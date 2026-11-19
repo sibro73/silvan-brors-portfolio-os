@@ -2,6 +2,7 @@ import './Terminal.css';
 
 import { type KeyboardEvent, useEffect, useId, useRef, useState } from 'react';
 
+import { useStatus } from '../../api/statusContext';
 import type { AppProps } from '../../os/appTypes';
 import { formatLastLogin } from '../../os/clock';
 import { type Line, OUTPUT_LIMIT, PROMPT, pushHistory, runCommand, stepHistory } from './commands';
@@ -16,6 +17,7 @@ const initialLines = (): Line[] => [
 
 export function Terminal({ openApp, closeSelf }: AppProps) {
   const inputId = useId();
+  const { status, source } = useStatus();
   const [lines, setLines] = useState<Line[]>(initialLines);
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([]);
@@ -42,7 +44,7 @@ export function Terminal({ openApp, closeSelf }: AppProps) {
     historyIndex.current = nextHistory.length;
     setInput('');
 
-    const { lines: output, effect } = runCommand(raw);
+    const { lines: output, effect } = runCommand(raw, { status, offline: source === 'fallback' });
     if (effect?.type === 'clear') {
       setLines([]);
       return;

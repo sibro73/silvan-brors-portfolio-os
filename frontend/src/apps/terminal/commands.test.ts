@@ -91,10 +91,22 @@ describe('runCommand', () => {
     expect(texts('open')).toEqual(['open: <name>: nicht gefunden. Versuch «projekte».']);
   });
 
-  it('curl prints the status with placeholders untouched', () => {
+  it('curl prints the stored status and says it is offline', () => {
     expect(texts('curl /api/status')).toEqual([
       '{ "wishlists": [live], "clipsHeute": [live],',
       '  "ipaFragen": [live], "letzterBericht": "[Datum]" }',
+      '# Offline-Modus: gespeicherte Daten',
+    ]);
+  });
+
+  it('curl prints live numbers without the offline note', () => {
+    const r = runCommand('curl', {
+      status: { wishlists: 5, clipsHeute: 1, ipaFragen: 2, letzterBericht: '2026-11-16' },
+      offline: false,
+    });
+    expect(r.lines.map((l) => l.text)).toEqual([
+      '{ "wishlists": 5, "clipsHeute": 1,',
+      '  "ipaFragen": 2, "letzterBericht": "2026-11-16" }',
     ]);
   });
 

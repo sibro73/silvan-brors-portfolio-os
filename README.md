@@ -8,14 +8,19 @@ eigenen Spring-Boot-Backend.
 
 ## Stack
 - Frontend: React, TypeScript, Vite
-- Backend: Spring Boot 3, Java 21, Postgres
+- Backend: Spring Boot 4, Java 21, Postgres
 - Betrieb: Docker, GitHub Actions, [Hosting]
 
 ## Lokal starten
 ```bash
-docker compose up          # backend + postgres
+cp .env.example .env       # POSTGRES_PASSWORD setzen
+docker compose up --build  # backend (localhost:8080) + postgres (localhost:5433)
 cd frontend && npm install && npm run dev
 ```
+
+Ports belegt? In `.env` `BACKEND_PORT` bzw. `POSTGRES_PORT` ändern und im Frontend
+`VITE_API_URL` in `frontend/.env.local` anpassen (Vorlage: `frontend/.env.example`).
+Ohne Backend zeigt die Seite die gespeicherten Daten aus `frontend/src/data/`.
 
 ## Projekte, die man im Desktop findet
 - **Rigged to Riches**: Koop-Heist-Spiel (Unity), bald auf Steam
