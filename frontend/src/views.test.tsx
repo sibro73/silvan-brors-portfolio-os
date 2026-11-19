@@ -15,22 +15,23 @@ describe('views', () => {
   it('stacks windows below 860 px', () => {
     mockViewportWidth(390);
     render(<App />);
-    const about = screen.getByRole('region', { name: 'Über mich.txt' });
-    expect(about).toHaveStyle({ position: 'relative', width: '100%' });
+    const welcome = screen.getByRole('region', { name: 'Willkommen' });
+    expect(welcome).toHaveStyle({ position: 'relative', width: '100%' });
     expect(screen.getByRole('navigation', { name: 'Dock' })).toHaveClass('dock--narrow');
   });
 
   it('uses the free desktop from 860 px', () => {
     mockViewportWidth(860);
     render(<App />);
-    expect(screen.getByRole('region', { name: 'Über mich.txt' })).toHaveStyle({ left: '90px' });
+    // zentriert: (1024 - 800) / 2
+    expect(screen.getByRole('region', { name: 'Willkommen' })).toHaveStyle({ left: '112px' });
   });
 
   it('switches layout when the window is resized', () => {
     const viewport = mockViewportWidth(1440);
     render(<App />);
     act(() => viewport.resize(500));
-    expect(screen.getByRole('region', { name: 'Über mich.txt' })).toHaveStyle({
+    expect(screen.getByRole('region', { name: 'Willkommen' })).toHaveStyle({
       position: 'relative',
     });
   });

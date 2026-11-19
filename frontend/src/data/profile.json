@@ -75,5 +75,10 @@
     "placeholder": "[Lebenslauf als PDF einbetten]",
     "downloadLabel": "PDF herunterladen",
     "downloadHref": "#lebenslauf"
+  },
+  "welcome": {
+    "title": "Portfolio von Silvan Brors",
+    "subtitle": "Applikationsentwickler EFZ · ti&m · Zürich",
+    "hint": "Fenster lassen sich verschieben. Im Terminal kannst du Befehle tippen."
   }
 }

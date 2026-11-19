@@ -48,6 +48,7 @@ export const OPEN_ALIASES: Record<string, AppId> = {
   cv: 'cv',
   finder: 'finder',
   projekte: 'finder',
+  willkommen: 'welcome',
 };
 
 /** Zahlenfelder ohne Anführungszeichen, damit `[live]` wie ein Wert aussieht. */

@@ -26,6 +26,7 @@ export interface Profile {
   motto: string[];
   contact: { email: string; subject: string; text: string; links: Link[] };
   cv: { role: string; placeholder: string; downloadLabel: string; downloadHref: string };
+  welcome: { title: string; subtitle: string; hint: string };
 }
 
 export interface Projects {
@@ -48,6 +49,8 @@ export interface Projects {
   };
   wetter: { title: string; description: string; placeholder: string };
   shop: { title: string; description: string };
+  /** Projektkarten im Willkommensfenster. `app` = AppId aus apps.registry.ts. */
+  cards: { app: string; title: string; text: string }[];
 }
 
 export interface AgentsReport {

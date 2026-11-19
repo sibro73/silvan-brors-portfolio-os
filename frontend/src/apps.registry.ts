@@ -3,6 +3,7 @@ import type { ComponentType } from 'react';
 import { About } from './apps/about/About';
 import { AboutOs } from './apps/about-os/AboutOs';
 import { Shortcuts } from './apps/shortcuts/Shortcuts';
+import { Welcome } from './apps/welcome/Welcome';
 import { Finder } from './apps/finder/Finder';
 import { RiggedToRiches } from './apps/rigged-to-riches/RiggedToRiches';
 import { Clipper } from './apps/clipper/Clipper';
@@ -26,6 +27,7 @@ import type { GlyphProps } from './os/AppIcon';
 import type { AppProps } from './os/appTypes';
 
 export type AppId =
+  | 'welcome'
   | 'about'
   | 'finder'
   | 'terminal'
@@ -58,6 +60,10 @@ export interface AppDefinition {
   dark?: boolean;
   /** Inhalt folgt «Darstellung → Dunkle Fenster» (nur eigene Text-Fenster, keine nachgebauten Apps). */
   themable?: boolean;
+  /** Beim Öffnen horizontal zentrieren (x wird dann ignoriert). */
+  center?: boolean;
+  /** Fenster ploppt verzögert auf (ms). */
+  entranceDelayMs?: number;
   icon?: { background: string; Glyph: ComponentType<GlyphProps> };
   /** Beschriftung im Dock (Reihenfolge = Reihenfolge dieser Liste). */
   dock?: string;
@@ -70,6 +76,20 @@ export interface AppDefinition {
 }
 
 export const APPS: AppDefinition[] = [
+  // zuerst: in der Mobile-Ansicht ganz oben
+  {
+    id: 'welcome',
+    themable: true,
+    center: true,
+    entranceDelayMs: 300,
+    component: Welcome,
+    title: 'Willkommen',
+    menuName: 'Willkommen',
+    x: 320,
+    y: 36,
+    width: 800,
+    height: 'auto',
+  },
   {
     id: 'about',
     themable: true,
@@ -259,4 +279,11 @@ export const DOCK_ORDER: AppId[] = [
 export const FINDER_ORDER: AppId[] = ['rtr', 'clipper', 'ipa', 'agents', 'wetter', 'shop'];
 
 /** Beim ersten Laden offen, von hinten nach vorne. */
-export const INITIAL_OPEN: AppId[] = ['terminal', 'finder', 'about'];
+export const INITIAL_OPEN: AppId[] = ['terminal', 'welcome'];
+
+/** Startposition eines Fensters; zentrierte Fenster richten sich nach der Desktop-Breite. */
+export function defaultPosition(id: AppId, desktopWidth: number): { x: number; y: number } {
+  const app = APP_BY_ID[id];
+  if (!app.center) return { x: app.x, y: app.y };
+  return { x: Math.max(16, Math.round((desktopWidth - app.width) / 2)), y: app.y };
+}

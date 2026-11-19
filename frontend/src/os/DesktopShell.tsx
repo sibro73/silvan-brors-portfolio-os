@@ -2,7 +2,7 @@ import './Desktop.css';
 
 import { useCallback, useMemo, useState } from 'react';
 
-import { APP_BY_ID, APPS, type AppId, INITIAL_OPEN } from '../apps.registry';
+import { APP_BY_ID, APPS, type AppId, defaultPosition, INITIAL_OPEN } from '../apps.registry';
 import { projects } from '../data';
 import { createActions } from './actions';
 import type { TerminalRequest } from './appTypes';
@@ -28,7 +28,7 @@ const showClassic = () => {
 };
 
 const initState = () =>
-  createInitialState(INITIAL_OPEN.map((id) => ({ id, x: APP_BY_ID[id].x, y: APP_BY_ID[id].y })));
+  createInitialState(INITIAL_OPEN.map((id) => ({ id, ...defaultPosition(id, window.innerWidth) })));
 
 interface DesktopShellProps {
   /** Unter 860 px: Fenster gestapelt, kein Drag. */
@@ -73,10 +73,12 @@ export function DesktopShell({
 
   const openApp = useCallback(
     (id: AppId) => {
-      windows.open(id, APP_BY_ID[id].x, APP_BY_ID[id].y);
+      const width = deskEl?.getBoundingClientRect().width || window.innerWidth;
+      const { x, y } = defaultPosition(id, width);
+      windows.open(id, x, y);
       if (id === 'clipper') dismissNotification();
     },
-    [windows, dismissNotification],
+    [windows, dismissNotification, deskEl],
   );
 
   const getDesktopArea = useCallback((): Area => {
@@ -181,6 +183,7 @@ export function DesktopShell({
               active={active === app.id}
               narrow={narrow}
               actions={windows}
+              entranceDelayMs={app.entranceDelayMs}
             >
               <app.component
                 key={isTerminal ? `session-${terminal.session}` : undefined}
