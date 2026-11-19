@@ -22,6 +22,11 @@
   bottom: auto;
   transform: none;
   align-self: center;
+  /* Auf kleinen Handys lieber umbrechen als ein halbes Icon abschneiden. */
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 12px;
+  overflow-x: visible;
 }
 
 .dock__item {

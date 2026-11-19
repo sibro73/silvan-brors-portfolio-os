@@ -60,3 +60,10 @@
     display: none;
   }
 }
+
+@media (max-width: 479.98px) {
+  .menubar__date,
+  .menubar__wifi {
+    display: none;
+  }
+}

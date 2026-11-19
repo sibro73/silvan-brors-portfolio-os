@@ -10,6 +10,9 @@ interface MenuBarProps {
 
 export function MenuBar({ activeName }: MenuBarProps) {
   const clock = useClock();
+  const splitAt = clock.lastIndexOf(' ');
+  const date = clock.slice(0, splitAt + 1);
+  const time = clock.slice(splitAt + 1);
 
   return (
     <header className="menubar">
@@ -38,6 +41,7 @@ export function MenuBar({ activeName }: MenuBarProps) {
           stroke="currentColor"
           strokeWidth="2.2"
           strokeLinecap="round"
+          className="menubar__wifi"
           role="img"
           aria-label="WLAN verbunden"
         >
@@ -72,7 +76,10 @@ export function MenuBar({ activeName }: MenuBarProps) {
             />
           </svg>
         </span>
-        <time className="menubar__clock">{clock}</time>
+        <time className="menubar__clock">
+          <span className="menubar__date">{date}</span>
+          {time}
+        </time>
       </div>
     </header>
   );
