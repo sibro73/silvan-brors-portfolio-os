@@ -38,5 +38,27 @@
   "shop": {
     "title": "shop-outreach",
     "description": "Python-Tool, das mit Google Places und PageSpeed lokale Shops findet, deren Website ein Update braucht."
-  }
+  },
+  "cards": [
+    {
+      "app": "rtr",
+      "title": "Rigged to Riches",
+      "text": "Koop-Heist-Spiel (Unity), bald auf Steam."
+    },
+    {
+      "app": "clipper",
+      "title": "Clipper",
+      "text": "Echtzeit-Bot, der Highlights aus Livestreams schneidet."
+    },
+    {
+      "app": "ipa",
+      "title": "IPA-Lernassistent",
+      "text": "RAG über meine IPA-Lernnotizen."
+    },
+    {
+      "app": "agents",
+      "title": "Marketing-Agents",
+      "text": "Multi-Agent-System für den Spiel-Release (in Arbeit)."
+    }
+  ]
 }

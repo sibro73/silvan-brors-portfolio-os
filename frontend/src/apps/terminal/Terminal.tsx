@@ -1,9 +1,9 @@
 import './Terminal.css';
 
-import { type KeyboardEvent, useEffect, useId, useRef, useState } from 'react';
+import { type KeyboardEvent, useEffect, useEffectEvent, useId, useRef, useState } from 'react';
 
 import { useStatus } from '../../api/statusContext';
-import type { AppProps } from '../../os/appTypes';
+import type { AppProps, TerminalRequest } from '../../os/appTypes';
 import { formatLastLogin } from '../../os/clock';
 import { type Line, OUTPUT_LIMIT, PROMPT, pushHistory, runCommand, stepHistory } from './commands';
 
@@ -15,7 +15,7 @@ const initialLines = (): Line[] => [
   { text: 'Tippe «help», um alle Befehle zu sehen.', tone: 'default' },
 ];
 
-export function Terminal({ openApp, closeSelf }: AppProps) {
+export function Terminal({ openApp, closeSelf, terminalRequest }: AppProps) {
   const inputId = useId();
   const { status, source } = useStatus();
   const [lines, setLines] = useState<Line[]>(initialLines);
@@ -37,8 +37,8 @@ export function Terminal({ openApp, closeSelf }: AppProps) {
     if (scroller) scroller.scrollTop = scroller.scrollHeight;
   }, [lines]);
 
-  const submit = () => {
-    const raw = input;
+  /** Führt eine Zeile aus, als wäre sie getippt worden. */
+  const execute = (raw: string) => {
     const nextHistory = pushHistory(history, raw);
     setHistory(nextHistory);
     historyIndex.current = nextHistory.length;
@@ -60,6 +60,21 @@ export function Terminal({ openApp, closeSelf }: AppProps) {
       timers.current.push(setTimeout(() => openApp(id), OPEN_DELAY_MS));
     }
   };
+
+  const submit = () => execute(input);
+
+  // Befehl von aussen (Menü). Der Ref verhindert doppelte Ausführung im StrictMode.
+  const handledNonce = useRef<number | null>(null);
+  const runRequest = useEffectEvent((request: TerminalRequest) => {
+    if (handledNonce.current === request.nonce) return;
+    handledNonce.current = request.nonce;
+    request.onHandled(request.nonce);
+    execute(request.command);
+    inputRef.current?.focus();
+  });
+  useEffect(() => {
+    if (terminalRequest) runRequest(terminalRequest);
+  }, [terminalRequest]);
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {

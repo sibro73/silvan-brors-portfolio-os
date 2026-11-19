@@ -79,7 +79,8 @@ describe('runCommand', () => {
     expect(runCommand('open Mail').effect).toEqual({ type: 'open', id: 'kontakt' });
     expect(runCommand('open cv').effect).toEqual({ type: 'open', id: 'cv' });
     expect(runCommand('open rigged-to-riches').effect).toEqual({ type: 'open', id: 'rtr' });
-    expect(Object.keys(OPEN_ALIASES)).toHaveLength(11);
+    expect(Object.keys(OPEN_ALIASES)).toHaveLength(12);
+    expect(runCommand('open willkommen').effect).toEqual({ type: 'open', id: 'welcome' });
   });
 
   it('open with an unknown or missing name explains what to do', () => {

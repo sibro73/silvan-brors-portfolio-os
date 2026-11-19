@@ -1,6 +1,9 @@
 import type { ComponentType } from 'react';
 
 import { About } from './apps/about/About';
+import { AboutOs } from './apps/about-os/AboutOs';
+import { Shortcuts } from './apps/shortcuts/Shortcuts';
+import { Welcome } from './apps/welcome/Welcome';
 import { Finder } from './apps/finder/Finder';
 import { RiggedToRiches } from './apps/rigged-to-riches/RiggedToRiches';
 import { Clipper } from './apps/clipper/Clipper';
@@ -24,6 +27,7 @@ import type { GlyphProps } from './os/AppIcon';
 import type { AppProps } from './os/appTypes';
 
 export type AppId =
+  | 'welcome'
   | 'about'
   | 'finder'
   | 'terminal'
@@ -34,7 +38,9 @@ export type AppId =
   | 'kontakt'
   | 'cv'
   | 'wetter'
-  | 'shop';
+  | 'shop'
+  | 'about-os'
+  | 'shortcuts';
 
 export type DesktopIconKind =
   { kind: 'folder' } | { kind: 'document'; badge: string; badgeColor: string };
@@ -52,6 +58,12 @@ export interface AppDefinition {
   height: number | 'auto';
   /** Dunkle Titelleiste (Terminal). */
   dark?: boolean;
+  /** Inhalt folgt «Darstellung → Dunkle Fenster» (nur eigene Text-Fenster, keine nachgebauten Apps). */
+  themable?: boolean;
+  /** Beim Öffnen horizontal zentrieren (x wird dann ignoriert). */
+  center?: boolean;
+  /** Fenster ploppt verzögert auf (ms). */
+  entranceDelayMs?: number;
   icon?: { background: string; Glyph: ComponentType<GlyphProps> };
   /** Beschriftung im Dock (Reihenfolge = Reihenfolge dieser Liste). */
   dock?: string;
@@ -64,8 +76,23 @@ export interface AppDefinition {
 }
 
 export const APPS: AppDefinition[] = [
+  // zuerst: in der Mobile-Ansicht ganz oben
+  {
+    id: 'welcome',
+    themable: true,
+    center: true,
+    entranceDelayMs: 300,
+    component: Welcome,
+    title: 'Willkommen',
+    menuName: 'Willkommen',
+    x: 320,
+    y: 36,
+    width: 800,
+    height: 'auto',
+  },
   {
     id: 'about',
+    themable: true,
     component: About,
     title: 'Über mich.txt',
     menuName: 'TextEdit',
@@ -77,6 +104,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'finder',
+    themable: true,
     component: Finder,
     title: 'Projekte',
     menuName: 'Finder',
@@ -155,6 +183,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'kontakt',
+    themable: true,
     component: Mail,
     title: 'Neue E-Mail',
     menuName: 'Mail',
@@ -179,6 +208,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'wetter',
+    themable: true,
     component: Wetter,
     title: 'Wetterstation (BMA)',
     menuName: 'Finder',
@@ -191,6 +221,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'shop',
+    themable: true,
     component: ShopOutreach,
     title: 'shop-outreach',
     menuName: 'Finder',
@@ -200,6 +231,28 @@ export const APPS: AppDefinition[] = [
     height: 'auto',
     icon: { background: '#34C759', Glyph: ShopGlyph },
     finder: 'shop-outreach',
+  },
+  {
+    id: 'about-os',
+    themable: true,
+    component: AboutOs,
+    title: 'Über Silvan OS',
+    menuName: 'Silvan OS',
+    x: 520,
+    y: 110,
+    width: 400,
+    height: 'auto',
+  },
+  {
+    id: 'shortcuts',
+    themable: true,
+    component: Shortcuts,
+    title: 'Tastenkürzel',
+    menuName: 'Hilfe',
+    x: 540,
+    y: 140,
+    width: 480,
+    height: 'auto',
   },
 ];
 
@@ -226,4 +279,11 @@ export const DOCK_ORDER: AppId[] = [
 export const FINDER_ORDER: AppId[] = ['rtr', 'clipper', 'ipa', 'agents', 'wetter', 'shop'];
 
 /** Beim ersten Laden offen, von hinten nach vorne. */
-export const INITIAL_OPEN: AppId[] = ['terminal', 'finder', 'about'];
+export const INITIAL_OPEN: AppId[] = ['terminal', 'welcome'];
+
+/** Startposition eines Fensters; zentrierte Fenster richten sich nach der Desktop-Breite. */
+export function defaultPosition(id: AppId, desktopWidth: number): { x: number; y: number } {
+  const app = APP_BY_ID[id];
+  if (!app.center) return { x: app.x, y: app.y };
+  return { x: Math.max(16, Math.round((desktopWidth - app.width) / 2)), y: app.y };
+}

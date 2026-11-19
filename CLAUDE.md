@@ -28,12 +28,18 @@ src/
 ├── App.tsx                  Wechsel Desktop / Mobile / Klassische Ansicht
 ├── os/
 │   ├── MenuBar.tsx          Logo, aktive App, Menüs, WLAN, Akku, Uhr (Europe/Zurich)
+│   ├── menu/                Dropdown, Popover (WLAN/Akku/Kalender), Kalender-Logik
+│   ├── menu.config.ts       Menüstruktur als Daten (Einträge → Aktions-ID)
+│   ├── actions.ts           zentrale Aktionsliste für Menü, Tastenkürzel, Willkommensfenster
+│   ├── shortcuts.ts         Tastenkürzel (Alt+W, Alt+M, …)
+│   ├── preferences.ts       Hintergrund, dunkle Fenster (localStorage mit try/catch)
 │   ├── Desktop.tsx          Hintergrund, Schreibtisch-Icons, Fensterfläche
 │   ├── Window.tsx           Titelleiste, Ampel-Buttons, Drag per Pointer-Events
 │   ├── Dock.tsx             App-Icons, Hover-Vergrösserung, Punkt für offene Apps
 │   ├── Notification.tsx     Benachrichtigung oben rechts
 │   └── windowStore.ts       Zustand: offen/minimiert/maximiert, x/y, z-Reihenfolge
 ├── apps/                    Ein Ordner pro App (Inhalt eines Fensters)
+│   ├── welcome/             Willkommensfenster (Startfenster)
 │   ├── about/               Über mich.txt
 │   ├── finder/              Ordner "Projekte"
 │   ├── terminal/            Terminal + commands.ts (Befehlstabelle)
@@ -42,7 +48,9 @@ src/
 │   ├── ipa-assistent/       Chat mit RAG-Backend
 │   ├── agents/              Wochenbericht (PDF-Vorschau)
 │   ├── mail/                Kontakt
-│   └── lebenslauf/          PDF-Vorschau
+│   ├── lebenslauf/          PDF-Vorschau
+│   ├── wetter/, shop-outreach/   kleine Projekte aus dem Ordner «Projekte»
+│   └── about-os/, shortcuts/     «Über Silvan OS», «Tastenkürzel»
 ├── apps.registry.ts         Liste aller Apps: id, Titel, Icon, Standardgrösse/-position
 ├── api/                     fetch-Funktionen für das Backend
 ├── data/                    statische Fallback-Daten (JSON), solange das Backend fehlt
@@ -52,6 +60,8 @@ src/
 Regeln:
 - Neue App = neuer Ordner in `apps/` + Eintrag in `apps.registry.ts`. Sonst nichts anfassen.
 - Neuer Terminal-Befehl = ein Eintrag in `apps/terminal/commands.ts`.
+- Neuer Menüeintrag = Aktion in `os/actions.ts` + Eintrag in `os/menu.config.ts`.
+  Menü, Tastenkürzel und Buttons rufen nur Aktionen auf, keine eigene Logik.
 - Kein UI-Framework für Fenster (kein react-rnd o. ä.). Drag selbst mit Pointer-Events.
 - Unter 860 px Breite: Fenster untereinander stapeln, kein Drag.
 - Barrierefreiheit: echte `<button>`/`<a>`, `aria-label` für Icon-Buttons,

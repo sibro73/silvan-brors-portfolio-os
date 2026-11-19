@@ -128,3 +128,25 @@ button {
   justify-content: center;
   box-shadow: var(--icon-shadow);
 }
+
+/* Weitere Hintergründe (Darstellung → Hintergrund). «aurora» ist der aus der Referenz. */
+.wall[data-wallpaper='nacht'] {
+  background-color: #0b1020;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(32, 76, 160, 0.8) 0, rgba(32, 76, 160, 0) 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(20, 140, 150, 0.55) 0, rgba(20, 140, 150, 0) 45%),
+    radial-gradient(ellipse at 50% 100%, rgba(70, 40, 140, 0.6) 0, rgba(70, 40, 140, 0) 50%);
+}
+.wall[data-wallpaper='abendrot'] {
+  background-color: #2a0f1f;
+  background-image:
+    radial-gradient(ellipse at 25% 85%, rgba(255, 122, 26, 0.85) 0, rgba(255, 122, 26, 0) 50%),
+    radial-gradient(ellipse at 75% 30%, rgba(214, 41, 118, 0.75) 0, rgba(214, 41, 118, 0) 48%),
+    radial-gradient(ellipse at 50% 0%, rgba(120, 40, 160, 0.6) 0, rgba(120, 40, 160, 0) 45%);
+}
+.wall[data-wallpaper='graphit'] {
+  background-color: #2b2d31;
+  background-image:
+    radial-gradient(ellipse at 30% 25%, rgba(120, 124, 132, 0.45) 0, rgba(120, 124, 132, 0) 50%),
+    radial-gradient(ellipse at 75% 80%, rgba(70, 72, 78, 0.6) 0, rgba(70, 72, 78, 0) 50%);
+}

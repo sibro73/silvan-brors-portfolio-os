@@ -1,20 +1,28 @@
 import './Desktop.css';
 
-import type { ReactNode } from 'react';
+import type { ReactNode, Ref } from 'react';
 
 import { APP_BY_ID, type AppId, DESKTOP_ORDER } from '../apps.registry';
 import { DesktopIcon } from './DesktopIcon';
 
 interface DesktopProps {
+  /** Für die Grösse der Fläche (z. B. «Fenster anordnen»). */
+  ref?: Ref<HTMLElement>;
   narrow: boolean;
   onOpen: (id: AppId) => void;
-  /** Fenster, Benachrichtigung und Dock. */
+  /** Offene Fenster. Sie liegen in einer eigenen Stapel-Ebene unter Dock und Benachrichtigung. */
+  windows?: ReactNode;
+  /** Benachrichtigung und Dock. */
   children?: ReactNode;
 }
 
-export function Desktop({ narrow, onOpen, children }: DesktopProps) {
+export function Desktop({ ref, narrow, onOpen, windows, children }: DesktopProps) {
   return (
-    <main aria-label="Schreibtisch" className={narrow ? 'desktop desktop--narrow' : 'desktop'}>
+    <main
+      ref={ref}
+      aria-label="Schreibtisch"
+      className={narrow ? 'desktop desktop--narrow' : 'desktop'}
+    >
       <div className="desktop__icons">
         {DESKTOP_ORDER.map((id) => {
           const app = APP_BY_ID[id];
@@ -29,6 +37,7 @@ export function Desktop({ narrow, onOpen, children }: DesktopProps) {
           );
         })}
       </div>
+      <div className="desktop__windows">{windows}</div>
       {children}
     </main>
   );

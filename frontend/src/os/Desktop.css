@@ -67,3 +67,26 @@
   line-height: 1.25;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
+
+/*
+ * Eigene Stapel-Ebene für alle Fenster: ihre z-Werte wachsen mit jedem Fokus,
+ * bleiben so aber immer unter Benachrichtigung (9000) und Dock (9500).
+ */
+.desktop__windows {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  isolation: isolate;
+  pointer-events: none;
+}
+.desktop__windows > .win {
+  pointer-events: auto;
+}
+.desktop--narrow .desktop__windows {
+  position: relative;
+  inset: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  pointer-events: auto;
+}

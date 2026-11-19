@@ -5,6 +5,9 @@ import {
   clampPosition,
   createInitialState,
   type DesktopState,
+  TILE_DOCK_SPACE,
+  TILE_MIN_WIDTH,
+  tileLayout,
   windowReducer,
 } from './windowStore';
 
@@ -122,5 +125,56 @@ describe('move / clampPosition', () => {
   it('keeps at least 140 px visible on the left', () => {
     expect(clampPosition(-1000, 10, 500)).toEqual({ x: -360, y: 10 });
     expect(clampPosition(-360, 10, 500)).toEqual({ x: -360, y: 10 });
+  });
+});
+
+describe('minimizeAll', () => {
+  it('minimizes every open window', () => {
+    const s = windowReducer(initial(), { type: 'minimizeAll' });
+    expect(Object.values(s.windows).every((w) => w.minimized)).toBe(true);
+    expect(activeWindow(s)).toBeNull();
+  });
+
+  it('the dock brings a single window back', () => {
+    let s = windowReducer(initial(), { type: 'minimizeAll' });
+    s = windowReducer(s, { type: 'open', id: 'finder', x: 0, y: 0 });
+    expect(activeWindow(s)).toBe('finder');
+    expect(s.windows.about?.minimized).toBe(true);
+  });
+});
+
+describe('tile / tileLayout', () => {
+  const area = { width: 1440, height: 872 };
+
+  it('places windows side by side without overlap, above the dock', () => {
+    const rects = tileLayout(3, area);
+    expect(rects).toHaveLength(3);
+    expect(new Set(rects.map((r) => r.y)).size).toBe(1);
+    for (let i = 1; i < rects.length; i++) {
+      expect(rects[i].x).toBeGreaterThanOrEqual(rects[i - 1].x + rects[i - 1].width);
+    }
+    const last = rects[2];
+    expect(last.x + last.width).toBeLessThanOrEqual(area.width);
+    expect(last.y + last.height).toBeLessThanOrEqual(area.height - TILE_DOCK_SPACE);
+  });
+
+  it('wraps into rows when windows would get narrower than the minimum', () => {
+    const rects = tileLayout(6, { width: 1000, height: 800 });
+    expect(rects.every((r) => r.width >= TILE_MIN_WIDTH)).toBe(true);
+    expect(new Set(rects.map((r) => r.y)).size).toBeGreaterThan(1);
+  });
+
+  it('returns nothing for no windows', () => {
+    expect(tileLayout(0, area)).toEqual([]);
+  });
+
+  it('tiles visible windows (back to front), skips minimized ones and un-maximizes', () => {
+    let s = windowReducer(initial(), { type: 'toggleMaximize', id: 'finder' });
+    s = windowReducer(s, { type: 'minimize', id: 'terminal' });
+    s = windowReducer(s, { type: 'tile', area });
+    const [first, second] = tileLayout(2, area);
+    expect(s.windows.finder).toMatchObject({ ...first, maximized: false });
+    expect(s.windows.about).toMatchObject(second);
+    expect(s.windows.terminal?.width).toBeUndefined();
   });
 });

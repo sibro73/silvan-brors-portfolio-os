@@ -20,12 +20,17 @@ describe('App (desktop)', () => {
 
   const user = () => userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
 
-  it('starts with about, finder and terminal open, about in front', () => {
+  it('starts with the welcome window in front and the terminal behind it', () => {
     render(<App />);
-    expect(screen.getByRole('region', { name: 'Über mich.txt' })).toBeInTheDocument();
-    expect(screen.getByRole('region', { name: 'Projekte' })).toBeInTheDocument();
-    expect(screen.getByRole('region', { name: 'silvan — zsh — 80×24' })).toBeInTheDocument();
-    expect(screen.getByTestId('active-app')).toHaveTextContent('TextEdit');
+    const welcome = screen.getByRole('region', { name: 'Willkommen' });
+    const terminal = screen.getByRole('region', { name: 'silvan — zsh — 80×24' });
+    expect(Number(welcome.style.zIndex)).toBeGreaterThan(Number(terminal.style.zIndex));
+    expect(welcome).toHaveStyle({ animationDelay: '300ms' });
+    expect(screen.getByTestId('active-app')).toHaveTextContent('Willkommen');
+    // Finder und Über mich sind zu, aber über die Schreibtisch-Icons erreichbar
+    expect(screen.queryByRole('region', { name: 'Projekte' })).toBeNull();
+    expect(screen.queryByRole('region', { name: 'Über mich.txt' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Über mich.txt' })).toBeInTheDocument();
   });
 
   it('opens apps from the dock and shows their name in the menu bar', async () => {
@@ -40,12 +45,12 @@ describe('App (desktop)', () => {
 
   it('minimize hides a window, the dock brings it back', async () => {
     render(<App />);
-    const about = screen.getByRole('region', { name: 'Über mich.txt' });
-    await user().click(within(about).getByRole('button', { name: 'Fenster minimieren' }));
-    expect(screen.queryByRole('region', { name: 'Über mich.txt' })).toBeNull();
-    expect(screen.getByTestId('active-app')).toHaveTextContent('Finder');
-    await user().click(screen.getByRole('button', { name: 'Über mich.txt' }));
-    expect(screen.getByRole('region', { name: 'Über mich.txt' })).toBeInTheDocument();
+    const term = screen.getByRole('region', { name: 'silvan — zsh — 80×24' });
+    await user().click(within(term).getByRole('button', { name: 'Fenster minimieren' }));
+    expect(screen.queryByRole('region', { name: 'silvan — zsh — 80×24' })).toBeNull();
+    await user().click(screen.getByRole('button', { name: 'Terminal öffnen (geöffnet)' }));
+    expect(screen.getByRole('region', { name: 'silvan — zsh — 80×24' })).toBeInTheDocument();
+    expect(screen.getByTestId('active-app')).toHaveTextContent('Terminal');
   });
 
   it('the terminal can open apps', async () => {

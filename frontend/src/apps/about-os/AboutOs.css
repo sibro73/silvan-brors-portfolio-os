@@ -1,0 +1,48 @@
+.about-os {
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.about-os p,
+.about-os h2,
+.about-os dl {
+  margin: 0;
+}
+.about-os__logo {
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.about-os__title {
+  font-size: 22px;
+}
+.about-os__version,
+.about-os__muted {
+  font-size: 12px;
+  color: var(--muted);
+}
+.about-os__text {
+  margin-top: 8px !important;
+  font-size: 13px;
+}
+.about-os__stack {
+  margin-top: 12px !important;
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+}
+.about-os__stack div {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px;
+  text-align: left;
+}
+.about-os__stack dt {
+  color: var(--muted);
+  text-align: right;
+}
+.about-os__stack dd {
+  margin: 0;
+}
