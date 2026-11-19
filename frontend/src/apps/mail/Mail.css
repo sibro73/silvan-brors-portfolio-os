@@ -7,7 +7,7 @@
 }
 .mail__field {
   padding: 10px 16px;
-  border-bottom: 1px solid #e5e5ea;
+  border-bottom: 1px solid var(--line);
   display: flex;
   gap: 10px;
 }
@@ -39,7 +39,7 @@
 }
 .mail__actions {
   padding: 12px 16px;
-  border-top: 1px solid #e5e5ea;
+  border-top: 1px solid var(--line);
   display: flex;
   justify-content: flex-end;
 }

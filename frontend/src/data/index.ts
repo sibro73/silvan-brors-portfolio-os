@@ -4,6 +4,7 @@
  * und bleiben stehen, bis echte Daten da sind.
  */
 import agentsReportJson from './agents-report.json';
+import eventsJson from './events.json';
 import ipaJson from './ipa.json';
 import profileJson from './profile.json';
 import projectsJson from './projects.json';
@@ -73,8 +74,19 @@ export interface Status {
   letzterBericht: string;
 }
 
+/**
+ * Termin für den Kalender in der Menüleiste.
+ * `when`: so genau, wie bekannt: "2027", "2027-02" oder "2027-02-15". Nichts erfinden.
+ */
+export interface CalendarEvent {
+  title: string;
+  detail?: string;
+  when: string;
+}
+
 export const profile: Profile = profileJson;
 export const projects: Projects = projectsJson;
 export const agentsReport: AgentsReport = agentsReportJson;
 export const ipa: IpaData = ipaJson;
 export const status: Status = statusJson;
+export const events: CalendarEvent[] = eventsJson;

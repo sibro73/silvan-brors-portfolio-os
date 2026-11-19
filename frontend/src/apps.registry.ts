@@ -1,6 +1,8 @@
 import type { ComponentType } from 'react';
 
 import { About } from './apps/about/About';
+import { AboutOs } from './apps/about-os/AboutOs';
+import { Shortcuts } from './apps/shortcuts/Shortcuts';
 import { Finder } from './apps/finder/Finder';
 import { RiggedToRiches } from './apps/rigged-to-riches/RiggedToRiches';
 import { Clipper } from './apps/clipper/Clipper';
@@ -34,7 +36,9 @@ export type AppId =
   | 'kontakt'
   | 'cv'
   | 'wetter'
-  | 'shop';
+  | 'shop'
+  | 'about-os'
+  | 'shortcuts';
 
 export type DesktopIconKind =
   { kind: 'folder' } | { kind: 'document'; badge: string; badgeColor: string };
@@ -52,6 +56,8 @@ export interface AppDefinition {
   height: number | 'auto';
   /** Dunkle Titelleiste (Terminal). */
   dark?: boolean;
+  /** Inhalt folgt «Darstellung → Dunkle Fenster» (nur eigene Text-Fenster, keine nachgebauten Apps). */
+  themable?: boolean;
   icon?: { background: string; Glyph: ComponentType<GlyphProps> };
   /** Beschriftung im Dock (Reihenfolge = Reihenfolge dieser Liste). */
   dock?: string;
@@ -66,6 +72,7 @@ export interface AppDefinition {
 export const APPS: AppDefinition[] = [
   {
     id: 'about',
+    themable: true,
     component: About,
     title: 'Über mich.txt',
     menuName: 'TextEdit',
@@ -77,6 +84,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'finder',
+    themable: true,
     component: Finder,
     title: 'Projekte',
     menuName: 'Finder',
@@ -155,6 +163,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'kontakt',
+    themable: true,
     component: Mail,
     title: 'Neue E-Mail',
     menuName: 'Mail',
@@ -179,6 +188,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'wetter',
+    themable: true,
     component: Wetter,
     title: 'Wetterstation (BMA)',
     menuName: 'Finder',
@@ -191,6 +201,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'shop',
+    themable: true,
     component: ShopOutreach,
     title: 'shop-outreach',
     menuName: 'Finder',
@@ -200,6 +211,28 @@ export const APPS: AppDefinition[] = [
     height: 'auto',
     icon: { background: '#34C759', Glyph: ShopGlyph },
     finder: 'shop-outreach',
+  },
+  {
+    id: 'about-os',
+    themable: true,
+    component: AboutOs,
+    title: 'Über Silvan OS',
+    menuName: 'Silvan OS',
+    x: 520,
+    y: 110,
+    width: 400,
+    height: 'auto',
+  },
+  {
+    id: 'shortcuts',
+    themable: true,
+    component: Shortcuts,
+    title: 'Tastenkürzel',
+    menuName: 'Hilfe',
+    x: 540,
+    y: 140,
+    width: 480,
+    height: 'auto',
   },
 ];
 

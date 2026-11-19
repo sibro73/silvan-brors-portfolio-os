@@ -1,4 +1,5 @@
 import './Window.css';
+import './windowTheme.css';
 
 import { type CSSProperties, type PointerEvent, type ReactNode, useEffect, useRef } from 'react';
 
@@ -13,6 +14,8 @@ interface WindowProps {
   /** Schmale Ansicht: Fenster gestapelt, kein Drag, kein Maximieren. */
   narrow: boolean;
   actions: WindowActions;
+  /** Verzögerung der Einblend-Animation (z. B. Willkommensfenster beim Start). */
+  entranceDelayMs?: number;
   children?: ReactNode;
 }
 
@@ -45,10 +48,27 @@ function windowStyle(app: AppDefinition, state: WindowState, narrow: boolean): C
       zIndex: z,
     };
   }
-  return { left: state.x, top: state.y, width: app.width, height: app.height, zIndex: z };
+  const height = state.height ?? app.height;
+  return {
+    left: state.x,
+    top: state.y,
+    width: state.width ?? app.width,
+    height,
+    // Fenster mit Höhe «auto» nie unter das Dock wachsen lassen (Inhalt scrollt dann).
+    maxHeight: height === 'auto' ? `max(200px, calc(100% - ${state.y + 96}px))` : undefined,
+    zIndex: z,
+  };
 }
 
-export function Window({ app, state, active, narrow, actions, children }: WindowProps) {
+export function Window({
+  app,
+  state,
+  active,
+  narrow,
+  actions,
+  entranceDelayMs,
+  children,
+}: WindowProps) {
   const drag = useRef<DragStart | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const lastZ = useRef(state.z);
@@ -82,7 +102,7 @@ export function Window({ app, state, active, narrow, actions, children }: Window
       app.id,
       d.originX + (e.clientX - d.startX),
       d.originY + (e.clientY - d.startY),
-      app.width,
+      state.width ?? app.width,
     );
   };
 
@@ -96,6 +116,7 @@ export function Window({ app, state, active, narrow, actions, children }: Window
   if (app.dark) classes.push('win--dark');
   if (active) classes.push('win--active');
   if (canDrag) classes.push('win--draggable');
+  if (app.themable) classes.push('win--themable');
 
   return (
     <section
@@ -103,7 +124,10 @@ export function Window({ app, state, active, narrow, actions, children }: Window
       className={classes.join(' ')}
       aria-label={app.title}
       hidden={state.minimized}
-      style={windowStyle(app, state, narrow)}
+      style={{
+        ...windowStyle(app, state, narrow),
+        animationDelay: entranceDelayMs ? `${entranceDelayMs}ms` : undefined,
+      }}
       onPointerDown={() => actions.focus(app.id)}
       onFocus={() => actions.focus(app.id)}
       data-app={app.id}

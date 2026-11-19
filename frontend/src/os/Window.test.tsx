@@ -13,6 +13,8 @@ const mockActions = (): WindowActions => ({
   minimize: vi.fn(),
   toggleMaximize: vi.fn(),
   move: vi.fn(),
+  minimizeAll: vi.fn(),
+  tile: vi.fn(),
 });
 
 const base: WindowState = { x: 90, y: 40, z: 3, minimized: false, maximized: false };
