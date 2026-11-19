@@ -3,16 +3,16 @@
 Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 
 ## Phase 1 – Desktop statisch (`feat/desktop`)
-- [ ] Vite + React + TypeScript in `frontend/` aufsetzen, ESLint, Prettier, Vitest
-- [ ] Menüleiste mit Uhr (Europe/Zurich) und Name der aktiven App
-- [ ] Hintergrund und Schreibtisch-Icons
-- [ ] `Window` mit Drag, Fokus (z-Reihenfolge), Schliessen, Minimieren, Maximieren
-- [ ] Dock mit Hover-Effekt und Punkt für offene Apps
-- [ ] Alle Apps aus der Design-Referenz mit Daten aus `data/*.json`
-- [ ] Terminal: Eingabe, Verlauf mit Pfeil nach oben, Befehle `help whoami skills motto ls projekte open curl clear exit`
-- [ ] Benachrichtigung vom Clipper Bot
-- [ ] Mobile-Ansicht (Fenster gestapelt) und "Klassische Ansicht"
-- [ ] Tests: windowStore, Terminal-Befehle
+- [x] Vite + React + TypeScript in `frontend/` aufsetzen, ESLint, Prettier, Vitest
+- [x] Menüleiste mit Uhr (Europe/Zurich) und Name der aktiven App
+- [x] Hintergrund und Schreibtisch-Icons
+- [x] `Window` mit Drag, Fokus (z-Reihenfolge), Schliessen, Minimieren, Maximieren
+- [x] Dock mit Hover-Effekt und Punkt für offene Apps
+- [x] Alle Apps aus der Design-Referenz mit Daten aus `data/*.json`
+- [x] Terminal: Eingabe, Verlauf mit Pfeil nach oben, Befehle `help whoami skills motto ls projekte open curl clear exit`
+- [x] Benachrichtigung vom Clipper Bot
+- [x] Mobile-Ansicht (Fenster gestapelt) und "Klassische Ansicht"
+- [x] Tests: windowStore, Terminal-Befehle
 
 ## Phase 2 – Backend MVP (`feat/backend-status`)
 - [ ] Spring Boot 3 / Java 21 in `backend/` (Spring Initializr: Web, Validation, Actuator, Cache)
