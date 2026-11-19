@@ -120,3 +120,11 @@ button {
     transition-duration: 0.01ms !important;
   }
 }
+
+.app-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--icon-shadow);
+}
