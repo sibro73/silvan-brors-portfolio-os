@@ -1,0 +1,31 @@
+.about {
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: var(--ink);
+}
+.about p,
+.about h1 {
+  margin: 0;
+}
+.about__title {
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.about__muted {
+  font-size: 13px;
+  color: var(--muted);
+}
+.about__intro {
+  font-size: 17px;
+  line-height: 1.6;
+}
+.about__intro mark {
+  background: var(--accent);
+  color: inherit;
+  padding: 0 3px;
+  border-radius: 3px;
+}

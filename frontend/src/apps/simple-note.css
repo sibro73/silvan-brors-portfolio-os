@@ -1,0 +1,10 @@
+/* Schlichtes Textfenster für kleine Projekte (Wetterstation, shop-outreach). */
+.note {
+  padding: 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.note__muted {
+  color: var(--muted);
+}

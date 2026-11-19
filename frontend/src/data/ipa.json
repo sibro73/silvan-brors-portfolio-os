@@ -1,0 +1,21 @@
+{
+  "greeting": "Hoi! Ich kenne alle IPA-Lernnotizen von Silvan. Frag mich etwas.",
+  "footer": "Spring Boot / [LLM] / [Vektor-DB] · Beispielantworten",
+  "examples": [
+    {
+      "question": "Was heisst IPERKA?",
+      "answer": "Informieren, Planen, Entscheiden, Realisieren, Kontrollieren, Auswerten. Die sechs Schritte, nach denen die IPA aufgebaut ist.",
+      "source": "notizen/iperka.md"
+    },
+    {
+      "question": "Image oder Container?",
+      "answer": "Ein Image ist die unveränderliche Vorlage, ein Container eine laufende Instanz davon.",
+      "source": "notizen/docker.md"
+    },
+    {
+      "question": "Merge oder Rebase?",
+      "answer": "Merge behält die Historie mit einem Merge-Commit, Rebase setzt die Commits neu oben drauf.",
+      "source": "notizen/git.md"
+    }
+  ]
+}

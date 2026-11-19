@@ -1,0 +1,58 @@
+.term {
+  padding: 12px 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: #e6e6e6;
+  background: #1e1e1e;
+  min-height: 100%;
+  cursor: text;
+}
+.term__line {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.term__line--default {
+  color: #e6e6e6;
+}
+.term__line--green {
+  color: #7ee787;
+}
+.term__line--red {
+  color: #ff7b72;
+}
+.term__line--muted {
+  color: #9a9a9a;
+}
+.term__prompt {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.term__ps1 {
+  color: #7ee787;
+  white-space: nowrap;
+}
+.term__input {
+  flex-grow: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: #e6e6e6;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  caret-color: #e6e6e6;
+  padding: 4px 0;
+}
+/* Fokus trotzdem sichtbar machen, wenn per Tastatur angesteuert. */
+.term__prompt:has(.term__input:focus-visible) {
+  outline: 1px dashed #7ee787;
+  outline-offset: 2px;
+}
+@media (max-width: 859.98px) {
+  /* Kein Auto-Zoom auf iOS. */
+  .term__input {
+    font-size: 16px;
+  }
+}
