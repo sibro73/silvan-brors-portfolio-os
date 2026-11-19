@@ -2,6 +2,7 @@ import './os/Desktop.css';
 
 import { APP_BY_ID, APPS, type AppId, INITIAL_OPEN } from './apps.registry';
 import { Desktop } from './os/Desktop';
+import { Dock } from './os/Dock';
 import { MenuBar } from './os/MenuBar';
 import { Window } from './os/Window';
 import { activeWindow, createInitialState, useWindowStore } from './os/windowStore';
@@ -13,6 +14,7 @@ export default function App() {
   const narrow = false;
   const [state, actions] = useWindowStore(initState);
   const active = activeWindow(state);
+  const running = new Set(Object.keys(state.windows) as AppId[]);
   const openApp = (id: AppId) => actions.open(id, APP_BY_ID[id].x, APP_BY_ID[id].y);
 
   return (
@@ -33,6 +35,7 @@ export default function App() {
             />
           );
         })}
+        <Dock running={running} narrow={narrow} onOpen={openApp} />
       </Desktop>
     </div>
   );
