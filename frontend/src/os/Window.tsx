@@ -1,6 +1,6 @@
 import './Window.css';
 
-import { type CSSProperties, type PointerEvent, type ReactNode, useRef } from 'react';
+import { type CSSProperties, type PointerEvent, type ReactNode, useEffect, useRef } from 'react';
 
 import type { AppDefinition } from '../apps.registry';
 import type { WindowActions, WindowState } from './windowStore';
@@ -50,7 +50,18 @@ function windowStyle(app: AppDefinition, state: WindowState, narrow: boolean): C
 
 export function Window({ app, state, active, narrow, actions, children }: WindowProps) {
   const drag = useRef<DragStart | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const lastZ = useRef(state.z);
   const canDrag = !narrow && !state.maximized;
+
+  // Gestapelt (mobil): ein neu geöffnetes oder nach vorne geholtes Fenster in den Blick scrollen.
+  useEffect(() => {
+    const raised = state.z > lastZ.current;
+    lastZ.current = state.z;
+    if (!narrow || !raised || state.minimized) return;
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    sectionRef.current?.scrollIntoView?.({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+  }, [narrow, state.z, state.minimized]);
 
   const onTitlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
     if (!canDrag || e.button !== 0) return;
@@ -88,6 +99,7 @@ export function Window({ app, state, active, narrow, actions, children }: Window
 
   return (
     <section
+      ref={sectionRef}
       className={classes.join(' ')}
       aria-label={app.title}
       hidden={state.minimized}

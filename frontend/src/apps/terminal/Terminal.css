@@ -50,7 +50,7 @@
   outline: 1px dashed #7ee787;
   outline-offset: 2px;
 }
-@media (max-width: 859px) {
+@media (max-width: 859.98px) {
   /* Kein Auto-Zoom auf iOS. */
   .term__input {
     font-size: 16px;

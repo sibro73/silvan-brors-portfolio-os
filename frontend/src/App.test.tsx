@@ -2,7 +2,8 @@ import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import App, { NOTIFICATION_HIDE_MS, NOTIFICATION_SHOW_MS } from './App';
+import App from './App';
+import { NOTIFICATION_HIDE_MS, NOTIFICATION_SHOW_MS } from './os/DesktopShell';
 
 const advance = (ms: number) =>
   act(() => {

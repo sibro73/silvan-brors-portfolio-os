@@ -54,7 +54,7 @@
   white-space: pre;
 }
 
-@media (max-width: 859px) {
+@media (max-width: 859.98px) {
   .menubar__menu,
   .menubar__battery {
     display: none;
