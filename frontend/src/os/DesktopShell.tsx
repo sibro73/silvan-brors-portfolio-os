@@ -41,8 +41,10 @@ export function DesktopShell({ narrow }: DesktopShellProps) {
   return (
     <div className={narrow ? 'wall os os--narrow' : 'wall os'}>
       <MenuBar activeName={active ? APP_BY_ID[active].menuName : 'Finder'} />
-      <Desktop narrow={narrow} onOpen={openApp}>
-        {APPS.map((app) => {
+      <Desktop
+        narrow={narrow}
+        onOpen={openApp}
+        windows={APPS.map((app) => {
           const w = state.windows[app.id];
           if (!w) return null;
           return (
@@ -58,6 +60,7 @@ export function DesktopShell({ narrow }: DesktopShellProps) {
             </Window>
           );
         })}
+      >
         {notificationVisible && APP_BY_ID.clipper.icon && (
           <Notification
             title={projects.clipper.botName}

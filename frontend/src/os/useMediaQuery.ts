@@ -19,3 +19,6 @@ export function useMediaQuery(query: string): boolean {
   const getSnapshot = () => hasMatchMedia() && window.matchMedia(query).matches;
   return useSyncExternalStore(subscribe, getSnapshot, () => false);
 }
+
+/** Nutzer möchte keine Animationen. */
+export const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';

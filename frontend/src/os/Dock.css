@@ -1,8 +1,12 @@
 .dock {
+  /* Grundgrösse eines Dock-Platzes: Icon 48 px + 2 × 2 px Rand. */
+  --dock-slot: 52px;
+
   position: absolute;
   left: 50%;
   bottom: 8px;
   transform: translateX(-50%);
+  /* über allen Fenstern (die liegen in einer eigenen Ebene, siehe Desktop.css) */
   z-index: 9500;
   display: flex;
   align-items: flex-end;
@@ -14,34 +18,61 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 18px;
   max-width: calc(100% - 16px);
-  overflow-x: auto;
-}
-.dock--narrow {
-  position: relative;
-  left: auto;
-  bottom: auto;
-  transform: none;
-  align-self: center;
-  /* Auf kleinen Handys lieber umbrechen als ein halbes Icon abschneiden. */
-  flex-wrap: wrap;
-  justify-content: center;
-  row-gap: 12px;
-  overflow-x: visible;
+  /* Desktop: kein Clipping, die Icons wachsen nach oben aus dem Dock heraus. */
+  overflow: visible;
 }
 
 .dock__item {
+  --scale: 1;
+  position: relative;
+  /* Der Platz wächst mit, damit sich vergrösserte Nachbarn nicht überlappen. */
+  width: calc(var(--dock-slot) * var(--scale));
+  min-height: 44px;
   background: transparent;
   border: 0;
-  padding: 0 2px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3px;
   cursor: pointer;
-  transition: transform 0.15s ease;
 }
-.dock__item:hover {
-  transform: translateY(-10px) scale(1.18);
+
+.dock__icon {
+  display: block;
+  transform: scale(var(--scale));
+  transform-origin: bottom center;
+}
+
+.dock--magnify .dock__item {
+  transition: width 0.12s ease-out;
+}
+.dock--magnify .dock__icon {
+  transition: transform 0.12s ease-out;
+  will-change: transform;
+}
+
+/* Tooltip mit dem App-Namen, über dem (vergrösserten) Icon */
+.dock__tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 48px * (var(--scale) - 1) + 10px);
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(30, 30, 30, 0.85);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.dock__item:hover .dock__tooltip,
+.dock__item:focus-visible .dock__tooltip {
+  opacity: 1;
+  visibility: visible;
 }
 
 .dock__dot {
@@ -54,8 +85,32 @@
   background: rgba(255, 255, 255, 0.9);
 }
 
+/* Mobile: Dock im Fluss, horizontal scrollbar, ohne Vergrösserung und Tooltip */
+.dock--narrow {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  transform: none;
+  align-self: center;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.dock--narrow::-webkit-scrollbar {
+  display: none;
+}
+.dock--narrow .dock__item {
+  flex-shrink: 0;
+  scroll-snap-align: center;
+}
+.dock--narrow .dock__tooltip {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .dock__item:hover {
-    transform: none;
+  .dock__item,
+  .dock__icon {
+    transition: none;
   }
 }
