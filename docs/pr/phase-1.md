@@ -40,7 +40,7 @@ Inhalte kommen aus `frontend/src/data/*.json`. Ein Backend gibt es noch nicht (P
 - **Ampel-Buttons:** Sie sehen aus wie in der Referenz (12-px-Punkte im Abstand von 26 px). Die
   unsichtbare Klickfläche ist **26 × 44 px**. Für 44 × 44 px müssten die Punkte weiter
   auseinander stehen, sonst überlappen die Flächen. Das erfüllt WCAG 2.5.8 (24 px), aber nicht die
-  44-px-Regel aus CLAUDE.md. → Bitte entscheiden, ob die Punkte weiter auseinander sollen.
+  44-px-Regel aus CLAUDE.md. Entscheid: bleibt so, der Look der Referenz hat Vorrang.
 - **Dock auf kleinen Handys:** bricht um, statt seitlich zu scrollen, damit kein Icon halb
   abgeschnitten ist.
 - **Menüleiste unter 480 px:** Datum und WLAN-Symbol werden ausgeblendet, die Uhrzeit bleibt.
