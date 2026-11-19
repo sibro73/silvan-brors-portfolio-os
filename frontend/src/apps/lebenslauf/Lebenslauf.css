@@ -1,0 +1,45 @@
+.cv {
+  max-width: 420px;
+  aspect-ratio: 1 / 1.414;
+  padding: 28px;
+  gap: 10px;
+}
+.cv__name {
+  font-size: 20px;
+  font-weight: 700;
+}
+.cv__role {
+  font-size: 12px;
+  color: var(--muted);
+}
+.cv__rule {
+  border: 0;
+  height: 1px;
+  background: #e5e5ea;
+  margin: 6px 0;
+}
+.cv__placeholder {
+  font-size: 11px;
+  color: var(--muted-2);
+}
+.cv__actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 14px;
+}
+.cv__download {
+  text-decoration: none;
+  background: #ffffff;
+  color: var(--ink);
+  padding: 10px 16px;
+  border-radius: 8px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+.cv__download:hover {
+  color: var(--ink);
+  background: #f0f0f2;
+}

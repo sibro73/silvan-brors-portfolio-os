@@ -1,0 +1,31 @@
+{
+  "meta": "Analyse-Agent · automatisch erstellt",
+  "week": "[KW]",
+  "title": "Wochenbericht Marketing",
+  "intro": "Mehrere Agents posten Clips von Rigged to Riches. Dieser Bericht zeigt, was diese Woche funktioniert hat.",
+  "channels": [
+    {
+      "name": "TikTok",
+      "barWidth": 80,
+      "highlight": true,
+      "views": "[Views]"
+    },
+    {
+      "name": "YT Shorts",
+      "barWidth": 56,
+      "views": "[Views]"
+    },
+    {
+      "name": "Reddit",
+      "barWidth": 38,
+      "views": "[Views]"
+    },
+    {
+      "name": "X",
+      "barWidth": 22,
+      "views": "[Views]"
+    }
+  ],
+  "recommendation": "[Was der Agent für nächste Woche vorschlägt]",
+  "note": "Balken sind Beispiel-Längen. Projekt in Arbeit."
+}

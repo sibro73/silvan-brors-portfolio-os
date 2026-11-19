@@ -32,7 +32,11 @@ export default function App() {
               active={active === app.id}
               narrow={narrow}
               actions={actions}
-            />
+            >
+              {app.component && (
+                <app.component openApp={openApp} closeSelf={() => actions.close(app.id)} />
+              )}
+            </Window>
           );
         })}
         <Dock running={running} narrow={narrow} onOpen={openApp} />

@@ -1,0 +1,79 @@
+{
+  "name": "Silvan Brors",
+  "greeting": "Hallo, ich bin Silvan.",
+  "tagline": "Applikationsentwickler EFZ in Ausbildung · ti&m · Zürich",
+  "intro": [
+    {
+      "text": "Ich arbeite mit "
+    },
+    {
+      "text": "Java",
+      "mark": true
+    },
+    {
+      "text": " und "
+    },
+    {
+      "text": "Spring",
+      "mark": true
+    },
+    {
+      "text": ", am liebsten im "
+    },
+    {
+      "text": "Backend",
+      "mark": true
+    },
+    {
+      "text": ". Dazu Docker, SQL, Linux und AI. Was ich zweimal von Hand mache, "
+    },
+    {
+      "text": "automatisiere",
+      "mark": true
+    },
+    {
+      "text": " ich beim dritten Mal, damit mein Alltag bequemer wird."
+    }
+  ],
+  "tip": "Tipp: Öffne den Ordner «Projekte» oder klick unten im Dock auf eine App. Fenster lassen sich verschieben.",
+  "skills": [
+    {
+      "area": "backend",
+      "items": "java, spring boot, rest, sql"
+    },
+    {
+      "area": "devops",
+      "items": "docker, linux, git, ci/cd"
+    },
+    {
+      "area": "ai",
+      "items": "rag, agents, claude code"
+    },
+    {
+      "area": "sonst",
+      "items": "unity, c#, python"
+    }
+  ],
+  "motto": ["was ich zweimal von hand mache,", "automatisiere ich beim dritten mal."],
+  "contact": {
+    "email": "[deine@email.ch]",
+    "subject": "Hallo Silvan",
+    "text": "Fragen zu einem Projekt oder eine offene Stelle? Melde dich.",
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/"
+      }
+    ]
+  },
+  "cv": {
+    "role": "Applikationsentwickler EFZ · Zürich",
+    "placeholder": "[Lebenslauf als PDF einbetten]",
+    "downloadLabel": "PDF herunterladen",
+    "downloadHref": "#lebenslauf"
+  }
+}

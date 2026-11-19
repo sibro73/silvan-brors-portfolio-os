@@ -1,0 +1,42 @@
+{
+  "rtr": {
+    "title": "Rigged to Riches",
+    "trailer": "[Trailer, läuft automatisch ohne Ton]",
+    "description": "First-Person-Heist in der Casino-Stadt Las Agné. Solo oder im Online-Koop mit bis zu 4 Leuten. Gebaut mit Unity und C#, Release nach dem Steam Next Fest im Februar 2027.",
+    "tags": ["Heist", "Koop", "First-Person"],
+    "cta": {
+      "label": "Auf die Wunschliste",
+      "href": "#steam"
+    }
+  },
+  "clipper": {
+    "botName": "Clipper Bot",
+    "botInitials": "CB",
+    "botTag": "Bot",
+    "highlight": {
+      "before": "Highlight erkannt bei ",
+      "streamer": "[Streamer A]",
+      "after": ". Schneide …",
+      "time": "[Zeit]"
+    },
+    "clip": {
+      "label": "[Clip 0:23]",
+      "caption": "Fertig in [Sek.] s, bereit zum Posten"
+    },
+    "reply": {
+      "text": "Gepostet 👍",
+      "time": "[Zeit] ✓✓"
+    },
+    "footer": "Clipper: schaut Livestreams mit, erkennt Highlights und schickt den Clip sofort hierher. [Sprache] / FFmpeg / Telegram Bot API",
+    "notification": "Neuer Clip ist fertig. Klick zum Ansehen."
+  },
+  "wetter": {
+    "title": "Wetterstation",
+    "description": "Gruppenprojekt für die BMA: von den Sensoren bis ins Dashboard.",
+    "placeholder": "[Foto / Dashboard-Screenshot]"
+  },
+  "shop": {
+    "title": "shop-outreach",
+    "description": "Python-Tool, das mit Google Places und PageSpeed lokale Shops findet, deren Website ein Update braucht."
+  }
+}

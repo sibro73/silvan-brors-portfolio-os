@@ -1,5 +1,15 @@
 import type { ComponentType } from 'react';
 
+import { About } from './apps/about/About';
+import { Finder } from './apps/finder/Finder';
+import { RiggedToRiches } from './apps/rigged-to-riches/RiggedToRiches';
+import { Clipper } from './apps/clipper/Clipper';
+import { IpaAssistent } from './apps/ipa-assistent/IpaAssistent';
+import { Wochenbericht } from './apps/agents/Wochenbericht';
+import { Mail } from './apps/mail/Mail';
+import { Lebenslauf } from './apps/lebenslauf/Lebenslauf';
+import { Wetter } from './apps/wetter/Wetter';
+import { ShopOutreach } from './apps/shop-outreach/ShopOutreach';
 import { Glyph as AgentsGlyph } from './apps/agents/Glyph';
 import { Glyph as ClipperGlyph } from './apps/clipper/Glyph';
 import { Glyph as FinderGlyph } from './apps/finder/Glyph';
@@ -10,6 +20,7 @@ import { Glyph as ShopGlyph } from './apps/shop-outreach/Glyph';
 import { Glyph as TerminalGlyph } from './apps/terminal/Glyph';
 import { Glyph as WetterGlyph } from './apps/wetter/Glyph';
 import type { GlyphProps } from './os/AppIcon';
+import type { AppProps } from './os/appTypes';
 
 export type AppId =
   | 'about'
@@ -45,6 +56,8 @@ export interface AppDefinition {
   dock?: string;
   /** Beschriftung im Ordner «Projekte». */
   finder?: string;
+  /** Inhalt des Fensters. */
+  component?: ComponentType<AppProps>;
   /** Icon auf dem Schreibtisch. */
   desktop?: { label: string } & DesktopIconKind;
 }
@@ -52,6 +65,7 @@ export interface AppDefinition {
 export const APPS: AppDefinition[] = [
   {
     id: 'about',
+    component: About,
     title: 'Über mich.txt',
     menuName: 'TextEdit',
     x: 90,
@@ -62,6 +76,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'finder',
+    component: Finder,
     title: 'Projekte',
     menuName: 'Finder',
     x: 150,
@@ -86,6 +101,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'rtr',
+    component: RiggedToRiches,
     title: 'Rigged to Riches',
     menuName: 'Rigged to Riches',
     x: 240,
@@ -98,6 +114,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'clipper',
+    component: Clipper,
     title: 'Telegram — Clipper Bot',
     menuName: 'Telegram',
     x: 880,
@@ -110,6 +127,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'ipa',
+    component: IpaAssistent,
     title: 'IPA-Assistent',
     menuName: 'IPA-Assistent',
     x: 420,
@@ -122,6 +140,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'agents',
+    component: Wochenbericht,
     title: 'Wochenbericht.pdf',
     menuName: 'Vorschau',
     x: 520,
@@ -134,6 +153,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'kontakt',
+    component: Mail,
     title: 'Neue E-Mail',
     menuName: 'Mail',
     x: 560,
@@ -146,6 +166,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'cv',
+    component: Lebenslauf,
     title: 'Lebenslauf.pdf',
     menuName: 'Vorschau',
     x: 640,
@@ -156,6 +177,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'wetter',
+    component: Wetter,
     title: 'Wetterstation (BMA)',
     menuName: 'Finder',
     x: 300,
@@ -167,6 +189,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'shop',
+    component: ShopOutreach,
     title: 'shop-outreach',
     menuName: 'Finder',
     x: 360,
