@@ -1,0 +1,62 @@
+.menubar {
+  flex-shrink: 0;
+  height: 28px;
+  background: var(--chrome);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  font-size: 13px;
+  gap: 16px;
+  position: relative;
+  z-index: 10000;
+  color: var(--ink);
+}
+
+.menubar__left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.menubar__app {
+  font-weight: 700;
+}
+
+.menubar__right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.menubar__link {
+  color: inherit;
+  text-decoration: none;
+}
+.menubar__link:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.menubar__battery {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.menubar__clock {
+  white-space: pre;
+}
+
+@media (max-width: 859px) {
+  .menubar__menu,
+  .menubar__battery {
+    display: none;
+  }
+}
