@@ -14,7 +14,7 @@ Referenz, kein Code zum Weiterverwenden.
 ```
 silvan-os/
 ├── frontend/        React + TypeScript + Vite
-├── backend/         Spring Boot 3, Java 21, Maven
+├── backend/         Spring Boot 4, Java 21, Maven
 ├── docs/            Plan, Design-Referenz, Entscheide
 ├── docker-compose.yml   lokal: backend + postgres
 └── .github/workflows/   CI für frontend und backend
@@ -74,7 +74,7 @@ Package `ch.silvanbrors.portfolio`:
 ```
 
 Regeln:
-- Java 21, Spring Boot 3, Maven. Records für DTOs.
+- Java 21, Spring Boot 4, Maven. Records für DTOs.
 - Postgres für Verlauf (Clips pro Tag, Berichte). Flyway für Migrationen.
 - Externe APIs nie pro Request abfragen: Scheduler + Cache.
 - `/api/ipa/ask`: Rate-Limit pro IP (z. B. Bucket4j), max. Länge der Frage, Timeout.

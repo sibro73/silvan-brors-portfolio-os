@@ -15,12 +15,12 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 - [x] Tests: windowStore, Terminal-Befehle
 
 ## Phase 2 – Backend MVP (`feat/backend-status`)
-- [ ] Spring Boot 3 / Java 21 in `backend/` (Spring Initializr: Web, Validation, Actuator, Cache)
-- [ ] `GET /api/status` mit Testdaten, Test mit MockMvc
-- [ ] CORS für die Frontend-Domain
-- [ ] Dockerfile + `docker-compose.yml` (backend + postgres)
-- [ ] GitHub Actions: Tests für frontend und backend bei jedem PR
-- [ ] Frontend holt `/api/status`, Fallback auf `data/`
+- [x] Spring Boot 4 / Java 21 in `backend/` (Spring Initializr: Web, Validation, Actuator, Cache)
+- [x] `GET /api/status` mit Testdaten, Test mit MockMvc
+- [x] CORS für die Frontend-Domain
+- [x] Dockerfile + `docker-compose.yml` (backend + postgres)
+- [x] GitHub Actions: Tests für frontend und backend bei jedem PR
+- [x] Frontend holt `/api/status`, Fallback auf `data/`
 
 ## Phase 3 – Deployment (`chore/deploy`)
 - [ ] Frontend auf Vercel oder Cloudflare Pages
