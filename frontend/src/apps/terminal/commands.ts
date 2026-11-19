@@ -19,8 +19,17 @@ export interface CommandResult {
   effect?: Effect;
 }
 
+/** Was ein Befehl ausser den Argumenten wissen darf. */
+export interface CommandContext {
+  status: Status;
+  /** true: Backend nicht erreichbar, Status kommt aus `data/`. */
+  offline: boolean;
+}
+
+const DEFAULT_CONTEXT: CommandContext = { status, offline: true };
+
 interface Command {
-  run: (args: string[]) => CommandResult;
+  run: (args: string[], ctx: CommandContext) => CommandResult;
 }
 
 const out = (text: string, tone: Tone = 'default'): Line => ({ text, tone });
@@ -109,8 +118,11 @@ export const COMMANDS: Record<string, Command> = {
     },
   },
   curl: {
-    // Phase 1: statische Daten. Ab Phase 2 kommt das aus GET /api/status.
-    run: () => print(...formatStatus(status)),
+    run: (_args, ctx) =>
+      print(
+        ...formatStatus(ctx.status),
+        ...(ctx.offline ? [out('# Offline-Modus: gespeicherte Daten', 'muted')] : []),
+      ),
   },
   sudo: {
     run: () => print(out('Netter Versuch.', 'red')),
@@ -124,7 +136,7 @@ export const COMMANDS: Record<string, Command> = {
 };
 
 /** Führt eine Eingabezeile aus. Gibt nur die Ausgabe zurück (ohne Echo der Eingabe). */
-export function runCommand(input: string): CommandResult {
+export function runCommand(input: string, ctx: CommandContext = DEFAULT_CONTEXT): CommandResult {
   const [name = '', ...args] = input.trim().split(/\s+/).filter(Boolean);
   if (!name) return { lines: [] };
   const command = Object.hasOwn(COMMANDS, name) ? COMMANDS[name] : undefined;
@@ -134,7 +146,7 @@ export function runCommand(input: string): CommandResult {
       out('Tippe «help» für alle Befehle.', 'muted'),
     );
   }
-  return command.run(args);
+  return command.run(args, ctx);
 }
 
 export function pushHistory(history: string[], input: string): string[] {

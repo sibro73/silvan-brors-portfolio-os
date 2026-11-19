@@ -9,10 +9,13 @@ import './index.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
+import { StatusProvider } from './api/StatusProvider';
 import App from './App';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <StatusProvider>
+      <App />
+    </StatusProvider>
   </StrictMode>,
 );

@@ -2,7 +2,8 @@ import './Classic.css';
 
 import { useEffect, useRef } from 'react';
 
-import { agentsReport, ipa, profile, projects, status } from '../data';
+import { useStatus } from '../api/statusContext';
+import { agentsReport, ipa, profile, projects } from '../data';
 
 /**
  * «Klassische Ansicht»: alle Inhalte auf einer schlichten, linearen Seite.
@@ -10,6 +11,7 @@ import { agentsReport, ipa, profile, projects, status } from '../data';
  */
 export function Classic() {
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const { status } = useStatus();
   const { rtr, clipper, wetter, shop } = projects;
   const c = profile.contact;
 

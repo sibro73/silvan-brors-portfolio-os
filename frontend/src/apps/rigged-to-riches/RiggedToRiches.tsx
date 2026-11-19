@@ -1,9 +1,11 @@
 import './RiggedToRiches.css';
 
-import { projects, status } from '../../data';
+import { useStatus } from '../../api/statusContext';
+import { projects } from '../../data';
 
 export function RiggedToRiches() {
   const rtr = projects.rtr;
+  const { status } = useStatus();
   return (
     <div className="rtr">
       <div className="rtr__trailer">
