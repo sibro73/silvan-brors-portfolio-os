@@ -8,6 +8,7 @@ import { IpaAssistent } from './apps/ipa-assistent/IpaAssistent';
 import { Wochenbericht } from './apps/agents/Wochenbericht';
 import { Mail } from './apps/mail/Mail';
 import { Lebenslauf } from './apps/lebenslauf/Lebenslauf';
+import { Terminal } from './apps/terminal/Terminal';
 import { Wetter } from './apps/wetter/Wetter';
 import { ShopOutreach } from './apps/shop-outreach/ShopOutreach';
 import { Glyph as AgentsGlyph } from './apps/agents/Glyph';
@@ -57,7 +58,7 @@ export interface AppDefinition {
   /** Beschriftung im Ordner «Projekte». */
   finder?: string;
   /** Inhalt des Fensters. */
-  component?: ComponentType<AppProps>;
+  component: ComponentType<AppProps>;
   /** Icon auf dem Schreibtisch. */
   desktop?: { label: string } & DesktopIconKind;
 }
@@ -89,6 +90,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'terminal',
+    component: Terminal,
     title: 'silvan — zsh — 80×24',
     menuName: 'Terminal',
     x: 700,

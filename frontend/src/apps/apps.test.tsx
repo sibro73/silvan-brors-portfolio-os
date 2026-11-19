@@ -15,9 +15,8 @@ import { RiggedToRiches } from './rigged-to-riches/RiggedToRiches';
 const noop = { openApp: () => {}, closeSelf: () => {} };
 
 describe('apps', () => {
-  it('every app except the terminal has a component (terminal follows)', () => {
-    const missing = APPS.filter((a) => !a.component).map((a) => a.id);
-    expect(missing.every((id) => id === 'terminal')).toBe(true);
+  it('every app has a window component', () => {
+    expect(APPS.every((a) => typeof a.component === 'function')).toBe(true);
   });
 
   it('About shows greeting and highlights', () => {

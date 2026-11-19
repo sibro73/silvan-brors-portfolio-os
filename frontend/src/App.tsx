@@ -33,9 +33,7 @@ export default function App() {
               narrow={narrow}
               actions={actions}
             >
-              {app.component && (
-                <app.component openApp={openApp} closeSelf={() => actions.close(app.id)} />
-              )}
+              <app.component openApp={openApp} closeSelf={() => actions.close(app.id)} />
             </Window>
           );
         })}
