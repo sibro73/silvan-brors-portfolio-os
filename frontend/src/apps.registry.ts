@@ -60,8 +60,8 @@ export interface AppDefinition {
   dark?: boolean;
   /** Inhalt folgt «Darstellung → Dunkle Fenster» (nur eigene Text-Fenster, keine nachgebauten Apps). */
   themable?: boolean;
-  /** Beim Öffnen horizontal zentrieren (x wird dann ignoriert). */
-  center?: boolean;
+  /** Unten rechts auf dem Desktop öffnen, neben den Schreibtisch-Icons (x/y werden dann ignoriert). */
+  bottomRight?: boolean;
   /** Fenster ploppt verzögert auf (ms). */
   entranceDelayMs?: number;
   icon?: { background: string; Glyph: ComponentType<GlyphProps> };
@@ -80,13 +80,12 @@ export const APPS: AppDefinition[] = [
   {
     id: 'welcome',
     themable: true,
-    center: true,
     entranceDelayMs: 300,
     component: Welcome,
     title: 'Willkommen',
     menuName: 'Willkommen',
-    x: 320,
-    y: 36,
+    x: 24,
+    y: 24,
     width: 800,
     height: 'auto',
   },
@@ -118,6 +117,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: 'terminal',
+    bottomRight: true,
     component: Terminal,
     title: 'silvan — zsh — 80×24',
     menuName: 'Terminal',
@@ -281,9 +281,23 @@ export const FINDER_ORDER: AppId[] = ['rtr', 'clipper', 'ipa', 'agents', 'wetter
 /** Beim ersten Laden offen, von hinten nach vorne. */
 export const INITIAL_OPEN: AppId[] = ['terminal', 'welcome'];
 
-/** Startposition eines Fensters; zentrierte Fenster richten sich nach der Desktop-Breite. */
-export function defaultPosition(id: AppId, desktopWidth: number): { x: number; y: number } {
+/** Höhe der Spalte mit den Schreibtisch-Icons (4 Icons). Darunter ist der rechte Rand frei. */
+export const ICON_COLUMN_HEIGHT = 400;
+/** Abstand rechts, wenn das Fenster neben den Icons liegt (92 px Icons + 16 px Rand + Luft). */
+export const ICON_COLUMN_GAP = 124;
+/** Abstand unten: Platz fürs Dock. */
+export const DOCK_GAP = 96;
+const EDGE = 16;
+
+/** Startposition eines Fensters; «unten rechts» richtet sich nach der Desktop-Grösse. */
+export function defaultPosition(
+  id: AppId,
+  desktop: { width: number; height: number },
+): { x: number; y: number } {
   const app = APP_BY_ID[id];
-  if (!app.center) return { x: app.x, y: app.y };
-  return { x: Math.max(16, Math.round((desktopWidth - app.width) / 2)), y: app.y };
+  if (!app.bottomRight || app.height === 'auto') return { x: app.x, y: app.y };
+  const y = Math.max(EDGE, Math.round(desktop.height - app.height - DOCK_GAP));
+  // Liegt das Fenster unter den Icons, darf es an den Rand, sonst bleibt die Icon-Spalte frei.
+  const rightGap = y >= ICON_COLUMN_HEIGHT ? EDGE : ICON_COLUMN_GAP;
+  return { x: Math.max(EDGE, Math.round(desktop.width - app.width - rightGap)), y };
 }

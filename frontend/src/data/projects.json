@@ -27,7 +27,7 @@
       "text": "Gepostet 👍",
       "time": "[Zeit] ✓✓"
     },
-    "footer": "Clipper: schaut Livestreams mit, erkennt Highlights und schickt den Clip sofort hierher. [Sprache] / FFmpeg / Telegram Bot API",
+    "footer": "Clipper: schaut Livestreams mit, erkennt Highlights und schickt den Clip sofort hierher. Python / FFmpeg / Whisper / Telegram Bot API",
     "notification": "Neuer Clip ist fertig. Klick zum Ansehen."
   },
   "wetter": {
