@@ -8,7 +8,6 @@ export interface MenuContext {
   state: DesktopState;
   active: AppId | null;
   preferences: Preferences;
-  narrow: boolean;
   fullscreen: boolean;
   fullscreenSupported: boolean;
 }
@@ -126,7 +125,7 @@ export const MENUS: MenuConfig[] = [
         type: 'action',
         label: 'Fenster anordnen',
         action: 'tile',
-        disabled: (ctx) => ctx.narrow || noActiveWindow(ctx),
+        disabled: noActiveWindow,
       },
       { type: 'separator' },
       { type: 'open-windows' },

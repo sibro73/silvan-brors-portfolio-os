@@ -270,14 +270,3 @@
     min-height: 44px;
   }
 }
-
-@media (max-width: 859.98px) {
-  .menubar__battery-text {
-    display: none;
-  }
-}
-@media (max-width: 479.98px) {
-  .menubar__date {
-    display: none;
-  }
-}

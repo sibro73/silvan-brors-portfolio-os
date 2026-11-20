@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import type { AppId } from '../apps.registry';
-import { mockViewportWidth } from '../test/matchMedia';
 import { Dock } from './Dock';
 import { DOCK_MAX_SCALE, DOCK_RANGE, dockScale } from './dockMagnification';
 
@@ -37,7 +36,7 @@ describe('dockScale', () => {
 
 describe('Dock', () => {
   it('lists the dock apps in reference order with a name tooltip', () => {
-    render(<Dock running={new Set()} narrow={false} onOpen={() => {}} />);
+    render(<Dock running={new Set()} onOpen={() => {}} />);
     expect(tooltips()).toEqual([
       'Finder',
       'Terminal',
@@ -52,7 +51,7 @@ describe('Dock', () => {
   });
 
   it('shows a dot for running apps only', () => {
-    render(<Dock running={new Set<AppId>(['terminal'])} narrow={false} onOpen={() => {}} />);
+    render(<Dock running={new Set<AppId>(['terminal'])} onOpen={() => {}} />);
     expect(screen.getByTestId('dot-terminal')).toHaveClass('dock__dot--on');
     expect(screen.getByTestId('dot-finder')).not.toHaveClass('dock__dot--on');
     expect(screen.getByRole('button', { name: 'Terminal öffnen (geöffnet)' })).toBeInTheDocument();
@@ -60,13 +59,13 @@ describe('Dock', () => {
 
   it('opens the app on click', async () => {
     const onOpen = vi.fn();
-    render(<Dock running={new Set()} narrow={false} onOpen={onOpen} />);
+    render(<Dock running={new Set()} onOpen={onOpen} />);
     await userEvent.click(screen.getByRole('button', { name: 'Telegram öffnen' }));
     expect(onOpen).toHaveBeenCalledWith('clipper');
   });
 
   it('magnifies icons near the pointer and resets on leave', () => {
-    render(<Dock running={new Set()} narrow={false} onOpen={() => {}} />);
+    render(<Dock running={new Set()} onOpen={() => {}} />);
     const dock = screen.getByRole('navigation', { name: 'Dock' });
     const item = screen.getByTestId('dock-finder');
     vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(new DOMRect(100, 800, 52, 60));
@@ -87,21 +86,11 @@ describe('Dock', () => {
       removeListener: () => {},
       dispatchEvent: () => false,
     })) as unknown as typeof window.matchMedia;
-    render(<Dock running={new Set()} narrow={false} onOpen={() => {}} />);
+    render(<Dock running={new Set()} onOpen={() => {}} />);
     const dock = screen.getByRole('navigation', { name: 'Dock' });
     expect(dock).not.toHaveClass('dock--magnify');
     fireEvent.pointerMove(dock, { clientX: 0, pointerType: 'mouse' });
     expect(screen.getByTestId('dock-finder').style.getPropertyValue('--scale')).toBe('');
     expect(tooltips()).toHaveLength(7);
-  });
-
-  it('scrolls without magnification on mobile', () => {
-    mockViewportWidth(390);
-    render(<Dock running={new Set()} narrow onOpen={() => {}} />);
-    const dock = screen.getByRole('navigation', { name: 'Dock' });
-    expect(dock).toHaveClass('dock--narrow');
-    expect(dock).not.toHaveClass('dock--magnify');
-    fireEvent.pointerMove(dock, { clientX: 0, pointerType: 'mouse' });
-    expect(screen.getByTestId('dock-finder').style.getPropertyValue('--scale')).toBe('');
   });
 });

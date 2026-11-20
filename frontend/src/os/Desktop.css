@@ -4,25 +4,12 @@
   display: flex;
   flex-direction: column;
 }
-.os--narrow {
-  height: auto;
-  min-height: 100vh;
-}
-
 .desktop {
   position: relative;
   flex-grow: 1;
   min-height: 0;
   overflow: hidden;
 }
-.desktop--narrow {
-  overflow: visible;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 16px 12px 24px;
-}
-
 .desktop__icons {
   position: absolute;
   top: 16px;
@@ -34,13 +21,6 @@
   gap: 10px;
   align-items: center;
 }
-.desktop--narrow .desktop__icons {
-  position: relative;
-  top: auto;
-  right: auto;
-  flex-direction: row;
-}
-
 .desktop-icon {
   background: transparent;
   border: 0;
@@ -80,13 +60,5 @@
   pointer-events: none;
 }
 .desktop__windows > .win {
-  pointer-events: auto;
-}
-.desktop--narrow .desktop__windows {
-  position: relative;
-  inset: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   pointer-events: auto;
 }

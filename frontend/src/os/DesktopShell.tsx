@@ -36,8 +36,6 @@ const initState = () => {
 };
 
 interface DesktopShellProps {
-  /** Unter 860 px: Fenster gestapelt, kein Drag. */
-  narrow: boolean;
   preferences: Preferences;
   setPreferences: (patch: Partial<Preferences>) => void;
   /** «Neu starten» im Logo-Menü. */
@@ -53,12 +51,7 @@ interface TerminalChannel {
 }
 
 /** Der ganze «Mac»: Menüleiste, Schreibtisch, Fenster, Benachrichtigung, Dock. */
-export function DesktopShell({
-  narrow,
-  preferences,
-  setPreferences,
-  onRestart,
-}: DesktopShellProps) {
+export function DesktopShell({ preferences, setPreferences, onRestart }: DesktopShellProps) {
   const [state, windows] = useWindowStore(initState);
   const active = activeWindow(state);
   const running = new Set(Object.keys(state.windows) as AppId[]);
@@ -151,17 +144,13 @@ export function DesktopShell({
     state,
     active,
     preferences,
-    narrow,
     fullscreen: fullscreen.active,
     fullscreenSupported: fullscreen.supported,
   };
 
-  const classes = ['wall', 'os'];
-  if (narrow) classes.push('os--narrow');
-
   return (
     <div
-      className={classes.join(' ')}
+      className="wall os"
       data-wallpaper={preferences.wallpaper}
       data-dark-windows={preferences.darkWindows}
     >
@@ -173,7 +162,6 @@ export function DesktopShell({
       />
       <Desktop
         ref={setDeskEl}
-        narrow={narrow}
         onOpen={openApp}
         windows={APPS.map((app) => {
           const w = state.windows[app.id];
@@ -185,7 +173,6 @@ export function DesktopShell({
               app={app}
               state={w}
               active={active === app.id}
-              narrow={narrow}
               actions={windows}
               entranceDelayMs={app.entranceDelayMs}
             >
@@ -208,7 +195,7 @@ export function DesktopShell({
             onClose={dismissNotification}
           />
         )}
-        <Dock running={running} narrow={narrow} onOpen={openApp} />
+        <Dock running={running} onOpen={openApp} />
       </Desktop>
       {toast && <Toast message={toast} onDone={clearToast} />}
     </div>

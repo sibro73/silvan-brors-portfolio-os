@@ -1,7 +1,7 @@
 import './Window.css';
 import './windowTheme.css';
 
-import { type CSSProperties, type PointerEvent, type ReactNode, useEffect, useRef } from 'react';
+import { type CSSProperties, type PointerEvent, type ReactNode, useRef } from 'react';
 
 import type { AppDefinition } from '../apps.registry';
 import type { WindowActions, WindowState } from './windowStore';
@@ -11,8 +11,6 @@ interface WindowProps {
   state: WindowState;
   /** Vorderstes Fenster: stärkerer Schatten. */
   active: boolean;
-  /** Schmale Ansicht: Fenster gestapelt, kein Drag, kein Maximieren. */
-  narrow: boolean;
   actions: WindowActions;
   /** Verzögerung der Einblend-Animation (z. B. Willkommensfenster beim Start). */
   entranceDelayMs?: number;
@@ -29,16 +27,8 @@ interface DragStart {
 
 const stop = (e: PointerEvent) => e.stopPropagation();
 
-function windowStyle(app: AppDefinition, state: WindowState, narrow: boolean): CSSProperties {
+function windowStyle(app: AppDefinition, state: WindowState): CSSProperties {
   const z = 10 + state.z;
-  if (narrow) {
-    return {
-      position: 'relative',
-      width: '100%',
-      height: app.height === 'auto' ? 'auto' : 420,
-      zIndex: z,
-    };
-  }
   if (state.maximized) {
     return {
       left: 8,
@@ -60,28 +50,9 @@ function windowStyle(app: AppDefinition, state: WindowState, narrow: boolean): C
   };
 }
 
-export function Window({
-  app,
-  state,
-  active,
-  narrow,
-  actions,
-  entranceDelayMs,
-  children,
-}: WindowProps) {
+export function Window({ app, state, active, actions, entranceDelayMs, children }: WindowProps) {
   const drag = useRef<DragStart | null>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-  const lastZ = useRef(state.z);
-  const canDrag = !narrow && !state.maximized;
-
-  // Gestapelt (mobil): ein neu geöffnetes oder nach vorne geholtes Fenster in den Blick scrollen.
-  useEffect(() => {
-    const raised = state.z > lastZ.current;
-    lastZ.current = state.z;
-    if (!narrow || !raised || state.minimized) return;
-    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    sectionRef.current?.scrollIntoView?.({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
-  }, [narrow, state.z, state.minimized]);
+  const canDrag = !state.maximized;
 
   const onTitlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
     if (!canDrag || e.button !== 0) return;
@@ -120,12 +91,11 @@ export function Window({
 
   return (
     <section
-      ref={sectionRef}
       className={classes.join(' ')}
       aria-label={app.title}
       hidden={state.minimized}
       style={{
-        ...windowStyle(app, state, narrow),
+        ...windowStyle(app, state),
         animationDelay: entranceDelayMs ? `${entranceDelayMs}ms` : undefined,
       }}
       onPointerDown={() => actions.focus(app.id)}
@@ -164,7 +134,6 @@ export function Window({
             className="win__light win__light--max"
             aria-label={state.maximized ? 'Fenstergrösse wiederherstellen' : 'Fenster maximieren'}
             aria-pressed={state.maximized}
-            disabled={narrow}
             onPointerDown={stop}
             onClick={() => actions.toggleMaximize(app.id)}
           >
