@@ -72,8 +72,8 @@ und schützt es davor.
 
 **Nur lokal:** `ipa-assistant` ist nicht öffentlich. In Produktion ist `IPA_ASSISTANT_URL` leer.
 Auf der Live-Seite beantwortet stattdessen eine Pages Function unter
-`https://silvanbrors.ch/api/ipa/ask` die Fragen, im selben Format plus `"hinweis"`
-(`frontend/server/ipaAgent.ts`, siehe `docs/deploy.md` → 6).
+`https://silvanbrors.ch/api/ipa/ask` die Fragen im selben Format, als RAG über die Notizen in
+Cloudflare Vectorize (`frontend/server/ipaAgent.ts`, siehe `docs/deploy.md` → 6).
 Der Endpunkt antwortet dort mit `503`, und das Frontend zeigt gar kein Eingabefeld, nur die
 Beispielantworten. Lokal ausprobieren:
 

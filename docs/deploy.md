@@ -106,20 +106,37 @@ gh variable set BACKEND_DEPLOY_ENABLED --body true  # Backend, erst wenn Fly und
 Danach den ersten Deploy von Hand starten: *Actions* → `frontend` bzw. `backend` →
 *Run workflow* auf `main`. Ab dann geht es bei jedem Merge automatisch.
 
-### 6. IPA-Chat: Übergangs-Assistent auf Cloudflare, ipa-assistant bleibt lokal
+### 6. IPA-Chat: RAG über die Notizen auf Cloudflare, ipa-assistant bleibt lokal
 
 `ipa-assistant` darf nicht öffentlich sein. Auf der Live-Seite bleibt `IPA_ASSISTANT_URL`
-deshalb **leer**. Fragen beantwortet dort ein Übergangs-Assistent: eine Pages Function
-(`frontend/functions/api/ipa/ask.ts`, Logik in `frontend/server/ipaAgent.ts`) mit Workers AI
-(Llama 3.3 70B). Er kennt Silvans Notizen nicht und schreibt das unter jede Antwort.
+deshalb **leer**. Fragen beantwortet dort eine Pages Function (`frontend/functions/api/ipa/ask.ts`,
+Logik in `frontend/server/ipaAgent.ts`):
 
-- **Einrichtung:** keine. Das Binding `AI` steht in `frontend/wrangler.toml`, der Workflow baut
-  mit `VITE_IPA_AGENT=true` und `VITE_IPA_URL=/`.
-- **Kosten:** Workers AI hat ein tägliches Gratis-Kontingent (rund 450 Antworten mit diesem
-  Modell). Ist es aufgebraucht, meldet der Chat «Kontingent für heute aufgebraucht». Auf dem
+1. Frage mit `bge-m3` einbetten (Workers AI),
+2. die passendsten Abschnitte aus Silvans Lernnotizen im **Vectorize-Index `ipa-notes`** suchen,
+3. Llama 3.3 70B antwortet nur daraus, in eigenen Worten, mit Quellen (Datei › Abschnitt).
+   Findet die Suche nichts Passendes, sagt der Chat das, ohne das Sprachmodell aufzurufen.
+
+**Die Notizen werden nicht veröffentlicht.** Sie liegen nur im Index auf Cloudflare, nie im Repo
+oder auf der Website. Der Assistent gibt sie nicht wörtlich heraus.
+
+- **Notizen einlesen oder aktualisieren** (Quelle: `ipa-assistant/lernunterlagen/`):
+  ```bash
+  cd frontend
+  npx wrangler login    # falls nötig
+  T=$(npx wrangler auth token)
+  CLOUDFLARE_ACCOUNT_ID=<account id> CLOUDFLARE_API_TOKEN="$T"     node --experimental-strip-types scripts/ingest-notes.ts
+  ```
+  Abschnitte, die es nicht mehr gibt, bleiben im Index. Bei grösseren Umbauten den Index neu
+  anlegen: `npx wrangler vectorize delete ipa-notes` und
+  `npx wrangler vectorize create ipa-notes --dimensions=1024 --metric=cosine`, dann einlesen.
+- **Bindings:** `AI` und `NOTES` stehen in `frontend/wrangler.toml`. Der Workflow baut mit
+  `VITE_IPA_AGENT=true` und `VITE_IPA_URL=/`.
+- **Kosten:** Workers AI und Vectorize haben Gratis-Kontingente (rund 450 Antworten pro Tag).
+  Ist das Kontingent aufgebraucht, meldet der Chat «Kontingent für heute aufgebraucht». Auf dem
   Workers-Free-Plan entstehen keine Kosten.
 - **Missbrauch:** Eine Rate-Limiting-Regel der Zone (*Security* → *WAF* → *Rate limiting rules*)
-  begrenzt `/api/ipa/ask` pro IP.
+  begrenzt `/api/ipa/ask` auf 3 Fragen pro 10 s und IP.
 - **Abschalten:** Im Workflow `VITE_IPA_AGENT` entfernen. Dann zeigt der Chat wieder nur Beispiele.
 
 Wie man den Chat lokal gegen `ipa-assistant` laufen lässt, steht in `docs/api.md`.
