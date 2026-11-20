@@ -1,5 +1,5 @@
-import type { CalendarEvent } from '../../data';
-import { TIME_ZONE } from '../clock';
+import type { CalendarEvent } from '../data';
+import { TIME_ZONE } from '../os/clock';
 
 export interface DateParts {
   year: number;

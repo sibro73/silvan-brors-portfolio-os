@@ -111,9 +111,9 @@ describe('createActions', () => {
 
   it('appearance actions update the preferences', () => {
     const { actions, deps } = setup();
-    actions['wallpaper:graphit']();
+    actions['wallpaper:casino']();
     actions['toggle-dark-windows']();
-    expect(deps.setPreferences).toHaveBeenNthCalledWith(1, { wallpaper: 'graphit' });
+    expect(deps.setPreferences).toHaveBeenNthCalledWith(1, { wallpaper: 'casino' });
     expect(deps.setPreferences).toHaveBeenNthCalledWith(2, { darkWindows: true });
   });
 

@@ -25,7 +25,7 @@ silvan-os/
 ```
 src/
 ├── main.tsx
-├── App.tsx                  Wechsel Desktop / Mobile / Klassische Ansicht
+├── App.tsx                  Wechsel Handy / Desktop (matchMedia, React.lazy) / Klassische Ansicht
 ├── os/
 │   ├── MenuBar.tsx          Logo, aktive App, Menüs, WLAN, Akku, Uhr (Europe/Zurich)
 │   ├── menu/                Dropdown, Popover (WLAN/Akku/Kalender), Kalender-Logik
@@ -38,7 +38,7 @@ src/
 │   ├── Dock.tsx             App-Icons, Hover-Vergrösserung, Punkt für offene Apps
 │   ├── Notification.tsx     Benachrichtigung oben rechts
 │   └── windowStore.ts       Zustand: offen/minimiert/maximiert, x/y, z-Reihenfolge
-├── apps/                    Ein Ordner pro App (Inhalt eines Fensters)
+├── apps/                    Ein Ordner pro Desktop-App (Inhalt eines Fensters)
 │   ├── welcome/             Willkommensfenster (Startfenster)
 │   ├── about/               Über mich.txt
 │   ├── finder/              Ordner "Projekte"
@@ -51,7 +51,18 @@ src/
 │   ├── lebenslauf/          PDF-Vorschau
 │   ├── wetter/, shop-outreach/   kleine Projekte aus dem Ordner «Projekte»
 │   └── about-os/, shortcuts/     «Über Silvan OS», «Tastenkürzel»
-├── apps.registry.ts         Liste aller Apps: id, Titel, Icon, Standardgrösse/-position
+├── apps.registry.ts         Liste aller Desktop-Apps: id, Titel, Icon, Standardgrösse/-position
+├── mobile/                  Handy-Ansicht (unter 860 px) nach design/mobile.dc.html
+│   ├── MobileOS.tsx         Home-Bildschirm, Dock, App öffnen/schliessen, Browser-Zurück
+│   ├── HomeScreen.tsx, Dock.tsx, AppSheet.tsx, icons.tsx, mobile.css
+│   ├── mobileApps.ts        Titel und Farben der Apps, Namen für `open`
+│   └── apps/                ein Inhalt pro App (Rtr, Clipper, Ipa, Terminal, …)
+├── shared/                  von beiden Ansichten genutzt
+│   ├── content.ts           gemeinsame Inhalte (aus data/), Stack, Terminal-Chips
+│   ├── terminal.ts          Terminal-Befehle als reine Funktion
+│   ├── wallpaper.ts         Hintergrund, localStorage-Key `silvanos-wall`
+│   ├── calendar.ts          Kalender-Logik (Europe/Zurich)
+│   └── useIsMobile.ts
 ├── api/                     fetch-Funktionen für das Backend
 ├── data/                    statische Fallback-Daten (JSON), solange das Backend fehlt
 └── classic/                 "Klassische Ansicht": alles auf einer schlichten Seite
@@ -64,12 +75,16 @@ Notizen aus `ipa-assistant/lernunterlagen/` ein. Die Notizen kommen nie ins Repo
 Website, und der Assistent gibt sie nicht wörtlich heraus.
 
 Regeln:
-- Neue App = neuer Ordner in `apps/` + Eintrag in `apps.registry.ts`. Sonst nichts anfassen.
-- Neuer Terminal-Befehl = ein Eintrag in `apps/terminal/commands.ts`.
+- Neue App = neuer Ordner in `apps/` + Eintrag in `apps.registry.ts` (Desktop) bzw. Datei in
+  `mobile/apps/` + Eintrag in `mobile/mobileApps.ts` und `MobileOS.tsx` (Handy).
+- Texte nur in `data/*.json` pflegen. Beide Ansichten lesen über `shared/content.ts`.
+- Neuer Terminal-Befehl = ein Eintrag in `shared/terminal.ts` (gilt für Desktop und Handy).
 - Neuer Menüeintrag = Aktion in `os/actions.ts` + Eintrag in `os/menu.config.ts`.
   Menü, Tastenkürzel und Buttons rufen nur Aktionen auf, keine eigene Logik.
 - Kein UI-Framework für Fenster (kein react-rnd o. ä.). Drag selbst mit Pointer-Events.
-- Unter 860 px Breite: Fenster untereinander stapeln, kein Drag.
+- Unter 860 px Breite: nur die Handy-Ansicht (`mobile/`), ab 860 px nur der Desktop. Umschalten
+  live per `useIsMobile`, beide Ansichten per `React.lazy` geladen.
+- Design-Vorlagen: `design/desktop.dc.html` und `design/mobile.dc.html` (Referenz, kein Code).
 - Barrierefreiheit: echte `<button>`/`<a>`, `aria-label` für Icon-Buttons,
   Klickflächen mind. 44 px (die Ampel-Punkte haben eine grössere unsichtbare Fläche),
   `prefers-reduced-motion` respektieren.

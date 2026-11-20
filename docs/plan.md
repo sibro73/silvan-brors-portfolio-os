@@ -55,6 +55,13 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 - [x] Lighthouse: Performance und Barrierefreiheit prüfen (`docs/lighthouse.md`)
 - [x] README mit Screenshot, Architektur und Link zur Live-Seite
 
+## Phase 7 – Handy-Ansicht (`feat/mobile-os`)
+- [x] Unter 860 px eigene Handy-Ansicht nach `design/mobile.dc.html`, ab 860 px nur der Desktop
+- [x] Live-Umschalten per `matchMedia`, beide Ansichten mit `React.lazy`
+- [x] Gemeinsame Inhalte (`shared/content.ts`), Terminal-Logik und Hintergrund (`silvanos-wall`)
+- [x] Apps zoomen aus dem Icon, Browser-Zurück schliesst, Wackel-Modus, Animationen nur ohne
+  `prefers-reduced-motion`
+
 ## Offene Punkte
 - ~~Sprache des Clippers~~: Python (FFmpeg, Whisper, Telegram Bot API)
 - LLM und Vektor-DB des IPA-Assistenten: lokal Ollama `llama3.1:8b` + pgvector (`ipa-assistant`),

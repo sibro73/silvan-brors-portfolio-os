@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Silvan Brors – Portfolio (iPhone)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#12131A}
+a{color:#2F6FE4}a:hover{color:#1C55C0}
+.wall-abend,.wall-nacht,.wall-gletscher,.wall-casino{background-size:170% 170%}
+.drift{animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{from{background-position:0% 0%}to{background-position:100% 100%}}
+.wall-abend{background-color:#12131A;background-image:radial-gradient(ellipse at 18% 22%,rgba(91,60,196,.85) 0,rgba(91,60,196,0) 55%),radial-gradient(ellipse at 85% 78%,rgba(179,18,43,.75) 0,rgba(179,18,43,0) 50%),radial-gradient(ellipse at 70% 12%,rgba(47,111,228,.7) 0,rgba(47,111,228,0) 48%),radial-gradient(ellipse at 22% 95%,rgba(255,122,26,.45) 0,rgba(255,122,26,0) 45%)}
+.wall-nacht{background-color:#05070D;background-image:radial-gradient(1px 1px at 12% 18%,#FFFFFF 50%,transparent 51%),radial-gradient(1px 1px at 34% 62%,#FFFFFF 50%,transparent 51%),radial-gradient(1.5px 1.5px at 58% 28%,#FFFFFF 50%,transparent 51%),radial-gradient(1px 1px at 76% 70%,#FFFFFF 50%,transparent 51%),radial-gradient(1px 1px at 88% 14%,#FFFFFF 50%,transparent 51%),radial-gradient(1px 1px at 22% 84%,#FFFFFF 50%,transparent 51%),radial-gradient(ellipse at 70% 110%,rgba(47,111,228,.55) 0,rgba(47,111,228,0) 60%)}
+.wall-gletscher{background-color:#7FA9C6;background-image:radial-gradient(ellipse at 20% 15%,rgba(255,255,255,.75) 0,rgba(255,255,255,0) 45%),radial-gradient(ellipse at 80% 85%,rgba(32,86,140,.85) 0,rgba(32,86,140,0) 60%),radial-gradient(ellipse at 55% 55%,rgba(122,190,220,.7) 0,rgba(122,190,220,0) 50%)}
+.wall-casino{background-color:#2A050B;background-image:radial-gradient(ellipse at 25% 25%,rgba(179,18,43,.9) 0,rgba(179,18,43,0) 55%),radial-gradient(ellipse at 78% 75%,rgba(242,193,78,.55) 0,rgba(242,193,78,0) 45%),radial-gradient(ellipse at 60% 8%,rgba(122,14,28,.9) 0,rgba(122,14,28,0) 50%)}
+.ic{transition:transform .14s ease}
+.ic:active{transform:scale(.9)}
+.app{animation:appIn .42s cubic-bezier(.2,.85,.25,1) both}
+@keyframes appIn{from{opacity:.3;transform:scale(.14);border-radius:60px}to{opacity:1;transform:none;border-radius:0}}
+.appout{animation:appOut .26s cubic-bezier(.4,0,.8,.5) both}
+@keyframes appOut{from{opacity:1;transform:none}to{opacity:0;transform:scale(.14);border-radius:60px}}
+.home{transition:transform .4s cubic-bezier(.2,.85,.25,1),opacity .4s,filter .4s}
+.home>*{animation:iconIn .55s cubic-bezier(.2,.9,.3,1.25) both}
+.home>*:nth-child(1){animation-delay:.05s}.home>*:nth-child(2){animation-delay:.12s}.home>*:nth-child(3){animation-delay:.18s}.home>*:nth-child(4){animation-delay:.22s}.home>*:nth-child(5){animation-delay:.26s}.home>*:nth-child(6){animation-delay:.3s}.home>*:nth-child(7){animation-delay:.34s}.home>*:nth-child(8){animation-delay:.38s}.home>*:nth-child(9){animation-delay:.42s}.home>*:nth-child(10){animation-delay:.46s}
+@keyframes iconIn{from{opacity:0;transform:scale(.5) translateY(24px)}to{opacity:1;transform:none}}
+.jiggle>*{animation:jig .24s ease-in-out infinite alternate}
+.jiggle>*:nth-child(even){animation-delay:-.12s}
+@keyframes jig{from{transform:rotate(-1.4deg)}to{transform:rotate(1.4deg)}}
+.dockin{animation:dockIn .6s .5s cubic-bezier(.2,.9,.3,1.1) both}
+@keyframes dockIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+.sun{animation:spin 20s linear infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pulse{animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+.bar{animation:bar 1.1s cubic-bezier(.2,.8,.2,1) both}
+.bar2{animation-delay:.1s}.bar3{animation-delay:.2s}.bar4{animation-delay:.3s}
+@keyframes bar{from{width:0}}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#8E8E93;animation:dot 1s ease-in-out infinite}
+.dot:nth-child(2){animation-delay:.15s}.dot:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.island{transition:width .5s cubic-bezier(.2,.9,.3,1.2)}
+.badge{animation:badge .5s cubic-bezier(.2,.9,.3,1.6) both}
+@keyframes badge{from{transform:scale(0)}to{transform:none}}
+.nt{animation:nt .45s cubic-bezier(.2,.9,.3,1.15) both}
+@keyframes nt{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:none}}
+.ln{animation:ln .25s ease both}
+@keyframes ln{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.lbl{text-shadow:0 1px 3px rgba(0,0,0,.55)}
+.chip:active{transform:scale(.96)}
+.scr::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion: reduce){.app,.appout,.nt,.ln,.drift,.home>*,.jiggle>*,.dockin,.sun,.pulse,.bar,.dot,.badge{animation:none}.ic,.home,.island{transition:none}}
+</style>
+</helmet>
+<div class="{{wallClass}} drift" ref="{{rootRef}}" style="width: 390px; height: 844px; position: relative; overflow: hidden; font-family: Inter, -apple-system, system-ui, sans-serif; font-size: 15px; line-height: 1.4; color: #FFFFFF">
+
+<!-- Statusleiste -->
+<div style="position: absolute; top: 0; left: 0; right: 0; height: 54px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px 0 40px; box-sizing: border-box; z-index: 80; color: {{sbColor}}; pointer-events: none">
+<span style="font-size: 16px; font-weight: 600; letter-spacing: -0.2px">{{clock}}</span>
+<span style="display: flex; align-items: center; gap: 6px" aria-hidden="true">
+<svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"></rect><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="currentColor"></rect><rect x="10" y="3" width="3" height="9" rx="1" fill="currentColor"></rect><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"></rect></svg>
+<svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 11.5l2.4-2.9a3.6 3.6 0 0 0-4.8 0z" fill="currentColor"></path><path d="M3.9 6.2a7 7 0 0 1 9.2 0" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"></path><path d="M1.2 3.4a11 11 0 0 1 14.6 0" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"></path></svg>
+<svg width="27" height="13" viewBox="0 0 27 13"><rect x="0.5" y="0.5" width="23" height="12" rx="3.5" stroke="currentColor" stroke-opacity="0.45" fill="none"></rect><rect x="2" y="2" width="20" height="9" rx="2" fill="currentColor"></rect><path d="M25 4.5v4a2 2 0 0 0 0-4z" fill="currentColor" fill-opacity="0.45"></path></svg>
+</span>
+</div>
+
+<!-- Dynamic Island -->
+<div aria-hidden="true" class="island" style="position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: {{islandW}}; height: 36px; border-radius: 20px; background: #000000; z-index: 90; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; box-sizing: border-box; overflow: hidden">
+<sc-if value="{{notif}}" hint-placeholder-val="{{ false }}"><span class="ln" style="width: 22px; height: 22px; border-radius: 6px; background: linear-gradient(160deg, #3FB0F0, #1667B8)"></span><span class="pulse" style="width: 8px; height: 8px; border-radius: 50%; background: #34C759"></span></sc-if>
+</div>
+
+<!-- Home-Bildschirm -->
+<main aria-label="Home-Bildschirm" class="{{homeClass}}" onPointerDown="{{pressStart}}" onPointerUp="{{pressEnd}}" onPointerLeave="{{pressEnd}}" style="transform: {{homeTf}}; opacity: {{homeOp}}; filter: {{homeBlur}}; position: absolute; top: 62px; left: 0; right: 0; padding: 0 14px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 84px; row-gap: 16px">
+
+<!-- Widget: Profil (4×2) -->
+<div style="grid-column: span 4; grid-row: span 2; display: flex; flex-direction: column; align-items: stretch; gap: 6px; padding: 0 10px">
+<button type="button" onClick="{{open.notes}}" class="ic" style="height: 160px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.16); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); padding: 16px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; color: #FFFFFF; font-family: inherit; cursor: pointer">
+<div style="display: flex; align-items: center; gap: 14px">
+<div style="width: 58px; height: 58px; border-radius: 50%; background: {{accent}}; color: #1D1D1F; display: flex; align-items: center; justify-content: center; font-size: 21px; font-weight: 700; flex-shrink: 0">SB</div>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-size: 19px; font-weight: 700; letter-spacing: -0.3px">Silvan Brors</span>
+<span style="font-size: 13px; color: rgba(255,255,255,0.85)">Applikationsentwickler EFZ in Ausbildung · ti&amp;m · Zürich</span>
+</div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<div style="display: flex; gap: 6px; flex-wrap: wrap">
+<span style="font-size: 12px; font-weight: 600; padding: 4px 9px; border-radius: 999px; background: rgba(255,255,255,0.2)">Java</span>
+<span style="font-size: 12px; font-weight: 600; padding: 4px 9px; border-radius: 999px; background: rgba(255,255,255,0.2)">Spring</span>
+<span style="font-size: 12px; font-weight: 600; padding: 4px 9px; border-radius: 999px; background: rgba(255,255,255,0.2)">Docker</span>
+<span style="font-size: 12px; font-weight: 600; padding: 4px 9px; border-radius: 999px; background: rgba(255,255,255,0.2)">AI</span>
+</div>
+<span style="font-size: 12px; color: rgba(255,255,255,0.9); white-space: nowrap; display: flex; align-items: center; gap: 6px"><span class="pulse" style="width: 7px; height: 7px; border-radius: 50%; background: #34C759"></span>Über mich ›</span>
+</div>
+</button>
+<span class="lbl" style="font-size: 12px; text-align: center; font-weight: 500">Profil</span>
+</div>
+
+<!-- Widget: Wetterstation (2×2) -->
+<div style="grid-column: span 2; grid-row: span 2; display: flex; flex-direction: column; gap: 6px; padding: 0 10px">
+<button type="button" onClick="{{open.wetter}}" class="ic" style="height: 160px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.22); background: linear-gradient(165deg, rgba(70,128,240,0.92), rgba(91,60,196,0.88)); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; text-align: left; color: #FFFFFF; font-family: inherit; cursor: pointer">
+<div style="display: flex; flex-direction: column; gap: 0">
+<span style="font-size: 14px; font-weight: 600">Wetterstation</span>
+<span style="font-size: 40px; font-weight: 300; letter-spacing: -1px; line-height: 1.15">[°C]</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<svg class="sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFE08A" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"></path></svg>
+<span style="font-size: 12px; color: rgba(255,255,255,0.9)">BMA-Projekt · eigene Sensoren</span>
+</div>
+</button>
+<span class="lbl" style="font-size: 12px; text-align: center; font-weight: 500">Wetter</span>
+</div>
+
+<!-- Apps -->
+<button type="button" onClick="{{open.rtr}}" class="ic" style="border: 0; background: none; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; color: #FFFFFF; font-family: inherit; cursor: pointer">
+<span style="width: 60px; height: 60px; border-radius: 15px; background: linear-gradient(160deg, #D0243F, #7A0E1C); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 6px 14px rgba(0,0,0,0.3)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3" stroke="#F2C14E"></rect><circle cx="9" cy="9" r="1.2" fill="#F2C14E" stroke="none"></circle><circle cx="15" cy="9" r="1.2" fill="#F2C14E" stroke="none"></circle><circle cx="9" cy="15" r="1.2" fill="#F2C14E" stroke="none"></circle><circle cx="15" cy="15" r="1.2" fill="#F2C14E" stroke="none"></circle></svg></span>
+<span class="lbl" style="font-size: 12px; font-weight: 500; white-space: nowrap">Rigged</span>
+</button>
+<button type="button" onClick="{{open.clipper}}" class="ic" style="border: 0; background: none; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; color: #FFFFFF; font-family: inherit; cursor: pointer; position: relative">
+<span style="width: 60px; height: 60px; border-radius: 15px; background: linear-gradient(160deg, #3FB0F0, #1667B8); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 6px 14px rgba(0,0,0,0.3); position: relative"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="7" r="2.5"></circle><circle cx="6" cy="17" r="2.5"></circle><path d="M8.2 8.4L20 18M8.2 15.6L20 6"></path></svg>
+<sc-if value="{{badge}}" hint-placeholder-val="{{ false }}"><span class="badge" style="position: absolute; top: -5px; right: -5px; min-width: 22px; height: 22px; border-radius: 11px; background: #FF3B30; color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center">1</span></sc-if>
+</span>
+<span class="lbl" style="font-size: 12px; font-weight: 500; white-space: nowrap">Clipper</span>
+</button>
+<button type="button" onClick="{{open.ipa}}" class="ic" style="border: 0; background: none; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; color: #FFFFFF; font-family: inherit; cursor: pointer">
+<span style="width: 60px; height: 60px; border-radius: 15px; background: linear-gradient(160deg, #8466F0, #4A2FB0); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 6px 14px rgba(0,0,0,0.3)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"></path><path d="M5 17a3 3 0 0 1 3-3h11"></path></svg></span>
+<span class="lbl" style="font-size: 12px; font-weight: 500; white-space: nowrap">IPA</span>
+</button>
+<button type="button" onClick="{{open.agents}}" class="ic" style="border: 0; background: none; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; color: #FFFFFF; font-family: inherit; cursor: pointer">
+<span style="width: 60px; height: 60px; border-radius: 15px; background: linear-gradient(160deg, #FFA24D, #E0601A); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 6px 14px rgba(0,0,0,0.3)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"></path><path d="M7 16v-4M12 16V7M17 16v-7"></path></svg></span>
+<span class="lbl" style="font-size: 12px; font-weight: 500; white-space: nowrap">Agents</span>
+</button>
+
+<button type="button" onClick="{{open.shop}}" class="ic" style="border: 0; background: none; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; color: #FFFFFF; font-family: inherit; cursor: pointer">
+<span style="width: 60px; height: 60px; border-radius: 15px; background: linear-gradient(160deg, #E25597, #8E1F57); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 6px 14px rgba(0,0,0,0.3)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v10h16V10"></path><path d="M3 10l2-6h14l2 6z"></path><path d="M10 20v-5h4v5"></path></svg></span>
+<span class="lbl" style="font-size: 12px; font-weight: 500; white-space: nowrap">Shops</span>
+</button>
+<button type="button" onClick="{{open.cv}}" class="ic" style="border: 0; background: none; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; color: #FFFFFF; font-family: inherit; cursor: pointer">
+<span style="width: 60px; height: 60px; border-radius: 15px; background: linear-gradient(160deg, #474B66, #1E1F2B); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 6px 14px rgba(0,0,0,0.3)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5"></path><path d="M10 13h6M10 17h6"></path></svg></span>
+<span class="lbl" style="font-size: 12px; font-weight: 500; white-space: nowrap">Lebenslauf</span>
+</button>
+<button type="button" onClick="{{open.kalender}}" class="ic" style="border: 0; background: none; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; color: #FFFFFF; font-family: inherit; cursor: pointer">
+<span style="width: 60px; height: 60px; border-radius: 15px; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 6px 14px rgba(0,0,0,0.3)">
+<span style="font-size: 10px; font-weight: 600; color: #D70015; text-transform: uppercase; line-height: 1.2">{{calWeekday}}</span>
+<span style="font-size: 28px; font-weight: 400; color: #1D1D1F; line-height: 1">{{calDay}}</span>
+</span>
+<span class="lbl" style="font-size: 12px; font-weight: 500; white-space: nowrap">Kalender</span>
+</button>
+<button type="button" onClick="{{open.settings}}" class="ic" style="border: 0; background: none; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; color: #FFFFFF; font-family: inherit; cursor: pointer">
+<span style="width: 60px; height: 60px; border-radius: 15px; background: linear-gradient(160deg, #8A8FA8, #4E5266); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 6px 14px rgba(0,0,0,0.3)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"></path><circle cx="16" cy="7" r="2"></circle><circle cx="10" cy="17" r="2"></circle></svg></span>
+<span class="lbl" style="font-size: 12px; font-weight: 500; white-space: nowrap">Einstellungen</span>
+</button>
+</main>
+
+<!-- Hinweis über dem Dock -->
+<div class="dockin" style="position: absolute; left: 0; right: 0; bottom: 124px; display: flex; justify-content: center; pointer-events: none">
+<span style="font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 999px; background: rgba(0,0,0,0.28); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); color: #FFFFFF">{{hint}}</span>
+</div>
+
+<!-- Dock -->
+<nav aria-label="Dock" class="dockin" style="position: absolute; left: 12px; right: 12px; bottom: 22px; height: 90px; border-radius: 34px; background: rgba(255,255,255,0.2); backdrop-filter: blur(26px); -webkit-backdrop-filter: blur(26px); border: 1px solid rgba(255,255,255,0.18); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; justify-items: center">
+<button type="button" onClick="{{open.kontakt}}" class="ic" aria-label="Mail: Kontakt" style="width: 60px; height: 60px; border-radius: 15px; border: 0; background: linear-gradient(160deg, #6A88FF, #3B4FD8); box-shadow: inset 0 1px 0 rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3.5 6.5L12 13l8.5-6.5"></path></svg></button>
+<button type="button" onClick="{{open.notes}}" class="ic" aria-label="Notizen: Über mich" style="width: 60px; height: 60px; border-radius: 15px; border: 0; background: linear-gradient(160deg, #FFDB7A, #F0B429); box-shadow: inset 0 1px 0 rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#4A3B00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="2"></rect><path d="M8 9h8M8 13h8M8 17h5"></path></svg></button>
+<button type="button" onClick="{{open.terminal}}" class="ic" aria-label="Terminal" style="width: 60px; height: 60px; border-radius: 15px; border: 0; background: linear-gradient(160deg, #2E3040, #121318); box-shadow: inset 0 1px 0 rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#7EE787" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" stroke="#FFFFFF"></rect><path d="M7 9l3 3-3 3M12 15h5"></path></svg></button>
+<button type="button" onClick="{{github}}" class="ic" aria-label="GitHub" style="width: 60px; height: 60px; border-radius: 15px; border: 0; background: linear-gradient(160deg, #FFFFFF, #DCDCE4); box-shadow: inset 0 1px 0 rgba(255,255,255,0.6); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14" stroke="#1D1D1F"></path></svg></button>
+</nav>
+<div aria-hidden="true" style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.9)"></div>
+
+<sc-if value="{{jiggle}}" hint-placeholder-val="{{ false }}">
+<button type="button" class="ln" onClick="{{stopJiggle}}" style="position: absolute; top: 58px; right: 18px; z-index: 85; min-height: 34px; border: 0; border-radius: 999px; background: rgba(255,255,255,0.3); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 600; padding: 0 16px; cursor: pointer">Fertig</button>
+</sc-if>
+
+<!-- Mitteilung -->
+<sc-if value="{{notif}}" hint-placeholder-val="{{ false }}">
+<button type="button" class="nt" onClick="{{open.clipper}}" style="position: absolute; top: 56px; left: 10px; right: 10px; z-index: 95; border: 0; border-radius: 22px; background: rgba(245,245,247,0.94); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); padding: 12px 14px; display: flex; align-items: center; gap: 12px; text-align: left; font-family: inherit; color: #1D1D1F; cursor: pointer">
+<span style="width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(160deg, #3FB0F0, #1667B8); display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="7" r="2.5"></circle><circle cx="6" cy="17" r="2.5"></circle><path d="M8.2 8.4L20 18M8.2 15.6L20 6"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0">
+<span style="display: flex; justify-content: space-between; font-size: 14px"><b style="font-weight: 600">Clipper Bot</b><span style="color: #6E6E73; font-size: 13px">jetzt</span></span>
+<span style="font-size: 14px; color: #3A3A3C">Neuer Clip ist fertig. Tippe zum Ansehen.</span>
+</span>
+</button>
+</sc-if>
+
+<!-- Geöffnete App -->
+<sc-if value="{{appOpen}}" hint-placeholder-val="{{ false }}">
+<section class="{{appClass}}" aria-label="{{appTitle}}" style="transform-origin: {{origin}}; position: absolute; inset: 0; z-index: 60; background: {{appBg}}; color: {{appFg}}; display: flex; flex-direction: column; padding-top: 54px; box-sizing: border-box">
+<header style="height: 46px; flex-shrink: 0; display: grid; grid-template-columns: 96px 1fr 96px; align-items: center; padding: 0 8px">
+<button type="button" onClick="{{home}}" style="border: 0; background: none; color: {{appTint}}; font-family: inherit; font-size: 17px; display: flex; align-items: center; gap: 2px; cursor: pointer; padding: 8px 6px; justify-self: start; min-height: 44px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Home</button>
+<span style="text-align: center; font-size: 17px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{appTitle}}</span>
+<span></span>
+</header>
+<div class="scr" style="flex: 1; min-height: 0; overflow-y: auto; padding: 8px 20px 24px; box-sizing: border-box">
+
+<!-- Rigged to Riches -->
+<sc-if value="{{is.rtr}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="aspect-ratio: 16 / 9; border-radius: 16px; background: rgba(255,255,255,0.08); border: 1px dashed rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; text-align: center; padding: 16px; font-size: 14px; color: rgba(255,255,255,0.75)">[Trailer, läuft automatisch ohne Ton]</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h2 style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.5px">Rigged to Riches</h2>
+<p style="margin: 0; font-size: 15px; color: rgba(255,255,255,0.85)">First-Person-Heist in der Casino-Stadt Las Agné. Solo oder im Online-Koop mit bis zu 4 Leuten. Gebaut mit Unity und C#, Release nach dem Steam Next Fest im Februar 2027.</p>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<span style="font-size: 13px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: rgba(242,193,78,0.18); color: #F2C14E">Heist</span>
+<span style="font-size: 13px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: rgba(242,193,78,0.18); color: #F2C14E">Koop</span>
+<span style="font-size: 13px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: rgba(242,193,78,0.18); color: #F2C14E">First-Person</span>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-radius: 14px; background: rgba(255,255,255,0.08)">
+<span style="font-size: 15px; color: rgba(255,255,255,0.85)">Wishlists</span>
+<span style="font-size: 17px; font-weight: 700">[live]</span>
+</div>
+<button type="button" onClick="{{steam}}" style="min-height: 50px; border: 0; border-radius: 14px; background: #F2C14E; color: #1D1D1F; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">Auf die Wunschliste</button>
+</div>
+</sc-if>
+
+<!-- Clipper / Telegram -->
+<sc-if value="{{is.clipper}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; gap: 10px; padding-bottom: 6px">
+<span style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(160deg, #3FB0F0, #1667B8); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px">CB</span>
+<span style="display: flex; flex-direction: column"><b style="font-size: 15px">Clipper Bot</b><span style="font-size: 13px; color: #3E6A8A">Bot</span></span>
+</div>
+<div style="align-self: flex-start; max-width: 82%; background: #FFFFFF; border-radius: 16px 16px 16px 4px; padding: 9px 12px; font-size: 15px; box-shadow: 0 1px 1px rgba(0,0,0,0.08)">Highlight erkannt bei <b>[Streamer A]</b>. Schneide … <span style="font-size: 12px; color: #6E6E73">[Zeit]</span></div>
+<div style="align-self: flex-start; width: 72%; aspect-ratio: 9 / 12; background: #1D1D1F; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.75); font-size: 14px">[Clip 0:23]</div>
+<div style="align-self: flex-start; max-width: 82%; background: #FFFFFF; border-radius: 16px 16px 16px 4px; padding: 9px 12px; font-size: 15px; box-shadow: 0 1px 1px rgba(0,0,0,0.08)">Fertig in [Sek.] s, bereit zum Posten</div>
+<div style="align-self: flex-end; max-width: 82%; background: #EFFDDE; border-radius: 16px 16px 4px 16px; padding: 9px 12px; font-size: 15px; box-shadow: 0 1px 1px rgba(0,0,0,0.08)">Gepostet <span style="font-size: 12px; color: #4F8A3A">[Zeit] ✓✓</span></div>
+<p style="margin: 8px 0 0; font-size: 13px; color: #3E6A8A; text-align: center">Clipper: schaut Livestreams mit, erkennt Highlights und schickt den Clip sofort hierher. [Sprache] / FFmpeg / Telegram Bot API</p>
+</div>
+</sc-if>
+
+<!-- IPA-Assistent -->
+<sc-if value="{{is.ipa}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px; min-height: 100%">
+<div style="align-self: flex-start; max-width: 85%; background: #E9E9EB; border-radius: 18px 18px 18px 4px; padding: 10px 14px; font-size: 15px">Hoi! Ich kenne alle IPA-Lernnotizen von Silvan. Frag mich etwas.</div>
+<sc-if value="{{hasQuestion}}" hint-placeholder-val="{{ false }}">
+<div class="ln" style="align-self: flex-end; max-width: 85%; background: linear-gradient(160deg, #8466F0, #4A2FB0); color: #FFFFFF; border-radius: 18px 18px 4px 18px; padding: 10px 14px; font-size: 15px">{{question}}</div>
+<sc-if value="{{typing}}" hint-placeholder-val="{{ false }}"><div class="ln" aria-label="schreibt" style="align-self: flex-start; background: #E9E9EB; border-radius: 18px 18px 18px 4px; padding: 13px 16px; display: flex; gap: 5px"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></sc-if>
+<sc-if value="{{showAnswer}}" hint-placeholder-val="{{ false }}"><div class="ln" style="align-self: flex-start; max-width: 85%; background: #E9E9EB; border-radius: 18px 18px 18px 4px; padding: 10px 14px; font-size: 15px; display: flex; flex-direction: column; gap: 6px"><span>{{answer}}</span><span style="font-size: 12px; color: #5E5E63">Quelle: {{source}}</span></div></sc-if>
+</sc-if>
+<div style="flex: 1"></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; padding-top: 12px">
+<sc-for list="{{questions}}" as="q" hint-placeholder-count="3">
+<button type="button" class="chip" onClick="{{q.ask}}" style="min-height: 40px; border: 1px solid #5B3CC4; background: #FFFFFF; color: #4A2FB0; border-radius: 999px; padding: 0 14px; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer">{{q.label}}</button>
+</sc-for>
+</div>
+<p style="margin: 4px 0 0; font-size: 12px; color: #6E6E73; text-align: center">Spring Boot / [LLM] / [Vektor-DB] · Beispielantworten</p>
+</div>
+</sc-if>
+
+<!-- Marketing-Agents -->
+<sc-if value="{{is.agents}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 13px; color: #6E6E73">Analyse-Agent · automatisch erstellt [KW]</span>
+<h2 style="margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.4px">Wochenbericht Marketing</h2>
+<p style="margin: 0; font-size: 15px; color: #3A3A3C">Mehrere Agents posten Clips von Rigged to Riches. Dieser Bericht zeigt, was diese Woche funktioniert hat.</p>
+<div style="background: #FFFFFF; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="display: flex; justify-content: space-between; font-size: 14px"><b style="font-weight: 600">TikTok</b><span style="color: #6E6E73">[Views]</span></span><div style="height: 8px; border-radius: 4px; background: #F2F2F7"><div class="bar bar1" style="width: 82%; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #FFA24D, #E0601A)"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="display: flex; justify-content: space-between; font-size: 14px"><b style="font-weight: 600">YT Shorts</b><span style="color: #6E6E73">[Views]</span></span><div style="height: 8px; border-radius: 4px; background: #F2F2F7"><div class="bar bar2" style="width: 58%; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #FFA24D, #E0601A)"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="display: flex; justify-content: space-between; font-size: 14px"><b style="font-weight: 600">Reddit</b><span style="color: #6E6E73">[Views]</span></span><div style="height: 8px; border-radius: 4px; background: #F2F2F7"><div class="bar bar3" style="width: 40%; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #FFA24D, #E0601A)"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="display: flex; justify-content: space-between; font-size: 14px"><b style="font-weight: 600">X</b><span style="color: #6E6E73">[Views]</span></span><div style="height: 8px; border-radius: 4px; background: #F2F2F7"><div class="bar bar4" style="width: 26%; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #FFA24D, #E0601A)"></div></div></div>
+</div>
+<div style="background: #FFF1E6; border-radius: 16px; padding: 14px 16px; font-size: 15px; color: #6B3200"><b>Empfehlung:</b> [Was der Agent für nächste Woche vorschlägt]</div>
+<span style="font-size: 12px; color: #6E6E73">Balken sind Beispiel-Längen. Projekt in Arbeit.</span>
+</div>
+</sc-if>
+
+<!-- Wetterstation -->
+<sc-if value="{{is.wetter}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px; align-items: stretch">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 16px 0 8px">
+<span style="font-size: 18px; font-weight: 500">Wetterstation</span>
+<span style="font-size: 76px; font-weight: 200; letter-spacing: -3px; line-height: 1.05">[°C]</span>
+<span style="font-size: 15px; color: rgba(255,255,255,0.85)">BMA-Gruppenprojekt</span>
+</div>
+<div style="border-radius: 18px; background: rgba(255,255,255,0.14); padding: 16px; font-size: 15px">Gruppenprojekt für die BMA: von den Sensoren bis ins Dashboard.</div>
+<div style="aspect-ratio: 4 / 3; border-radius: 18px; border: 1px dashed rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 14px; color: rgba(255,255,255,0.8)">[Foto / Dashboard-Screenshot]</div>
+</div>
+</sc-if>
+
+<!-- shop-outreach -->
+<sc-if value="{{is.shop}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="background: #FFFFFF; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 500">shop-outreach</span>
+<p style="margin: 0; font-size: 15px; color: #3A3A3C">Python-Tool, das mit Google Places und PageSpeed lokale Shops findet, deren Website ein Update braucht.</p>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<span style="font-size: 13px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: #FBE4EF; color: #8E1F57">Python</span>
+<span style="font-size: 13px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: #FBE4EF; color: #8E1F57">Google Places</span>
+<span style="font-size: 13px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: #FBE4EF; color: #8E1F57">PageSpeed</span>
+</div>
+</div>
+</sc-if>
+
+<!-- Lebenslauf -->
+<sc-if value="{{is.cv}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="background: #FFFFFF; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.06)">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 22px; font-weight: 700">Silvan Brors</span><span style="font-size: 14px; color: #6E6E73">Applikationsentwickler EFZ · Zürich</span></div>
+<div style="aspect-ratio: 1 / 1.2; border-radius: 10px; border: 1px dashed #C7C7CC; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #6E6E73">[Lebenslauf als PDF einbetten]</div>
+</div>
+<button type="button" onClick="{{download}}" style="min-height: 50px; border: 0; border-radius: 14px; background: #2F6FE4; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer">PDF herunterladen</button>
+</div>
+</sc-if>
+
+<!-- Kalender -->
+<sc-if value="{{is.kalender}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<span style="font-size: 26px; font-weight: 700; color: #D70015; text-transform: capitalize">{{calTitle}}</span>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); row-gap: 6px; text-align: center; font-size: 12px; color: #6E6E73"><span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span></div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); row-gap: 8px; justify-items: center">
+<sc-for list="{{calCells}}" as="c" hint-placeholder-count="30">
+<span style="width: 36px; height: 36px; border-radius: 50%; background: {{c.bg}}; color: {{c.fg}}; font-weight: {{c.fw}}; display: flex; align-items: center; justify-content: center; font-size: 17px">{{c.t}}</span>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 600; color: #6E6E73; text-transform: uppercase; letter-spacing: 0.4px">Demnächst</span>
+<div style="background: #FFFFFF; border-radius: 14px; overflow: hidden">
+<div style="display: flex; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #E5E5EA"><span style="width: 4px; border-radius: 2px; background: #B3122B"></span><span style="display: flex; flex-direction: column"><b style="font-size: 15px; font-weight: 600">Steam Next Fest mit Rigged to Riches</b><span style="font-size: 13px; color: #6E6E73">Februar 2027</span></span></div>
+<div style="display: flex; gap: 12px; padding: 12px 14px"><span style="width: 4px; border-radius: 2px; background: #2F6FE4"></span><span style="display: flex; flex-direction: column"><b style="font-size: 15px; font-weight: 600">Lehrabschluss Applikationsentwickler EFZ</b><span style="font-size: 13px; color: #6E6E73">2027</span></span></div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- Einstellungen -->
+<sc-if value="{{is.settings}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #6E6E73; text-transform: uppercase; letter-spacing: 0.4px; padding-left: 14px">Hintergrund</span>
+<div style="background: #FFFFFF; border-radius: 14px; overflow: hidden">
+<sc-for list="{{walls}}" as="w" hint-placeholder-count="4">
+<button type="button" onClick="{{w.pick}}" style="width: 100%; min-height: 50px; border: 0; border-bottom: 1px solid #E5E5EA; background: #FFFFFF; display: flex; align-items: center; gap: 12px; padding: 0 14px; font-family: inherit; font-size: 16px; color: #1D1D1F; cursor: pointer; text-align: left">
+<span class="{{w.cls}}" style="width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0"></span>
+<span style="flex: 1">{{w.label}}</span>
+<span style="color: #2F6FE4; font-weight: 700">{{w.check}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; color: #6E6E73; text-transform: uppercase; letter-spacing: 0.4px; padding-left: 14px">Über Silvan OS</span>
+<div style="background: #FFFFFF; border-radius: 14px; overflow: hidden; font-size: 15px">
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 14px; border-bottom: 1px solid #E5E5EA"><span>Version</span><span style="color: #6E6E73; text-align: right">1.0 · Portfolio-Edition</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 14px; border-bottom: 1px solid #E5E5EA"><span>Frontend</span><span style="color: #6E6E73; text-align: right">React, TypeScript, Vite</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 14px; border-bottom: 1px solid #E5E5EA"><span>Backend</span><span style="color: #6E6E73; text-align: right">Spring Boot 3, Java 21</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 14px; border-bottom: 1px solid #E5E5EA"><span>Datenbank</span><span style="color: #6E6E73; text-align: right">Postgres</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 14px"><span>Läuft auf</span><span style="color: #6E6E73; text-align: right">[Hosting]</span></div>
+</div>
+</div>
+<p style="margin: 0; font-size: 13px; color: #6E6E73; padding: 0 14px">Am Computer öffnet sich Silvan OS als Desktop mit Fenstern, Menüleiste und Dock.</p>
+</div>
+</sc-if>
+
+<!-- Mail / Kontakt -->
+<sc-if value="{{is.kontakt}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 0; font-size: 15px">
+<div style="padding: 12px 0; border-bottom: 1px solid #E5E5EA; display: flex; gap: 6px"><span style="color: #6E6E73">An:</span><span>Silvan Brors &lt;[deine@email.ch]&gt;</span></div>
+<div style="padding: 12px 0; border-bottom: 1px solid #E5E5EA; display: flex; gap: 6px"><span style="color: #6E6E73">Betreff:</span><span>Hallo Silvan</span></div>
+<label for="m-msg" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Nachricht</label>
+<textarea id="m-msg" placeholder="Fragen zu einem Projekt oder eine offene Stelle? Melde dich." style="min-height: 200px; border: 0; padding: 14px 0; font-family: inherit; font-size: 15px; resize: none; outline: none; background: transparent; color: #1D1D1F"></textarea>
+<button type="button" onClick="{{send}}" style="min-height: 50px; border: 0; border-radius: 14px; background: #2F6FE4; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer">Senden</button>
+<div style="display: flex; justify-content: center; gap: 24px; padding-top: 18px; font-size: 15px">
+<a href="#" onClick="{{github}}">GitHub ↗</a>
+<a href="#" onClick="{{linkedin}}">LinkedIn ↗</a>
+</div>
+</div>
+</sc-if>
+
+<!-- Notizen / Über mich -->
+<sc-if value="{{is.notes}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 13px; color: #8A7A3A; text-align: center">Über mich.txt</span>
+<h2 style="margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.4px">Hallo, ich bin Silvan.</h2>
+<p style="margin: 0; font-size: 16px; color: #6E6E73">Applikationsentwickler EFZ in Ausbildung · ti&amp;m · Zürich</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.5">Ich arbeite mit <b>Java</b> und <b>Spring</b>, am liebsten im <b>Backend</b>. Dazu Docker, SQL, Linux und AI. Was ich zweimal von Hand mache, automatisiere ich beim dritten Mal, damit mein Alltag bequemer wird.</p>
+<div style="display: flex; flex-direction: column; gap: 6px; font-size: 15px; padding: 14px 16px; border-radius: 14px; background: #FFF6D6">
+<span><b>Backend</b> · Java, Spring Boot, REST, SQL</span>
+<span><b>DevOps</b> · Docker, Linux, Git, CI/CD</span>
+<span><b>AI</b> · RAG, Agents, Claude Code</span>
+<span><b>Sonst</b> · Unity, C#, Python</span>
+</div>
+<span style="font-size: 14px; color: #6E6E73">Tipp: Die Apps auf dem Home-Bildschirm sind meine Projekte.</span>
+</div>
+</sc-if>
+
+<!-- Terminal -->
+<sc-if value="{{is.terminal}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 12px; min-height: 100%; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px">
+<div style="display: flex; flex-direction: column; gap: 2px; flex: 1">
+<sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
+<div class="ln" style="color: {{l.color}}; white-space: pre-wrap; word-break: break-word">{{l.text}}</div>
+</sc-for>
+<div style="display: flex; align-items: center; gap: 6px; color: #E6E6E6">
+<label for="t-cmd" style="white-space: nowrap; color: #7EE787">~ %</label>
+<input id="t-cmd" type="text" value="{{cmd}}" onChange="{{onCmd}}" onKeyDown="{{onKey}}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Befehl eingeben" style="flex: 1; min-width: 0; border: 0; outline: none; background: transparent; color: #FFFFFF; font-family: inherit; font-size: 16px; padding: 6px 0">
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="5">
+<button type="button" class="chip" onClick="{{c.run}}" style="min-height: 40px; border: 1px solid #3A3A3C; background: #2A2A2C; color: #E6E6E6; border-radius: 10px; padding: 0 12px; font-family: inherit; font-size: 13px; cursor: pointer">{{c.label}}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+</div>
+<button type="button" onClick="{{home}}" aria-label="Zum Home-Bildschirm" style="flex-shrink: 0; height: 30px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0"><span style="width: 134px; height: 5px; border-radius: 3px; background: {{appFg}}; opacity: 0.85"></span></button>
+</section>
+</sc-if>
+
+<!-- Toast -->
+<sc-if value="{{toastOn}}" hint-placeholder-val="{{ false }}">
+<div role="status" class="ln" style="position: absolute; left: 50%; bottom: 128px; transform: translateX(-50%); z-index: 99; background: rgba(30,30,30,0.9); color: #FFFFFF; font-size: 14px; font-weight: 500; padding: 9px 16px; border-radius: 999px; white-space: nowrap">{{toastText}}</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FFE08A","options":["#FFE08A","#FFC9A8","#CFE0FF","#D9CCFF"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.apps = {
+      rtr:      { title: 'Rigged to Riches', bg: 'linear-gradient(180deg, #2A0710 0%, #12060A 60%)', fg: '#FFFFFF', tint: '#F2C14E' },
+      clipper:  { title: 'Telegram', bg: '#D4E7F5', fg: '#1D1D1F', tint: '#1A73B5' },
+      ipa:      { title: 'IPA-Assistent', bg: '#FFFFFF', fg: '#1D1D1F', tint: '#5B3CC4' },
+      agents:   { title: 'Wochenbericht', bg: '#F2F2F7', fg: '#1D1D1F', tint: '#C2570C' },
+      wetter:   { title: 'Wetter', bg: 'linear-gradient(180deg, #3F72E6 0%, #5B3CC4 100%)', fg: '#FFFFFF', tint: '#FFFFFF' },
+      shop:     { title: 'shop-outreach', bg: '#F2F2F7', fg: '#1D1D1F', tint: '#B02A6B' },
+      cv:       { title: 'Lebenslauf.pdf', bg: '#F2F2F7', fg: '#1D1D1F', tint: '#2F6FE4' },
+      kalender: { title: 'Kalender', bg: '#F2F2F7', fg: '#1D1D1F', tint: '#D70015' },
+      settings: { title: 'Einstellungen', bg: '#F2F2F7', fg: '#1D1D1F', tint: '#2F6FE4' },
+      kontakt:  { title: 'Neue E-Mail', bg: '#FFFFFF', fg: '#1D1D1F', tint: '#2F6FE4' },
+      notes:    { title: 'Notizen', bg: '#FFFDF5', fg: '#1D1D1F', tint: '#B8860B' },
+      terminal: { title: 'Terminal', bg: '#1E1E1E', fg: '#FFFFFF', tint: '#7EE787' }
+    };
+    this.walls = [
+      { id: 'abend', label: 'Abendrot' },
+      { id: 'nacht', label: 'Nacht' },
+      { id: 'gletscher', label: 'Gletscher' },
+      { id: 'casino', label: 'Casino' }
+    ];
+    let wall = 'abend';
+    try { const s = window.localStorage.getItem('silvanos-wall'); if (s) wall = s; } catch (e) { wall = 'abend'; }
+    this.state = {
+      app: null, closing: false, origin: '50% 50%', jiggle: false, typing: false, wall: wall, clock: '', notif: false, badge: true, toast: null, q: -1, cmd: '', hist: [],
+      lines: [
+        { text: 'silvan os · mobile', color: '#9A9A9A' },
+        { text: 'Tippe «help» oder einen Befehl unten.', color: '#E6E6E6' }
+      ]
+    };
+  }
+  componentDidMount() {
+    this.tick();
+    this.timer = setInterval(() => this.tick(), 1000);
+    this.nt1 = setTimeout(() => { if (this.state.app !== 'clipper' && this.state.badge) this.setState({ notif: true }); }, 6000);
+    this.nt2 = setTimeout(() => this.setState({ notif: false }), 14000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer); clearTimeout(this.nt1); clearTimeout(this.nt2); clearTimeout(this.tt); clearTimeout(this.ct); clearTimeout(this.lp); clearTimeout(this.ty);
+  }
+  tick() {
+    let c = '';
+    try { c = new Date().toLocaleTimeString('de-CH', { timeZone: 'Europe/Zurich', hour: '2-digit', minute: '2-digit' }); } catch (e) { c = ''; }
+    if (c !== this.state.clock) this.setState({ clock: c });
+  }
+  toast(msg) {
+    clearTimeout(this.tt);
+    this.setState({ toast: msg });
+    this.tt = setTimeout(() => this.setState({ toast: null }), 1900);
+  }
+  open(k, e) {
+    if (this.state.jiggle) return;
+    let origin = '50% 50%';
+    try {
+      const t = e && e.currentTarget, r = this.rootEl;
+      if (t && r && t.getBoundingClientRect) {
+        const a = t.getBoundingClientRect(), b = r.getBoundingClientRect();
+        origin = Math.round(((a.left + a.width / 2 - b.left) / b.width) * 100) + '% ' + Math.round(((a.top + a.height / 2 - b.top) / b.height) * 100) + '%';
+      }
+    } catch (err) { origin = '50% 50%'; }
+    clearTimeout(this.ct);
+    const patch = { app: k, closing: false, origin: origin };
+    if (k === 'clipper') { patch.notif = false; patch.badge = false; }
+    this.setState(patch);
+  }
+  goHome() {
+    if (!this.state.app || this.state.closing) return;
+    this.setState({ closing: true });
+    clearTimeout(this.ct);
+    this.ct = setTimeout(() => this.setState({ app: null, closing: false }), 250);
+  }
+  ask(i) {
+    clearTimeout(this.ty);
+    this.setState({ q: i, typing: true });
+    this.ty = setTimeout(() => this.setState({ typing: false }), 900);
+  }
+  setWall(id) {
+    this.setState({ wall: id });
+    try { window.localStorage.setItem('silvanos-wall', id); } catch (e) { /* egal */ }
+  }
+  run(raw) {
+    const cmd = (raw || '').trim();
+    const W = '#E6E6E6', G = '#7EE787', R = '#FF7B72', M = '#9A9A9A';
+    const out = (t, c) => ({ text: t, color: c || W });
+    const echo = { text: '~ % ' + cmd, color: W };
+    const apps = { rtr: 'rtr', 'rigged-to-riches': 'rtr', clipper: 'clipper', ipa: 'ipa', agents: 'agents', kontakt: 'kontakt', mail: 'kontakt', lebenslauf: 'cv', cv: 'cv', wetter: 'wetter', shop: 'shop', kalender: 'kalender' };
+    const hist = cmd ? this.state.hist.concat([cmd]).slice(-20) : this.state.hist;
+    this.histIdx = hist.length;
+    let res = [];
+    if (cmd === '') { res = []; }
+    else if (cmd === 'clear') { this.setState({ lines: [], cmd: '', hist: hist }); return; }
+    else if (cmd === 'help') { res = [out('Befehle:', G), out('  whoami     wer ich bin'), out('  skills     womit ich arbeite'), out('  motto      warum ich automatisiere'), out('  projekte   alle Projekte'), out('  open <app> App öffnen'), out('  clear      leeren')]; }
+    else if (cmd === 'whoami') { res = [out('silvan brors'), out('applikationsentwickler efz in ausbildung @ ti&m, zürich', M)]; }
+    else if (cmd === 'skills') { res = [out('backend   java, spring boot, rest, sql'), out('devops    docker, linux, git, ci/cd'), out('ai        rag, agents, claude code'), out('sonst     unity, c#, python')]; }
+    else if (cmd === 'motto') { res = [out('was ich zweimal von hand mache,', G), out('automatisiere ich beim dritten mal.', G)]; }
+    else if (cmd === 'projekte' || cmd === 'ls') { res = [out('rigged-to-riches   spiel, unity, steam'), out('clipper            echtzeit-bot für clips'), out('ipa                rag-lernassistent'), out('agents             multi-agent-marketing'), out('→ open <name>', M)]; }
+    else if (cmd.indexOf('open') === 0) {
+      const name = cmd.slice(4).trim().toLowerCase();
+      const k = apps[name];
+      if (k) { res = [out('öffne ' + name + ' …', M)]; setTimeout(() => this.open(k), 350); }
+      else { res = [out('open: ' + (name || '<name>') + ': nicht gefunden', R)]; }
+    }
+    else if (cmd.indexOf('sudo') === 0) { res = [out('Netter Versuch.', R)]; }
+    else if (cmd === 'exit') { this.setState({ cmd: '', hist: hist }); this.goHome(); return; }
+    else { res = [out('zsh: command not found: ' + cmd.split(' ')[0], R)]; }
+    this.setState({ lines: this.state.lines.concat([echo]).concat(res).slice(-30), cmd: '', hist: hist });
+  }
+  calendar() {
+    let y = 2026, m = 1, d = 1, wd = '';
+    try {
+      const p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Zurich', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()).split('-');
+      y = +p[0]; m = +p[1]; d = +p[2];
+      wd = new Date().toLocaleDateString('de-CH', { timeZone: 'Europe/Zurich', weekday: 'short' }).replace('.', '');
+    } catch (e) { /* Standardwerte */ }
+    const first = (new Date(Date.UTC(y, m - 1, 1)).getUTCDay() + 6) % 7;
+    const days = new Date(Date.UTC(y, m, 0)).getUTCDate();
+    const cells = [];
+    for (let i = 0; i < first; i++) cells.push({ t: '', bg: 'transparent', fg: '#1D1D1F', fw: '400' });
+    for (let i = 1; i <= days; i++) cells.push({ t: String(i), bg: i === d ? '#D70015' : 'transparent', fg: i === d ? '#FFFFFF' : '#1D1D1F', fw: i === d ? '600' : '400' });
+    let title = '';
+    try { title = new Date(Date.UTC(y, m - 1, 1)).toLocaleDateString('de-CH', { month: 'long', year: 'numeric', timeZone: 'UTC' }); } catch (e) { title = ''; }
+    return { cells: cells, title: title, day: String(d), weekday: wd };
+  }
+  renderVals() {
+    const cur = this.state.app;
+    const a = cur ? this.apps[cur] : null;
+    const open = {}, is = {};
+    Object.keys(this.apps).forEach((k) => { open[k] = (e) => this.open(k, e); is[k] = cur === k; });
+    const shown = !!a && !this.state.closing;
+    const qa = [
+      { label: 'Was heisst IPERKA?', answer: 'Informieren, Planen, Entscheiden, Realisieren, Kontrollieren, Auswerten. Die sechs Schritte, nach denen die IPA aufgebaut ist.', source: 'notizen/iperka.md' },
+      { label: 'Image oder Container?', answer: 'Ein Image ist die unveränderliche Vorlage, ein Container eine laufende Instanz davon.', source: 'notizen/docker.md' },
+      { label: 'Merge oder Rebase?', answer: 'Merge behält die Historie mit einem Merge-Commit, Rebase setzt die Commits neu oben drauf.', source: 'notizen/git.md' }
+    ];
+    const q = this.state.q;
+    const cal = this.calendar();
+    return {
+      accent: this.props.accent ?? '#FFE08A',
+      wallClass: 'wall-' + this.state.wall,
+      clock: this.state.clock,
+      sbColor: a ? a.fg : '#FFFFFF',
+      open: open, is: is,
+      appOpen: !!a,
+      appTitle: a ? a.title : '',
+      appBg: a ? a.bg : '#FFFFFF',
+      appFg: a ? a.fg : '#1D1D1F',
+      appTint: a ? a.tint : '#2F6FE4',
+      home: () => this.goHome(),
+      rootRef: (el) => { this.rootEl = el; },
+      appClass: this.state.closing ? 'appout' : 'app',
+      origin: this.state.origin,
+      homeTf: shown ? 'scale(0.9)' : 'none',
+      homeOp: shown ? '0.4' : '1',
+      homeBlur: shown ? 'blur(6px)' : 'none',
+      homeClass: this.state.jiggle ? 'home jiggle' : 'home',
+      jiggle: this.state.jiggle,
+      stopJiggle: () => this.setState({ jiggle: false }),
+      pressStart: () => { clearTimeout(this.lp); if (!this.state.app) this.lp = setTimeout(() => this.setState({ jiggle: true }), 600); },
+      pressEnd: () => { clearTimeout(this.lp); },
+      hint: this.state.jiggle ? 'Tippe auf «Fertig», um zu beenden' : 'Tippe auf eine App, um sie zu öffnen',
+      islandW: this.state.notif ? '200px' : '124px',
+      typing: q >= 0 && this.state.typing,
+      showAnswer: q >= 0 && !this.state.typing,
+      notif: this.state.notif,
+      badge: this.state.badge,
+      toastOn: !!this.state.toast,
+      toastText: this.state.toast || '',
+      steam: () => this.toast('Steam-Link folgt'),
+      download: () => this.toast('Das PDF wird noch hinterlegt'),
+      send: () => this.toast('Demo: Versand folgt'),
+      github: (e) => { if (e && e.preventDefault) e.preventDefault(); this.toast('GitHub-Link folgt'); },
+      linkedin: (e) => { if (e && e.preventDefault) e.preventDefault(); this.toast('LinkedIn-Link folgt'); },
+      walls: this.walls.map((w) => ({ label: w.label, cls: 'wall-' + w.id, check: this.state.wall === w.id ? '✓' : '', pick: () => this.setWall(w.id) })),
+      calTitle: cal.title, calCells: cal.cells, calDay: cal.day, calWeekday: cal.weekday,
+      hasQuestion: q >= 0,
+      question: q >= 0 ? qa[q].label : '',
+      answer: q >= 0 ? qa[q].answer : '',
+      source: q >= 0 ? qa[q].source : '',
+      questions: qa.map((x, i) => ({ label: x.label, ask: () => this.ask(i) })),
+      lines: this.state.lines,
+      cmd: this.state.cmd,
+      onCmd: (e) => this.setState({ cmd: e && e.target ? e.target.value : '' }),
+      onKey: (e) => {
+        if (!e) return;
+        if (e.key === 'Enter') this.run(this.state.cmd);
+        else if (e.key === 'ArrowUp') {
+          const h = this.state.hist; if (!h.length) return;
+          this.histIdx = Math.max(0, (this.histIdx ?? h.length) - 1);
+          this.setState({ cmd: h[this.histIdx] });
+          if (e.preventDefault) e.preventDefault();
+        }
+      },
+      chips: ['help', 'whoami', 'skills', 'projekte', 'motto', 'open rtr'].map((c) => ({ label: c, run: () => this.run(c) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

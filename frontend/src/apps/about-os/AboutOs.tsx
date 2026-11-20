@@ -1,10 +1,9 @@
 import './AboutOs.css';
 
-const STACK: { area: string; items: string }[] = [
-  { area: 'Frontend', items: 'React, TypeScript, Vite' },
-  { area: 'Backend', items: 'Spring Boot, Java 21' },
-  { area: 'Betrieb', items: 'Docker, GitHub Actions' },
-];
+import { OS_STACK } from '../../shared/content';
+
+/** Am Desktop ohne Datenbank-Zeile, wie im Design. */
+const STACK = OS_STACK.filter((s) => s.area !== 'Datenbank');
 
 export function AboutOs() {
   return (

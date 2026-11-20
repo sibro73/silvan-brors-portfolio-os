@@ -2,9 +2,11 @@ import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import App, { BOOT_MS } from './App';
+import { BOOT_MS } from './os/boot';
+import DesktopView from './os/DesktopView';
 import { INITIAL_OPEN } from './apps.registry';
 import { PREFERENCES_KEY } from './os/preferences';
+import { WALLPAPER_KEY } from './shared/wallpaper';
 
 const advance = (ms: number) =>
   act(() => {
@@ -45,14 +47,14 @@ const terminalLog = () =>
 
 describe('menu actions in the running desktop', () => {
   it('Fenster → Alle minimieren hides every window', async () => {
-    render(<App />);
+    render(<DesktopView />);
     await choose('Fenster', 'Alle minimieren');
     expect(visibleWindows()).toEqual([]);
     expect(screen.getByTestId('active-app')).toHaveTextContent('Finder');
   });
 
   it('Fenster → Fenster anordnen tiles the open windows', async () => {
-    render(<App />);
+    render(<DesktopView />);
     await choose('Fenster', 'Fenster anordnen');
     const regions = screen.getAllByRole('region');
     const lefts = regions.map((r) => parseInt(r.style.left, 10)).sort((a, b) => a - b);
@@ -62,13 +64,13 @@ describe('menu actions in the running desktop', () => {
   });
 
   it('Fenster → list brings a window to the front', async () => {
-    render(<App />);
+    render(<DesktopView />);
     await choose('Fenster', /silvan — zsh/);
     expect(screen.getByTestId('active-app')).toHaveTextContent('Terminal');
   });
 
   it('Silvan OS → Neu starten shows the boot screen and resets the desktop', async () => {
-    render(<App />);
+    render(<DesktopView />);
     await user.click(screen.getByRole('button', { name: 'IPA-Assistent öffnen' }));
     await choose('Fenster', 'Alle minimieren');
     await choose('Silvan OS', 'Neu starten …');
@@ -80,7 +82,7 @@ describe('menu actions in the running desktop', () => {
   });
 
   it('Silvan OS → Über Silvan OS shows version and stack', async () => {
-    render(<App />);
+    render(<DesktopView />);
     await choose('Silvan OS', 'Über Silvan OS');
     const win = screen.getByRole('region', { name: 'Über Silvan OS' });
     expect(win).toHaveTextContent(/Version \d+\.\d+\.\d+/);
@@ -89,7 +91,7 @@ describe('menu actions in the running desktop', () => {
   });
 
   it('Hilfe → Terminal-Befehle opens the terminal and runs help once', async () => {
-    render(<App />);
+    render(<DesktopView />);
     await choose('Hilfe', 'Terminal-Befehle');
     expect(terminalLog()).toHaveTextContent('silvan@macbook ~ % help');
     expect(terminalLog()).toHaveTextContent('Befehle:');
@@ -103,7 +105,7 @@ describe('menu actions in the running desktop', () => {
   });
 
   it('Ablage → Neues Terminal-Fenster starts a fresh session', async () => {
-    render(<App />);
+    render(<DesktopView />);
     await user.type(screen.getByLabelText('Befehl eingeben'), 'whoami{Enter}');
     expect(terminalLog()).toHaveTextContent('silvan brors');
     await choose('Ablage', 'Neues Terminal-Fenster');
@@ -112,7 +114,7 @@ describe('menu actions in the running desktop', () => {
   });
 
   it('Hilfe → Tastenkürzel and Kontakt open their windows', async () => {
-    render(<App />);
+    render(<DesktopView />);
     await choose('Hilfe', 'Tastenkürzel');
     expect(screen.getByRole('region', { name: 'Tastenkürzel' })).toHaveTextContent('Alt+W');
     await choose('Hilfe', 'Kontakt');
@@ -120,32 +122,33 @@ describe('menu actions in the running desktop', () => {
   });
 
   it('Bearbeiten → E-Mail-Adresse kopieren confirms with a toast', async () => {
-    render(<App />);
+    render(<DesktopView />);
     await choose('Bearbeiten', 'E-Mail-Adresse kopieren');
     expect(await screen.findByText('Kopiert')).toBeInTheDocument();
     expect(await navigator.clipboard.readText()).toBe('[deine@email.ch]');
   });
 
   it('Darstellung: wallpaper and dark windows are applied and remembered across restarts', async () => {
-    const { container } = render(<App />);
+    const { container } = render(<DesktopView />);
     const os = () => container.querySelector('.os');
-    await choose('Darstellung', /Hintergrund: Abendrot/);
+    await choose('Darstellung', /Hintergrund: Gletscher/);
     await choose('Darstellung', /Dunkle Fenster/);
-    expect(os()).toHaveAttribute('data-wallpaper', 'abendrot');
+    expect(os()).toHaveAttribute('data-wallpaper', 'gletscher');
     expect(os()).toHaveAttribute('data-dark-windows', 'true');
+    // Hintergrund unter dem gemeinsamen Key der Handy-Ansicht, «Dunkle Fenster» separat
+    expect(window.localStorage.getItem(WALLPAPER_KEY)).toBe('gletscher');
     expect(JSON.parse(window.localStorage.getItem(PREFERENCES_KEY) ?? '{}')).toEqual({
-      wallpaper: 'abendrot',
       darkWindows: true,
     });
     await choose('Silvan OS', 'Neu starten …');
     advance(BOOT_MS);
-    expect(os()).toHaveAttribute('data-wallpaper', 'abendrot');
+    expect(os()).toHaveAttribute('data-wallpaper', 'gletscher');
   });
 });
 
 describe('keyboard shortcuts', () => {
   it('Alt+W closes and Alt+M minimizes the active window', () => {
-    render(<App />);
+    render(<DesktopView />);
     const first = screen.getByTestId('active-app').textContent;
     fireEvent.keyDown(document.body, { code: 'KeyM', altKey: true });
     expect(screen.getByTestId('active-app').textContent).not.toBe(first);
@@ -155,7 +158,7 @@ describe('keyboard shortcuts', () => {
   });
 
   it('are ignored while typing in the terminal', () => {
-    render(<App />);
+    render(<DesktopView />);
     const before = visibleWindows().length;
     fireEvent.keyDown(screen.getByLabelText('Befehl eingeben'), { code: 'KeyW', altKey: true });
     expect(visibleWindows()).toHaveLength(before);

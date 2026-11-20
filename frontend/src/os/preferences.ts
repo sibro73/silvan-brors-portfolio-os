@@ -1,23 +1,27 @@
 import { useCallback, useState } from 'react';
 
-export const WALLPAPERS = [
-  { id: 'aurora', label: 'Aurora' },
-  { id: 'nacht', label: 'Nacht' },
-  { id: 'abendrot', label: 'Abendrot' },
-  { id: 'graphit', label: 'Graphit' },
-] as const;
+import {
+  DEFAULT_WALLPAPER,
+  loadWallpaper,
+  saveWallpaper,
+  useWallpaper,
+  WALLPAPERS,
+  type WallpaperId,
+} from '../shared/wallpaper';
 
-export type WallpaperId = (typeof WALLPAPERS)[number]['id'];
+export { WALLPAPERS, type WallpaperId };
 
 export interface Preferences {
   wallpaper: WallpaperId;
   darkWindows: boolean;
 }
 
-export const DEFAULT_PREFERENCES: Preferences = { wallpaper: 'aurora', darkWindows: false };
+export const DEFAULT_PREFERENCES: Preferences = {
+  wallpaper: DEFAULT_WALLPAPER,
+  darkWindows: false,
+};
+/** Nur «Dunkle Fenster». Der Hintergrund liegt unter `silvanos-wall` (shared/wallpaper.ts). */
 export const PREFERENCES_KEY = 'silvan-os:preferences';
-
-const isWallpaper = (v: unknown): v is WallpaperId => WALLPAPERS.some((w) => w.id === v);
 
 /** localStorage kann fehlen oder werfen (privates Fenster, blockierte Website-Daten). */
 function storage(): Storage | null {
@@ -28,39 +32,48 @@ function storage(): Storage | null {
   }
 }
 
-export function loadPreferences(): Preferences {
+function loadDarkWindows(): boolean {
   try {
     const raw = storage()?.getItem(PREFERENCES_KEY);
-    if (!raw) return DEFAULT_PREFERENCES;
+    if (!raw) return DEFAULT_PREFERENCES.darkWindows;
     const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== 'object' || parsed === null) return DEFAULT_PREFERENCES;
-    const p = parsed as Record<string, unknown>;
-    return {
-      wallpaper: isWallpaper(p.wallpaper) ? p.wallpaper : DEFAULT_PREFERENCES.wallpaper,
-      darkWindows:
-        typeof p.darkWindows === 'boolean' ? p.darkWindows : DEFAULT_PREFERENCES.darkWindows,
-    };
+    if (typeof parsed !== 'object' || parsed === null) return DEFAULT_PREFERENCES.darkWindows;
+    const dark = (parsed as Record<string, unknown>).darkWindows;
+    return typeof dark === 'boolean' ? dark : DEFAULT_PREFERENCES.darkWindows;
   } catch {
-    return DEFAULT_PREFERENCES;
+    return DEFAULT_PREFERENCES.darkWindows;
   }
 }
 
-export function savePreferences(prefs: Preferences): void {
+function saveDarkWindows(darkWindows: boolean): void {
   try {
-    storage()?.setItem(PREFERENCES_KEY, JSON.stringify(prefs));
+    storage()?.setItem(PREFERENCES_KEY, JSON.stringify({ darkWindows }));
   } catch {
     // Speichern ist nur Komfort. Ohne Speicher gilt die Auswahl bis zum Neuladen.
   }
 }
 
+export function loadPreferences(): Preferences {
+  return { wallpaper: loadWallpaper(), darkWindows: loadDarkWindows() };
+}
+
+export function savePreferences(prefs: Preferences): void {
+  saveWallpaper(prefs.wallpaper);
+  saveDarkWindows(prefs.darkWindows);
+}
+
 export function usePreferences(): [Preferences, (patch: Partial<Preferences>) => void] {
-  const [prefs, setPrefs] = useState(loadPreferences);
-  const update = useCallback((patch: Partial<Preferences>) => {
-    setPrefs((prev) => {
-      const next = { ...prev, ...patch };
-      savePreferences(next);
-      return next;
-    });
-  }, []);
-  return [prefs, update];
+  const [wallpaper, setWallpaper] = useWallpaper();
+  const [darkWindows, setDarkWindows] = useState(loadDarkWindows);
+  const update = useCallback(
+    (patch: Partial<Preferences>) => {
+      if (patch.wallpaper !== undefined) setWallpaper(patch.wallpaper);
+      if (patch.darkWindows !== undefined) {
+        setDarkWindows(patch.darkWindows);
+        saveDarkWindows(patch.darkWindows);
+      }
+    },
+    [setWallpaper],
+  );
+  return [{ wallpaper, darkWindows }, update];
 }
