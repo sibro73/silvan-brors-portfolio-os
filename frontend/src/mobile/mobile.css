@@ -38,6 +38,11 @@
 .m-os a:hover {
   color: #1c55c0;
 }
+/* App-Icons als Link (LinkedIn, Klassisch) sehen aus wie die anderen Icons */
+.m-os a.m-app,
+.m-os a.m-app:hover {
+  color: #ffffff;
+}
 
 /* ---------- Hintergründe ---------- */
 
@@ -99,14 +104,13 @@
   top: calc(var(--safe-top) + 16px);
   left: 0;
   right: 0;
-  bottom: calc(var(--dock-bottom) + var(--dock-height) + 56px);
-  padding: 0 14px;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-auto-rows: var(--row);
-  row-gap: 16px;
-  align-content: start;
-  overflow-y: auto;
+  bottom: calc(var(--dock-bottom) + var(--dock-height) + 72px);
+  /* Seiten nebeneinander, wischen wie am iPhone */
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
   scrollbar-width: none;
   /* Lang drücken = Wackel-Modus, ohne Kontextmenü und Textauswahl */
   -webkit-touch-callout: none;
@@ -117,45 +121,60 @@
     opacity 0.4s,
     filter 0.4s;
 }
-.m-home::-webkit-scrollbar {
+.m-home::-webkit-scrollbar,
+.m-page::-webkit-scrollbar {
   display: none;
+}
+.m-page {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 0 14px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: var(--row);
+  row-gap: 16px;
+  align-content: start;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 .m-home--behind {
   transform: scale(0.9);
   opacity: 0.4;
   filter: blur(6px);
 }
-.m-home > * {
+.m-page > * {
   animation: m-icon-in 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
 }
-.m-home > :nth-child(1) {
+.m-page > :nth-child(1) {
   animation-delay: 0.05s;
 }
-.m-home > :nth-child(2) {
+.m-page > :nth-child(2) {
   animation-delay: 0.12s;
 }
-.m-home > :nth-child(3) {
+.m-page > :nth-child(3) {
   animation-delay: 0.18s;
 }
-.m-home > :nth-child(4) {
+.m-page > :nth-child(4) {
   animation-delay: 0.22s;
 }
-.m-home > :nth-child(5) {
+.m-page > :nth-child(5) {
   animation-delay: 0.26s;
 }
-.m-home > :nth-child(6) {
+.m-page > :nth-child(6) {
   animation-delay: 0.3s;
 }
-.m-home > :nth-child(7) {
+.m-page > :nth-child(7) {
   animation-delay: 0.34s;
 }
-.m-home > :nth-child(8) {
+.m-page > :nth-child(8) {
   animation-delay: 0.38s;
 }
-.m-home > :nth-child(9) {
+.m-page > :nth-child(9) {
   animation-delay: 0.42s;
 }
-.m-home > :nth-child(10) {
+.m-page > :nth-child(10) {
   animation-delay: 0.46s;
 }
 @keyframes m-icon-in {
@@ -168,10 +187,10 @@
     transform: none;
   }
 }
-.m-home--jiggle > * {
+.m-home--jiggle .m-page > * {
   animation: m-jig 0.24s ease-in-out infinite alternate;
 }
-.m-home--jiggle > :nth-child(even) {
+.m-home--jiggle .m-page > :nth-child(even) {
   animation-delay: -0.12s;
 }
 @keyframes m-jig {
@@ -435,7 +454,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: calc(var(--dock-bottom) + var(--dock-height) + 12px);
+  bottom: calc(var(--dock-bottom) + var(--dock-height) + 34px);
   display: flex;
   justify-content: center;
   pointer-events: none;
@@ -500,6 +519,78 @@
   font-weight: 600;
   padding: 0 16px;
   cursor: pointer;
+}
+
+/* Seitenpunkte über dem Dock */
+.m-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--dock-bottom) + var(--dock-height) + 4px);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+.m-dots__btn {
+  width: 24px;
+  height: 28px;
+  border: 0;
+  background: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.m-dots__btn span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transition: background 0.2s;
+}
+.m-dots__btn[aria-current='true'] span {
+  background: #ffffff;
+}
+
+/* Seite 2: Widgets */
+.m-stat {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
+}
+.m-stat__label {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+.m-stat__value {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.m-stat__source {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.m-widget__card--event {
+  background: #ffffff;
+  color: #1d1d1f;
+  padding: 14px;
+}
+.m-widget__card--report {
+  background: linear-gradient(165deg, rgba(255, 162, 77, 0.95), rgba(224, 96, 26, 0.92));
+  padding: 14px;
+}
+.m-mini-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.95);
+  animation: m-bar 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 /* ---------- Mitteilung und Toast ---------- */
@@ -854,19 +945,21 @@
   .m-nt,
   .m-ln,
   .m-drift,
-  .m-home > *,
-  .m-home--jiggle > *,
+  .m-page > *,
+  .m-home--jiggle .m-page > *,
   .m-dockin,
   .m-sun,
   .m-pulse,
   .m-bar,
+  .m-mini-bar,
   .m-dot,
   .m-badge {
     animation: none;
   }
   .m-ic,
   .m-home,
-  .m-chip {
+  .m-chip,
+  .m-dots__btn span {
     transition: none;
   }
 }
