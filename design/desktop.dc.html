@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Silvan Brors – Portfolio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#12131A}
+a{color:#2F6FE4}a:hover{color:#1C55C0}
+.wall{background-color:#12131A;background-image:radial-gradient(ellipse at 18% 28%,rgba(91,60,196,.85) 0,rgba(91,60,196,0) 48%),radial-gradient(ellipse at 82% 76%,rgba(179,18,43,.75) 0,rgba(179,18,43,0) 44%),radial-gradient(ellipse at 62% 18%,rgba(47,111,228,.7) 0,rgba(47,111,228,0) 42%),radial-gradient(ellipse at 30% 92%,rgba(255,122,26,.45) 0,rgba(255,122,26,0) 38%)}
+.win{animation:pop .2s ease-out both}
+@keyframes pop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.dk{position:relative;transition:transform .16s ease;transform-origin:50% 100%}
+.dk:hover,.dk:focus-visible{transform:translateY(-6px) scale(1.42)}
+.tt{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%) scale(.72);transform-origin:50% 100%;background:rgba(30,30,30,.88);color:#FFFFFF;font-size:13px;font-weight:500;padding:4px 10px;border-radius:7px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s}
+.dk:hover .tt,.dk:focus-visible .tt{opacity:1}
+.mt:hover{background:rgba(0,0,0,.08)}
+.mi:hover,.mi:focus-visible{background:#2F6FE4 !important;color:#FFFFFF !important;outline:none}
+.wc:hover{background:#ECECF0 !important}
+.wall-abend{background-color:#12131A;background-image:radial-gradient(ellipse at 18% 28%,rgba(91,60,196,.85) 0,rgba(91,60,196,0) 48%),radial-gradient(ellipse at 82% 76%,rgba(179,18,43,.75) 0,rgba(179,18,43,0) 44%),radial-gradient(ellipse at 62% 18%,rgba(47,111,228,.7) 0,rgba(47,111,228,0) 42%),radial-gradient(ellipse at 30% 92%,rgba(255,122,26,.45) 0,rgba(255,122,26,0) 38%)}
+.wall-nacht{background-color:#05070D;background-image:radial-gradient(1px 1px at 12% 18%,#FFFFFF 50%,transparent 51%),radial-gradient(1px 1px at 34% 62%,#FFFFFF 50%,transparent 51%),radial-gradient(1.5px 1.5px at 58% 28%,#FFFFFF 50%,transparent 51%),radial-gradient(1px 1px at 76% 70%,#FFFFFF 50%,transparent 51%),radial-gradient(1px 1px at 88% 14%,#FFFFFF 50%,transparent 51%),radial-gradient(1px 1px at 22% 84%,#FFFFFF 50%,transparent 51%),radial-gradient(ellipse at 70% 110%,rgba(47,111,228,.55) 0,rgba(47,111,228,0) 55%)}
+.wall-gletscher{background-color:#9FC3DB;background-image:radial-gradient(ellipse at 20% 20%,rgba(255,255,255,.9) 0,rgba(255,255,255,0) 45%),radial-gradient(ellipse at 80% 85%,rgba(32,86,140,.8) 0,rgba(32,86,140,0) 55%),radial-gradient(ellipse at 55% 55%,rgba(122,190,220,.8) 0,rgba(122,190,220,0) 50%)}
+.wall-casino{background-color:#2A050B;background-image:radial-gradient(ellipse at 25% 30%,rgba(179,18,43,.9) 0,rgba(179,18,43,0) 50%),radial-gradient(ellipse at 78% 72%,rgba(242,193,78,.55) 0,rgba(242,193,78,0) 42%),radial-gradient(ellipse at 60% 10%,rgba(122,14,28,.9) 0,rgba(122,14,28,0) 45%)}
+.dd{animation:dd .12s ease-out both}
+@keyframes dd{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.bp{animation:bp 1.5s ease-in-out forwards}
+@keyframes bp{from{width:0}to{width:100%}}
+.di:hover,.di:focus-visible{background:rgba(255,255,255,.18)}
+.fi:hover{background:#E8F1FD}
+.ln{opacity:0;animation:lnIn .3s ease forwards}
+@keyframes lnIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.nt{animation:nt .4s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes nt{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.win,.ln,.nt,.dd{animation:none;opacity:1}.dk{transition:none}.dk:hover,.dk:focus-visible{transform:none}}
+</style>
+</helmet>
+<div class="{{wallClass}}" style="height: {{rootH}}; min-height: 680px; display: flex; flex-direction: column; font-family: Inter, -apple-system, system-ui, sans-serif; font-size: 14px; line-height: 1.4; color: #1D1D1F">
+
+<!-- Klick daneben schliesst Menüs -->
+<sc-if value="{{anyMenu}}" hint-placeholder-val="{{ false }}">
+<div onClick="{{closeMenus}}" aria-hidden="true" style="position: fixed; inset: 0; z-index: 9999"></div>
+</sc-if>
+
+<!-- Menüleiste -->
+<header onKeyDown="{{menuKey}}" style="flex-shrink: 0; height: 28px; background: rgba(246,246,246,0.82); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: space-between; padding: 0 8px; font-size: 13px; gap: 12px; position: relative; z-index: 10000">
+<nav aria-label="Menüs" style="display: flex; align-items: center; gap: 0; white-space: nowrap">
+<sc-for list="{{menus}}" as="m" hint-placeholder-count="7">
+<div style="position: relative">
+<button type="button" class="mt" onClick="{{m.toggle}}" onMouseEnter="{{m.enter}}" aria-haspopup="true" aria-expanded="{{m.open}}" style="background: {{m.bg}}; font-weight: {{m.weight}}; border: 0; border-radius: 5px; padding: 0 9px; height: 24px; font-family: inherit; font-size: 13px; color: #1D1D1F; cursor: default; display: flex; align-items: center; gap: 6px">
+<sc-if value="{{m.isLogo}}" hint-placeholder-val="{{ false }}"><span aria-label="Silvan-OS-Menü" style="display: flex"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 10-9 10-9-10z" fill="#1D1D1F"></path></svg></span></sc-if>
+<sc-if value="{{m.notLogo}}" hint-placeholder-val="{{ true }}">{{m.label}}</sc-if>
+</button>
+<sc-if value="{{m.open}}" hint-placeholder-val="{{ false }}">
+<div class="dd" role="menu" style="position: absolute; top: 27px; background: rgba(246,246,246,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; box-shadow: 0 12px 34px rgba(0,0,0,0.3); color: #1D1D1F; white-space: normal; left: 0; min-width: 250px; padding: 5px; display: flex; flex-direction: column">
+<sc-for list="{{m.items}}" as="it" hint-placeholder-count="4">
+<sc-if value="{{it.sep}}" hint-placeholder-val="{{ false }}"><div role="separator" style="height: 1px; background: rgba(0,0,0,0.12); margin: 5px 10px"></div></sc-if>
+<sc-if value="{{it.btn}}" hint-placeholder-val="{{ true }}"><button type="button" role="menuitem" class="mi" onClick="{{it.run}}" style="position: relative; background: transparent; border: 0; border-radius: 5px; padding: 6px 12px 6px 26px; min-height: 32px; display: flex; justify-content: space-between; align-items: center; gap: 24px; text-align: left; font-family: inherit; font-size: 13px; color: #1D1D1F; cursor: default"><span aria-hidden="true" style="position: absolute; left: 9px">{{it.check}}</span><span>{{it.label}}</span><span style="opacity: 0.55; font-size: 12px">{{it.hint}}</span></button></sc-if>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</nav>
+<div style="display: flex; align-items: center; gap: 2px; white-space: nowrap">
+
+<div style="position: relative">
+<button type="button" class="mt" onClick="{{pop.wifiT}}" aria-label="WLAN und Backend-Status" aria-expanded="{{pop.wifi}}" style="background: {{pop.wifiBg}}; border: 0; border-radius: 5px; padding: 0 9px; height: 24px; font-family: inherit; font-size: 13px; color: #1D1D1F; cursor: default; display: flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D1D1F" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M2 8.5a15 15 0 0 1 20 0"></path><path d="M5.5 12a10 10 0 0 1 13 0"></path><path d="M9 15.5a5 5 0 0 1 6 0"></path><circle cx="12" cy="19" r="1" fill="#1D1D1F"></circle></svg></button>
+<sc-if value="{{pop.wifi}}" hint-placeholder-val="{{ false }}">
+<div class="dd" role="dialog" aria-label="WLAN" style="position: absolute; top: 27px; background: rgba(246,246,246,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; box-shadow: 0 12px 34px rgba(0,0,0,0.3); color: #1D1D1F; white-space: normal; right: 0; width: 300px; padding: 14px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; align-items: center"><b>WLAN</b><span aria-hidden="true" style="width: 34px; height: 20px; border-radius: 10px; background: #34C759; position: relative"><span style="position: absolute; right: 2px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #FFFFFF"></span></span></div>
+<div style="display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 8px; background: rgba(0,0,0,0.05)"><span aria-hidden="true" style="width: 26px; height: 26px; border-radius: 50%; background: #2F6FE4; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M2 8.5a15 15 0 0 1 20 0"></path><path d="M5.5 12a10 10 0 0 1 13 0"></path><path d="M9 15.5a5 5 0 0 1 6 0"></path><circle cx="12" cy="19" r="1" fill="#FFFFFF"></circle></svg></span><span style="flex-grow: 1">Silvan-OS-Net</span><span aria-hidden="true">✓</span></div>
+<div style="height: 1px; background: rgba(0,0,0,0.12)"></div>
+<b style="font-size: 12px; color: #6E6E73">Backend</b>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="display: flex; align-items: center; gap: 8px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: {{backendDot}}"></span>api.silvanbrors.ch</span><span style="font-size: 12px; color: #6E6E73">{{backendText}}</span><span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: #6E6E73">Antwortzeit: [ms]</span></div>
+<button type="button" onClick="{{checkBackend}}" style="align-self: flex-start; background: #FFFFFF; border: 1px solid #D2D2D7; border-radius: 6px; padding: 6px 12px; min-height: 32px; font-family: inherit; font-size: 13px; cursor: pointer">Status neu prüfen</button>
+</div>
+</sc-if>
+</div>
+
+<div style="position: relative">
+<button type="button" class="mt" onClick="{{pop.battT}}" aria-label="Akku: Fortschritt der Lehre" aria-expanded="{{pop.batt}}" style="background: {{pop.battBg}}; border: 0; border-radius: 5px; padding: 0 9px; height: 24px; font-family: inherit; font-size: 13px; color: #1D1D1F; cursor: default; display: flex; align-items: center; gap: 6px">100 % <svg width="24" height="14" viewBox="0 0 26 14" aria-hidden="true"><rect x="0.75" y="0.75" width="21.5" height="12.5" rx="3.5" fill="none" stroke="#1D1D1F" stroke-width="1.2" opacity="0.6"></rect><rect x="2.5" y="2.5" width="16" height="9" rx="2" fill="#1D1D1F"></rect><rect x="23.2" y="4.5" width="1.8" height="5" rx="0.9" fill="#1D1D1F" opacity="0.6"></rect></svg></button>
+<sc-if value="{{pop.batt}}" hint-placeholder-val="{{ false }}">
+<div class="dd" role="dialog" aria-label="Lehre" style="position: absolute; top: 27px; background: rgba(246,246,246,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; box-shadow: 0 12px 34px rgba(0,0,0,0.3); color: #1D1D1F; white-space: normal; right: 0; width: 280px; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+<b>Akku: Lehre</b>
+<span style="font-size: 13px">Lehrjahr [x] von 4 · Abschluss 2027</span>
+<div style="height: 10px; border-radius: 5px; background: rgba(0,0,0,0.1); overflow: hidden"><div style="width: 75%; height: 100%; background: #34C759"></div></div>
+<span style="font-size: 12px; color: #6E6E73">Energiequelle: Kaffee und Automatisierung. Balken ist ein Beispielwert.</span>
+</div>
+</sc-if>
+</div>
+
+<div style="position: relative">
+<button type="button" class="mt" onClick="{{pop.clockT}}" aria-label="Kalender" aria-expanded="{{pop.clock}}" style="background: {{pop.clockBg}}; border: 0; border-radius: 5px; padding: 0 9px; height: 24px; font-family: inherit; font-size: 13px; color: #1D1D1F; cursor: default; display: flex; align-items: center; gap: 6px">{{clock}}</button>
+<sc-if value="{{pop.clock}}" hint-placeholder-val="{{ false }}">
+<div class="dd" role="dialog" aria-label="Kalender" style="position: absolute; top: 27px; background: rgba(246,246,246,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(0,0,0,0.15); border-radius: 10px; box-shadow: 0 12px 34px rgba(0,0,0,0.3); color: #1D1D1F; white-space: normal; right: 0; width: 290px; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+<b style="text-transform: capitalize">{{calTitle}}</b>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; text-align: center; font-size: 12px">
+<span style="color: #8E8E93">Mo</span><span style="color: #8E8E93">Di</span><span style="color: #8E8E93">Mi</span><span style="color: #8E8E93">Do</span><span style="color: #8E8E93">Fr</span><span style="color: #8E8E93">Sa</span><span style="color: #8E8E93">So</span>
+<sc-for list="{{calCells}}" as="c" hint-placeholder-count="30">
+<span style="height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: {{c.bg}}; color: {{c.fg}}; font-weight: {{c.fw}}">{{c.t}}</span>
+</sc-for>
+</div>
+<div style="height: 1px; background: rgba(0,0,0,0.12)"></div>
+<b style="font-size: 12px; color: #6E6E73">Demnächst</b>
+<div style="display: flex; gap: 10px; align-items: flex-start; font-size: 13px"><span aria-hidden="true" style="width: 4px; align-self: stretch; border-radius: 2px; background: #B3122B"></span><span>Steam Next Fest mit Rigged to Riches<br><span style="color: #6E6E73">Februar 2027</span></span></div>
+<div style="display: flex; gap: 10px; align-items: flex-start; font-size: 13px"><span aria-hidden="true" style="width: 4px; align-self: stretch; border-radius: 2px; background: #2F6FE4"></span><span>Lehrabschluss Applikationsentwickler EFZ<br><span style="color: #6E6E73">2027</span></span></div>
+</div>
+</sc-if>
+</div>
+
+</div>
+</header>
+
+<!-- Schreibtisch -->
+<main aria-label="Schreibtisch" style="position: relative; flex-grow: 1; min-height: 0; overflow: {{deskOverflow}}; display: {{deskDisplay}}; flex-direction: column; gap: 16px; padding: {{deskPad}}">
+
+<div style="position: {{iconPos}}; top: 16px; right: 16px; z-index: 1; display: flex; flex-direction: {{iconDir}}; flex-wrap: wrap; gap: 10px; align-items: center">
+<button type="button" onClick="{{openApp.finder}}" class="di" style="background: transparent; border: 0; padding: 6px 4px; width: 92px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; border-radius: 6px; font-family: inherit; min-height: 44px"><svg width="56" height="46" viewBox="0 0 56 46" aria-hidden="true"><path d="M2 8a4 4 0 0 1 4-4h14l5 5h25a4 4 0 0 1 4 4v27a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z" fill="#4FA3F7"></path><path d="M2 15h52v25a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z" fill="#6CB6FA"></path></svg><span style="font-size: 12px; font-weight: 500; color: #FFFFFF; text-align: center; line-height: 1.25; text-shadow: 0 1px 3px rgba(0,0,0,0.8)">Projekte</span></button><button type="button" onClick="{{openApp.cv}}" class="di" style="background: transparent; border: 0; padding: 6px 4px; width: 92px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; border-radius: 6px; font-family: inherit; min-height: 44px"><svg width="42" height="52" viewBox="0 0 42 52" aria-hidden="true"><path d="M2 4a3 3 0 0 1 3-3h22l13 13v34a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3z" fill="#FFFFFF" stroke="#C8C8C8"></path><path d="M27 1v10a3 3 0 0 0 3 3h10" fill="#E9E9E9" stroke="#C8C8C8"></path><rect x="6" y="32" width="30" height="11" rx="2" fill="#E5352B"></rect><text x="21" y="40.5" text-anchor="middle" font-size="8" font-family="Inter, sans-serif" font-weight="700" fill="#FFFFFF">PDF</text></svg><span style="font-size: 12px; font-weight: 500; color: #FFFFFF; text-align: center; line-height: 1.25; text-shadow: 0 1px 3px rgba(0,0,0,0.8)">Lebenslauf.pdf</span></button><button type="button" onClick="{{openApp.about}}" class="di" style="background: transparent; border: 0; padding: 6px 4px; width: 92px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; border-radius: 6px; font-family: inherit; min-height: 44px"><svg width="42" height="52" viewBox="0 0 42 52" aria-hidden="true"><path d="M2 4a3 3 0 0 1 3-3h22l13 13v34a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3z" fill="#FFFFFF" stroke="#C8C8C8"></path><path d="M27 1v10a3 3 0 0 0 3 3h10" fill="#E9E9E9" stroke="#C8C8C8"></path><rect x="6" y="32" width="30" height="11" rx="2" fill="#8E8E93"></rect><text x="21" y="40.5" text-anchor="middle" font-size="8" font-family="Inter, sans-serif" font-weight="700" fill="#FFFFFF">TXT</text></svg><span style="font-size: 12px; font-weight: 500; color: #FFFFFF; text-align: center; line-height: 1.25; text-shadow: 0 1px 3px rgba(0,0,0,0.8)">Über mich.txt</span></button><button type="button" onClick="{{openApp.kontakt}}" class="di" style="background: transparent; border: 0; padding: 6px 4px; width: 92px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; border-radius: 6px; font-family: inherit; min-height: 44px"><svg width="42" height="52" viewBox="0 0 42 52" aria-hidden="true"><path d="M2 4a3 3 0 0 1 3-3h22l13 13v34a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3z" fill="#FFFFFF" stroke="#C8C8C8"></path><path d="M27 1v10a3 3 0 0 0 3 3h10" fill="#E9E9E9" stroke="#C8C8C8"></path><rect x="6" y="32" width="30" height="11" rx="2" fill="#2E9BF0"></rect><text x="21" y="40.5" text-anchor="middle" font-size="8" font-family="Inter, sans-serif" font-weight="700" fill="#FFFFFF">@</text></svg><span style="font-size: 12px; font-weight: 500; color: #FFFFFF; text-align: center; line-height: 1.25; text-shadow: 0 1px 3px rgba(0,0,0,0.8)">Kontakt</span></button>
+</div>
+
+<sc-if value="{{W.welcome.show}}" hint-placeholder-val="{{ true }}">
+<section class="win" aria-label="Willkommen" onPointerDown="{{W.welcome.focus}}" style="position: {{W.welcome.pos}}; left: {{W.welcome.l}}; top: {{W.welcome.t}}; width: {{W.welcome.w}}; height: {{W.welcome.h}}; z-index: {{W.welcome.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.welcome.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.welcome.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.welcome.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.welcome.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.welcome.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">Willkommen</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="padding: 32px 38px 30px; display: flex; flex-direction: column; gap: 22px; color: #1D1D1F">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="align-self: flex-start; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #6E6E73; border: 1px solid #D2D2D7; border-radius: 999px; padding: 3px 10px">Portfolio</span>
+<h1 style="margin: 6px 0 0; font-size: 40px; line-height: 1.08; font-weight: 700; letter-spacing: -0.03em">Portfolio von Silvan Brors</h1>
+<p style="margin: 0; font-size: 15px; color: #6E6E73">Applikationsentwickler EFZ in Ausbildung · ti&amp;m · Zürich</p>
+</div>
+<p style="margin: 0; font-size: 17px; line-height: 1.6">Ich arbeite mit <mark style="background: {{accent}}; padding: 0 3px; border-radius: 3px">Java</mark> und <mark style="background: {{accent}}; padding: 0 3px; border-radius: 3px">Spring</mark>, am liebsten im <mark style="background: {{accent}}; padding: 0 3px; border-radius: 3px">Backend</mark>. Dazu Docker, SQL, Linux und AI. Was ich zweimal von Hand mache, <mark style="background: {{accent}}; padding: 0 3px; border-radius: 3px">automatisiere</mark> ich beim dritten Mal, damit mein Alltag bequemer wird.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px 24px; padding: 14px 16px; border: 1px solid #E5E5EA; border-radius: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 120px; flex: 1 1 120px"><span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 18px; font-weight: 500">[live]</span><span style="font-size: 12px; color: #6E6E73">Wishlists · Rigged to Riches</span></div><div style="display: flex; flex-direction: column; gap: 2px; min-width: 120px; flex: 1 1 120px"><span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 18px; font-weight: 500">[live]</span><span style="font-size: 12px; color: #6E6E73">Clips heute · Clipper</span></div><div style="display: flex; flex-direction: column; gap: 2px; min-width: 120px; flex: 1 1 120px"><span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 18px; font-weight: 500">[Sek.]</span><span style="font-size: 12px; color: #6E6E73">Ereignis bis Clip</span></div><div style="display: flex; flex-direction: column; gap: 2px; min-width: 120px; flex: 1 1 120px"><span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 18px; font-weight: 500">[live]</span><span style="font-size: 12px; color: #6E6E73">Fragen · IPA-Assistent</span></div>
+<span style="flex-basis: 100%; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: #8E8E93">live aus meinem Spring-Backend · GET /api/status</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px">
+<button type="button" onClick="{{openApp.rtr}}" class="wc" style="text-align: left; background: #F5F5F7; border: 1px solid #E5E5EA; border-radius: 12px; padding: 14px; display: flex; gap: 12px; align-items: flex-start; cursor: pointer; font-family: inherit; color: #1D1D1F; min-height: 44px"><span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 10px; background: #7A0E1C; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2C14E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"></rect><circle cx="9" cy="9" r="1.2" fill="currentColor"></circle><circle cx="15" cy="15" r="1.2" fill="currentColor"></circle><circle cx="15" cy="9" r="1.2" fill="currentColor"></circle><circle cx="9" cy="15" r="1.2" fill="currentColor"></circle></svg></span><span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><b style="font-size: 15px">Rigged to Riches</b><span style="font-size: 13px; line-height: 1.4; color: #3A3A3C">Koop-Heist-Spiel in Unity, bald auf Steam.</span><span style="font-size: 13px; font-weight: 600; color: #2F6FE4; margin-top: 2px">Öffnen →</span></span></button>
+<button type="button" onClick="{{openApp.clipper}}" class="wc" style="text-align: left; background: #F5F5F7; border: 1px solid #E5E5EA; border-radius: 12px; padding: 14px; display: flex; gap: 12px; align-items: flex-start; cursor: pointer; font-family: inherit; color: #1D1D1F; min-height: 44px"><span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 10px; background: #4B2FB8; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg></span><span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><b style="font-size: 15px">Clipper</b><span style="font-size: 13px; line-height: 1.4; color: #3A3A3C">Echtzeit-Bot, der Highlights aus Livestreams schneidet.</span><span style="font-size: 13px; font-weight: 600; color: #2F6FE4; margin-top: 2px">Öffnen →</span></span></button>
+<button type="button" onClick="{{openApp.ipa}}" class="wc" style="text-align: left; background: #F5F5F7; border: 1px solid #E5E5EA; border-radius: 12px; padding: 14px; display: flex; gap: 12px; align-items: flex-start; cursor: pointer; font-family: inherit; color: #1D1D1F; min-height: 44px"><span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 10px; background: #2F6FE4; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path><path d="M9.5 10a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5"></path><circle cx="12" cy="16.5" r=".6" fill="currentColor"></circle></svg></span><span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><b style="font-size: 15px">IPA-Lernassistent</b><span style="font-size: 13px; line-height: 1.4; color: #3A3A3C">RAG über meine Lernnotizen. Stell ihm eine Frage.</span><span style="font-size: 13px; font-weight: 600; color: #2F6FE4; margin-top: 2px">Öffnen →</span></span></button>
+<button type="button" onClick="{{openApp.agents}}" class="wc" style="text-align: left; background: #F5F5F7; border: 1px solid #E5E5EA; border-radius: 12px; padding: 14px; display: flex; gap: 12px; align-items: flex-start; cursor: pointer; font-family: inherit; color: #1D1D1F; min-height: 44px"><span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 10px; background: #FF7A1A; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A0D00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10"></path><path d="M10 20V4"></path><path d="M16 20v-7"></path><path d="M22 20H2"></path></svg></span><span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><b style="font-size: 15px">Marketing-Agents</b><span style="font-size: 13px; line-height: 1.4; color: #3A3A3C">Agents, die das Marketing für mein Spiel machen.</span><span style="font-size: 13px; font-weight: 600; color: #2F6FE4; margin-top: 2px">Öffnen →</span></span></button>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+<button type="button" onClick="{{openApp.cv}}" style="background: #1D1D1F; color: #FFFFFF; border: 0; border-radius: 8px; padding: 11px 18px; min-height: 44px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Lebenslauf</button>
+<button type="button" onClick="{{openApp.kontakt}}" style="background: #FFFFFF; color: #1D1D1F; border: 1px solid #D2D2D7; border-radius: 8px; padding: 11px 18px; min-height: 44px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Kontakt</button>
+<button type="button" onClick="{{openApp.classic}}" style="background: transparent; color: #2F6FE4; border: 0; padding: 11px 6px; min-height: 44px; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Klassische Ansicht</button>
+</div>
+<p style="margin: 0; font-size: 13px; color: #6E6E73">Fenster lassen sich verschieben. Im Terminal kannst du Befehle tippen, zum Beispiel <code style="font-family: 'JetBrains Mono', ui-monospace, monospace">help</code>.</p>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.about.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="Über mich.txt" onPointerDown="{{W.about.focus}}" style="position: {{W.about.pos}}; left: {{W.about.l}}; top: {{W.about.t}}; width: {{W.about.w}}; height: {{W.about.h}}; z-index: {{W.about.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.about.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.about.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.about.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.about.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.about.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">Über mich.txt</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="padding: 28px 32px; display: flex; flex-direction: column; gap: 14px; color: #1D1D1F">
+<h1 style="margin: 0; font-size: 30px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em">Hallo, ich bin Silvan.</h1>
+<p style="margin: 0; font-size: 13px; color: #6E6E73">Applikationsentwickler EFZ in Ausbildung · ti&amp;m · Zürich</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.6">Ich arbeite mit <mark style="background: {{accent}}; padding: 0 3px; border-radius: 3px">Java</mark> und <mark style="background: {{accent}}; padding: 0 3px; border-radius: 3px">Spring</mark>, am liebsten im <mark style="background: {{accent}}; padding: 0 3px; border-radius: 3px">Backend</mark>. Dazu Docker, SQL, Linux und AI. Was ich zweimal von Hand mache, <mark style="background: {{accent}}; padding: 0 3px; border-radius: 3px">automatisiere</mark> ich beim dritten Mal, damit mein Alltag bequemer wird.</p>
+<p style="margin: 0; font-size: 13px; color: #6E6E73">Tipp: Öffne den Ordner «Projekte» oder klick unten im Dock auf eine App. Fenster lassen sich verschieben.</p>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.finder.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="Projekte" onPointerDown="{{W.finder.focus}}" style="position: {{W.finder.pos}}; left: {{W.finder.l}}; top: {{W.finder.t}}; width: {{W.finder.w}}; height: {{W.finder.h}}; z-index: {{W.finder.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.finder.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.finder.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.finder.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.finder.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.finder.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">Projekte</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="display: flex; min-height: 100%">
+<nav aria-label="Seitenleiste" style="flex: 0 0 150px; background: #F5F5F7; border-right: 1px solid #E0E0E0; padding: 14px 10px; font-size: 13px; color: #1D1D1F; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 11px; font-weight: 600; color: #8E8E93; padding: 0 8px 4px">Favoriten</span>
+<span style="padding: 4px 8px; border-radius: 6px">Schreibtisch</span>
+<span style="padding: 4px 8px; border-radius: 6px; background: #E2E2E7; font-weight: 600">Projekte</span>
+<span style="padding: 4px 8px; border-radius: 6px">Downloads</span>
+<span style="font-size: 11px; font-weight: 600; color: #8E8E93; padding: 12px 8px 4px">Orte</span>
+<span style="padding: 4px 8px; border-radius: 6px">GitHub</span>
+</nav>
+<div style="flex: 1 1 auto; min-width: 0; padding: 16px; display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; align-content: start">
+<button type="button" onClick="{{openApp.rtr}}" class="fi" style="background: transparent; border: 0; border-radius: 8px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; color: #1D1D1F; min-height: 44px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #7A0E1C; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F2C14E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"></rect><circle cx="9" cy="9" r="1.2" fill="currentColor"></circle><circle cx="15" cy="15" r="1.2" fill="currentColor"></circle><circle cx="15" cy="9" r="1.2" fill="currentColor"></circle><circle cx="9" cy="15" r="1.2" fill="currentColor"></circle></svg></span><span style="font-size: 12px; text-align: center; line-height: 1.3">Rigged to Riches</span></button>
+<button type="button" onClick="{{openApp.clipper}}" class="fi" style="background: transparent; border: 0; border-radius: 8px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; color: #1D1D1F; min-height: 44px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #4B2FB8; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg></span><span style="font-size: 12px; text-align: center; line-height: 1.3">Clipper</span></button>
+<button type="button" onClick="{{openApp.ipa}}" class="fi" style="background: transparent; border: 0; border-radius: 8px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; color: #1D1D1F; min-height: 44px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #2F6FE4; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path><path d="M9.5 10a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5"></path><circle cx="12" cy="16.5" r=".6" fill="currentColor"></circle></svg></span><span style="font-size: 12px; text-align: center; line-height: 1.3">IPA-Assistent</span></button>
+<button type="button" onClick="{{openApp.agents}}" class="fi" style="background: transparent; border: 0; border-radius: 8px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; color: #1D1D1F; min-height: 44px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #FF7A1A; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A0D00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10"></path><path d="M10 20V4"></path><path d="M16 20v-7"></path><path d="M22 20H2"></path></svg></span><span style="font-size: 12px; text-align: center; line-height: 1.3">Marketing-Agents</span></button>
+<button type="button" onClick="{{openApp.wetter}}" class="fi" style="background: transparent; border: 0; border-radius: 8px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; color: #1D1D1F; min-height: 44px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #5AC8FA; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a5 5 0 1 1 1-9.9A6 6 0 0 1 19 10a4 4 0 0 1 0 8z"></path></svg></span><span style="font-size: 12px; text-align: center; line-height: 1.3">Wetterstation (BMA)</span></button>
+<button type="button" onClick="{{openApp.shop}}" class="fi" style="background: transparent; border: 0; border-radius: 8px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; color: #1D1D1F; min-height: 44px"><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #34C759; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="M20 20l-4.5-4.5"></path></svg></span><span style="font-size: 12px; text-align: center; line-height: 1.3">shop-outreach</span></button>
+</div>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.terminal.show}}" hint-placeholder-val="{{ true }}">
+<section class="win" aria-label="silvan — zsh — 80×24" onPointerDown="{{W.terminal.focus}}" style="position: {{W.terminal.pos}}; left: {{W.terminal.l}}; top: {{W.terminal.t}}; width: {{W.terminal.w}}; height: {{W.terminal.h}}; z-index: {{W.terminal.z}}; max-width: 100%; box-sizing: border-box; background: #1E1E1E; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.terminal.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.terminal.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #2B2B2B; border-bottom: 1px solid #111111; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.terminal.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.terminal.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.terminal.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #D0D0D0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">silvan — zsh — 80×24</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div onClick="{{focusInput}}" style="padding: 12px 14px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; line-height: 1.6; color: #E6E6E6; min-height: 100%; box-sizing: border-box; cursor: text">
+<sc-for list="{{lines}}" as="l" hint-placeholder-count="3">
+<div style="white-space: pre-wrap; color: {{l.color}}">{{l.text}}</div>
+</sc-for>
+<div style="display: flex; gap: 8px; align-items: center">
+<span style="color: #7EE787; white-space: nowrap">silvan@macbook ~ %</span>
+<label for="term-in" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Befehl eingeben</label>
+<input id="term-in" ref="{{inputRef}}" value="{{cmd}}" onChange="{{onCmd}}" onKeyDown="{{onKey}}" autocomplete="off" spellcheck="false" style="flex-grow: 1; min-width: 0; background: transparent; border: 0; outline: none; color: #E6E6E6; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; caret-color: #E6E6E6; padding: 4px 0">
+</div>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.rtr.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="Rigged to Riches" onPointerDown="{{W.rtr.focus}}" style="position: {{W.rtr.pos}}; left: {{W.rtr.l}}; top: {{W.rtr.t}}; width: {{W.rtr.w}}; height: {{W.rtr.h}}; z-index: {{W.rtr.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.rtr.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.rtr.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.rtr.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.rtr.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.rtr.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">Rigged to Riches</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="background: #171A21; color: #C7D5E0; min-height: 100%">
+<div style="aspect-ratio: 16 / 9; background: #0B0E13; display: flex; align-items: center; justify-content: center; position: relative">
+<span style="position: absolute; left: 14px; top: 10px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: #8BA3B8">[Trailer, läuft automatisch ohne Ton]</span>
+<span aria-hidden="true" style="width: 64px; height: 64px; border-radius: 50%; border: 2px solid #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M7 4l14 8-14 8z"></path></svg></span>
+</div>
+<div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 22px; color: #FFFFFF">Rigged to Riches</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.5">First-Person-Heist in der Casino-Stadt Las Agné. Solo oder im Online-Koop mit bis zu 4 Leuten. Gebaut mit Unity und C#, Release nach dem Steam Next Fest im Februar 2027.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px"><span style="background: #2A3F5A; padding: 2px 8px; border-radius: 3px">Heist</span><span style="background: #2A3F5A; padding: 2px 8px; border-radius: 3px">Koop</span><span style="background: #2A3F5A; padding: 2px 8px; border-radius: 3px">First-Person</span></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 4px"><span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px">Wishlists: [live]</span><a href="#steam" style="text-decoration: none; color: #FFFFFF; background: linear-gradient(#75B022, #588A1B); padding: 10px 16px; border-radius: 3px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; font-weight: 600; font-size: 14px">Auf die Wunschliste</a></div>
+</div>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.clipper.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="Telegram — Clipper Bot" onPointerDown="{{W.clipper.focus}}" style="position: {{W.clipper.pos}}; left: {{W.clipper.l}}; top: {{W.clipper.t}}; width: {{W.clipper.w}}; height: {{W.clipper.h}}; z-index: {{W.clipper.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.clipper.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.clipper.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.clipper.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.clipper.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.clipper.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">Telegram — Clipper Bot</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="background: #DCE6EE; min-height: 100%; display: flex; flex-direction: column">
+<div style="background: #FFFFFF; padding: 10px 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #D0D7DE">
+<span aria-hidden="true" style="width: 34px; height: 34px; border-radius: 50%; background: #4B2FB8; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px">CB</span>
+<div style="display: flex; flex-direction: column; line-height: 1.25"><span style="font-weight: 600; font-size: 14px; color: #1D1D1F">Clipper Bot</span><span style="font-size: 12px; color: #2F7FD8">Bot</span></div>
+</div>
+<div style="padding: 14px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: #1D1D1F">
+<div style="align-self: flex-start; max-width: 85%; background: #FFFFFF; padding: 8px 12px; border-radius: 12px 12px 12px 4px">Highlight erkannt bei <b>[Streamer A]</b>. Schneide …<span style="display: block; text-align: right; font-size: 11px; color: #8E8E93">[Zeit]</span></div>
+<div style="align-self: flex-start; width: 78%; background: #FFFFFF; padding: 6px; border-radius: 12px 12px 12px 4px">
+<div style="aspect-ratio: 9 / 12; max-height: 230px; width: 100%; background: #111111; color: #B8B8B8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px">[Clip 0:23]</div>
+<span style="display: block; padding: 6px 6px 2px; font-size: 13px">Fertig in [Sek.] s, bereit zum Posten</span>
+</div>
+<div style="align-self: flex-end; max-width: 80%; background: #E1FFC7; padding: 8px 12px; border-radius: 12px 12px 4px 12px">Gepostet 👍<span style="display: block; text-align: right; font-size: 11px; color: #5E9E4A">[Zeit] ✓✓</span></div>
+</div>
+<p style="margin: auto 0 0; padding: 10px 14px; font-size: 12px; color: #4A5560; background: #F3F6F8; border-top: 1px solid #D0D7DE">Clipper: schaut Livestreams mit, erkennt Highlights und schickt den Clip sofort hierher. [Sprache] / FFmpeg / Telegram Bot API</p>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.ipa.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="IPA-Assistent" onPointerDown="{{W.ipa.focus}}" style="position: {{W.ipa.pos}}; left: {{W.ipa.l}}; top: {{W.ipa.t}}; width: {{W.ipa.w}}; height: {{W.ipa.h}}; z-index: {{W.ipa.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.ipa.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.ipa.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.ipa.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.ipa.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.ipa.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">IPA-Assistent</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="display: flex; flex-direction: column; min-height: 100%; color: #1D1D1F">
+<div style="padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; min-height: 200px">
+<div style="align-self: flex-start; max-width: 88%; background: #F0F0F2; padding: 10px 14px; border-radius: 16px; font-size: 14px">Hoi! Ich kenne alle IPA-Lernnotizen von Silvan. Frag mich etwas.</div>
+<sc-if value="{{hasQuestion}}" hint-placeholder-val="{{ false }}">
+<div class="ln" style="align-self: flex-end; max-width: 85%; background: #2F6FE4; color: #FFFFFF; padding: 10px 14px; border-radius: 16px; font-size: 14px">{{question}}</div>
+<div class="ln" style="animation-delay: 0.3s; align-self: flex-start; max-width: 88%; background: #F0F0F2; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5">{{answer}}<span style="display: block; margin-top: 6px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: #6E6E73">Quelle: {{source}}</span></div>
+</sc-if>
+</div>
+<div style="padding: 12px 18px 16px; border-top: 1px solid #E5E5EA; display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{questions}}" as="q" hint-placeholder-count="3">
+<button type="button" onClick="{{q.ask}}" style="background: #FFFFFF; color: #2F6FE4; border: 1px solid #2F6FE4; border-radius: 999px; padding: 8px 14px; min-height: 44px; font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer">{{q.label}}</button>
+</sc-for>
+</div>
+<p style="margin: 0; padding: 0 18px 14px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: #6E6E73">Spring Boot / [LLM] / [Vektor-DB] · Beispielantworten</p>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.agents.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="Wochenbericht.pdf" onPointerDown="{{W.agents.focus}}" style="position: {{W.agents.pos}}; left: {{W.agents.l}}; top: {{W.agents.t}}; width: {{W.agents.w}}; height: {{W.agents.h}}; z-index: {{W.agents.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.agents.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.agents.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.agents.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.agents.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.agents.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">Wochenbericht.pdf</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="background: #8E8E93; padding: 18px; min-height: 100%; box-sizing: border-box">
+<div style="background: #FFFFFF; max-width: 520px; margin: 0 auto; padding: 28px 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 14px; color: #1D1D1F">
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: #6E6E73"><span>Analyse-Agent · automatisch erstellt</span><span>[KW]</span></div>
+<h2 style="margin: 0; font-size: 20px">Wochenbericht Marketing</h2>
+<p style="margin: 0; font-size: 13px; color: #3A3A3C">Mehrere Agents posten Clips von Rigged to Riches. Dieser Bericht zeigt, was diese Woche funktioniert hat.</p>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px"><span style="width: 80px">TikTok</span><div style="flex: 1; height: 12px; background: #EDEDED; border-radius: 6px"><div style="width: 80%; height: 100%; background: #FF7A1A; border-radius: 6px"></div></div><span style="width: 56px; text-align: right; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px">[Views]</span></div>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px"><span style="width: 80px">YT Shorts</span><div style="flex: 1; height: 12px; background: #EDEDED; border-radius: 6px"><div style="width: 56%; height: 100%; background: #1D1D1F; border-radius: 6px"></div></div><span style="width: 56px; text-align: right; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px">[Views]</span></div>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px"><span style="width: 80px">Reddit</span><div style="flex: 1; height: 12px; background: #EDEDED; border-radius: 6px"><div style="width: 38%; height: 100%; background: #1D1D1F; border-radius: 6px"></div></div><span style="width: 56px; text-align: right; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px">[Views]</span></div>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px"><span style="width: 80px">X</span><div style="flex: 1; height: 12px; background: #EDEDED; border-radius: 6px"><div style="width: 22%; height: 100%; background: #1D1D1F; border-radius: 6px"></div></div><span style="width: 56px; text-align: right; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px">[Views]</span></div>
+<p style="margin: 0; font-size: 13px; border-left: 3px solid #FF7A1A; padding-left: 10px"><b>Empfehlung:</b> [Was der Agent für nächste Woche vorschlägt]</p>
+<p style="margin: 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; color: #8E8E93">Balken sind Beispiel-Längen. Projekt in Arbeit.</p>
+</div>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.kontakt.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="Neue E-Mail" onPointerDown="{{W.kontakt.focus}}" style="position: {{W.kontakt.pos}}; left: {{W.kontakt.l}}; top: {{W.kontakt.t}}; width: {{W.kontakt.w}}; height: {{W.kontakt.h}}; z-index: {{W.kontakt.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.kontakt.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.kontakt.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.kontakt.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.kontakt.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.kontakt.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">Neue E-Mail</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="color: #1D1D1F; font-size: 14px; display: flex; flex-direction: column; min-height: 100%">
+<div style="padding: 10px 16px; border-bottom: 1px solid #E5E5EA; display: flex; gap: 10px"><span style="color: #8E8E93; width: 50px">An:</span><span>Silvan Brors &lt;[deine@email.ch]&gt;</span></div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #E5E5EA; display: flex; gap: 10px"><span style="color: #8E8E93; width: 50px">Betreff:</span><span>Hallo Silvan</span></div>
+<div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; line-height: 1.5">Fragen zu einem Projekt oder eine offene Stelle? Melde dich.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px"><a href="https://github.com/" style="color: #2F6FE4">GitHub ↗</a><a href="https://www.linkedin.com/" style="color: #2F6FE4">LinkedIn ↗</a></div>
+</div>
+<div style="padding: 12px 16px; border-top: 1px solid #E5E5EA; display: flex; justify-content: flex-end"><a href="mailto:[deine@email.ch]" style="text-decoration: none; background: #2F6FE4; color: #FFFFFF; padding: 10px 18px; border-radius: 8px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; font-weight: 600">Senden</a></div>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.cv.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="Lebenslauf.pdf" onPointerDown="{{W.cv.focus}}" style="position: {{W.cv.pos}}; left: {{W.cv.l}}; top: {{W.cv.t}}; width: {{W.cv.w}}; height: {{W.cv.h}}; z-index: {{W.cv.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.cv.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.cv.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.cv.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.cv.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.cv.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">Lebenslauf.pdf</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="background: #8E8E93; padding: 18px; min-height: 100%; box-sizing: border-box">
+<div style="background: #FFFFFF; max-width: 420px; margin: 0 auto; aspect-ratio: 1 / 1.414; padding: 28px; box-sizing: border-box; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 10px; color: #1D1D1F">
+<span style="font-size: 20px; font-weight: 700">Silvan Brors</span>
+<span style="font-size: 12px; color: #6E6E73">Applikationsentwickler EFZ · Zürich</span>
+<div style="height: 1px; background: #E5E5EA; margin: 6px 0"></div>
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: #8E8E93">[Lebenslauf als PDF einbetten]</span>
+</div>
+<div style="display: flex; justify-content: center; padding-top: 14px"><a href="#lebenslauf" style="text-decoration: none; background: #FFFFFF; color: #1D1D1F; padding: 10px 16px; border-radius: 8px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; font-weight: 600; font-size: 14px">PDF herunterladen</a></div>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.wetter.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="Wetterstation (BMA)" onPointerDown="{{W.wetter.focus}}" style="position: {{W.wetter.pos}}; left: {{W.wetter.l}}; top: {{W.wetter.t}}; width: {{W.wetter.w}}; height: {{W.wetter.h}}; z-index: {{W.wetter.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.wetter.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.wetter.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.wetter.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.wetter.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.wetter.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">Wetterstation (BMA)</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="padding: 24px; font-size: 15px; line-height: 1.6; color: #1D1D1F"><b>Wetterstation</b><br>Gruppenprojekt für die BMA: von den Sensoren bis ins Dashboard.<br><span style="color: #6E6E73">[Foto / Dashboard-Screenshot]</span></div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.sysinfo.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="Über Silvan OS" onPointerDown="{{W.sysinfo.focus}}" style="position: {{W.sysinfo.pos}}; left: {{W.sysinfo.l}}; top: {{W.sysinfo.t}}; width: {{W.sysinfo.w}}; height: {{W.sysinfo.h}}; z-index: {{W.sysinfo.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.sysinfo.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.sysinfo.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.sysinfo.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.sysinfo.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.sysinfo.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">Über Silvan OS</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="padding: 28px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; color: #1D1D1F">
+<svg width="64" height="64" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 10-9 10-9-10z" fill="#1D1D1F"></path></svg>
+<h2 style="margin: 4px 0 0; font-size: 24px">Silvan OS</h2>
+<span style="font-size: 13px; color: #6E6E73">Version 1.0 · Portfolio-Edition</span>
+<div style="width: 100%; display: flex; flex-direction: column; gap: 6px; font-size: 13px; margin-top: 8px; text-align: left">
+<div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: #6E6E73">Frontend</span><span>React, TypeScript, Vite</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: #6E6E73">Backend</span><span>Spring Boot 3, Java 21</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: #6E6E73">Datenbank</span><span>Postgres</span></div>
+<div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: #6E6E73">Läuft auf</span><span>[Hosting]</span></div>
+</div>
+<a href="https://github.com/" style="margin-top: 8px; font-size: 13px">Quellcode auf GitHub ↗</a>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.classic.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="Klassische Ansicht" onPointerDown="{{W.classic.focus}}" style="position: {{W.classic.pos}}; left: {{W.classic.l}}; top: {{W.classic.t}}; width: {{W.classic.w}}; height: {{W.classic.h}}; z-index: {{W.classic.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.classic.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.classic.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.classic.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.classic.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.classic.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">Klassische Ansicht</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="padding: 32px 36px; display: flex; flex-direction: column; gap: 18px; color: #1D1D1F; font-size: 15px; line-height: 1.6">
+<div><h2 style="margin: 0; font-size: 26px">Silvan Brors</h2><p style="margin: 2px 0 0; color: #6E6E73">Applikationsentwickler EFZ in Ausbildung · ti&amp;m · Zürich</p></div>
+<p style="margin: 0">Ich arbeite mit Java und Spring, am liebsten im Backend. Dazu Docker, SQL, Linux und AI. Was ich zweimal von Hand mache, automatisiere ich beim dritten Mal.</p>
+<h3 style="margin: 6px 0 0; font-size: 15px; text-transform: uppercase; letter-spacing: 0.05em; color: #6E6E73">Projekte</h3>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px">
+<li><b>Rigged to Riches</b>: Koop-Heist-Spiel (Unity, C#), Release auf Steam nach dem Next Fest im Februar 2027</li>
+<li><b>Clipper</b>: Echtzeit-Bot, der Highlights aus Livestreams erkennt, schneidet und per Telegram schickt</li>
+<li><b>IPA-Lernassistent</b>: RAG über meine IPA-Lernnotizen (Spring Boot, [LLM], [Vektor-DB])</li>
+<li><b>Marketing-Agents</b>: Multi-Agent-System für den Spiel-Release (in Arbeit)</li>
+<li><b>Wetterstation</b> (BMA-Gruppenprojekt) und <b>shop-outreach</b> (Python-Tool)</li>
+</ul>
+<h3 style="margin: 6px 0 0; font-size: 15px; text-transform: uppercase; letter-spacing: 0.05em; color: #6E6E73">Skills</h3>
+<p style="margin: 0">Java, Spring Boot, REST, SQL, Docker, Linux, Git, CI/CD, RAG, Agents, Unity, Python</p>
+<h3 style="margin: 6px 0 0; font-size: 15px; text-transform: uppercase; letter-spacing: 0.05em; color: #6E6E73">Kontakt</h3>
+<p style="margin: 0; display: flex; flex-wrap: wrap; gap: 16px"><a href="mailto:[deine@email.ch]">[deine@email.ch]</a><a href="https://github.com/">GitHub</a><a href="https://www.linkedin.com/">LinkedIn</a><a href="#lebenslauf">Lebenslauf (PDF)</a></p>
+</div>
+</div>
+</section>
+</sc-if><sc-if value="{{W.shop.show}}" hint-placeholder-val="{{ false }}">
+<section class="win" aria-label="shop-outreach" onPointerDown="{{W.shop.focus}}" style="position: {{W.shop.pos}}; left: {{W.shop.l}}; top: {{W.shop.t}}; width: {{W.shop.w}}; height: {{W.shop.h}}; z-index: {{W.shop.z}}; max-width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; border: 1px solid rgba(0,0,0,0.35); box-shadow: {{W.shop.sh}}; overflow: hidden; display: flex; flex-direction: column">
+<div onPointerDown="{{W.shop.drag}}" style="position: relative; flex-shrink: 0; height: 38px; display: flex; align-items: center; padding: 0 8px; background: #EFEFEF; border-bottom: 1px solid #D4D4D4; cursor: grab; user-select: none; touch-action: none">
+<div style="display: flex; gap: 0; position: relative; z-index: 1"><button type="button" aria-label="Fenster schliessen" onClick="{{W.shop.close}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; box-shadow: inset 0 0 0 0.5px #E0443E"></span></button><button type="button" aria-label="Fenster minimieren" onClick="{{W.shop.min}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #FEBC2E; box-shadow: inset 0 0 0 0.5px #DEA123"></span></button><button type="button" aria-label="Fenster maximieren" onClick="{{W.shop.max}}" onPointerDown="{{stop}}" style="width: 26px; height: 26px; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span aria-hidden="true" style="width: 12px; height: 12px; border-radius: 50%; background: #28C840; box-shadow: inset 0 0 0 0.5px #1AAB29"></span></button></div>
+<span style="position: absolute; left: 90px; right: 90px; text-align: center; font-size: 13px; font-weight: 600; color: #3A3A3A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none">shop-outreach</span>
+</div>
+<div style="flex-grow: 1; overflow: auto; min-height: 0">
+<div style="padding: 24px; font-size: 15px; line-height: 1.6; color: #1D1D1F"><b>shop-outreach</b><br>Python-Tool, das mit Google Places und PageSpeed lokale Shops findet, deren Website ein Update braucht.</div>
+</div>
+</section>
+</sc-if>
+
+<!-- Benachrichtigung -->
+<sc-if value="{{notif}}" hint-placeholder-val="{{ false }}">
+<div class="nt" role="status" style="position: absolute; top: 12px; right: 12px; z-index: 9000; width: 340px; max-width: calc(100% - 24px); background: rgba(246,246,246,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); display: flex; align-items: center; gap: 4px; padding: 4px">
+<button type="button" onClick="{{notifOpen}}" style="flex-grow: 1; background: transparent; border: 0; padding: 8px; display: flex; gap: 10px; align-items: center; text-align: left; cursor: pointer; font-family: inherit; color: #1D1D1F; min-height: 44px">
+<span aria-hidden="true" style="width: 36px; height: 36px; border-radius: 9px; background: #4B2FB8; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg></span>
+<span style="display: flex; flex-direction: column; line-height: 1.3"><b style="font-size: 13px">Clipper Bot</b><span style="font-size: 13px">Neuer Clip ist fertig. Klick zum Ansehen.</span></span>
+</button>
+<button type="button" onClick="{{notifClose}}" aria-label="Benachrichtigung schliessen" style="width: 44px; height: 44px; background: transparent; border: 0; cursor: pointer; font-size: 18px; color: #6E6E73">×</button>
+</div>
+</sc-if>
+
+<!-- Hinweis -->
+<sc-if value="{{toastOn}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position: absolute; top: 14px; left: 0; right: 0; z-index: 9600; display: flex; justify-content: center; pointer-events: none">
+<span class="dd" style="background: rgba(30,30,30,0.88); color: #FFFFFF; padding: 8px 16px; border-radius: 10px; font-size: 13px; box-shadow: 0 6px 20px rgba(0,0,0,0.3)">{{toastText}}</span>
+</div>
+</sc-if>
+
+<!-- Dock -->
+<nav aria-label="Dock" style="position: {{dockPos}}; left: {{dockLeft}}; bottom: 8px; transform: {{dockTf}}; align-self: center; z-index: 9500; display: flex; align-items: flex-end; gap: 6px; padding: 6px 8px 4px; background: rgba(255,255,255,0.22); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.3); border-radius: 18px; max-width: calc(100% - 16px); overflow-x: {{dockOverflow}}">
+<button type="button" class="dk" onClick="{{openApp.finder}}" aria-label="Finder öffnen" style="background: transparent; border: 0; padding: 0 2px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer"><span class="tt" aria-hidden="true">Finder</span><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #4FA3F7; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" fill="#E8F3FF"></rect><path d="M12 2h5a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5h-5z" fill="#4FA3F7"></path><circle cx="8" cy="9" r="1.2" fill="#1D1D1F"></circle><circle cx="16" cy="9" r="1.2" fill="#FFFFFF"></circle><path d="M7 15c3 2 7 2 10 0" stroke="#1D1D1F" stroke-width="1.4" fill="none" stroke-linecap="round"></path></svg></span><span aria-hidden="true" style="width: 4px; height: 4px; border-radius: 50%; background: {{run.finder}}"></span></button><button type="button" class="dk" onClick="{{openApp.terminal}}" aria-label="Terminal öffnen" style="background: transparent; border: 0; padding: 0 2px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer"><span class="tt" aria-hidden="true">Terminal</span><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #1E1E1E; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E6E6E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8l4 4-4 4"></path><path d="M12 16h6"></path></svg></span><span aria-hidden="true" style="width: 4px; height: 4px; border-radius: 50%; background: {{run.terminal}}"></span></button><button type="button" class="dk" onClick="{{openApp.rtr}}" aria-label="Rigged to Riches öffnen" style="background: transparent; border: 0; padding: 0 2px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer"><span class="tt" aria-hidden="true">Rigged to Riches</span><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #7A0E1C; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F2C14E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"></rect><circle cx="9" cy="9" r="1.2" fill="currentColor"></circle><circle cx="15" cy="15" r="1.2" fill="currentColor"></circle><circle cx="15" cy="9" r="1.2" fill="currentColor"></circle><circle cx="9" cy="15" r="1.2" fill="currentColor"></circle></svg></span><span aria-hidden="true" style="width: 4px; height: 4px; border-radius: 50%; background: {{run.rtr}}"></span></button><button type="button" class="dk" onClick="{{openApp.clipper}}" aria-label="Telegram öffnen" style="background: transparent; border: 0; padding: 0 2px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer"><span class="tt" aria-hidden="true">Telegram</span><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #4B2FB8; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4z"></path></svg></span><span aria-hidden="true" style="width: 4px; height: 4px; border-radius: 50%; background: {{run.clipper}}"></span></button><button type="button" class="dk" onClick="{{openApp.ipa}}" aria-label="IPA-Assistent öffnen" style="background: transparent; border: 0; padding: 0 2px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer"><span class="tt" aria-hidden="true">IPA-Assistent</span><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #2F6FE4; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path><path d="M9.5 10a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5"></path><circle cx="12" cy="16.5" r=".6" fill="currentColor"></circle></svg></span><span aria-hidden="true" style="width: 4px; height: 4px; border-radius: 50%; background: {{run.ipa}}"></span></button><button type="button" class="dk" onClick="{{openApp.agents}}" aria-label="Wochenbericht öffnen" style="background: transparent; border: 0; padding: 0 2px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer"><span class="tt" aria-hidden="true">Wochenbericht</span><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #FF7A1A; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1A0D00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10"></path><path d="M10 20V4"></path><path d="M16 20v-7"></path><path d="M22 20H2"></path></svg></span><span aria-hidden="true" style="width: 4px; height: 4px; border-radius: 50%; background: {{run.agents}}"></span></button><button type="button" class="dk" onClick="{{openApp.kontakt}}" aria-label="Mail öffnen" style="background: transparent; border: 0; padding: 0 2px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer"><span class="tt" aria-hidden="true">Mail</span><span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 11px; background: #2E9BF0; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.2)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span><span aria-hidden="true" style="width: 4px; height: 4px; border-radius: 50%; background: {{run.kontakt}}"></span></button>
+</nav>
+</main>
+
+<!-- Neustart -->
+<sc-if value="{{booting}}" hint-placeholder-val="{{ false }}">
+<div role="status" aria-label="Silvan OS startet neu" style="position: fixed; inset: 0; z-index: 20000; background: #000000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px">
+<svg width="72" height="72" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 10-9 10-9-10z" fill="#FFFFFF"></path></svg>
+<div style="width: 200px; height: 5px; border-radius: 3px; background: #333333; overflow: hidden"><div class="bp" style="height: 100%; background: #FFFFFF"></div></div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FFE08A","options":["#FFE08A","#FFC9A8","#CFE0FF","#D9CCFF"]},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.defs = {
+      welcome: { x: 320, y: 34,  w: 800, h: 'auto',  name: 'Willkommen', title: 'Willkommen' },
+      about:   { x: 90,  y: 40,  w: 500, h: 'auto',  name: 'TextEdit', title: 'Über mich.txt' },
+      finder:  { x: 150, y: 380, w: 600, h: '300px', name: 'Finder', title: 'Projekte' },
+      terminal:{ x: 880, y: 460, w: 520, h: '270px', name: 'Terminal', title: 'Terminal' },
+      rtr:     { x: 240, y: 40,  w: 620, h: 'auto',  name: 'Rigged to Riches', title: 'Rigged to Riches' },
+      clipper: { x: 880, y: 30,  w: 380, h: '580px', name: 'Telegram', title: 'Telegram' },
+      ipa:     { x: 420, y: 100, w: 540, h: 'auto',  name: 'IPA-Assistent', title: 'IPA-Assistent' },
+      agents:  { x: 520, y: 40,  w: 560, h: '600px', name: 'Vorschau', title: 'Wochenbericht.pdf' },
+      kontakt: { x: 560, y: 150, w: 480, h: 'auto',  name: 'Mail', title: 'Neue E-Mail' },
+      cv:      { x: 640, y: 30,  w: 460, h: '640px', name: 'Vorschau', title: 'Lebenslauf.pdf' },
+      wetter:  { x: 300, y: 200, w: 420, h: 'auto',  name: 'Finder', title: 'Wetterstation' },
+      shop:    { x: 360, y: 240, w: 420, h: 'auto',  name: 'Finder', title: 'shop-outreach' },
+      sysinfo: { x: 510, y: 120, w: 420, h: 'auto',  name: 'Silvan OS', title: 'Über Silvan OS' },
+      classic: { x: 400, y: 30,  w: 640, h: '600px', name: 'Klassische Ansicht', title: 'Klassische Ansicht' }
+    };
+    this.center = { welcome: true, sysinfo: true, classic: true };
+    this.walls = [
+      { id: 'abend', label: 'Abendrot' },
+      { id: 'nacht', label: 'Nacht' },
+      { id: 'gletscher', label: 'Gletscher' },
+      { id: 'casino', label: 'Casino' }
+    ];
+    let wall = 'abend';
+    try { const s = window.localStorage.getItem('silvanos-wall'); if (s) wall = s; } catch (e) { wall = 'abend'; }
+    this.state = Object.assign(this.initial(), { clock: '', narrow: false, wall: wall, menu: null, toast: null, booting: false, backend: 'demo' });
+    this.onMove = this.onMove.bind(this);
+    this.onUp = this.onUp.bind(this);
+    this.onResize = this.onResize.bind(this);
+  }
+  initial() {
+    let d = '';
+    try { d = new Date().toLocaleString('de-CH', { timeZone: 'Europe/Zurich', weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); } catch (e) { d = ''; }
+    return {
+      wins: { terminal: { x: 880, y: 460, z: 1, min: false, max: false } },
+      zc: 2, q: -1, cmd: '', hist: [], notif: false,
+      lines: [
+        { text: 'Last login: ' + d + ' on ttys000', color: '#9A9A9A' },
+        { text: 'Tippe «help», um alle Befehle zu sehen.', color: '#E6E6E6' }
+      ]
+    };
+  }
+  componentDidMount() {
+    this.tick();
+    this.timer = setInterval(() => this.tick(), 1000);
+    window.addEventListener('pointermove', this.onMove);
+    window.addEventListener('pointerup', this.onUp);
+    window.addEventListener('resize', this.onResize);
+    this.onResize();
+    this.startTimers();
+  }
+  startTimers() {
+    clearTimeout(this.w1); clearTimeout(this.nt1); clearTimeout(this.nt2);
+    this.w1 = setTimeout(() => this.open('welcome'), 300);
+    this.nt1 = setTimeout(() => { if (!this.state.wins.clipper) this.setState({ notif: true }); }, 6000);
+    this.nt2 = setTimeout(() => this.setState({ notif: false }), 16000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer); clearTimeout(this.w1); clearTimeout(this.nt1); clearTimeout(this.nt2); clearTimeout(this.tt); clearTimeout(this.bt);
+    window.removeEventListener('pointermove', this.onMove);
+    window.removeEventListener('pointerup', this.onUp);
+    window.removeEventListener('resize', this.onResize);
+  }
+  onResize() {
+    const n = (window.innerWidth || 1440) < 860;
+    if (n !== this.state.narrow) this.setState({ narrow: n });
+  }
+  tick() {
+    let c = '';
+    try {
+      const now = new Date();
+      c = now.toLocaleDateString('de-CH', { timeZone: 'Europe/Zurich', weekday: 'short', day: 'numeric', month: 'short' }) + '  ' +
+          now.toLocaleTimeString('de-CH', { timeZone: 'Europe/Zurich', hour: '2-digit', minute: '2-digit' });
+    } catch (e) { c = ''; }
+    if (c !== this.state.clock) this.setState({ clock: c });
+  }
+  toast(msg) {
+    clearTimeout(this.tt);
+    this.setState({ toast: msg });
+    this.tt = setTimeout(() => this.setState({ toast: null }), 1900);
+  }
+  setWin(k, patch) {
+    const wins = Object.assign({}, this.state.wins);
+    wins[k] = Object.assign({}, wins[k], patch);
+    this.setState({ wins: wins });
+  }
+  topKey() {
+    const wins = this.state.wins;
+    let topK = null, topZ = -1;
+    Object.keys(wins).forEach((k) => { if (!wins[k].min && wins[k].z > topZ) { topZ = wins[k].z; topK = k; } });
+    return topK;
+  }
+  focus(k) {
+    const w = this.state.wins[k];
+    if (!w || this.topKey() === k) return;
+    const wins = Object.assign({}, this.state.wins);
+    wins[k] = Object.assign({}, w, { z: this.state.zc });
+    this.setState({ wins: wins, zc: this.state.zc + 1 });
+  }
+  open(k) {
+    const wins = Object.assign({}, this.state.wins);
+    const d = this.defs[k];
+    const cur = wins[k];
+    let x = d.x;
+    if (this.center[k]) x = Math.max(20, Math.round(((window.innerWidth || 1440) - d.w) / 2));
+    wins[k] = cur ? Object.assign({}, cur, { min: false, z: this.state.zc }) : { x: x, y: d.y, z: this.state.zc, min: false, max: false };
+    const patch = { wins: wins, zc: this.state.zc + 1 };
+    if (k === 'clipper') patch.notif = false;
+    this.setState(patch);
+  }
+  close(k) {
+    if (!k) return;
+    const wins = Object.assign({}, this.state.wins);
+    delete wins[k];
+    this.setState({ wins: wins });
+  }
+  minimizeAll() {
+    const wins = {};
+    Object.keys(this.state.wins).forEach((k) => { wins[k] = Object.assign({}, this.state.wins[k], { min: true }); });
+    this.setState({ wins: wins });
+  }
+  tile() {
+    const ks = Object.keys(this.state.wins).filter((k) => !this.state.wins[k].min).sort((a, b) => this.state.wins[a].z - this.state.wins[b].z);
+    const n = ks.length;
+    if (!n) { this.toast('Keine offenen Fenster'); return; }
+    const cols = n <= 3 ? n : Math.ceil(Math.sqrt(n));
+    const rows = Math.ceil(n / cols);
+    const W = (window.innerWidth || 1440) - 24, H = (window.innerHeight || 900) - 28 - 110;
+    const cw = Math.floor(W / cols) - 12, ch = Math.floor(H / rows) - 12;
+    const wins = Object.assign({}, this.state.wins);
+    ks.forEach((k, i) => {
+      const c = i % cols, r = Math.floor(i / cols);
+      wins[k] = Object.assign({}, wins[k], { x: 12 + c * (cw + 12), y: 10 + r * (ch + 12), tw: cw, th: ch + 'px', max: false });
+    });
+    this.setState({ wins: wins });
+  }
+  restart() {
+    this.setState({ menu: null, booting: true });
+    clearTimeout(this.bt);
+    this.bt = setTimeout(() => {
+      this.setState(Object.assign(this.initial(), { booting: false }));
+      this.startTimers();
+    }, 1700);
+  }
+  copy(text, msg) {
+    try {
+      navigator.clipboard.writeText(text).then(() => this.toast(msg), () => this.toast('Kopieren nicht möglich'));
+    } catch (e) { this.toast('Kopieren nicht möglich'); }
+  }
+  fullscreen() {
+    try {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen().catch(() => this.toast('Vollbild hier nicht möglich'));
+    } catch (e) { this.toast('Vollbild hier nicht möglich'); }
+  }
+  setWall(id) {
+    this.setState({ wall: id });
+    try { window.localStorage.setItem('silvanos-wall', id); } catch (e) { /* egal */ }
+  }
+  checkBackend() {
+    this.setState({ backend: 'checking' });
+    setTimeout(() => this.setState({ backend: 'demo' }), 800);
+  }
+  onMove(e) {
+    const d = this.drag;
+    if (!d) return;
+    const x = Math.max(-(d.w - 140), d.ox + (e.clientX - d.sx));
+    const y = Math.max(0, d.oy + (e.clientY - d.sy));
+    this.setWin(d.k, { x: x, y: y });
+  }
+  onUp() { this.drag = null; }
+  run(raw) {
+    const cmd = (raw || '').trim();
+    const echo = { text: 'silvan@macbook ~ % ' + cmd, color: '#E6E6E6' };
+    const W = '#E6E6E6', G = '#7EE787', R = '#FF7B72', M = '#9A9A9A';
+    const out = (t, c) => ({ text: t, color: c || W });
+    const apps = { rtr: 'rtr', 'rigged-to-riches': 'rtr', clipper: 'clipper', ipa: 'ipa', agents: 'agents', kontakt: 'kontakt', mail: 'kontakt', lebenslauf: 'cv', cv: 'cv', finder: 'finder', projekte: 'finder', willkommen: 'welcome' };
+    let res = [];
+    const hist = cmd ? this.state.hist.concat([cmd]).slice(-20) : this.state.hist;
+    this.histIdx = hist.length;
+    if (cmd === '') { res = []; }
+    else if (cmd === 'clear') { this.setState({ lines: [], cmd: '', hist: hist }); return; }
+    else if (cmd === 'help') {
+      res = [out('Befehle:', G), out('  whoami          wer ich bin'), out('  skills          womit ich arbeite'), out('  motto           warum ich automatisiere'), out('  ls              Dateien auf dem Schreibtisch'), out('  projekte        alle Projekte'), out('  open <name>     App öffnen, z. B. open clipper'), out('  curl /api/status  Live-Daten aus meinem Spring-Backend'), out('  clear           Terminal leeren')];
+    }
+    else if (cmd === 'whoami') { res = [out('silvan brors'), out('applikationsentwickler efz in ausbildung @ ti&m, zürich', M)]; }
+    else if (cmd === 'skills') { res = [out('backend   java, spring boot, rest, sql'), out('devops    docker, linux, git, ci/cd'), out('ai        rag, agents, claude code'), out('sonst     unity, c#, python')]; }
+    else if (cmd === 'motto') { res = [out('was ich zweimal von hand mache,', G), out('automatisiere ich beim dritten mal.', G)]; }
+    else if (cmd === 'ls') { res = [out('Projekte/    Lebenslauf.pdf    Über mich.txt    Kontakt')]; }
+    else if (cmd === 'projekte' || cmd === 'ls projekte') { res = [out('rigged-to-riches   spiel, unity, steam'), out('clipper            echtzeit-bot für livestream-clips'), out('ipa                rag-lernassistent'), out('agents             multi-agent-marketing (in arbeit)'), out('→ open <name> zum öffnen', M)]; }
+    else if (cmd.indexOf('open') === 0) {
+      const name = cmd.slice(4).trim().toLowerCase();
+      const k = apps[name];
+      if (k) { res = [out('öffne ' + name + ' …', M)]; setTimeout(() => this.open(k), 150); }
+      else { res = [out('open: ' + (name || '<name>') + ': nicht gefunden. Versuch «projekte».', R)]; }
+    }
+    else if (cmd.indexOf('curl') === 0) { res = [out('{ "wishlists": [live], "clipsHeute": [live],', G), out('  "ipaFragen": [live], "letzterBericht": "[Datum]" }', G)]; }
+    else if (cmd.indexOf('sudo') === 0) { res = [out('Netter Versuch.', R)]; }
+    else if (cmd === 'exit') { this.setState({ cmd: '', hist: hist }); this.close('terminal'); return; }
+    else { res = [out('zsh: command not found: ' + cmd.split(' ')[0], R), out('Tippe «help» für alle Befehle.', M)]; }
+    this.setState({ lines: this.state.lines.concat([echo]).concat(res).slice(-40), cmd: '', hist: hist });
+  }
+  calendar() {
+    let y = 2026, m = 1, d = 1;
+    try {
+      const p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Zurich', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()).split('-');
+      y = +p[0]; m = +p[1]; d = +p[2];
+    } catch (e) { /* Standardwerte */ }
+    const first = (new Date(Date.UTC(y, m - 1, 1)).getUTCDay() + 6) % 7;
+    const days = new Date(Date.UTC(y, m, 0)).getUTCDate();
+    const cells = [];
+    for (let i = 0; i < first; i++) cells.push({ t: '', bg: 'transparent', fg: '#1D1D1F', fw: '400' });
+    for (let i = 1; i <= days; i++) cells.push({ t: String(i), bg: i === d ? '#FF3B30' : 'transparent', fg: i === d ? '#FFFFFF' : '#1D1D1F', fw: i === d ? '700' : '400' });
+    let title = '';
+    try { title = new Date(Date.UTC(y, m - 1, 1)).toLocaleDateString('de-CH', { month: 'long', year: 'numeric', timeZone: 'UTC' }); } catch (e) { title = ''; }
+    return { cells: cells, title: title };
+  }
+  renderVals() {
+    const narrow = this.state.narrow;
+    const wins = this.state.wins;
+    const keys = Object.keys(this.defs);
+    const topK = this.topKey();
+    const W = {}, openApp = {}, run = {};
+    keys.forEach((k) => {
+      const d = this.defs[k], w = wins[k];
+      openApp[k] = () => this.open(k);
+      run[k] = w ? 'rgba(255,255,255,0.9)' : 'transparent';
+      if (!w) { W[k] = { show: false }; return; }
+      const mx = w.max && !narrow;
+      const ww = w.tw || d.w;
+      W[k] = {
+        show: !w.min,
+        pos: narrow ? 'relative' : 'absolute',
+        l: narrow ? 'auto' : (mx ? '8px' : w.x + 'px'),
+        t: narrow ? 'auto' : (mx ? '8px' : w.y + 'px'),
+        w: narrow ? '100%' : (mx ? 'calc(100% - 16px)' : ww + 'px'),
+        h: narrow ? (d.h === 'auto' ? 'auto' : '420px') : (mx ? 'calc(100% - 104px)' : (w.th || d.h)),
+        z: String(10 + w.z),
+        sh: k === topK ? '0 24px 70px rgba(0,0,0,0.55)' : '0 10px 30px rgba(0,0,0,0.35)',
+        focus: () => this.focus(k),
+        drag: (e) => {
+          if (narrow || w.max || !e) return;
+          this.drag = { k: k, sx: e.clientX, sy: e.clientY, ox: w.x, oy: w.y, w: ww };
+        },
+        close: () => this.close(k),
+        min: () => this.setWin(k, { min: true }),
+        max: () => this.setWin(k, { max: !w.max })
+      };
+    });
+
+    // Menüs
+    const act = (fn) => () => { this.setState({ menu: null }); fn(); };
+    const item = (label, fn, check, hint) => ({ label: label, run: act(fn), check: check ? '✓' : '', hint: hint || '', btn: true, sep: false });
+    const sep = () => ({ sep: true, btn: false, label: '', check: '', hint: '', run: () => {} });
+    const appName = topK ? this.defs[topK].name : 'Finder';
+    const openList = Object.keys(wins).sort((a, b) => wins[b].z - wins[a].z).map((k) => item(this.defs[k].title, () => this.open(k), k === topK, wins[k].min ? 'minimiert' : ''));
+    const defs = [
+      { id: 'logo', label: 'Silvan OS', logo: true, items: [item('Über Silvan OS', () => this.open('sysinfo')), item('Klassische Ansicht', () => this.open('classic')), sep(), item('Neu starten …', () => this.restart())] },
+      { id: 'app', label: appName, bold: true, items: [item('Über dieses Portfolio', () => this.open('welcome')), sep(), item(appName + ' ausblenden', () => { if (topK) this.setWin(topK, { min: true }); }), item(appName + ' beenden', () => this.close(topK))] },
+      { id: 'ablage', label: 'Ablage', items: [item('Neues Terminal-Fenster', () => this.open('terminal')), item('Projekte öffnen', () => this.open('finder')), sep(), item('Lebenslauf öffnen', () => this.open('cv')), item('Lebenslauf herunterladen', () => this.toast('Das PDF wird noch hinterlegt')), sep(), item('Fenster schliessen', () => this.close(topK))] },
+      { id: 'bearbeiten', label: 'Bearbeiten', items: [item('E-Mail-Adresse kopieren', () => this.copy('[deine@email.ch]', 'E-Mail-Adresse kopiert')), item('Link zu dieser Seite kopieren', () => this.copy(String(window.location.href), 'Link kopiert'))] },
+      { id: 'darstellung', label: 'Darstellung', items: this.walls.map((w) => item('Hintergrund: ' + w.label, () => this.setWall(w.id), this.state.wall === w.id)).concat([sep(), item('Vollbild', () => this.fullscreen())]) },
+      { id: 'fenster', label: 'Fenster', items: [item('Alle minimieren', () => this.minimizeAll()), item('Fenster anordnen', () => this.tile())].concat(openList.length ? [sep()].concat(openList) : []) },
+      { id: 'hilfe', label: 'Hilfe', items: [item('Terminal-Befehle', () => { this.open('terminal'); setTimeout(() => this.run('help'), 200); }), item('Über dieses Portfolio', () => this.open('welcome')), item('Kontakt', () => this.open('kontakt'))] }
+    ];
+    const menu = this.state.menu;
+    const menus = defs.map((m) => ({
+      label: m.label, isLogo: !!m.logo, notLogo: !m.logo, items: m.items,
+      open: menu === m.id, weight: m.bold ? '700' : '400', bg: menu === m.id ? 'rgba(0,0,0,0.12)' : 'transparent',
+      toggle: () => this.setState({ menu: this.state.menu === m.id ? null : m.id }),
+      enter: () => { if (this.state.menu && this.state.menu !== m.id && ['wifi', 'batt', 'clock'].indexOf(this.state.menu) < 0) this.setState({ menu: m.id }); }
+    }));
+    const pt = (id) => () => this.setState({ menu: this.state.menu === id ? null : id });
+    const cal = this.calendar();
+
+    const qa = [
+      { label: 'Was heisst IPERKA?', answer: 'Informieren, Planen, Entscheiden, Realisieren, Kontrollieren, Auswerten. Die sechs Schritte, nach denen die IPA aufgebaut ist.', source: 'notizen/iperka.md' },
+      { label: 'Image oder Container?', answer: 'Ein Image ist die unveränderliche Vorlage, ein Container eine laufende Instanz davon.', source: 'notizen/docker.md' },
+      { label: 'Merge oder Rebase?', answer: 'Merge behält die Historie mit einem Merge-Commit, Rebase setzt die Commits neu oben drauf.', source: 'notizen/git.md' }
+    ];
+    const cur = this.state.q;
+    return {
+      accent: this.props.accent ?? '#FFE08A',
+      clock: this.state.clock,
+      wallClass: 'wall-' + this.state.wall,
+      W: W, openApp: openApp, run: run,
+      menus: menus,
+      anyMenu: !!menu,
+      closeMenus: () => this.setState({ menu: null }),
+      menuKey: (e) => { if (e && e.key === 'Escape') this.setState({ menu: null }); },
+      pop: { wifi: menu === 'wifi', batt: menu === 'batt', clock: menu === 'clock', wifiT: pt('wifi'), battT: pt('batt'), clockT: pt('clock'),
+             wifiBg: menu === 'wifi' ? 'rgba(0,0,0,0.12)' : 'transparent', battBg: menu === 'batt' ? 'rgba(0,0,0,0.12)' : 'transparent', clockBg: menu === 'clock' ? 'rgba(0,0,0,0.12)' : 'transparent' },
+      backendText: this.state.backend === 'checking' ? 'Prüfe Verbindung …' : 'Demo-Modus: zeige Beispieldaten',
+      backendDot: this.state.backend === 'checking' ? '#FEBC2E' : '#8E8E93',
+      checkBackend: () => this.checkBackend(),
+      calTitle: cal.title, calCells: cal.cells,
+      toastOn: !!this.state.toast, toastText: this.state.toast || '',
+      booting: this.state.booting,
+      stop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
+      rootH: narrow ? 'auto' : '100vh',
+      deskOverflow: narrow ? 'visible' : 'hidden',
+      deskDisplay: narrow ? 'flex' : 'block',
+      deskPad: narrow ? '16px 12px 24px' : '0',
+      iconPos: narrow ? 'relative' : 'absolute',
+      iconDir: narrow ? 'row' : 'column',
+      dockPos: narrow ? 'relative' : 'absolute',
+      dockLeft: narrow ? 'auto' : '50%',
+      dockTf: narrow ? 'none' : 'translateX(-50%)',
+      dockOverflow: narrow ? 'auto' : 'visible',
+      notif: this.state.notif,
+      notifOpen: () => this.open('clipper'),
+      notifClose: () => this.setState({ notif: false }),
+      lines: this.state.lines,
+      cmd: this.state.cmd,
+      onCmd: (e) => this.setState({ cmd: e && e.target ? e.target.value : '' }),
+      onKey: (e) => {
+        if (!e) return;
+        if (e.key === 'Enter') { this.run(this.state.cmd); }
+        else if (e.key === 'ArrowUp') {
+          const h = this.state.hist; if (!h.length) return;
+          this.histIdx = Math.max(0, (this.histIdx ?? h.length) - 1);
+          this.setState({ cmd: h[this.histIdx] });
+          if (e.preventDefault) e.preventDefault();
+        }
+      },
+      inputRef: (el) => { this.inputEl = el; },
+      focusInput: () => { if (this.inputEl) this.inputEl.focus(); },
+      hasQuestion: cur >= 0,
+      question: cur >= 0 ? qa[cur].label : '',
+      answer: cur >= 0 ? qa[cur].answer : '',
+      source: cur >= 0 ? qa[cur].source : '',
+      questions: qa.map((x, i) => ({ label: x.label, ask: () => this.setState({ q: i }) }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>
