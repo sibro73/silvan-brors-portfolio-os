@@ -20,6 +20,6 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.ts'],
     css: false,
     // Tests schicken nie echte Requests: ohne Backend-URL gilt überall der Fallback.
-    env: { VITE_API_URL: '', VITE_IPA_LIVE: '' },
+    env: { VITE_API_URL: '', VITE_IPA_LIVE: '', VITE_IPA_AGENT: '', VITE_IPA_URL: '' },
   },
 });

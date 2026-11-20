@@ -2,7 +2,7 @@ import './IpaAssistent.css';
 
 import { type FormEvent, useId, useRef, useState } from 'react';
 
-import { askIpa, IPA_LIVE, type IpaResult, type IpaSource } from '../../api/ipa';
+import { askIpa, IPA_AGENT, IPA_LIVE, type IpaResult, type IpaSource } from '../../api/ipa';
 import { ipa } from '../../data';
 import type { AppProps } from '../../os/appTypes';
 
@@ -15,12 +15,16 @@ type Entry =
 interface IpaAssistentProps extends Partial<AppProps> {
   /** Für Tests austauschbar. */
   ask?: (question: string) => Promise<IpaResult>;
-  /** Eingabefeld für echte Fragen zeigen (nur lokal). */
+  /** Eingabefeld für echte Fragen an ipa-assistant zeigen (nur lokal). */
   live?: boolean;
+  /** Eingabefeld mit dem Übergangs-Assistenten (Live-Seite, ohne Silvans Notizen). */
+  agent?: boolean;
 }
 
-function Sources({ sources }: { sources: IpaSource[] }) {
-  if (sources.length === 0) return null;
+function Sources({ sources, note }: { sources: IpaSource[]; note?: string }) {
+  if (sources.length === 0) {
+    return note ? <span className="ipa__source mono">{note}</span> : null;
+  }
   return (
     <span className="ipa__source mono">
       Quelle{sources.length > 1 ? 'n' : ''}:{' '}
@@ -29,7 +33,12 @@ function Sources({ sources }: { sources: IpaSource[] }) {
   );
 }
 
-export function IpaAssistent({ ask = askIpa, live = IPA_LIVE }: IpaAssistentProps) {
+export function IpaAssistent({
+  ask = askIpa,
+  live: liveProp = IPA_LIVE,
+  agent = IPA_AGENT,
+}: IpaAssistentProps) {
+  const live = liveProp || agent;
   const [entries, setEntries] = useState<Entry[]>([]);
   const [draft, setDraft] = useState('');
   const nextId = useRef(1);
@@ -59,7 +68,7 @@ export function IpaAssistent({ ask = askIpa, live = IPA_LIVE }: IpaAssistentProp
   return (
     <div className="ipa">
       <div className="ipa__chat" aria-live="polite">
-        <div className="ipa__bubble">{ipa.greeting}</div>
+        <div className="ipa__bubble">{agent ? ipa.agentGreeting : ipa.greeting}</div>
         {entries.map((entry) => {
           if (entry.kind === 'example') {
             const qa = ipa.examples[entry.index];
@@ -84,7 +93,7 @@ export function IpaAssistent({ ask = askIpa, live = IPA_LIVE }: IpaAssistentProp
               ) : result.ok ? (
                 <div className="ipa__bubble ipa__bubble--answer ln">
                   {result.answer}
-                  <Sources sources={result.sources} />
+                  <Sources sources={result.sources} note={result.note} />
                 </div>
               ) : (
                 <div className="ipa__bubble ipa__bubble--error ln" role="status">
@@ -134,7 +143,7 @@ export function IpaAssistent({ ask = askIpa, live = IPA_LIVE }: IpaAssistentProp
         </form>
       )}
       <p className="ipa__footer mono">
-        {ipa.footer}
+        {agent ? ipa.agentFooter : ipa.footer}
         {!live && ` · ${ipa.exampleNote}`}
       </p>
     </div>

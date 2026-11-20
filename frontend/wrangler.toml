@@ -1,0 +1,9 @@
+# Cloudflare Pages: Projekt silvan-os (docs/deploy.md).
+# Gilt für `wrangler pages deploy` aus dem Ordner frontend/. Die Pages Functions liegen in functions/.
+name = "silvan-os"
+pages_build_output_dir = "./dist"
+compatibility_date = "2025-06-01"
+
+# Workers AI für den IPA-Übergangs-Assistenten (server/ipaAgent.ts)
+[ai]
+binding = "AI"
