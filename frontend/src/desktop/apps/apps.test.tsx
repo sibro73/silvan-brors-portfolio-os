@@ -71,16 +71,22 @@ describe('apps', () => {
     expect(screen.getByText('[KW]')).toBeInTheDocument();
   });
 
-  it('Mail keeps the e-mail placeholder', () => {
+  it('Mail sends to the real address', () => {
     render(<Mail />);
     expect(screen.getByRole('link', { name: 'Senden' })).toHaveAttribute(
       'href',
-      'mailto:[deine@email.ch]?subject=Hallo%20Silvan',
+      'mailto:silvan.brors@icloud.com?subject=Hallo%20Silvan',
     );
   });
 
-  it('Lebenslauf shows the embed placeholder', () => {
+  it('Lebenslauf shows the preview and downloads the PDF', () => {
     render(<Lebenslauf />);
-    expect(screen.getByText('[Lebenslauf als PDF einbetten]')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /Vorschau des Lebenslaufs/ })).toHaveAttribute(
+      'src',
+      '/media/lebenslauf.webp',
+    );
+    const link = screen.getByRole('link', { name: 'PDF herunterladen' });
+    expect(link).toHaveAttribute('href', '/media/lebenslauf.pdf');
+    expect(link).toHaveAttribute('download');
   });
 });

@@ -29,7 +29,14 @@ export interface Profile {
   skills: { area: string; items: string }[];
   motto: string[];
   contact: { email: string; subject: string; text: string; links: Link[] };
-  cv: { role: string; placeholder: string; downloadLabel: string; downloadHref: string };
+  cv: {
+    role: string;
+    /** Bild der ersten Seite (aus docs/cv/lebenslauf.html), als Vorschau im Fenster. */
+    preview: string;
+    previewAlt: string;
+    downloadLabel: string;
+    downloadHref: string;
+  };
   welcome: { title: string; subtitle: string; hint: string };
 }
 

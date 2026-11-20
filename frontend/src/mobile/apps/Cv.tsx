@@ -19,17 +19,19 @@ export function Cv({ toast }: MobileAppProps) {
           <span style={{ fontSize: 22, fontWeight: 700 }}>{profile.name}</span>
           <span style={{ fontSize: 14, color: '#6E6E73' }}>{profile.cv.role}</span>
         </div>
-        <div
-          className="m-placeholder"
+        <img
+          src={profile.cv.preview}
+          alt={profile.cv.previewAlt}
           style={{
-            aspectRatio: '1 / 1.2',
+            display: 'block',
+            width: '100%',
+            aspectRatio: '1 / 1.414',
+            objectFit: 'contain',
             borderRadius: 10,
-            border: '1px dashed #C7C7CC',
-            color: '#6E6E73',
+            border: '1px solid #E5E5EA',
+            background: '#FFFFFF',
           }}
-        >
-          {profile.cv.placeholder}
-        </div>
+        />
       </div>
       {hasPdf ? (
         <a
