@@ -1,0 +1,257 @@
+<!doctype html>
+<!--
+  Vorlage für frontend/public/media/lebenslauf.pdf (A4).
+  Platzhalter in [eckigen Klammern] ersetzen, nichts erfinden.
+  PDF erzeugen: siehe docs/cv/README.md
+-->
+<html lang="de-CH">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lebenslauf Silvan Brors</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 13mm 15mm 12mm;
+      }
+      :root {
+        --ink: #1d1d1f;
+        --muted: #5b5b66;
+        --line: #e3e3ea;
+        --accent: #5b3cc4;
+        --ph: #b42318;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        font-size: 9.6pt;
+        line-height: 1.4;
+        color: var(--ink);
+        background: #fff;
+      }
+      body {
+        margin: 0;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 8pt;
+        margin-bottom: 12pt;
+      }
+      h1 {
+        font-size: 24pt;
+        line-height: 1.1;
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+      .role {
+        color: var(--muted);
+        font-size: 11pt;
+        margin-top: 3pt;
+      }
+      .contact {
+        text-align: right;
+        font-size: 9pt;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .contact a {
+        color: inherit;
+        text-decoration: none;
+      }
+      h2 {
+        font-size: 9pt;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent);
+        margin: 11pt 0 5pt;
+      }
+      p {
+        margin: 0 0 6pt;
+      }
+      .entry {
+        display: grid;
+        grid-template-columns: 30mm 1fr;
+        gap: 0 10pt;
+        margin-bottom: 5pt;
+        break-inside: avoid;
+      }
+      .when {
+        color: var(--muted);
+        font-size: 9pt;
+        padding-top: 1pt;
+      }
+      .what strong {
+        font-weight: 600;
+      }
+      .what .sub {
+        color: var(--muted);
+      }
+      .what p {
+        margin: 2pt 0 0;
+      }
+      .tech {
+        font-size: 8.5pt;
+        color: var(--muted);
+        margin-top: 1pt;
+      }
+      .skills {
+        display: grid;
+        grid-template-columns: 30mm 1fr 18mm 1fr;
+        gap: 3pt 10pt;
+      }
+      .skills dt {
+        color: var(--muted);
+        font-size: 9pt;
+      }
+      .skills dd {
+        margin: 0;
+      }
+      .ph {
+        color: var(--ph);
+      }
+      .motto {
+        margin-top: 10pt;
+        font-style: italic;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Silvan Brors</h1>
+        <div class="role">Applikationsentwickler EFZ in Ausbildung · ti&amp;m · Zürich</div>
+      </div>
+      <div class="contact">
+        <div class="ph">[E-Mail]</div>
+        <div class="ph">[Telefon]</div>
+        <div><a href="https://silvanbrors.ch">silvanbrors.ch</a></div>
+        <div><a href="https://github.com/sibro73">github.com/sibro73</a></div>
+        <div>
+          <a href="https://www.linkedin.com/in/silvan-brors-b91b62287/"
+            >linkedin.com/in/silvan-brors-b91b62287</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <h2>Profil</h2>
+    <p>
+      Ich arbeite mit Java und Spring, am liebsten im Backend. Dazu Docker, SQL, Linux und AI. Was
+      ich zweimal von Hand mache, automatisiere ich beim dritten Mal. Neben der Lehre baue ich
+      eigene Projekte: ein Koop-Spiel für Steam, Bots und KI-Assistenten.
+    </p>
+
+    <h2>Ausbildung</h2>
+    <div class="entry">
+      <div class="when ph">[Beginn] – [Ende]</div>
+      <div class="what">
+        <strong>Lehre Applikationsentwickler EFZ</strong> <span class="sub">· ti&amp;m, Zürich</span>
+        <p>4-jährige Lehre, aktuell im <span class="ph">[x.]</span> Lehrjahr.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when ph">[Beginn] – [Ende]</div>
+      <div class="what">
+        <strong class="ph">[Berufsmaturität, Schule]</strong>
+        <p class="ph">[bitte prüfen: Die Wetterstation war ein Gruppenprojekt für die BMA]</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when ph">[Jahre]</div>
+      <div class="what"><strong class="ph">[Schule vor der Lehre, Ort]</strong></div>
+    </div>
+
+    <h2>Projekte</h2>
+    <div class="entry">
+      <div class="when">Release 2027</div>
+      <div class="what">
+        <strong>Rigged to Riches</strong> <span class="sub">· eigenes Spiel</span>
+        <p>
+          First-Person-Heist in der Casino-Stadt Las Agné, solo oder im Online-Koop mit bis zu 4
+          Leuten. Release auf Steam nach dem Steam Next Fest im Februar 2027.
+        </p>
+        <div class="tech">Unity · C#</div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2026</div>
+      <div class="what">
+        <strong>Silvan OS</strong> <span class="sub">· Portfolio, silvanbrors.ch</span>
+        <p>
+          Portfolio als Desktop im Browser: Fenster, Dock und Terminal selbst gebaut, Live-Zahlen
+          aus einem eigenen Backend, KI-Assistent auf Cloudflare.
+        </p>
+        <div class="tech">
+          React · TypeScript · Spring Boot 4 · Java 21 · Postgres · Docker · GitHub Actions ·
+          Cloudflare
+        </div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2026</div>
+      <div class="what">
+        <strong>IPA-Lernassistent</strong> <span class="sub">· RAG über meine Lernnotizen</span>
+        <p>Beantwortet Fragen aus meinen IPA-Lernunterlagen, mit Quellenangabe.</p>
+        <div class="tech">Spring Boot · Spring AI · Ollama (llama3.1:8b) · pgvector</div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2026</div>
+      <div class="what">
+        <strong>Clipper</strong> <span class="sub">· Echtzeit-Bot für Livestreams</span>
+        <p>
+          Schaut Livestreams mit, erkennt Highlights und schickt einen fertigen Hochformat-Clip
+          mit Untertiteln aufs Handy.
+        </p>
+        <div class="tech">Python · FFmpeg · Whisper · Telegram Bot API</div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">in Arbeit</div>
+      <div class="what">
+        <strong>Marketing-Agents</strong> <span class="sub">· Multi-Agent-System</span>
+        <p>Agents, die den Release von Rigged to Riches begleiten und wöchentlich berichten.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when ph">[Jahr]</div>
+      <div class="what">
+        <strong>Wetterstation</strong> <span class="sub">· Gruppenprojekt für die BMA</span>
+        <p>Von den Sensoren bis ins Dashboard.</p>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when ph">[Jahr]</div>
+      <div class="what">
+        <strong>Shop-Outreach</strong>
+        <p>
+          Python-Tool, das mit Google Places und PageSpeed lokale Shops findet, deren Website ein
+          Update braucht.
+        </p>
+      </div>
+    </div>
+
+    <h2>Kenntnisse</h2>
+    <dl class="skills">
+      <dt>Backend</dt>
+      <dd>Java, Spring Boot, REST, SQL</dd>
+      <dt>DevOps</dt>
+      <dd>Docker, Linux, Git, CI/CD</dd>
+      <dt>AI</dt>
+      <dd>RAG, Agents, Claude Code</dd>
+      <dt>Weitere</dt>
+      <dd>Unity, C#, Python, React, TypeScript</dd>
+      <dt>Sprachen</dt>
+      <dd class="ph">[Deutsch, Englisch …, mit Niveau]</dd>
+      <dt>Interessen</dt>
+      <dd class="ph">[optional]</dd>
+    </dl>
+
+    <p class="motto">«Was ich zweimal von Hand mache, automatisiere ich beim dritten Mal.»</p>
+  </body>
+</html>

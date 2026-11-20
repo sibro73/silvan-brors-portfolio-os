@@ -74,8 +74,7 @@ und schützt es davor.
 Auf der Live-Seite beantwortet stattdessen eine Pages Function unter
 `https://silvanbrors.ch/api/ipa/ask` die Fragen im selben Format, als RAG über die Notizen in
 Cloudflare Vectorize (`frontend/server/ipaAgent.ts`, siehe `docs/deploy.md` → 6).
-Der Endpunkt antwortet dort mit `503`, und das Frontend zeigt gar kein Eingabefeld, nur die
-Beispielantworten. Lokal ausprobieren:
+Das Backend selbst antwortet in Produktion mit `503`. Lokal ausprobieren:
 
 1. `ipa-assistant` starten: `.\mvnw spring-boot:run "-Dspring-boot.run.arguments=--server.port=8081"`
    (Port 8080 gehört dem Portfolio-Backend).
