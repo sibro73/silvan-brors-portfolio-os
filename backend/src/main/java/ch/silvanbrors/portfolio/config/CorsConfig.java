@@ -18,10 +18,20 @@ public class CorsConfig implements WebMvcConfigurer {
 
   @Override
   public void addCorsMappings(CorsRegistry registry) {
+    String[] origins = properties.allowedOrigins().toArray(String[]::new);
+    // The IPA chat is the only POST the browser may send (rate-limited). Registered first,
+    // because the first matching pattern wins.
+    registry
+        .addMapping("/api/ipa/**")
+        .allowedOrigins(origins)
+        .allowedMethods("POST")
+        .allowedHeaders("Content-Type")
+        .allowCredentials(false)
+        .maxAge(3600);
+    // Everything else: read only. The write endpoints (Clipper, agents) are not for browsers.
     registry
         .addMapping("/api/**")
-        .allowedOrigins(properties.allowedOrigins().toArray(String[]::new))
-        // POST endpoints follow in later phases and get their own rules (API key, rate limit).
+        .allowedOrigins(origins)
         .allowedMethods("GET")
         .allowCredentials(false)
         .maxAge(3600);
