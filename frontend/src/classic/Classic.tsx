@@ -82,7 +82,9 @@ export function Classic() {
                 </div>
               ))}
             </dl>
-            <p className="classic__muted">{ipa.footer}</p>
+            <p className="classic__muted">
+              {ipa.footer} · {ipa.exampleNote}
+            </p>
           </article>
 
           <article>

@@ -66,6 +66,8 @@ export interface AgentsReport {
 export interface IpaData {
   greeting: string;
   footer: string;
+  /** Hinweis in der Fusszeile, wenn der Chat nur Beispiele zeigt. */
+  exampleNote: string;
   inputLabel: string;
   placeholder: string;
   thinking: string;

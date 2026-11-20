@@ -1,5 +1,11 @@
 import { API_URL } from './http';
 
+/**
+ * Eingabefeld für echte Fragen nur lokal: ipa-assistant ist nicht öffentlich.
+ * Auf der Live-Seite zeigt der Chat die Beispielantworten aus `data/ipa.json`.
+ */
+export const IPA_LIVE = import.meta.env.VITE_IPA_LIVE === 'true';
+
 /** Das lokale LLM ist langsam; das Backend bricht selbst nach 30 s ab. */
 export const IPA_TIMEOUT_MS = 40_000;
 
@@ -12,7 +18,7 @@ export type IpaResult =
   { ok: true; answer: string; sources: IpaSource[] } | { ok: false; message: string };
 
 export const IPA_MESSAGES = {
-  offline: 'Der Assistent ist gerade offline. Die Beispielfragen funktionieren trotzdem.',
+  offline: 'Der Assistent ist nicht erreichbar. Die Beispielfragen funktionieren trotzdem.',
   unreachable: 'Der Assistent ist gerade nicht erreichbar.',
   timeout: 'Der Assistent hat zu lange gebraucht. Versuch es nochmals.',
 } as const;

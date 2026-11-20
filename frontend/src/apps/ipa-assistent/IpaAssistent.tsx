@@ -2,7 +2,7 @@ import './IpaAssistent.css';
 
 import { type FormEvent, useId, useRef, useState } from 'react';
 
-import { askIpa, type IpaResult, type IpaSource } from '../../api/ipa';
+import { askIpa, IPA_LIVE, type IpaResult, type IpaSource } from '../../api/ipa';
 import { ipa } from '../../data';
 import type { AppProps } from '../../os/appTypes';
 
@@ -15,6 +15,8 @@ type Entry =
 interface IpaAssistentProps extends Partial<AppProps> {
   /** Für Tests austauschbar. */
   ask?: (question: string) => Promise<IpaResult>;
+  /** Eingabefeld für echte Fragen zeigen (nur lokal). */
+  live?: boolean;
 }
 
 function Sources({ sources }: { sources: IpaSource[] }) {
@@ -27,7 +29,7 @@ function Sources({ sources }: { sources: IpaSource[] }) {
   );
 }
 
-export function IpaAssistent({ ask = askIpa }: IpaAssistentProps) {
+export function IpaAssistent({ ask = askIpa, live = IPA_LIVE }: IpaAssistentProps) {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [draft, setDraft] = useState('');
   const nextId = useRef(1);
@@ -106,30 +108,35 @@ export function IpaAssistent({ ask = askIpa }: IpaAssistentProps) {
           </button>
         ))}
       </div>
-      <form className="ipa__form" onSubmit={submit}>
-        <label htmlFor={inputId} className="visually-hidden">
-          {ipa.inputLabel}
-        </label>
-        <input
-          id={inputId}
-          className="ipa__input"
-          type="text"
-          value={draft}
-          maxLength={MAX_LENGTH}
-          placeholder={ipa.placeholder}
-          autoComplete="off"
-          onChange={(e) => setDraft(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="ipa__send"
-          disabled={pending || question.length < 3}
-          aria-busy={pending}
-        >
-          Fragen
-        </button>
-      </form>
-      <p className="ipa__footer mono">{ipa.footer}</p>
+      {live && (
+        <form className="ipa__form" onSubmit={submit}>
+          <label htmlFor={inputId} className="visually-hidden">
+            {ipa.inputLabel}
+          </label>
+          <input
+            id={inputId}
+            className="ipa__input"
+            type="text"
+            value={draft}
+            maxLength={MAX_LENGTH}
+            placeholder={ipa.placeholder}
+            autoComplete="off"
+            onChange={(e) => setDraft(e.target.value)}
+          />
+          <button
+            type="submit"
+            className="ipa__send"
+            disabled={pending || question.length < 3}
+            aria-busy={pending}
+          >
+            Fragen
+          </button>
+        </form>
+      )}
+      <p className="ipa__footer mono">
+        {ipa.footer}
+        {!live && ` · ${ipa.exampleNote}`}
+      </p>
     </div>
   );
 }

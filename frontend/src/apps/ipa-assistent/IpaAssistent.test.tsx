@@ -18,7 +18,7 @@ describe('IpaAssistent live chat', () => {
   it('asks the backend and shows answer and sources', async () => {
     const pending = deferred();
     const ask = vi.fn(() => pending.promise);
-    render(<IpaAssistent ask={ask} />);
+    render(<IpaAssistent ask={ask} live />);
 
     await userEvent.type(input(), '  Was ist Docker?  ');
     await userEvent.click(send());
@@ -49,7 +49,7 @@ describe('IpaAssistent live chat', () => {
     const ask = vi.fn(() =>
       Promise.resolve<IpaResult>({ ok: false, message: 'Der Assistent ist gerade offline.' }),
     );
-    render(<IpaAssistent ask={ask} />);
+    render(<IpaAssistent ask={ask} live />);
 
     await userEvent.type(input(), 'Was ist Git?{Enter}');
 
@@ -60,7 +60,7 @@ describe('IpaAssistent live chat', () => {
 
   it('does not send questions shorter than 3 characters', async () => {
     const ask = vi.fn();
-    render(<IpaAssistent ask={ask} />);
+    render(<IpaAssistent ask={ask} live />);
 
     expect(send()).toBeDisabled();
     await userEvent.type(input(), 'ok{Enter}');
@@ -69,14 +69,22 @@ describe('IpaAssistent live chat', () => {
     expect(input()).toHaveAttribute('maxlength', '300');
   });
 
-  it('is offline without backend and keeps the examples working', async () => {
+  it('live without backend: says so, examples keep working', async () => {
     // In Tests ist VITE_API_URL leer: askIpa schickt nichts weg
-    render(<IpaAssistent />);
+    render(<IpaAssistent live />);
 
     await userEvent.type(input(), 'Was ist SQL?{Enter}');
-    expect(await screen.findByRole('status')).toHaveTextContent(/offline/);
+    expect(await screen.findByRole('status')).toHaveTextContent(/nicht erreichbar/);
 
     await userEvent.click(screen.getByRole('button', { name: 'Merge oder Rebase?' }));
     expect(screen.getByText(/Rebase setzt die Commits/)).toBeInTheDocument();
+  });
+
+  it('on the live site: examples only, no input, honest note', () => {
+    render(<IpaAssistent />);
+
+    expect(screen.queryByRole('textbox')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Fragen' })).toBeNull();
+    expect(screen.getByText(/Läuft nur lokal · hier Beispielantworten/)).toBeInTheDocument();
   });
 });
