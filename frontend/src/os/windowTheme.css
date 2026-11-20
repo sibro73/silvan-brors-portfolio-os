@@ -12,6 +12,8 @@
   --surface-3: #e2e2e7;
   --line: #e5e5ea;
   --hover: #e8f1fd;
+  /* Text-Links und Umriss-Buttons: mind. 4.5:1 auf --surface und --surface-2 */
+  --link-strong: #1c55c0;
 }
 .os[data-dark-windows='true'] .win--themable {
   --surface: #1f1f22;
@@ -23,6 +25,7 @@
   --ink-soft: #d0d0d5;
   --muted: #a1a1a6;
   --muted-2: #8e8e93;
+  --link-strong: #79aaff;
   background: var(--surface);
 }
 
