@@ -13,6 +13,12 @@ Cloudflare Pages sind hier also nicht mit gemessen.
 | vorher | Desktop | 100 (98 / 100 / 100) | 97 | 100 | 100 | 0.5 s | 0.6 s | 0 ms |
 | nachher | Mobil | 86 (94 / 85 / 86) | 100 | 100 | 100 | 2.5 s | 2.7 s | 283 ms |
 | nachher | Desktop | 100 (100 / 100 / 100) | 100 | 100 | 100 | 0.5 s | 0.6 s | 32 ms |
+| Handy-Ansicht | Mobil | **95** (95 / 95 / 95) | 100 | 100 | 100 | 2.3 s | 2.4 s | 0 ms |
+| Handy-Ansicht | Desktop | 100 (100 / 100 / 100) | 100 | 100 | 100 | 0.6 s | 0.6 s | 0 ms |
+
+«Handy-Ansicht» = Stand nach PR #14–#16: eigene Handy-Ansicht unter 860 px, Desktop und Handy
+per `React.lazy` getrennt geladen. Lighthouse misst mobil mit 412 px Breite, also die
+Handy-Ansicht (grösstes Element: das Profil-Widget), am Desktop die Computer-Ansicht.
 
 ## Was geändert wurde
 
@@ -30,9 +36,13 @@ Blocking Time, die von der CPU-Last des Messrechners abhängt. FCP und LCP sind 
 nachher praktisch gleich. Die kleineren Schriften bringen in diesem Rauschen **keine messbare**
 Verbesserung. Der Median «92 → 86» ist darum kein echter Rückschritt, aber auch kein Gewinn.
 
+**Mit der Handy-Ansicht:** mobil 95 statt 86, die Total Blocking Time fällt von 283 ms auf 0 ms.
+Das Handy lädt nur noch seinen eigenen Code (32 kB) statt den ganzen Desktop. Ungenutztes
+JavaScript beim Start: rund 31 kB statt 43 kB.
+
 Was mobil noch helfen würde, aber nicht umgesetzt ist:
-- **Apps erst bei Bedarf laden** (`React.lazy`): Lighthouse meldet rund 43 kB ungenutztes JavaScript
-  beim Start.
+- **Apps erst bei Bedarf laden:** Innerhalb der Handy-Ansicht liegen alle zwölf Apps im selben
+  Chunk.
 - Die Seite rendert erst nach dem JavaScript. Ein statischer erster Bildschirm in `index.html`
   würde FCP verkürzen.
 

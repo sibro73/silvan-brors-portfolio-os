@@ -24,8 +24,8 @@ export const OS_STACK: { area: string; items: string }[] = [
   { area: 'Betrieb', items: 'Docker, GitHub Actions' },
 ];
 
-/** Hosting bleibt Platzhalter, bis es feststeht. */
-export const OS_HOSTING = '[Hosting]';
+/** Wo die Seite läuft (silvanbrors.ch, siehe docs/deploy.md). */
+export const OS_HOSTING = 'Cloudflare Pages';
 
 /** Beispielfragen der Terminal-Chips am Handy. */
 export const TERMINAL_CHIPS = ['help', 'whoami', 'skills', 'projekte', 'motto', 'open rtr'];
