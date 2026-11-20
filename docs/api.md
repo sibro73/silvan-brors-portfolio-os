@@ -6,7 +6,7 @@ Basis-URL: `https://api.silvanbrors.ch` (lokal `http://localhost:8080`). Alle An
 |---|---|---|---|
 | GET | `/api/status` | Frontend, Terminal | öffentlich |
 | GET | `/api/agents/report` | Frontend | öffentlich |
-| POST | `/api/ipa/ask` | Frontend (IPA-Chat) | öffentlich, Rate-Limit pro IP |
+| POST | `/api/ipa/ask` | Frontend (IPA-Chat, nur lokal) | Rate-Limit pro IP |
 | POST | `/api/clipper/events` | Clipper | `X-Api-Key: $CLIPPER_API_KEY` |
 | POST | `/api/agents/report` | Marketing-Agents | `X-Api-Key: $AGENTS_API_KEY` |
 
@@ -69,6 +69,16 @@ keinen, antwortet der Endpunkt mit `404`, und die Seite zeigt den gespeicherten 
 Der Chat im Fenster «IPA-Assistent». Das Portfolio-Backend beantwortet die Frage nicht selbst.
 Es leitet sie an das separate Projekt `ipa-assistant` weiter (`GET {IPA_ASSISTANT_URL}/chat?frage=…`)
 und schützt es davor.
+
+**Nur lokal:** `ipa-assistant` ist nicht öffentlich. In Produktion ist `IPA_ASSISTANT_URL` leer.
+Der Endpunkt antwortet dort mit `503`, und das Frontend zeigt gar kein Eingabefeld, nur die
+Beispielantworten. Lokal ausprobieren:
+
+1. `ipa-assistant` starten: `.\mvnw spring-boot:run "-Dspring-boot.run.arguments=--server.port=8081"`
+   (Port 8080 gehört dem Portfolio-Backend).
+2. Portfolio-Backend mit `IPA_ASSISTANT_URL=http://localhost:8081` starten, in `docker compose`
+   mit `http://host.docker.internal:8081` (in `.env`).
+3. In `frontend/.env.local` `VITE_IPA_LIVE=true` setzen und `npm run dev` starten.
 
 ```json
 { "frage": "Was heisst IPERKA?" }

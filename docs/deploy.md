@@ -104,45 +104,13 @@ gh variable set DEPLOY_ENABLED --body true
 Danach den ersten Deploy von Hand starten: *Actions* → `frontend` bzw. `backend` →
 *Run workflow* auf `main`. Ab dann geht es bei jedem Merge automatisch.
 
-### 6. IPA-Assistent (optional, später)
+### 6. IPA-Assistent: bleibt lokal
 
-Der Chat im Fenster «IPA-Assistent» fragt das separate Projekt `ipa-assistant`
-(Ollama `llama3.1:8b` + pgvector). Das Modell ist zu gross für das Gratis-Backend bei Fly.
-Deshalb läuft `ipa-assistant` auf deinem PC und ist nur erreichbar, solange der PC läuft.
-Sonst zeigt der Chat «Der Assistent ist gerade offline» und die Beispielantworten.
+`ipa-assistant` darf nicht öffentlich sein. Auf der Live-Seite bleibt `IPA_ASSISTANT_URL`
+deshalb **leer**, und `VITE_IPA_LIVE` wird beim Frontend-Build nicht gesetzt. Der Chat zeigt
+dort nur die Beispielantworten, mit dem Hinweis «Läuft nur lokal». Hier ist nichts zu tun.
 
-Solange `IPA_ASSISTANT_URL` nicht gesetzt ist, ist der Chat einfach offline. Dafür musst du nichts tun.
-
-> **Wichtig:** `ipa-assistant` hat kein Login. Ein offener Tunnel liesse jeden direkt an
-> `/chat` und sogar `POST /ingestion` heran, am Rate-Limit vorbei. Den Tunnel deshalb
-> **immer mit Cloudflare Access schützen** (Service-Token), damit nur das Portfolio-Backend durchkommt.
->
-> Kläre vorher mit ti&m, ob das Lernprojekt öffentlich erreichbar sein darf.
-
-Grober Ablauf. Die Menüs heissen in Cloudflare manchmal anders, im Zweifel gilt die Cloudflare-Doku zu *Tunnel* und *Access*:
-
-1. `ipa-assistant` auf einem freien Port starten, z. B. `.\mvnw spring-boot:run "-Dspring-boot.run.arguments=--server.port=8081"`.
-2. `cloudflared` installieren und einen Tunnel anlegen:
-   ```bash
-   cloudflared tunnel login
-   cloudflared tunnel create ipa
-   cloudflared tunnel route dns ipa ipa.silvanbrors.ch
-   cloudflared tunnel run --url http://localhost:8081 ipa
-   ```
-3. Cloudflare Zero Trust → *Access* → Service-Token `portfolio-backend` erstellen.
-   Client-ID und Secret notieren.
-4. *Access* → *Applications* → *Self-hosted* für `ipa.silvanbrors.ch`, Policy mit
-   Aktion **Service Auth**, die nur dieses Service-Token zulässt.
-5. Backend verbinden:
-   ```bash
-   fly secrets set IPA_ASSISTANT_URL=https://ipa.silvanbrors.ch \
-     IPA_ACCESS_CLIENT_ID='<client-id>' IPA_ACCESS_CLIENT_SECRET='<secret>'
-   ```
-6. Prüfen: `curl https://ipa.silvanbrors.ch/chat?frage=test` **ohne** Token muss abgelehnt
-   werden. Über die Seite muss der Chat antworten.
-
-Das Rate-Limit (5 pro Minute und 30 pro Tag pro IP, 200 pro Tag insgesamt) schützt deinen PC.
-Die IP liest das Backend aus `Fly-Client-IP` (`TRUST_FLY_CLIENT_IP=true` in `backend/fly.toml`).
+Wie man den Chat lokal gegen `ipa-assistant` laufen lässt, steht in `docs/api.md`.
 
 ## Prüfen
 

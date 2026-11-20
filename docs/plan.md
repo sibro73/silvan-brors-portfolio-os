@@ -37,8 +37,8 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 - [x] Agents: Wochenbericht speichern und über `/api/agents/report` ausliefern
 
 ## Phase 5 – IPA-Demo live (`feat/ipa-ask`)
-- [ ] `POST /api/ipa/ask` an das RAG anbinden
-  (Anbindung an `ipa-assistant` fertig. Offen: `ipa-assistant` öffentlich erreichbar machen, siehe `docs/deploy.md`)
+- [x] `POST /api/ipa/ask` an das RAG anbinden
+  (an `ipa-assistant`, **nur lokal**: das Projekt darf nicht öffentlich sein, die Live-Seite zeigt Beispielantworten)
 - [x] Rate-Limit, Längenlimit, Timeout, Fehlermeldung im Chat
 - [x] Quellen (welche Notiz) in der Antwort mitliefern
 
