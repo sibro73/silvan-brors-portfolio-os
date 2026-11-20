@@ -6,6 +6,7 @@ on:
       - 'backend/**'
       - 'docker-compose.yml'
       - '.github/workflows/backend.yml'
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -18,7 +19,8 @@ permissions:
 
 concurrency:
   group: backend-${{ github.ref }}
-  cancel-in-progress: true
+  # Never cancel a running deploy on main
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 defaults:
   run:
@@ -42,3 +44,22 @@ jobs:
 
       - name: Build Docker image
         run: docker build --tag portfolio-backend:ci .
+
+  deploy:
+    needs: verify
+    # Off until the accounts exist: set the repo variable DEPLOY_ENABLED=true (docs/deploy.md)
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: https://api.silvanbrors.ch/actuator/health
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy to Fly.io
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

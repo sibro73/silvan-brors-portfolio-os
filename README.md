@@ -22,6 +22,11 @@ Ports belegt? In `.env` `BACKEND_PORT` bzw. `POSTGRES_PORT` ändern und im Front
 `VITE_API_URL` in `frontend/.env.local` anpassen (Vorlage: `frontend/.env.example`).
 Ohne Backend zeigt die Seite die gespeicherten Daten aus `frontend/src/data/`.
 
+## Deployment
+Frontend auf Cloudflare Pages (silvanbrors.ch), Backend auf Fly.io (api.silvanbrors.ch).
+Nach jedem Merge auf `main` wird automatisch deployt. Einrichtung und Rollback:
+[`docs/deploy.md`](docs/deploy.md).
+
 ## Projekte, die man im Desktop findet
 - **Rigged to Riches**: Koop-Heist-Spiel (Unity), bald auf Steam
 - **Clipper**: Echtzeit-Bot, der Highlights aus Livestreams schneidet

@@ -15,7 +15,7 @@ Referenz, kein Code zum Weiterverwenden.
 silvan-os/
 ├── frontend/        React + TypeScript + Vite
 ├── backend/         Spring Boot 4, Java 21, Maven
-├── docs/            Plan, Design-Referenz, Entscheide
+├── docs/            Plan, Design-Referenz, Entscheide, deploy.md
 ├── docker-compose.yml   lokal: backend + postgres
 └── .github/workflows/   CI für frontend und backend
 ```
