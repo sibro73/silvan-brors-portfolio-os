@@ -44,9 +44,11 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 
 ## Phase 6 – Feinschliff (`chore/polish`)
 - [ ] Echte Screenshots, GIFs, Trailer, Lebenslauf-PDF
-- [ ] Meta-Tags, Open-Graph-Bild für LinkedIn, Favicon
-- [ ] Lighthouse: Performance und Barrierefreiheit prüfen
+  (vorbereitet: `docs/inhalte.md`, Ablage `frontend/public/media/`. Offen: das Material selbst)
+- [x] Meta-Tags, Open-Graph-Bild für LinkedIn, Favicon
+- [x] Lighthouse: Performance und Barrierefreiheit prüfen (`docs/lighthouse.md`)
 - [ ] README mit Screenshot, Architektur und Link zur Live-Seite
+  (Screenshot und Architektur drin. Offen: Live-Link, sobald die Seite läuft)
 
 ## Offene Punkte
 - Sprache des Clippers: [eintragen]

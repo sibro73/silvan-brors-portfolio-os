@@ -1,0 +1,147 @@
+<!doctype html>
+<!--
+  Vorlage für frontend/public/og-image.png (1200×630, Vorschau beim Teilen).
+  Neu erzeugen: siehe docs/og/README.md. Keine Zahlen, keine Platzhalter: nur Name und Rolle.
+-->
+<html lang="de-CH">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      @font-face {
+        font-family: Inter;
+        font-weight: 400;
+        src: url('../../frontend/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2');
+      }
+      @font-face {
+        font-family: Inter;
+        font-weight: 600;
+        src: url('../../frontend/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2');
+      }
+      @font-face {
+        font-family: Inter;
+        font-weight: 700;
+        src: url('../../frontend/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2');
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+      body {
+        font-family: Inter, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        /* Hintergrund «Aurora» aus src/index.css */
+        background-color: #12131a;
+        background-image:
+          radial-gradient(ellipse at 18% 28%, rgba(91, 60, 196, 0.85) 0, rgba(91, 60, 196, 0) 48%),
+          radial-gradient(ellipse at 82% 76%, rgba(179, 18, 43, 0.75) 0, rgba(179, 18, 43, 0) 44%),
+          radial-gradient(ellipse at 62% 18%, rgba(47, 111, 228, 0.7) 0, rgba(47, 111, 228, 0) 42%),
+          radial-gradient(ellipse at 30% 92%, rgba(255, 122, 26, 0.45) 0, rgba(255, 122, 26, 0) 38%);
+        position: relative;
+      }
+      .menubar {
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        padding: 0 22px;
+        background: rgba(20, 20, 28, 0.35);
+        backdrop-filter: blur(20px);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .menubar span:not(:first-child) {
+        font-weight: 400;
+        opacity: 0.85;
+      }
+      .window {
+        position: absolute;
+        left: 110px;
+        top: 112px;
+        width: 760px;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #ffffff;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+      }
+      .titlebar {
+        height: 44px;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 0 18px;
+        background: #efefef;
+        border-bottom: 1px solid #d4d4d4;
+        position: relative;
+      }
+      .dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+      }
+      .title {
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 15px;
+        color: #3a3a3a;
+        font-weight: 600;
+      }
+      .content {
+        padding: 48px 56px 54px;
+        color: #1d1d1f;
+      }
+      .hello {
+        margin: 0 0 10px;
+        font-size: 24px;
+        color: #6e6e73;
+      }
+      h1 {
+        margin: 0 0 18px;
+        font-size: 76px;
+        line-height: 1.02;
+        letter-spacing: -1.5px;
+        font-weight: 700;
+      }
+      .role {
+        margin: 0;
+        font-size: 30px;
+        line-height: 1.35;
+        color: #3a3a3a;
+      }
+      .domain {
+        position: absolute;
+        right: 64px;
+        bottom: 46px;
+        color: #fff;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menubar"><span>Silvan OS</span><span>Ablage</span><span>Darstellung</span><span>Fenster</span></div>
+    <div class="window">
+      <div class="titlebar">
+        <span class="dot" style="background: #ff5f57"></span>
+        <span class="dot" style="background: #febc2e"></span>
+        <span class="dot" style="background: #28c840"></span>
+        <span class="title">Über mich.txt</span>
+      </div>
+      <div class="content">
+        <p class="hello">Hoi, ich bin</p>
+        <h1>Silvan Brors</h1>
+        <p class="role">Applikationsentwickler EFZ in Ausbildung<br />ti&amp;m · Zürich</p>
+      </div>
+    </div>
+    <div class="domain">silvanbrors.ch</div>
+  </body>
+</html>
