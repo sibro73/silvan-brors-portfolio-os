@@ -23,9 +23,10 @@ Grosse Videos besser extern hosten (z. B. YouTube) und nur den Link eintragen.
 | `[Trailer, läuft automatisch ohne Ton]` | `src/data/projects.json` | ersetzt durch das Video, siehe oben |
 | `[Foto / Dashboard-Screenshot]` | `src/data/projects.json` | ersetzt durch das Bild, siehe oben |
 | `[Lebenslauf als PDF einbetten]` | `src/data/profile.json` | ersetzt durch das PDF, siehe oben |
+| `Lehrjahr [x] von 4` (Akku in der Menüleiste) | `src/data/apprenticeship.ts` | aktuelles Lehrjahr (`year`, 1–4) |
 
 ## Bleiben bewusst Platzhalter (kommen live vom Backend)
 
 `[live]`, `[Datum]` (Status), `[KW]`, `[Views]`, `[Was der Agent … vorschlägt]` (Wochenbericht),
-`[Zeit]`, `[Clip 0:23]`, `[Streamer A]`, `[Sek.]` (Clipper-Chat), `Lehrjahr [x] von 4`.
+`[Zeit]`, `[Clip 0:23]`, `[Streamer A]`, `[Sek.]` (Clipper-Chat).
 Diese verschwinden, sobald Clipper und Agents Daten schicken. Siehe `docs/api.md`.
