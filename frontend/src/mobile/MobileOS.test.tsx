@@ -202,7 +202,7 @@ describe('MobileOS', () => {
     render(<MobileOS />);
     tap(screen.getByRole('button', { name: 'Mail: Kontakt' }));
     expect(screen.getByRole('textbox', { name: 'Nachricht' })).toHaveStyle({ fontSize: '16px' });
-    expect(screen.getByRole('link', { name: /LinkedIn/ })).toHaveAttribute(
+    expect(within(sheet('Neue E-Mail')!).getByRole('link', { name: /LinkedIn/ })).toHaveAttribute(
       'href',
       'https://www.linkedin.com/in/silvan-brors-b91b62287/',
     );
@@ -210,5 +210,31 @@ describe('MobileOS', () => {
       'href',
       'https://github.com/sibro73',
     );
+  });
+
+  it('has a second home page with live numbers, next event and report', () => {
+    render(<MobileOS />);
+    const page2 = screen.getByRole('group', { name: 'Seite 2 von 2' });
+    expect(
+      within(page2).getByRole('button', { name: /Live-Zahlen: Wishlists \[live\]/ }),
+    ).toBeInTheDocument();
+    expect(within(page2).getByText('Steam Next Fest')).toBeInTheDocument();
+    expect(within(page2).getByText('Wochenbericht')).toBeInTheDocument();
+    expect(within(page2).getByRole('link', { name: 'Klassische Ansicht' })).toHaveAttribute(
+      'href',
+      '#klassisch',
+    );
+
+    // Seitenpunkte: Seite 1 aktiv, Seite 2 per Tipp
+    const dot1 = screen.getByRole('button', { name: 'Seite 1' });
+    const dot2 = screen.getByRole('button', { name: 'Seite 2' });
+    expect(dot1).toHaveAttribute('aria-current', 'true');
+    tap(dot2);
+    expect(dot2).toHaveAttribute('aria-current', 'true');
+    expect(dot1).toHaveAttribute('aria-current', 'false');
+
+    // Widgets öffnen ihre App
+    tap(within(page2).getByRole('button', { name: /Wochenbericht/ }));
+    expect(sheet('Wochenbericht')).toBeInTheDocument();
   });
 });
