@@ -2,13 +2,16 @@
 
 Mein Portfolio als Desktop im Browser: Projekte öffnen sich als Apps in verschiebbaren
 Fenstern, im Terminal kann man Befehle eingeben, und die Live-Zahlen kommen aus einem
-eigenen Spring-Boot-Backend.
+eigenen Spring-Boot-Backend. Auf dem Handy wird daraus ein Home-Bildschirm mit Widgets und Apps.
 
 **Live:** [silvanbrors.ch](https://silvanbrors.ch)
 
 ![Silvan OS: Willkommensfenster auf dem Desktop, mit Menüleiste, Schreibtisch-Icons und Dock](docs/screenshot.png)
 
-<sub>Screenshot von silvanbrors.ch. Das Backend ist noch nicht online, die Live-Zahlen zeigen deshalb Platzhalter.</sub>
+<img src="docs/screenshot-mobile.png" width="260" alt="Silvan OS auf dem Handy: Home-Bildschirm mit Profil- und Wetter-Widget, App-Icons und Dock">
+
+<sub>Oben am Computer, unten unter 860 px Breite (eigene Handy-Ansicht). Das Backend ist noch nicht
+online, die Live-Zahlen zeigen deshalb Platzhalter.</sub>
 
 ## Stack
 - **Frontend:** React 19, TypeScript, Vite, Vitest. Fenster, Drag, Dock und Menüleiste sind selbst gebaut, ohne UI-Framework.
