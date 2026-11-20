@@ -65,9 +65,13 @@ export interface AgentsReport {
 
 export interface IpaData {
   greeting: string;
+  /** Begrüssung, wenn der Übergangs-Assistent antwortet (ohne Silvans Notizen). */
+  agentGreeting: string;
   footer: string;
   /** Hinweis in der Fusszeile, wenn der Chat nur Beispiele zeigt. */
   exampleNote: string;
+  /** Fusszeile mit dem Übergangs-Assistenten. */
+  agentFooter: string;
   inputLabel: string;
   placeholder: string;
   thinking: string;

@@ -47,8 +47,8 @@ jobs:
 
   deploy:
     needs: verify
-    # Off until the accounts exist: set the repo variable DEPLOY_ENABLED=true (docs/deploy.md)
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.DEPLOY_ENABLED == 'true'
+    # Off until Fly and Neon exist: set the repo variable BACKEND_DEPLOY_ENABLED=true (docs/deploy.md)
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.BACKEND_DEPLOY_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment:

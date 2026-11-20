@@ -87,4 +87,25 @@ describe('IpaAssistent live chat', () => {
     expect(screen.queryByRole('button', { name: 'Fragen' })).toBeNull();
     expect(screen.getByText(/Läuft nur lokal · hier Beispielantworten/)).toBeInTheDocument();
   });
+
+  it('on the live site with the interim agent: input, honest greeting, note under answers', async () => {
+    const ask = vi.fn(() =>
+      Promise.resolve<IpaResult>({
+        ok: true,
+        answer: 'Ein Unit-Test prüft eine einzelne Einheit.',
+        sources: [],
+        note: 'Allgemeine Antwort, nicht aus Silvans Notizen',
+      }),
+    );
+    render(<IpaAssistent ask={ask} agent />);
+
+    expect(screen.getByText(/läuft noch nur lokal/)).toBeInTheDocument();
+    expect(screen.getByText(/Cloudflare Workers AI · ohne Silvans Notizen/)).toBeInTheDocument();
+    expect(screen.queryByText(/hier Beispielantworten/)).toBeNull();
+
+    await userEvent.type(input(), 'Was ist ein Unit-Test?{Enter}');
+
+    expect(await screen.findByText(/prüft eine einzelne Einheit/)).toBeInTheDocument();
+    expect(screen.getByText('Allgemeine Antwort, nicht aus Silvans Notizen')).toBeInTheDocument();
+  });
 });
