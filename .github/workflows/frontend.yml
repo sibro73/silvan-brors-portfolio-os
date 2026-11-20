@@ -63,7 +63,8 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          VITE_API_URL: https://api.silvanbrors.ch
+          # Backend = Pages Functions auf derselben Domain (functions/api/*, D1)
+          VITE_API_URL: /
           # IPA chat: interim agent as Pages Function on the same domain (functions/api/ipa/ask.ts)
           VITE_IPA_AGENT: 'true'
           VITE_IPA_URL: /

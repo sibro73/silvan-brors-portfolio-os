@@ -24,16 +24,15 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 
 ## Phase 3 – Deployment (`chore/deploy`)
 - [x] Frontend auf Vercel oder Cloudflare Pages (Cloudflare Pages, live seit 20.11.2026)
-- [ ] Backend auf VPS (Docker) oder Fly.io, HTTPS
-  (vorbereitet: `backend/fly.toml`, `docs/deploy.md`. Offen: Fly.io braucht eine Kreditkarte, Neon-Konto)
+- [x] Backend live: Cloudflare Pages Functions + D1 (gratis), gleiche API wie Spring Boot.
+  Das Spring-Backend läuft lokal und in der CI.
 - [x] Domain einrichten: silvanbrors.ch bei Hostpoint, DNS bei Cloudflare, `www` leitet weiter
-  (`api.` folgt mit dem Backend)
-- [x] Deploy automatisch nach Merge auf `main` (Frontend; Backend mit `BACKEND_DEPLOY_ENABLED`)
+  (API unter derselben Domain, `/api/…`)
+- [x] Deploy automatisch nach Merge auf `main` (Seite und Functions zusammen)
 
 ## Phase 4 – Echte Daten (`feat/live-data`)
-- [ ] `POST /api/clipper/events` mit API-Key, Clipper anbinden
-  (Endpunkt fertig, der Clipper meldet Clips, sobald `PORTFOLIO_API_URL`/`PORTFOLIO_API_KEY` in seiner `.env`
-  stehen. Offen: braucht das Backend live)
+- [x] `POST /api/clipper/events` mit API-Key, Clipper anbinden
+  (live: der Clipper meldet jeden gesendeten Clip, Key in seiner `.env`)
 - [x] Postgres + Flyway: Clips pro Tag speichern
 - [ ] Steam: prüfen, was die Steamworks-API liefert (Wishlists/Follower), Scheduler + Cache
   (geprüft, siehe `docs/steam.md`: braucht Financial-API-Key, Endpunkt noch unbestätigt)
@@ -66,6 +65,6 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 - ~~Sprache des Clippers~~: Python (FFmpeg, Whisper, Telegram Bot API)
 - LLM und Vektor-DB des IPA-Assistenten: lokal Ollama `llama3.1:8b` + pgvector (`ipa-assistant`),
   live Llama 3.3 70B + bge-m3 + Cloudflare Vectorize
-- Datenbank in Produktion: Neon (Free-Plan), siehe `docs/deploy.md`
-- Domain: silvanbrors.ch (live), API später unter api.silvanbrors.ch (Fly.io, siehe `docs/deploy.md`)
+- Datenbank in Produktion: Cloudflare D1, siehe `docs/deploy.md`
+- Domain: silvanbrors.ch (live), API unter silvanbrors.ch/api (Pages Functions)
 - DNSSEC: bei Cloudflare eingeschaltet, wartet auf den DS-Eintrag bei der .ch-Registry

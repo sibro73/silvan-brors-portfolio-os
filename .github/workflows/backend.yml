@@ -44,22 +44,3 @@ jobs:
 
       - name: Build Docker image
         run: docker build --tag portfolio-backend:ci .
-
-  deploy:
-    needs: verify
-    # Off until Fly and Neon exist: set the repo variable BACKEND_DEPLOY_ENABLED=true (docs/deploy.md)
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.BACKEND_DEPLOY_ENABLED == 'true'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    environment:
-      name: production
-      url: https://api.silvanbrors.ch/actuator/health
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-
-      - name: Deploy to Fly.io
-        run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
