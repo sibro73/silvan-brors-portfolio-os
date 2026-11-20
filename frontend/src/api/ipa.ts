@@ -7,8 +7,8 @@ import { API_URL } from './http';
 export const IPA_LIVE = import.meta.env.VITE_IPA_LIVE === 'true';
 
 /**
- * Live-Seite: Eingabefeld mit dem Übergangs-Assistenten (Pages Function mit Workers AI,
- * `server/ipaAgent.ts`). Er kennt Silvans Notizen nicht und sagt das unter jeder Antwort.
+ * Live-Seite: Eingabefeld mit dem RAG auf Cloudflare (Pages Function mit Workers AI und
+ * Vectorize, `server/ipaAgent.ts`). Antwortet aus Silvans Notizen, ohne sie herauszugeben.
  */
 export const IPA_AGENT = import.meta.env.VITE_IPA_AGENT === 'true';
 

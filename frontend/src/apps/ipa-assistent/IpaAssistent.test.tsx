@@ -88,24 +88,25 @@ describe('IpaAssistent live chat', () => {
     expect(screen.getByText(/Läuft nur lokal · hier Beispielantworten/)).toBeInTheDocument();
   });
 
-  it('on the live site with the interim agent: input, honest greeting, note under answers', async () => {
+  it('on the live site with the notes RAG: input, greeting, sources under answers', async () => {
     const ask = vi.fn(() =>
       Promise.resolve<IpaResult>({
         ok: true,
-        answer: 'Ein Unit-Test prüft eine einzelne Einheit.',
-        sources: [],
-        note: 'Allgemeine Antwort, nicht aus Silvans Notizen',
+        answer: 'Ein Image ist die Vorlage, ein Container läuft.',
+        sources: [{ datei: '3.3 – Docker.md', abschnitt: 'Lösungen › Aufgabe 1 – Begriffe' }],
       }),
     );
     render(<IpaAssistent ask={ask} agent />);
 
-    expect(screen.getByText(/läuft noch nur lokal/)).toBeInTheDocument();
-    expect(screen.getByText(/Cloudflare Workers AI · ohne Silvans Notizen/)).toBeInTheDocument();
+    expect(screen.getByText(/Ich kenne Silvans IPA-Lernnotizen/)).toBeInTheDocument();
+    expect(screen.getByText(/Cloudflare Workers AI \+ Vectorize/)).toBeInTheDocument();
     expect(screen.queryByText(/hier Beispielantworten/)).toBeNull();
 
-    await userEvent.type(input(), 'Was ist ein Unit-Test?{Enter}');
+    await userEvent.type(input(), 'Image oder Container?{Enter}');
 
-    expect(await screen.findByText(/prüft eine einzelne Einheit/)).toBeInTheDocument();
-    expect(screen.getByText('Allgemeine Antwort, nicht aus Silvans Notizen')).toBeInTheDocument();
+    expect(await screen.findByText(/ein Container läuft/)).toBeInTheDocument();
+    expect(
+      screen.getByText('Quelle: 3.3 – Docker.md › Lösungen › Aufgabe 1 – Begriffe'),
+    ).toBeInTheDocument();
   });
 });
