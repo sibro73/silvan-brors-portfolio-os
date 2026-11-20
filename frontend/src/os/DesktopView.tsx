@@ -34,7 +34,6 @@ export default function DesktopView() {
     <>
       <DesktopShell
         key={bootCount}
-        narrow={false}
         preferences={preferences}
         setPreferences={setPreferences}
         onRestart={restart}

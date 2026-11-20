@@ -6,7 +6,7 @@ import { Desktop } from './Desktop';
 
 describe('Desktop', () => {
   it('shows the four desktop icons in reference order', () => {
-    render(<Desktop narrow={false} onOpen={() => {}} />);
+    render(<Desktop onOpen={() => {}} />);
     const labels = screen
       .getAllByRole('button')
       .map((b) => b.querySelector('.desktop-icon__label')?.textContent);
@@ -15,7 +15,7 @@ describe('Desktop', () => {
 
   it('opens the matching app on click', async () => {
     const onOpen = vi.fn();
-    render(<Desktop narrow={false} onOpen={onOpen} />);
+    render(<Desktop onOpen={onOpen} />);
     await userEvent.click(screen.getByRole('button', { name: 'Lebenslauf.pdf' }));
     expect(onOpen).toHaveBeenCalledWith('cv');
   });

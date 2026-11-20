@@ -90,9 +90,7 @@ export function MenuBar({ activeName, actions, context, onSelectWindow }: MenuBa
   const [open, setOpen] = useState<string | null>(null);
   const [initialFocus, setInitialFocus] = useState<Focus>(null);
 
-  // Mobile: nur das Logo-Menü, der Rest passt nicht in die Leiste.
-  const menus = context.narrow ? MENUS.filter((m) => m.logo) : MENUS;
-  const menuIds = menus.map((m) => m.id);
+  const menuIds = MENUS.map((m) => m.id);
   const [focusIndex, setFocusIndex] = useState(0);
 
   const close = useCallback(
@@ -207,7 +205,7 @@ export function MenuBar({ activeName, actions, context, onSelectWindow }: MenuBa
   return (
     <header className="menubar" ref={rootRef}>
       <div role="menubar" aria-label="Menüleiste" className="menubar__left">
-        {menus.map((menu, i) => {
+        {MENUS.map((menu, i) => {
           const triggerId = `${uid}-trigger-${menu.id}`;
           const isOpen = open === menu.id;
           return (

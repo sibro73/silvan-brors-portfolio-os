@@ -10,13 +10,12 @@ import { REDUCED_MOTION_QUERY, useMediaQuery } from './useMediaQuery';
 interface DockProps {
   /** Apps mit offenem (auch minimiertem) Fenster bekommen einen Punkt. */
   running: ReadonlySet<AppId>;
-  narrow: boolean;
   onOpen: (id: AppId) => void;
 }
 
-export function Dock({ running, narrow, onOpen }: DockProps) {
+export function Dock({ running, onOpen }: DockProps) {
   const reducedMotion = useMediaQuery(REDUCED_MOTION_QUERY);
-  const magnify = !narrow && !reducedMotion;
+  const magnify = !reducedMotion;
   const items = useRef(new Map<AppId, HTMLButtonElement>());
 
   // Direkt am DOM (CSS-Variable), damit nicht bei jeder Mausbewegung neu gerendert wird.
@@ -34,7 +33,6 @@ export function Dock({ running, narrow, onOpen }: DockProps) {
   };
 
   const classes = ['dock'];
-  if (narrow) classes.push('dock--narrow');
   if (magnify) classes.push('dock--magnify');
 
   return (

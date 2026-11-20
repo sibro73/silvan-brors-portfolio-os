@@ -85,29 +85,6 @@
   background: rgba(255, 255, 255, 0.9);
 }
 
-/* Mobile: Dock im Fluss, horizontal scrollbar, ohne Vergrösserung und Tooltip */
-.dock--narrow {
-  position: relative;
-  left: auto;
-  bottom: auto;
-  transform: none;
-  align-self: center;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
-}
-.dock--narrow::-webkit-scrollbar {
-  display: none;
-}
-.dock--narrow .dock__item {
-  flex-shrink: 0;
-  scroll-snap-align: center;
-}
-.dock--narrow .dock__tooltip {
-  display: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .dock__item,
   .dock__icon {

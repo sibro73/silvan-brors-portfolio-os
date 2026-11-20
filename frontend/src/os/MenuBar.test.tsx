@@ -25,7 +25,6 @@ const baseContext = (patch: Partial<MenuContext> = {}): MenuContext => ({
   ]),
   active: 'about',
   preferences: DEFAULT_PREFERENCES,
-  narrow: false,
   fullscreen: false,
   fullscreenSupported: true,
   ...patch,
@@ -80,11 +79,6 @@ describe('MenuBar basics', () => {
       'Fenster',
       'Hilfe',
     ]);
-  });
-
-  it('shows only the logo menu on mobile', () => {
-    setup({ narrow: true });
-    expect(within(screen.getByRole('menubar')).getAllByRole('menuitem')).toHaveLength(1);
   });
 });
 

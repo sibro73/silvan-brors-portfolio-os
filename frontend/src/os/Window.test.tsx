@@ -19,16 +19,10 @@ const mockActions = (): WindowActions => ({
 
 const base: WindowState = { x: 90, y: 40, z: 3, minimized: false, maximized: false };
 
-function setup(state: Partial<WindowState> = {}, narrow = false) {
+function setup(state: Partial<WindowState> = {}) {
   const actions = mockActions();
   render(
-    <Window
-      app={APP_BY_ID.about}
-      state={{ ...base, ...state }}
-      active
-      narrow={narrow}
-      actions={actions}
-    >
+    <Window app={APP_BY_ID.about} state={{ ...base, ...state }} active actions={actions}>
       <p>Inhalt</p>
     </Window>,
   );
@@ -77,16 +71,6 @@ describe('Window', () => {
     fireEvent.pointerMove(bar, { pointerId: 1, clientX: 130, clientY: 80 });
     expect(actions.move).not.toHaveBeenCalled();
     expect(screen.getByRole('button', { name: 'Fenstergrösse wiederherstellen' })).toBeVisible();
-  });
-
-  it('stacks without drag or maximize in narrow mode', () => {
-    const actions = setup({}, true);
-    const bar = screen.getByTestId('titlebar');
-    fireEvent.pointerDown(bar, { pointerId: 1, button: 0, clientX: 100, clientY: 100 });
-    fireEvent.pointerMove(bar, { pointerId: 1, clientX: 130, clientY: 80 });
-    expect(actions.move).not.toHaveBeenCalled();
-    expect(screen.getByRole('region')).toHaveStyle({ position: 'relative', width: '100%' });
-    expect(screen.getByRole('button', { name: 'Fenster maximieren' })).toBeDisabled();
   });
 
   it('hides minimized windows but keeps them mounted', () => {
