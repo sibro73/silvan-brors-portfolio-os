@@ -64,10 +64,16 @@ jobs:
       - run: npm run build
         env:
           VITE_API_URL: https://api.silvanbrors.ch
+          # IPA chat: interim agent as Pages Function on the same domain (functions/api/ipa/ask.ts)
+          VITE_IPA_AGENT: 'true'
+          VITE_IPA_URL: /
 
+      # Run from frontend/ so wrangler picks up wrangler.toml (AI binding) and functions/
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy frontend/dist --project-name=silvan-os --branch=main
+          wranglerVersion: '4'
+          workingDirectory: frontend
+          command: pages deploy dist --project-name=silvan-os --branch=main

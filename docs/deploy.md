@@ -8,8 +8,9 @@
 
 Nach jedem Merge auf `main` laufen `.github/workflows/frontend.yml` und `backend.yml`.
 Sind die Tests grün, folgt der Job `deploy`, aber nur für den Teil, der sich geändert hat.
-Der Job läuft nur, wenn die Repo-Variable `DEPLOY_ENABLED` auf `true` steht. Ohne sie
-bleibt `main` grün, auch wenn die Konten noch fehlen.
+Der Job läuft nur, wenn die passende Repo-Variable auf `true` steht: `DEPLOY_ENABLED` fürs
+Frontend, `BACKEND_DEPLOY_ENABLED` fürs Backend. So kann das Frontend live gehen, bevor Fly und
+Neon eingerichtet sind. Ohne die Variablen bleibt `main` grün, auch wenn die Konten noch fehlen.
 
 ## Kosten
 
@@ -97,18 +98,29 @@ Im Repo unter *Settings* → *Secrets and variables* → *Actions*, oder mit `gh
 ```bash
 gh secret set CLOUDFLARE_API_TOKEN     # Token aus Schritt 2.3
 gh secret set CLOUDFLARE_ACCOUNT_ID    # Account ID aus Schritt 2.4
-gh secret set FLY_API_TOKEN            # Token aus Schritt 4.6
-gh variable set DEPLOY_ENABLED --body true
+gh variable set DEPLOY_ENABLED --body true          # Frontend
+gh secret set FLY_API_TOKEN                          # Token aus Schritt 4.6, erst mit dem Backend
+gh variable set BACKEND_DEPLOY_ENABLED --body true  # Backend, erst wenn Fly und Neon stehen
 ```
 
 Danach den ersten Deploy von Hand starten: *Actions* → `frontend` bzw. `backend` →
 *Run workflow* auf `main`. Ab dann geht es bei jedem Merge automatisch.
 
-### 6. IPA-Assistent: bleibt lokal
+### 6. IPA-Chat: Übergangs-Assistent auf Cloudflare, ipa-assistant bleibt lokal
 
 `ipa-assistant` darf nicht öffentlich sein. Auf der Live-Seite bleibt `IPA_ASSISTANT_URL`
-deshalb **leer**, und `VITE_IPA_LIVE` wird beim Frontend-Build nicht gesetzt. Der Chat zeigt
-dort nur die Beispielantworten, mit dem Hinweis «Läuft nur lokal». Hier ist nichts zu tun.
+deshalb **leer**. Fragen beantwortet dort ein Übergangs-Assistent: eine Pages Function
+(`frontend/functions/api/ipa/ask.ts`, Logik in `frontend/server/ipaAgent.ts`) mit Workers AI
+(Llama 3.3 70B). Er kennt Silvans Notizen nicht und schreibt das unter jede Antwort.
+
+- **Einrichtung:** keine. Das Binding `AI` steht in `frontend/wrangler.toml`, der Workflow baut
+  mit `VITE_IPA_AGENT=true` und `VITE_IPA_URL=/`.
+- **Kosten:** Workers AI hat ein tägliches Gratis-Kontingent (rund 450 Antworten mit diesem
+  Modell). Ist es aufgebraucht, meldet der Chat «Kontingent für heute aufgebraucht». Auf dem
+  Workers-Free-Plan entstehen keine Kosten.
+- **Missbrauch:** Eine Rate-Limiting-Regel der Zone (*Security* → *WAF* → *Rate limiting rules*)
+  begrenzt `/api/ipa/ask` pro IP.
+- **Abschalten:** Im Workflow `VITE_IPA_AGENT` entfernen. Dann zeigt der Chat wieder nur Beispiele.
 
 Wie man den Chat lokal gegen `ipa-assistant` laufen lässt, steht in `docs/api.md`.
 
@@ -135,4 +147,5 @@ Im Browser auf https://silvanbrors.ch zeigt das WLAN-Popover nach dem Aufwachen
 - **Key neu setzen:** `fly secrets set CLIPPER_API_KEY=…` startet das Backend mit dem neuen Key neu.
 - **CORS-Fehler im Browser:** `FRONTEND_ORIGIN` in `backend/fly.toml` prüfen.
 - **API blockiert (CSP):** `connect-src` in `frontend/public/_headers` prüfen.
-- **Automatischen Deploy stoppen:** `gh variable set DEPLOY_ENABLED --body false`.
+- **Automatischen Deploy stoppen:** `gh variable set DEPLOY_ENABLED --body false`
+  (Backend: `BACKEND_DEPLOY_ENABLED`).

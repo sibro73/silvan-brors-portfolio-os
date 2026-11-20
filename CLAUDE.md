@@ -57,6 +57,10 @@ src/
 └── classic/                 "Klassische Ansicht": alles auf einer schlichten Seite
 ```
 
+Neben `src/`: `functions/api/ipa/ask.ts` ist eine Cloudflare Pages Function (Logik in
+`server/ipaAgent.ts`). Sie beantwortet IPA-Fragen auf der Live-Seite mit Workers AI, solange
+`ipa-assistant` nur lokal läuft. Kein RAG, kennt die Notizen nicht und sagt das.
+
 Regeln:
 - Neue App = neuer Ordner in `apps/` + Eintrag in `apps.registry.ts`. Sonst nichts anfassen.
 - Neuer Terminal-Befehl = ein Eintrag in `apps/terminal/commands.ts`.
