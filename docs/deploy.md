@@ -36,6 +36,13 @@ gespeicherten Daten aus `frontend/src/data/` (WLAN-Symbol: «Offline-Modus»).
 2. In Cloudflare (Free-Plan) *Add a domain* → `silvanbrors.ch`.
 3. Beim Registrar die Nameserver auf die zwei Nameserver setzen, die Cloudflare anzeigt.
    Es kann bis zu 24 h dauern, bis Cloudflare die Domain als *Active* zeigt.
+4. **Stand (20.11.2026):** erledigt. Registrar ist Hostpoint, die Nameserver sind
+   `nero.ns.cloudflare.com` und `rose.ns.cloudflare.com`. Vorher musste DNSSEC bei Hostpoint aus.
+   `www.silvanbrors.ch` leitet per Redirect-Regel (301) auf `silvanbrors.ch` um. Die Mail-Einträge
+   von Hostpoint (MX, SPF, DMARC, autoconfig) sind übernommen.
+5. **DNSSEC** ist in Cloudflare eingeschaltet (*DNS* → *Settings*). Die .ch-Registry übernimmt den
+   DS-Eintrag meist von selbst (CDS). Steht er nach ein paar Tagen noch nicht, den DS-Eintrag aus
+   Cloudflare bei Hostpoint unter *DNSSEC* eintragen.
 
 ### 2. Cloudflare Pages
 
