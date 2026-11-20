@@ -26,6 +26,11 @@ public class ClipRepository {
     return rows == 1;
   }
 
+  /** Whether the Clipper ever reported a clip. */
+  public boolean any() {
+    return jdbc.sql("select exists (select 1 from clip_event)").query(Boolean.class).single();
+  }
+
   /** Clips with {@code from <= created_at < to}. */
   public int countCreatedBetween(Instant from, Instant to) {
     return jdbc.sql(

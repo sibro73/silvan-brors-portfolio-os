@@ -17,7 +17,9 @@ import org.springframework.context.annotation.Import;
 @SpringBootTest(
     properties = {
       "app.api-keys.clipper=" + IntegrationTest.CLIPPER_KEY,
-      "app.api-keys.agents=" + IntegrationTest.AGENTS_KEY
+      "app.api-keys.agents=" + IntegrationTest.AGENTS_KEY,
+      // Tests share one context: without a cache, every test sees the current database
+      "spring.cache.type=none"
     })
 @AutoConfigureMockMvc
 @Import(TestcontainersConfiguration.class)
