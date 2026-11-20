@@ -12,3 +12,11 @@ binding = "AI"
 [[vectorize]]
 binding = "NOTES"
 index_name = "ipa-notes"
+
+# Live-Daten (server/liveData.ts): Clips, Wochenberichte, IPA-Zähler.
+# Migrationen: npx wrangler d1 migrations apply silvan-os --remote
+[[d1_databases]]
+binding = "DB"
+database_name = "silvan-os"
+database_id = "b3b72cad-cc78-48a8-af87-99495f862f04"
+migrations_dir = "migrations"

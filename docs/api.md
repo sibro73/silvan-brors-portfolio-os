@@ -1,6 +1,9 @@
 # Backend-API
 
-Basis-URL: `https://api.silvanbrors.ch` (lokal `http://localhost:8080`). Alle Antworten sind JSON.
+Basis-URL: `https://silvanbrors.ch` (lokal `http://localhost:8080`). Alle Antworten sind JSON.
+
+Live beantworten Cloudflare Pages Functions mit D1 diese Endpunkte (`frontend/server/liveData.ts`),
+lokal das Spring-Boot-Backend. Verhalten und Format sind gleich, beide sind getestet.
 
 | Methode | Pfad | Wer | Schutz |
 |---|---|---|---|
@@ -40,7 +43,7 @@ Antworten:
 - `400`: ungültige Daten.
 
 ```bash
-curl -X POST https://api.silvanbrors.ch/api/clipper/events \
+curl -X POST https://silvanbrors.ch/api/clipper/events \
   -H "X-Api-Key: $CLIPPER_API_KEY" -H "Content-Type: application/json" \
   -d '{"clipId":"test-1","createdAt":"2026-11-20T14:05:00Z"}'
 ```

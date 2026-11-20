@@ -16,32 +16,31 @@ online, die Live-Zahlen zeigen deshalb Platzhalter.</sub>
 ## Stack
 - **Frontend:** React 19, TypeScript, Vite, Vitest. Fenster, Drag, Dock und Menüleiste sind selbst gebaut, ohne UI-Framework.
 - **Backend:** Spring Boot 4, Java 21, Postgres mit Flyway, Bucket4j fürs Rate-Limit.
-- **Betrieb:** Docker, GitHub Actions, Cloudflare Pages (Frontend), Fly.io (Backend), Neon (Postgres).
+- **Live auf Cloudflare (gratis):** Pages (Seite), Pages Functions mit D1 (API, gleiches Verhalten
+  wie das Spring-Backend), Workers AI und Vectorize (IPA-Assistent).
+- **Betrieb:** Docker, GitHub Actions.
 
 ## Architektur
 
 ```mermaid
 flowchart LR
   Browser["Browser<br/>Silvan OS (React)"]
-  subgraph Cloudflare["Cloudflare Pages"]
-    Static["statische Seite<br/>+ Fallback-Daten"]
+  subgraph Cloudflare["Cloudflare (silvanbrors.ch)"]
+    Static["Pages<br/>Seite + Fallback-Daten"]
+    API["Pages Functions<br/>/api/status, /api/agents/report,<br/>/api/clipper/events, /api/ipa/ask"]
+    DB[("D1<br/>Clips, Berichte, Fragen-Zähler")]
+    AI["Workers AI + Vectorize<br/>RAG über die Lernnotizen"]
   end
-  subgraph Fly["Fly.io"]
-    API["Spring Boot API<br/>/api/status, /api/agents/report, /api/ipa/ask"]
-  end
-  DB[("Neon Postgres<br/>Clips, Berichte, Fragen-Zähler")]
-  IpaFn["Pages Function /api/ipa/ask<br/>Workers AI + Vectorize"]
   Clipper["Clipper<br/>(eigenes Projekt)"]
   Agents["Marketing-Agents<br/>(eigenes Projekt)"]
-  IPA["ipa-assistant<br/>(eigenes Projekt, nur lokal)"]
+  Spring["Spring-Boot-Backend<br/>(lokal, gleiche API)"]
 
   Browser --> Static
-  Browser -- "IPA-Frage" --> IpaFn
   Browser -- "GET, 3 s Timeout" --> API
   Clipper -- "POST /api/clipper/events<br/>X-Api-Key" --> API
   Agents -- "POST /api/agents/report<br/>X-Api-Key" --> API
   API --> DB
-  API -. "nur lokal" .-> IPA
+  API --> AI
 ```
 
 - Antwortet das Backend nicht, zeigt die Seite die gespeicherten Daten aus `frontend/src/data/`.
@@ -50,6 +49,8 @@ flowchart LR
 - Der IPA-Chat ist lokal an das separate Projekt `ipa-assistant` angebunden. Auf der Live-Seite
   antwortet eine Cloudflare Pages Function als RAG über meine Lernnotizen (Workers AI + Vectorize).
   Die Notizen liegen nur im Index, nicht im Repo, und werden nicht wörtlich herausgegeben.
+- Das Spring-Boot-Backend (`backend/`) hat dieselbe API und läuft lokal. Live übernehmen die Pages
+  Functions, damit alles gratis bei Cloudflare liegt.
 
 API: [`docs/api.md`](docs/api.md)
 
@@ -68,10 +69,9 @@ Tests: `npm run lint && npm run test` in `frontend/`, `./mvnw verify` in `backen
 Die Backend-Tests brauchen Docker (Testcontainers).
 
 ## Deployment
-Frontend auf Cloudflare Pages (silvanbrors.ch, live). Backend auf Fly.io (api.silvanbrors.ch) und
-Datenbank auf Neon sind vorbereitet, aber noch nicht eingerichtet. Ohne Backend zeigt die Seite die
-gespeicherten Daten. Nach jedem Merge auf `main` wird das Frontend automatisch deployt. Einrichtung und Rollback:
-[`docs/deploy.md`](docs/deploy.md).
+Alles auf Cloudflare: Seite (Pages), API (Pages Functions + D1) und IPA-Assistent (Workers AI +
+Vectorize) unter silvanbrors.ch. Nach jedem Merge auf `main` wird automatisch deployt.
+Einrichtung und Rollback: [`docs/deploy.md`](docs/deploy.md).
 
 ## Projekte, die man im Desktop findet
 - **Rigged to Riches**: Koop-Heist-Spiel (Unity), bald auf Steam

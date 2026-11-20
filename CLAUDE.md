@@ -77,6 +77,10 @@ Lernnotizen (Workers AI + Vectorize-Index `ipa-notes`). `scripts/ingest-notes.ts
 Notizen aus `ipa-assistant/lernunterlagen/` ein. Die Notizen kommen nie ins Repo oder auf die
 Website, und der Assistent gibt sie nicht wörtlich heraus.
 
+Live-API: `functions/api/status.ts`, `clipper/events.ts`, `agents/report.ts` sind Pages Functions
+mit D1 (Logik `server/liveData.ts`, Migrationen `migrations/`). Sie verhalten sich wie das
+Spring-Backend. Ändert sich ein Endpunkt, beide Seiten anpassen und `docs/api.md` nachführen.
+
 Regeln:
 - Neue App = neuer Ordner in `desktop/apps/` + Eintrag in `desktop/apps.registry.ts` (Desktop) bzw. Datei in
   `mobile/apps/` + Eintrag in `mobile/mobileApps.ts` und `MobileOS.tsx` (Handy).
@@ -95,6 +99,8 @@ Regeln:
   Die Seite darf nie leer oder kaputt aussehen.
 
 ### Backend (`backend/`)
+
+Läuft lokal (`docker compose up`) und in der CI. Live übernehmen die Pages Functions (oben).
 
 Package `ch.silvanbrors.portfolio`:
 
