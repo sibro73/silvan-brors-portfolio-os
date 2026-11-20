@@ -36,6 +36,7 @@
     }
   ],
   "tip": "Tipp: Öffne den Ordner «Projekte» oder klick unten im Dock auf eine App. Fenster lassen sich verschieben.",
+  "tipMobile": "Tipp: Die Apps auf dem Home-Bildschirm sind meine Projekte.",
   "skills": [
     {
       "area": "backend",
@@ -54,6 +55,7 @@
       "items": "unity, c#, python"
     }
   ],
+  "tags": ["Java", "Spring", "Docker", "AI"],
   "motto": ["was ich zweimal von hand mache,", "automatisiere ich beim dritten mal."],
   "contact": {
     "email": "[deine@email.ch]",

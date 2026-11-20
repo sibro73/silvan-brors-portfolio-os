@@ -165,7 +165,7 @@ describe('MenuBar menus', () => {
       'aria-checked',
       'true',
     );
-    expect(screen.getByRole('menuitemradio', { name: /Hintergrund: Aurora/ })).toHaveAttribute(
+    expect(screen.getByRole('menuitemradio', { name: /Hintergrund: Abendrot/ })).toHaveAttribute(
       'aria-checked',
       'false',
     );

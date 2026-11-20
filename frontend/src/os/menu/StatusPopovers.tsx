@@ -1,7 +1,14 @@
 import { useStatus } from '../../api/statusContext';
 import { events } from '../../data';
 import { APPRENTICESHIP } from '../../data/apprenticeship';
-import { formatWhen, MONTHS, monthGrid, upcomingEvents, WEEKDAYS, zurichToday } from './calendar';
+import {
+  formatWhen,
+  MONTHS,
+  monthGrid,
+  upcomingEvents,
+  WEEKDAYS,
+  zurichToday,
+} from '../../shared/calendar';
 
 export function WifiIcon({ offline = false }: { offline?: boolean }) {
   return (

@@ -28,16 +28,21 @@
       "time": "[Zeit] ✓✓"
     },
     "footer": "Clipper: schaut Livestreams mit, erkennt Highlights und schickt den Clip sofort hierher. Python / FFmpeg / Whisper / Telegram Bot API",
-    "notification": "Neuer Clip ist fertig. Klick zum Ansehen."
+    "notification": "Neuer Clip ist fertig. Klick zum Ansehen.",
+    "notificationTouch": "Neuer Clip ist fertig. Tippe zum Ansehen."
   },
   "wetter": {
     "title": "Wetterstation",
     "description": "Gruppenprojekt für die BMA: von den Sensoren bis ins Dashboard.",
-    "placeholder": "[Foto / Dashboard-Screenshot]"
+    "placeholder": "[Foto / Dashboard-Screenshot]",
+    "widget": "BMA-Projekt · eigene Sensoren",
+    "subtitle": "BMA-Gruppenprojekt",
+    "temperature": "[°C]"
   },
   "shop": {
     "title": "shop-outreach",
-    "description": "Python-Tool, das mit Google Places und PageSpeed lokale Shops findet, deren Website ein Update braucht."
+    "description": "Python-Tool, das mit Google Places und PageSpeed lokale Shops findet, deren Website ein Update braucht.",
+    "tags": ["Python", "Google Places", "PageSpeed"]
   },
   "cards": [
     {

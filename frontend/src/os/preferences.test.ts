@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
+import { resetWallpaperCache, WALLPAPER_KEY } from '../shared/wallpaper';
 import {
   DEFAULT_PREFERENCES,
   loadPreferences,
@@ -14,8 +15,10 @@ afterEach(() => {
 
 describe('preferences', () => {
   it('round-trips through localStorage', () => {
-    savePreferences({ wallpaper: 'abendrot', darkWindows: true });
-    expect(loadPreferences()).toEqual({ wallpaper: 'abendrot', darkWindows: true });
+    savePreferences({ wallpaper: 'casino', darkWindows: true });
+    resetWallpaperCache();
+    expect(loadPreferences()).toEqual({ wallpaper: 'casino', darkWindows: true });
+    expect(window.localStorage.getItem(WALLPAPER_KEY)).toBe('casino');
   });
 
   it('falls back to defaults for missing or broken data', () => {
@@ -26,6 +29,7 @@ describe('preferences', () => {
       PREFERENCES_KEY,
       JSON.stringify({ wallpaper: 'rosa', darkWindows: 'ja' }),
     );
+    window.localStorage.setItem(WALLPAPER_KEY, 'rosa');
     expect(loadPreferences()).toEqual(DEFAULT_PREFERENCES);
   });
 

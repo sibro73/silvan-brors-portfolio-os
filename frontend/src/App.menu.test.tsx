@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import App, { BOOT_MS } from './App';
 import { INITIAL_OPEN } from './apps.registry';
 import { PREFERENCES_KEY } from './os/preferences';
+import { WALLPAPER_KEY } from './shared/wallpaper';
 
 const advance = (ms: number) =>
   act(() => {
@@ -129,17 +130,18 @@ describe('menu actions in the running desktop', () => {
   it('Darstellung: wallpaper and dark windows are applied and remembered across restarts', async () => {
     const { container } = render(<App />);
     const os = () => container.querySelector('.os');
-    await choose('Darstellung', /Hintergrund: Abendrot/);
+    await choose('Darstellung', /Hintergrund: Gletscher/);
     await choose('Darstellung', /Dunkle Fenster/);
-    expect(os()).toHaveAttribute('data-wallpaper', 'abendrot');
+    expect(os()).toHaveAttribute('data-wallpaper', 'gletscher');
     expect(os()).toHaveAttribute('data-dark-windows', 'true');
+    // Hintergrund unter dem gemeinsamen Key der Handy-Ansicht, «Dunkle Fenster» separat
+    expect(window.localStorage.getItem(WALLPAPER_KEY)).toBe('gletscher');
     expect(JSON.parse(window.localStorage.getItem(PREFERENCES_KEY) ?? '{}')).toEqual({
-      wallpaper: 'abendrot',
       darkWindows: true,
     });
     await choose('Silvan OS', 'Neu starten …');
     advance(BOOT_MS);
-    expect(os()).toHaveAttribute('data-wallpaper', 'abendrot');
+    expect(os()).toHaveAttribute('data-wallpaper', 'gletscher');
   });
 });
 

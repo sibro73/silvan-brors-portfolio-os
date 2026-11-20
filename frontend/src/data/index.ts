@@ -22,6 +22,10 @@ export interface Profile {
   /** Einleitung, Teile mit `mark` werden hervorgehoben. */
   intro: { text: string; mark?: boolean }[];
   tip: string;
+  /** Tipp in der Handy-Ansicht (Notizen). */
+  tipMobile: string;
+  /** Stichworte im Profil-Widget der Handy-Ansicht. */
+  tags: string[];
   skills: { area: string; items: string }[];
   motto: string[];
   contact: { email: string; subject: string; text: string; links: Link[] };
@@ -46,9 +50,19 @@ export interface Projects {
     reply: { text: string; time: string };
     footer: string;
     notification: string;
+    /** Mitteilung in der Handy-Ansicht («Tippe» statt «Klick»). */
+    notificationTouch: string;
   };
-  wetter: { title: string; description: string; placeholder: string };
-  shop: { title: string; description: string };
+  wetter: {
+    title: string;
+    description: string;
+    placeholder: string;
+    /** Handy-Ansicht: Zeile im Widget und Untertitel in der App. */
+    widget: string;
+    subtitle: string;
+    temperature: string;
+  };
+  shop: { title: string; description: string; tags: string[] };
   /** Projektkarten im Willkommensfenster. `app` = AppId aus apps.registry.ts. */
   cards: { app: string; title: string; text: string }[];
 }
