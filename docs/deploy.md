@@ -4,6 +4,7 @@
 |---|---|---|
 | Frontend | Cloudflare Pages, Projekt `silvan-os` | https://silvanbrors.ch (Ersatz: `silvan-os.pages.dev`) |
 | Backend | Fly.io, App `silvan-os-api`, Region `fra` | https://api.silvanbrors.ch (Ersatz: `silvan-os-api.fly.dev`) |
+| Datenbank | Neon (Postgres, Free-Plan), Region Frankfurt | nur für das Backend |
 
 Nach jedem Merge auf `main` laufen `.github/workflows/frontend.yml` und `backend.yml`.
 Sind die Tests grün, folgt der Job `deploy`, aber nur für den Teil, der sich geändert hat.
@@ -18,6 +19,7 @@ bleibt `main` grün, auch wenn die Konten noch fehlen.
   `backend/fly.toml`). Eine schlafende Maschine kostet nur den Speicher ihres Images.
   Die aktuellen Preise stehen auf https://fly.io/pricing. Kontrolliere nach dem ersten
   Monat die Rechnung unter *Billing*.
+- **Neon:** Free-Plan (0.5 GB). Die Datenbank schläft ebenfalls, wenn niemand sie braucht.
 - **Domain:** jährliche Gebühr beim Registrar.
 
 Weil das Backend schläft, braucht die erste Anfrage nach einer Pause ein paar Sekunden.
@@ -47,19 +49,34 @@ gespeicherten Daten aus `frontend/src/data/` (WLAN-Symbol: «Offline-Modus»).
    Berechtigung **Account → Cloudflare Pages → Edit**, nur für dein Konto.
 4. Die **Account ID** steht im Dashboard rechts auf der Übersichtsseite der Domain.
 
-### 3. Fly.io
+### 3. Datenbank (Neon)
+
+1. Konto auf https://neon.tech anlegen (Free-Plan), Projekt `silvan-os`,
+   Region **AWS Europe Central (Frankfurt)**, nahe bei Fly `fra`.
+2. Unter *Connect* die Verbindungsdaten ablesen und für Java umschreiben:
+   - `POSTGRES_URL=jdbc:postgresql://<host>/<datenbank>?sslmode=require`
+   - `POSTGRES_USER` und `POSTGRES_PASSWORD` einzeln. Im JDBC-URL steht kein Passwort.
+
+   Den Host **ohne** `-pooler` nehmen, also die direkte Verbindung. Flyway braucht sie für die Migrationen.
+3. Die Tabellen legt Flyway beim ersten Start des Backends selbst an.
+
+### 4. Fly.io
 
 1. Konto auf https://fly.io anlegen und eine Kreditkarte hinterlegen.
 2. `flyctl` installieren (PowerShell):
    ```powershell
    iwr https://fly.io/install.ps1 -useb | iex
    ```
-3. App anlegen und das erste Mal deployen (im Ordner `backend/`):
+3. App anlegen, Secrets setzen und das erste Mal deployen (im Ordner `backend/`):
    ```bash
    fly auth login
    fly apps create silvan-os-api
+   fly secrets set --stage      POSTGRES_URL='jdbc:postgresql://<host>/<datenbank>?sslmode=require'      POSTGRES_USER='<user>' POSTGRES_PASSWORD='<passwort>'      CLIPPER_API_KEY="$(openssl rand -hex 32)" AGENTS_API_KEY="$(openssl rand -hex 32)"
    fly deploy --ha=false   # nur eine Maschine, Fly legt sonst zwei an
    ```
+   Ohne Datenbank startet das Backend nicht. Die beiden Keys brauchen später der Clipper
+   und die Agents. Du siehst sie nur in diesem Moment. Notiere sie im Passwort-Manager,
+   oder setze sie später mit `fly secrets set` neu.
 4. Zertifikat für die Subdomain holen:
    ```bash
    fly certs add api.silvanbrors.ch
@@ -73,14 +90,14 @@ gespeicherten Daten aus `frontend/src/data/` (WLAN-Symbol: «Offline-Modus»).
    fly tokens create deploy --expiry 8760h   # gilt ein Jahr
    ```
 
-### 4. GitHub
+### 5. GitHub
 
 Im Repo unter *Settings* → *Secrets and variables* → *Actions*, oder mit `gh`:
 
 ```bash
 gh secret set CLOUDFLARE_API_TOKEN     # Token aus Schritt 2.3
 gh secret set CLOUDFLARE_ACCOUNT_ID    # Account ID aus Schritt 2.4
-gh secret set FLY_API_TOKEN            # Token aus Schritt 3.6
+gh secret set FLY_API_TOKEN            # Token aus Schritt 4.6
 gh variable set DEPLOY_ENABLED --body true
 ```
 
@@ -105,6 +122,9 @@ Im Browser auf https://silvanbrors.ch zeigt das WLAN-Popover nach dem Aufwachen
 - **Backend zurücksetzen:** `fly releases --image` zeigt die alten Images, dann
   `fly deploy --image <image>`.
 - **Logs:** `fly logs -a silvan-os-api`, Status: `fly status -a silvan-os-api`.
+- **Backend startet nicht:** `fly logs` zeigt meist Flyway- oder Verbindungsfehler.
+  `POSTGRES_URL` mit `?sslmode=require` und ohne `-pooler`?
+- **Key neu setzen:** `fly secrets set CLIPPER_API_KEY=…` startet das Backend mit dem neuen Key neu.
 - **CORS-Fehler im Browser:** `FRONTEND_ORIGIN` in `backend/fly.toml` prüfen.
 - **API blockiert (CSP):** `connect-src` in `frontend/public/_headers` prüfen.
 - **Automatischen Deploy stoppen:** `gh variable set DEPLOY_ENABLED --body false`.
