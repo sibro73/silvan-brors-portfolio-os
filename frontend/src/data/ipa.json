@@ -1,6 +1,10 @@
 {
   "greeting": "Hoi! Ich kenne alle IPA-Lernnotizen von Silvan. Frag mich etwas.",
-  "footer": "Spring Boot / [LLM] / [Vektor-DB] · Beispielantworten",
+  "footer": "Spring Boot · Spring AI · Ollama (llama3.1:8b) · pgvector",
+  "inputLabel": "Eigene Frage an den IPA-Assistenten",
+  "placeholder": "Eigene Frage zu den Lernunterlagen …",
+  "thinking": "denkt nach …",
+  "exampleLabel": "Beispielantwort",
   "examples": [
     {
       "question": "Was heisst IPERKA?",
