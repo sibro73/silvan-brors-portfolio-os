@@ -8,10 +8,10 @@ Grosse Videos besser extern hosten (z. B. YouTube) und nur den Link eintragen.
 
 | Was | Wo es angezeigt wird | Ablage | Danach zu tun |
 |---|---|---|---|
-| Lebenslauf als PDF | Fenster «Lebenslauf», Menü «Lebenslauf herunterladen» | `media/lebenslauf.pdf` | In `src/data/profile.json` `cv.downloadHref` auf `/media/lebenslauf.pdf` setzen. Die Vorschau im Fenster baue ich dann ein. |
+| Lebenslauf als PDF | Fenster «Lebenslauf», Menü «Lebenslauf herunterladen» | `media/lebenslauf.pdf` | Vorlage: `docs/cv/lebenslauf.html` (Platzhalter rot), PDF erzeugen siehe `docs/cv/README.md`. Danach `cv.downloadHref` auf `/media/lebenslauf.pdf` setzen und die Vorschau einbauen. |
 | Trailer Rigged to Riches | Fenster «Rigged to Riches» | `media/rtr-trailer.mp4` (kurz, ohne Ton) oder YouTube-Link | Video-Einbindung baue ich, sobald die Datei da ist. |
 | Foto oder Dashboard der Wetterstation | Fenster «Wetterstation» | `media/wetterstation.jpg` (oder `.png`) | Bild mit Alternativtext einbinden. |
-| Screenshot der Seite fürs README | `README.md` | `docs/screenshot.png` | Ist vom lokalen Build erstellt. Nach dem Go-live durch einen Screenshot der Live-Seite ersetzen. |
+| Screenshot der Seite fürs README | `README.md` | `docs/screenshot.png` | Erledigt: Screenshot der Live-Seite. |
 
 ## Angaben (Text)
 

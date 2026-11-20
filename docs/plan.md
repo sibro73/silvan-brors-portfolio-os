@@ -23,35 +23,42 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 - [x] Frontend holt `/api/status`, Fallback auf `data/`
 
 ## Phase 3 – Deployment (`chore/deploy`)
-- [ ] Frontend auf Vercel oder Cloudflare Pages
+- [x] Frontend auf Vercel oder Cloudflare Pages (Cloudflare Pages, live seit 20.11.2026)
 - [ ] Backend auf VPS (Docker) oder Fly.io, HTTPS
-- [ ] Domain einrichten (z. B. silvanbrors.ch), `api.` als Subdomain
-- [ ] Deploy automatisch nach Merge auf `main`
+  (vorbereitet: `backend/fly.toml`, `docs/deploy.md`. Offen: Fly.io braucht eine Kreditkarte, Neon-Konto)
+- [x] Domain einrichten: silvanbrors.ch bei Hostpoint, DNS bei Cloudflare, `www` leitet weiter
+  (`api.` folgt mit dem Backend)
+- [x] Deploy automatisch nach Merge auf `main` (Frontend; Backend mit `BACKEND_DEPLOY_ENABLED`)
 
 ## Phase 4 – Echte Daten (`feat/live-data`)
 - [ ] `POST /api/clipper/events` mit API-Key, Clipper anbinden
-  (Endpunkt fertig, Doku: `docs/api.md`. Offen: der Clipper selbst muss ihn aufrufen)
+  (Endpunkt fertig, der Clipper meldet Clips, sobald `PORTFOLIO_API_URL`/`PORTFOLIO_API_KEY` in seiner `.env`
+  stehen. Offen: braucht das Backend live)
 - [x] Postgres + Flyway: Clips pro Tag speichern
 - [ ] Steam: prüfen, was die Steamworks-API liefert (Wishlists/Follower), Scheduler + Cache
   (geprüft, siehe `docs/steam.md`: braucht Financial-API-Key, Endpunkt noch unbestätigt)
 - [x] Agents: Wochenbericht speichern und über `/api/agents/report` ausliefern
+  (`rtr-marketing`: `loop-analyst` schreibt `reports/*.portfolio.json`, `scripts/portfolio_report.py` sendet)
 
 ## Phase 5 – IPA-Demo live (`feat/ipa-ask`)
 - [x] `POST /api/ipa/ask` an das RAG anbinden
-  (an `ipa-assistant`, **nur lokal**: das Projekt darf nicht öffentlich sein, die Live-Seite zeigt Beispielantworten)
+  (lokal an `ipa-assistant`. Live-Seite: RAG über die Notizen auf Cloudflare (Workers AI + Vectorize),
+  die Notizen selbst werden nicht veröffentlicht, siehe `docs/deploy.md` → 6)
 - [x] Rate-Limit, Längenlimit, Timeout, Fehlermeldung im Chat
 - [x] Quellen (welche Notiz) in der Antwort mitliefern
 
 ## Phase 6 – Feinschliff (`chore/polish`)
 - [ ] Echte Screenshots, GIFs, Trailer, Lebenslauf-PDF
-  (vorbereitet: `docs/inhalte.md`, Ablage `frontend/public/media/`. Offen: das Material selbst)
+  (vorbereitet: `docs/inhalte.md`, Ablage `frontend/public/media/`, Lebenslauf-Vorlage `docs/cv/`.
+  Offen: das Material selbst)
 - [x] Meta-Tags, Open-Graph-Bild für LinkedIn, Favicon
 - [x] Lighthouse: Performance und Barrierefreiheit prüfen (`docs/lighthouse.md`)
-- [ ] README mit Screenshot, Architektur und Link zur Live-Seite
-  (Screenshot und Architektur drin. Offen: Live-Link, sobald die Seite läuft)
+- [x] README mit Screenshot, Architektur und Link zur Live-Seite
 
 ## Offene Punkte
 - ~~Sprache des Clippers~~: Python (FFmpeg, Whisper, Telegram Bot API)
-- LLM und Vektor-DB des IPA-Assistenten: Ollama `llama3.1:8b` + pgvector, im separaten Projekt `ipa-assistant`
+- LLM und Vektor-DB des IPA-Assistenten: lokal Ollama `llama3.1:8b` + pgvector (`ipa-assistant`),
+  live Llama 3.3 70B + bge-m3 + Cloudflare Vectorize
 - Datenbank in Produktion: Neon (Free-Plan), siehe `docs/deploy.md`
-- Domain: silvanbrors.ch, API unter api.silvanbrors.ch (Hosting: Cloudflare Pages + Fly.io, siehe `docs/deploy.md`)
+- Domain: silvanbrors.ch (live), API später unter api.silvanbrors.ch (Fly.io, siehe `docs/deploy.md`)
+- DNSSEC: bei Cloudflare eingeschaltet, wartet auf den DS-Eintrag bei der .ch-Registry
