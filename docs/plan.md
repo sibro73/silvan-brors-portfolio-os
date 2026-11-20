@@ -51,7 +51,7 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
   (Screenshot und Architektur drin. Offen: Live-Link, sobald die Seite läuft)
 
 ## Offene Punkte
-- Sprache des Clippers: [eintragen]
+- ~~Sprache des Clippers~~: Python (FFmpeg, Whisper, Telegram Bot API)
 - LLM und Vektor-DB des IPA-Assistenten: Ollama `llama3.1:8b` + pgvector, im separaten Projekt `ipa-assistant`
 - Datenbank in Produktion: Neon (Free-Plan), siehe `docs/deploy.md`
 - Domain: silvanbrors.ch, API unter api.silvanbrors.ch (Hosting: Cloudflare Pages + Fly.io, siehe `docs/deploy.md`)

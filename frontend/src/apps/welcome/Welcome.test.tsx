@@ -86,10 +86,17 @@ describe('Welcome', () => {
     expect(live).toHaveTextContent('live aus /api/status');
   });
 
-  it('is centered on the desktop', () => {
-    expect(defaultPosition('welcome', 1440)).toEqual({ x: 320, y: 36 });
-    expect(defaultPosition('welcome', 860)).toEqual({ x: 30, y: 36 });
-    // nie an den Rand geklebt
-    expect(defaultPosition('welcome', 700).x).toBe(16);
+  it('opens top left, independent of the desktop size', () => {
+    expect(defaultPosition('welcome', { width: 1440, height: 870 })).toEqual({ x: 24, y: 24 });
+    expect(defaultPosition('welcome', { width: 900, height: 600 })).toEqual({ x: 24, y: 24 });
+  });
+
+  it('puts the terminal bottom right, next to the desktop icons and above the dock', () => {
+    // unter den Icons: an den Rand (1440 - 600 - 16, 872 - 340 - 96)
+    expect(defaultPosition('terminal', { width: 1440, height: 872 })).toEqual({ x: 824, y: 436 });
+    // auf Höhe der Icons: Icon-Spalte bleibt frei (1280 - 600 - 124, 720 - 340 - 96)
+    expect(defaultPosition('terminal', { width: 1280, height: 720 })).toEqual({ x: 556, y: 284 });
+    // kleiner Desktop: nie aus dem Bild
+    expect(defaultPosition('terminal', { width: 700, height: 400 })).toEqual({ x: 16, y: 16 });
   });
 });

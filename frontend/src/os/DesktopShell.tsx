@@ -27,8 +27,13 @@ const showClassic = () => {
   window.location.hash = '#klassisch';
 };
 
-const initState = () =>
-  createInitialState(INITIAL_OPEN.map((id) => ({ id, ...defaultPosition(id, window.innerWidth) })));
+/** Desktop = Fenster minus Menüleiste (28 px). */
+const MENU_BAR_HEIGHT = 28;
+
+const initState = () => {
+  const desktop = { width: window.innerWidth, height: window.innerHeight - MENU_BAR_HEIGHT };
+  return createInitialState(INITIAL_OPEN.map((id) => ({ id, ...defaultPosition(id, desktop) })));
+};
 
 interface DesktopShellProps {
   /** Unter 860 px: Fenster gestapelt, kein Drag. */
@@ -71,22 +76,21 @@ export function DesktopShell({
     Boolean(state.windows.clipper),
   );
 
-  const openApp = useCallback(
-    (id: AppId) => {
-      const width = deskEl?.getBoundingClientRect().width || window.innerWidth;
-      const { x, y } = defaultPosition(id, width);
-      windows.open(id, x, y);
-      if (id === 'clipper') dismissNotification();
-    },
-    [windows, dismissNotification, deskEl],
-  );
-
   const getDesktopArea = useCallback((): Area => {
     const r = deskEl?.getBoundingClientRect();
     return r && r.width > 0
       ? { width: r.width, height: r.height }
-      : { width: window.innerWidth, height: window.innerHeight - 28 };
+      : { width: window.innerWidth, height: window.innerHeight - MENU_BAR_HEIGHT };
   }, [deskEl]);
+
+  const openApp = useCallback(
+    (id: AppId) => {
+      const { x, y } = defaultPosition(id, getDesktopArea());
+      windows.open(id, x, y);
+      if (id === 'clipper') dismissNotification();
+    },
+    [windows, dismissNotification, getDesktopArea],
+  );
 
   const runInTerminal = useCallback(
     ({ command, fresh }: { command?: string; fresh?: boolean }) => {
