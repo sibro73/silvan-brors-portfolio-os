@@ -11,36 +11,47 @@ afterEach(() => {
   window.location.hash = '';
 });
 
+/** Beide Ansichten laden nach (React.lazy): auf die erste Ansicht warten. */
+const homeScreen = () => screen.findByRole('main', { name: 'Home-Bildschirm' });
+const menuBar = () => screen.findByTestId('active-app');
+
 describe('views', () => {
-  it('stacks windows below 860 px', () => {
+  it('shows only the phone view below 860 px', async () => {
     mockViewportWidth(390);
     render(<App />);
-    const welcome = screen.getByRole('region', { name: 'Willkommen' });
-    expect(welcome).toHaveStyle({ position: 'relative', width: '100%' });
-    expect(screen.getByRole('navigation', { name: 'Dock' })).toHaveClass('dock--narrow');
+    expect(await homeScreen()).toBeInTheDocument();
+    expect(screen.queryByTestId('active-app')).toBeNull();
+    expect(screen.queryByRole('region', { name: 'Willkommen' })).toBeNull();
   });
 
-  it('uses the free desktop from 860 px', () => {
+  it('shows only the desktop from 860 px', async () => {
     mockViewportWidth(860);
     render(<App />);
-    // oben links
+    expect(await menuBar()).toBeInTheDocument();
     expect(screen.getByRole('region', { name: 'Willkommen' })).toHaveStyle({
       left: '24px',
       top: '24px',
     });
+    expect(screen.queryByRole('main', { name: 'Home-Bildschirm' })).toBeNull();
   });
 
-  it('switches layout when the window is resized', () => {
+  it('switches live when the window is resized', async () => {
     const viewport = mockViewportWidth(1440);
     render(<App />);
-    act(() => viewport.resize(500));
-    expect(screen.getByRole('region', { name: 'Willkommen' })).toHaveStyle({
-      position: 'relative',
-    });
+    expect(await menuBar()).toBeInTheDocument();
+
+    act(() => viewport.resize(390));
+    expect(await homeScreen()).toBeInTheDocument();
+    expect(screen.queryByTestId('active-app')).toBeNull();
+
+    act(() => viewport.resize(1440));
+    expect(await menuBar()).toBeInTheDocument();
+    expect(screen.queryByRole('main', { name: 'Home-Bildschirm' })).toBeNull();
   });
 
-  it('shows the classic view for #klassisch and returns to the desktop', () => {
+  it('shows the classic view for #klassisch and returns to the desktop', async () => {
     render(<App />);
+    expect(await menuBar()).toBeInTheDocument();
     act(() => {
       window.location.hash = '#klassisch';
       window.dispatchEvent(new HashChangeEvent('hashchange'));
@@ -56,6 +67,6 @@ describe('views', () => {
       window.location.hash = '#desktop';
       window.dispatchEvent(new HashChangeEvent('hashchange'));
     });
-    expect(screen.getByRole('navigation', { name: 'Dock' })).toBeInTheDocument();
+    expect(await screen.findByRole('navigation', { name: 'Dock' })).toBeInTheDocument();
   });
 });

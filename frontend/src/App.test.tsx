@@ -2,7 +2,7 @@ import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import App from './App';
+import DesktopView from './os/DesktopView';
 import { NOTIFICATION_HIDE_MS, NOTIFICATION_SHOW_MS } from './os/DesktopShell';
 
 const advance = (ms: number) =>
@@ -10,7 +10,7 @@ const advance = (ms: number) =>
     vi.advanceTimersByTime(ms);
   });
 
-describe('App (desktop)', () => {
+describe('desktop view', () => {
   beforeEach(() => {
     vi.useFakeTimers({ shouldAdvanceTime: true });
   });
@@ -21,7 +21,7 @@ describe('App (desktop)', () => {
   const user = () => userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
 
   it('starts with the welcome window in front and the terminal behind it', () => {
-    render(<App />);
+    render(<DesktopView />);
     const welcome = screen.getByRole('region', { name: 'Willkommen' });
     const terminal = screen.getByRole('region', { name: 'silvan — zsh — 80×24' });
     expect(Number(welcome.style.zIndex)).toBeGreaterThan(Number(terminal.style.zIndex));
@@ -34,7 +34,7 @@ describe('App (desktop)', () => {
   });
 
   it('opens apps from the dock and shows their name in the menu bar', async () => {
-    render(<App />);
+    render(<DesktopView />);
     await user().click(screen.getByRole('button', { name: 'IPA-Assistent öffnen' }));
     expect(screen.getByRole('region', { name: 'IPA-Assistent' })).toBeInTheDocument();
     expect(screen.getByTestId('active-app')).toHaveTextContent('IPA-Assistent');
@@ -44,7 +44,7 @@ describe('App (desktop)', () => {
   });
 
   it('minimize hides a window, the dock brings it back', async () => {
-    render(<App />);
+    render(<DesktopView />);
     const term = screen.getByRole('region', { name: 'silvan — zsh — 80×24' });
     await user().click(within(term).getByRole('button', { name: 'Fenster minimieren' }));
     expect(screen.queryByRole('region', { name: 'silvan — zsh — 80×24' })).toBeNull();
@@ -54,7 +54,7 @@ describe('App (desktop)', () => {
   });
 
   it('the terminal can open apps', async () => {
-    render(<App />);
+    render(<DesktopView />);
     const u = user();
     await u.type(screen.getByLabelText('Befehl eingeben'), 'open lebenslauf{Enter}');
     advance(200);
@@ -63,7 +63,7 @@ describe('App (desktop)', () => {
   });
 
   it('shows the clipper notification after 4 s and hides it after 14 s', () => {
-    render(<App />);
+    render(<DesktopView />);
     expect(screen.queryByText('Neuer Clip ist fertig. Klick zum Ansehen.')).toBeNull();
     advance(NOTIFICATION_SHOW_MS);
     expect(screen.getByText('Neuer Clip ist fertig. Klick zum Ansehen.')).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe('App (desktop)', () => {
   });
 
   it('clicking the notification opens the clipper chat', async () => {
-    render(<App />);
+    render(<DesktopView />);
     advance(NOTIFICATION_SHOW_MS);
     await user().click(screen.getByRole('button', { name: /Clipper Bot/ }));
     expect(screen.getByRole('region', { name: 'Telegram — Clipper Bot' })).toBeInTheDocument();
@@ -80,14 +80,14 @@ describe('App (desktop)', () => {
   });
 
   it('the notification can be dismissed', async () => {
-    render(<App />);
+    render(<DesktopView />);
     advance(NOTIFICATION_SHOW_MS);
     await user().click(screen.getByRole('button', { name: 'Benachrichtigung schliessen' }));
     expect(screen.queryByRole('status')).toBeNull();
   });
 
   it('no notification if the clipper chat is already open', async () => {
-    render(<App />);
+    render(<DesktopView />);
     await user().click(screen.getByRole('button', { name: 'Telegram öffnen' }));
     advance(NOTIFICATION_SHOW_MS);
     expect(screen.queryByRole('status')).toBeNull();
