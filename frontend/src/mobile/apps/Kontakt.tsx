@@ -1,7 +1,6 @@
-import { useId } from 'react';
+import { useId, useState } from 'react';
 
 import { profile } from '../../shared/content';
-import type { MobileAppProps } from '../mobileApps';
 
 const row = {
   padding: '12px 0',
@@ -10,9 +9,17 @@ const row = {
   gap: 6,
 } as const;
 
-export function Kontakt({ toast }: MobileAppProps) {
+/** «Senden» öffnet das Mailprogramm mit Betreff und Text. */
+function mailtoHref(email: string, subject: string, body: string): string {
+  const params = [`subject=${encodeURIComponent(subject)}`];
+  if (body.trim()) params.push(`body=${encodeURIComponent(body)}`);
+  return `mailto:${email}?${params.join('&')}`;
+}
+
+export function Kontakt() {
   const id = useId();
   const c = profile.contact;
+  const [message, setMessage] = useState('');
   return (
     <div style={{ display: 'flex', flexDirection: 'column', fontSize: 15 }}>
       <div style={row}>
@@ -31,6 +38,8 @@ export function Kontakt({ toast }: MobileAppProps) {
       <textarea
         id={id}
         placeholder={c.text}
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
         style={{
           minHeight: 200,
           border: 0,
@@ -44,9 +53,19 @@ export function Kontakt({ toast }: MobileAppProps) {
           color: '#1D1D1F',
         }}
       />
-      <button type="button" className="m-primary" onClick={() => toast('Demo: Versand folgt')}>
+      <a
+        className="m-primary"
+        href={mailtoHref(c.email, c.subject, message)}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#FFFFFF',
+          textDecoration: 'none',
+        }}
+      >
         Senden
-      </button>
+      </a>
       <div
         style={{ display: 'flex', justifyContent: 'center', gap: 24, paddingTop: 18, fontSize: 15 }}
       >

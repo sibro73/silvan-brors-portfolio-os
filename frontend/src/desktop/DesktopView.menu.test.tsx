@@ -125,7 +125,7 @@ describe('menu actions in the running desktop', () => {
     render(<DesktopView />);
     await choose('Bearbeiten', 'E-Mail-Adresse kopieren');
     expect(await screen.findByText('Kopiert')).toBeInTheDocument();
-    expect(await navigator.clipboard.readText()).toBe('[deine@email.ch]');
+    expect(await navigator.clipboard.readText()).toBe('silvan.brors@icloud.com');
   });
 
   it('Darstellung: wallpaper and dark windows are applied and remembered across restarts', async () => {

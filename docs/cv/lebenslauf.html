@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
-  Vorlage für frontend/public/media/lebenslauf.pdf (A4).
-  Platzhalter in [eckigen Klammern] ersetzen, nichts erfinden.
+  Quelle für frontend/public/media/lebenslauf.pdf und lebenslauf.png (A4).
+  Nur echte Angaben, nichts erfinden.
   PDF erzeugen: siehe docs/cv/README.md
 -->
 <html lang="de-CH">
@@ -32,6 +32,15 @@
       }
       body {
         margin: 0;
+      }
+      /* Bildschirm (Vorschau-PNG): gleiche Ränder wie im PDF */
+      @media screen {
+        body {
+          box-sizing: border-box;
+          width: 210mm;
+          height: 297mm;
+          padding: 13mm 15mm 12mm;
+        }
       }
       header {
         display: flex;
@@ -127,8 +136,8 @@
         <div class="role">Applikationsentwickler EFZ in Ausbildung · ti&amp;m · Zürich</div>
       </div>
       <div class="contact">
-        <div class="ph">[E-Mail]</div>
-        <div class="ph">[Telefon]</div>
+        <div><a href="mailto:silvan.brors@icloud.com">silvan.brors@icloud.com</a></div>
+        <div>079 108 24 36</div>
         <div><a href="https://silvanbrors.ch">silvanbrors.ch</a></div>
         <div><a href="https://github.com/sibro73">github.com/sibro73</a></div>
         <div>
@@ -148,22 +157,12 @@
 
     <h2>Ausbildung</h2>
     <div class="entry">
-      <div class="when ph">[Beginn] – [Ende]</div>
+      <div class="when">08/2023 – 08/2027</div>
       <div class="what">
         <strong>Lehre Applikationsentwickler EFZ</strong> <span class="sub">· ti&amp;m, Zürich</span>
-        <p>4-jährige Lehre, aktuell im <span class="ph">[x.]</span> Lehrjahr.</p>
+        <p>4-jährige Lehre, aktuell im 4. Lehrjahr.</p>
+        <p>Berufsfachschule BBW · Berufsmaturität BMSW</p>
       </div>
-    </div>
-    <div class="entry">
-      <div class="when ph">[Beginn] – [Ende]</div>
-      <div class="what">
-        <strong class="ph">[Berufsmaturität, Schule]</strong>
-        <p class="ph">[bitte prüfen: Die Wetterstation war ein Gruppenprojekt für die BMA]</p>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="when ph">[Jahre]</div>
-      <div class="what"><strong class="ph">[Schule vor der Lehre, Ort]</strong></div>
     </div>
 
     <h2>Projekte</h2>
@@ -183,8 +182,9 @@
       <div class="what">
         <strong>Silvan OS</strong> <span class="sub">· Portfolio, silvanbrors.ch</span>
         <p>
-          Portfolio als Desktop im Browser: Fenster, Dock und Terminal selbst gebaut, Live-Zahlen
-          aus einem eigenen Backend, KI-Assistent auf Cloudflare.
+          Portfolio als Desktop im Browser und als Home-Bildschirm auf dem Handy: Fenster, Dock
+          und Terminal selbst gebaut, Spring-Boot-Backend, KI-Assistent auf Cloudflare.
+          Automatischer Deploy über GitHub Actions.
         </p>
         <div class="tech">
           React · TypeScript · Spring Boot 4 · Java 21 · Postgres · Docker · GitHub Actions ·
@@ -196,8 +196,13 @@
       <div class="when">2026</div>
       <div class="what">
         <strong>IPA-Lernassistent</strong> <span class="sub">· RAG über meine Lernnotizen</span>
-        <p>Beantwortet Fragen aus meinen IPA-Lernunterlagen, mit Quellenangabe.</p>
-        <div class="tech">Spring Boot · Spring AI · Ollama (llama3.1:8b) · pgvector</div>
+        <p>
+          Beantwortet Fragen aus meinen IPA-Lernunterlagen, mit Quellenangabe. Lokal mit Spring AI,
+          auf der Website als RAG auf Cloudflare.
+        </p>
+        <div class="tech">
+          Spring Boot · Spring AI · Ollama · pgvector · Cloudflare Workers AI · Vectorize
+        </div>
       </div>
     </div>
     <div class="entry">
@@ -219,14 +224,14 @@
       </div>
     </div>
     <div class="entry">
-      <div class="when ph">[Jahr]</div>
+      <div class="when">BMA</div>
       <div class="what">
         <strong>Wetterstation</strong> <span class="sub">· Gruppenprojekt für die BMA</span>
         <p>Von den Sensoren bis ins Dashboard.</p>
       </div>
     </div>
     <div class="entry">
-      <div class="when ph">[Jahr]</div>
+      <div class="when">eigenes Projekt</div>
       <div class="what">
         <strong>Shop-Outreach</strong>
         <p>
@@ -247,9 +252,7 @@
       <dt>Weitere</dt>
       <dd>Unity, C#, Python, React, TypeScript</dd>
       <dt>Sprachen</dt>
-      <dd class="ph">[Deutsch, Englisch …, mit Niveau]</dd>
-      <dt>Interessen</dt>
-      <dd class="ph">[optional]</dd>
+      <dd>Deutsch, Englisch, Französisch (Grundkenntnisse)</dd>
     </dl>
 
     <p class="motto">«Was ich zweimal von Hand mache, automatisiere ich beim dritten Mal.»</p>

@@ -201,7 +201,14 @@ describe('MobileOS', () => {
   it('contact: message field is labelled and at least 16px, profile links are real', () => {
     render(<MobileOS />);
     tap(screen.getByRole('button', { name: 'Mail: Kontakt' }));
-    expect(screen.getByRole('textbox', { name: 'Nachricht' })).toHaveStyle({ fontSize: '16px' });
+    const message = screen.getByRole('textbox', { name: 'Nachricht' });
+    expect(message).toHaveStyle({ fontSize: '16px' });
+    expect(screen.getByText(/silvan\.brors@icloud\.com/)).toBeInTheDocument();
+    act(() => fireEvent.change(message, { target: { value: 'Hoi Silvan & Co.' } }));
+    expect(screen.getByRole('link', { name: 'Senden' })).toHaveAttribute(
+      'href',
+      'mailto:silvan.brors@icloud.com?subject=Hallo%20Silvan&body=Hoi%20Silvan%20%26%20Co.',
+    );
     expect(screen.getByRole('link', { name: /LinkedIn/ })).toHaveAttribute(
       'href',
       'https://www.linkedin.com/in/silvan-brors-b91b62287/',
@@ -209,6 +216,16 @@ describe('MobileOS', () => {
     expect(screen.getByRole('link', { name: /GitHub \(öffnet/ })).toHaveAttribute(
       'href',
       'https://github.com/sibro73',
+    );
+  });
+
+  it('CV shows the preview and downloads the PDF', () => {
+    render(<MobileOS />);
+    tap(screen.getByRole('button', { name: 'Lebenslauf' }));
+    expect(screen.getByRole('img', { name: /Vorschau des Lebenslaufs/ })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'PDF herunterladen' })).toHaveAttribute(
+      'href',
+      '/media/lebenslauf.pdf',
     );
   });
 });

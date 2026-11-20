@@ -232,8 +232,8 @@ describe('MenuBar status popovers', () => {
   it('battery shows the apprenticeship placeholder', async () => {
     setup();
     await userEvent.click(screen.getByRole('button', { name: 'Fortschritt der Lehre' }));
-    expect(screen.getByRole('dialog')).toHaveTextContent('Lehrjahr [x] von 4');
-    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuetext', 'Lehrjahr [x] von 4');
+    expect(screen.getByRole('dialog')).toHaveTextContent('Lehrjahr 4 von 4');
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuetext', 'Lehrjahr 4 von 4');
   });
 
   it('clock shows the month and upcoming events', async () => {
