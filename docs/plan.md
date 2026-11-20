@@ -48,4 +48,4 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 ## Offene Punkte
 - Sprache des Clippers: [eintragen]
 - LLM und Vektor-DB des IPA-Assistenten: [eintragen]
-- Domain: [eintragen]
+- Domain: silvanbrors.ch, API unter api.silvanbrors.ch (Hosting: Cloudflare Pages + Fly.io, siehe `docs/deploy.md`)
