@@ -80,7 +80,8 @@ Package `ch.silvanbrors.portfolio`:
 ├── steam/       Scheduler, holt Steam-Daten, Ergebnis im Cache
 ├── agents/      GET  /api/agents/report   letzter Wochenbericht
 │                POST /api/agents/report   Agents liefern ihn ab (Header X-Api-Key)
-├── ipa/         POST /api/ipa/ask         Frage an den Lernassistenten (Rate-Limit!)
+├── ipa/         POST /api/ipa/ask         Frage an den Lernassistenten (Rate-Limit!),
+│                                          leitet an das separate Projekt ipa-assistant weiter
 └── config/      CORS, Cache (Caffeine), Security für API-Keys
 ```
 
@@ -88,7 +89,8 @@ Regeln:
 - Java 21, Spring Boot 4, Maven. Records für DTOs.
 - Postgres für Verlauf (Clips pro Tag, Berichte). Flyway für Migrationen.
 - Externe APIs nie pro Request abfragen: Scheduler + Cache.
-- `/api/ipa/ask`: Rate-Limit pro IP (z. B. Bucket4j), max. Länge der Frage, Timeout.
+- `/api/ipa/ask`: Rate-Limit pro IP (Bucket4j), max. Länge der Frage, Timeout.
+  Den RAG selbst (LLM, Embeddings, Notizen) gibt es nur im Projekt `ipa-assistant`, nicht hier.
 - Secrets nur über Umgebungsvariablen (`STEAM_API_KEY`, `CLIPPER_API_KEY`, `LLM_API_KEY`).
   Nie committen. `.env.example` pflegen.
 - Tests: JUnit 5, MockMvc für Controller, Testcontainers für Postgres.
