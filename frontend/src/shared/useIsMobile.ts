@@ -1,4 +1,4 @@
-import { NARROW_QUERY, useMediaQuery } from '../os/useMediaQuery';
+import { NARROW_QUERY, useMediaQuery } from './useMediaQuery';
 
 /** Unter 860 px Breite: Handy-Ansicht. Schaltet live um (matchMedia), nicht per CSS. */
 export function useIsMobile(): boolean {

@@ -1,6 +1,6 @@
 import type { MouseEvent, ReactNode } from 'react';
 
-import { TIME_ZONE } from '../os/clock';
+import { TIME_ZONE } from '../shared/clock';
 import { zurichToday } from '../shared/calendar';
 import { profile, projects } from '../shared/content';
 import {
