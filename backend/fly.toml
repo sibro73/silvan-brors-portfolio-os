@@ -9,6 +9,8 @@ primary_region = 'fra'
 
 [env]
   FRONTEND_ORIGIN = 'https://silvanbrors.ch,https://www.silvanbrors.ch'
+  # Fly sets Fly-Client-IP; the IPA rate limit may trust it here
+  TRUST_FLY_CLIENT_IP = 'true'
 
 [http_service]
   internal_port = 8080
