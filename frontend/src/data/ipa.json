@@ -1,9 +1,9 @@
 {
   "greeting": "Hoi! Ich kenne alle IPA-Lernnotizen von Silvan. Frag mich etwas.",
-  "agentGreeting": "Hoi! Mein Wissen aus Silvans Lernnotizen läuft noch nur lokal. Hier beantworte ich allgemeine Fragen zur IPA und zur Informatik. Die Beispielfragen unten kommen aus den Notizen.",
+  "agentGreeting": "Hoi! Ich kenne Silvans IPA-Lernnotizen zu IPERKA, Testing, Git, OOP, Linux, Shells, Docker, SQL, IT-Security und Netzwerk. Frag mich etwas.",
   "footer": "Spring Boot · Spring AI · Ollama (llama3.1:8b) · pgvector",
   "exampleNote": "Läuft nur lokal · hier Beispielantworten",
-  "agentFooter": "Übergangslösung: Llama 3.3 70B auf Cloudflare Workers AI · ohne Silvans Notizen",
+  "agentFooter": "RAG über Silvans Notizen · Llama 3.3 70B · bge-m3 · Cloudflare Workers AI + Vectorize",
   "inputLabel": "Eigene Frage an den IPA-Assistenten",
   "placeholder": "Eigene Frage zu den Lernunterlagen …",
   "thinking": "denkt nach …",

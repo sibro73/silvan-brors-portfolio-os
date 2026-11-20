@@ -4,6 +4,11 @@ name = "silvan-os"
 pages_build_output_dir = "./dist"
 compatibility_date = "2025-06-01"
 
-# Workers AI für den IPA-Übergangs-Assistenten (server/ipaAgent.ts)
+# IPA-Lernassistent (server/ipaAgent.ts): Workers AI ...
 [ai]
 binding = "AI"
+
+# ... und Silvans Lernnotizen als Vektoren (eingelesen mit scripts/ingest-notes.ts)
+[[vectorize]]
+binding = "NOTES"
+index_name = "ipa-notes"

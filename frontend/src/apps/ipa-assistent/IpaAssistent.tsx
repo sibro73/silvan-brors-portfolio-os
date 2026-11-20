@@ -17,7 +17,7 @@ interface IpaAssistentProps extends Partial<AppProps> {
   ask?: (question: string) => Promise<IpaResult>;
   /** Eingabefeld für echte Fragen an ipa-assistant zeigen (nur lokal). */
   live?: boolean;
-  /** Eingabefeld mit dem Übergangs-Assistenten (Live-Seite, ohne Silvans Notizen). */
+  /** Eingabefeld mit dem RAG auf Cloudflare (Live-Seite). */
   agent?: boolean;
 }
 

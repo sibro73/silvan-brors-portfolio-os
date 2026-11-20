@@ -65,12 +65,12 @@ export interface AgentsReport {
 
 export interface IpaData {
   greeting: string;
-  /** Begrüssung, wenn der Übergangs-Assistent antwortet (ohne Silvans Notizen). */
+  /** Begrüssung auf der Live-Seite (RAG über die Notizen auf Cloudflare). */
   agentGreeting: string;
   footer: string;
   /** Hinweis in der Fusszeile, wenn der Chat nur Beispiele zeigt. */
   exampleNote: string;
-  /** Fusszeile mit dem Übergangs-Assistenten. */
+  /** Fusszeile auf der Live-Seite. */
   agentFooter: string;
   inputLabel: string;
   placeholder: string;

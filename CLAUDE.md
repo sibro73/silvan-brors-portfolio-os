@@ -58,8 +58,10 @@ src/
 ```
 
 Neben `src/`: `functions/api/ipa/ask.ts` ist eine Cloudflare Pages Function (Logik in
-`server/ipaAgent.ts`). Sie beantwortet IPA-Fragen auf der Live-Seite mit Workers AI, solange
-`ipa-assistant` nur lokal läuft. Kein RAG, kennt die Notizen nicht und sagt das.
+`server/ipaAgent.ts`). Sie beantwortet IPA-Fragen auf der Live-Seite als RAG über Silvans
+Lernnotizen (Workers AI + Vectorize-Index `ipa-notes`). `scripts/ingest-notes.ts` liest die
+Notizen aus `ipa-assistant/lernunterlagen/` ein. Die Notizen kommen nie ins Repo oder auf die
+Website, und der Assistent gibt sie nicht wörtlich heraus.
 
 Regeln:
 - Neue App = neuer Ordner in `apps/` + Eintrag in `apps.registry.ts`. Sonst nichts anfassen.
