@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
-import { RiggedToRiches } from '../apps/rigged-to-riches/RiggedToRiches';
-import { Terminal } from '../apps/terminal/Terminal';
+import { RiggedToRiches } from '../desktop/apps/rigged-to-riches/RiggedToRiches';
+import { Terminal } from '../desktop/apps/terminal/Terminal';
 import { status as fallback } from '../data';
 import type { StatusResult } from './status';
 import { StatusProvider } from './StatusProvider';

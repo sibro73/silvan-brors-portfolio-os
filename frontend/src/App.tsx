@@ -4,12 +4,12 @@ import { Classic } from './classic/Classic';
 import { useIsMobile } from './shared/useIsMobile';
 import { useHash } from './useHash';
 
-export { BOOT_MS, BOOT_MS_REDUCED_MOTION } from './os/boot';
+export { BOOT_MS, BOOT_MS_REDUCED_MOTION } from './desktop/boot';
 
 export const CLASSIC_HASH = '#klassisch';
 
 // Je nur die Ansicht laden, die gebraucht wird: das Handy lädt keinen Desktop-Code.
-const DesktopView = lazy(() => import('./os/DesktopView'));
+const DesktopView = lazy(() => import('./desktop/DesktopView'));
 const MobileOS = lazy(() => import('./mobile/MobileOS'));
 
 /**

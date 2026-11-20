@@ -26,9 +26,11 @@ silvan-os/
 src/
 ├── main.tsx
 ├── App.tsx                  Wechsel Handy / Desktop (matchMedia, React.lazy) / Klassische Ansicht
-├── os/
+├── desktop/                 Computer-Ansicht (ab 860 px) nach design/desktop.dc.html
+│   ├── DesktopView.tsx      Einstieg: Einstellungen, Neustart, Bootscreen
+│   ├── DesktopShell.tsx     der ganze «Mac»: Menüleiste, Schreibtisch, Fenster, Dock
 │   ├── MenuBar.tsx          Logo, aktive App, Menüs, WLAN, Akku, Uhr (Europe/Zurich)
-│   ├── menu/                Dropdown, Popover (WLAN/Akku/Kalender), Kalender-Logik
+│   ├── menu/                Dropdown, Popover (WLAN/Akku/Kalender)
 │   ├── menu.config.ts       Menüstruktur als Daten (Einträge → Aktions-ID)
 │   ├── actions.ts           zentrale Aktionsliste für Menü, Tastenkürzel, Willkommensfenster
 │   ├── shortcuts.ts         Tastenkürzel (Alt+W, Alt+M, …)
@@ -37,21 +39,21 @@ src/
 │   ├── Window.tsx           Titelleiste, Ampel-Buttons, Drag per Pointer-Events
 │   ├── Dock.tsx             App-Icons, Hover-Vergrösserung, Punkt für offene Apps
 │   ├── Notification.tsx     Benachrichtigung oben rechts
-│   └── windowStore.ts       Zustand: offen/minimiert/maximiert, x/y, z-Reihenfolge
-├── apps/                    Ein Ordner pro Desktop-App (Inhalt eines Fensters)
-│   ├── welcome/             Willkommensfenster (Startfenster)
-│   ├── about/               Über mich.txt
-│   ├── finder/              Ordner "Projekte"
-│   ├── terminal/            Terminal + commands.ts (Befehlstabelle)
-│   ├── rigged-to-riches/    Steam-Ansicht
-│   ├── clipper/             Telegram-Chat
-│   ├── ipa-assistent/       Chat mit RAG-Backend
-│   ├── agents/              Wochenbericht (PDF-Vorschau)
-│   ├── mail/                Kontakt
-│   ├── lebenslauf/          PDF-Vorschau
-│   ├── wetter/, shop-outreach/   kleine Projekte aus dem Ordner «Projekte»
-│   └── about-os/, shortcuts/     «Über Silvan OS», «Tastenkürzel»
-├── apps.registry.ts         Liste aller Desktop-Apps: id, Titel, Icon, Standardgrösse/-position
+│   ├── windowStore.ts       Zustand: offen/minimiert/maximiert, x/y, z-Reihenfolge
+│   ├── apps.registry.ts     Liste aller Desktop-Apps: id, Titel, Icon, Standardgrösse/-position
+│   └── apps/                Ein Ordner pro Desktop-App (Inhalt eines Fensters)
+│       ├── welcome/             Willkommensfenster (Startfenster)
+│       ├── about/               Über mich.txt
+│       ├── finder/              Ordner "Projekte"
+│       ├── terminal/            Terminal (Befehle aus shared/terminal.ts)
+│       ├── rigged-to-riches/    Steam-Ansicht
+│       ├── clipper/             Telegram-Chat
+│       ├── ipa-assistent/       Chat mit RAG-Backend
+│       ├── agents/              Wochenbericht (PDF-Vorschau)
+│       ├── mail/                Kontakt
+│       ├── lebenslauf/          PDF-Vorschau
+│       ├── wetter/, shop-outreach/   kleine Projekte aus dem Ordner «Projekte»
+│       └── about-os/, shortcuts/     «Über Silvan OS», «Tastenkürzel»
 ├── mobile/                  Handy-Ansicht (unter 860 px) nach design/mobile.dc.html
 │   ├── MobileOS.tsx         Home-Bildschirm, Dock, App öffnen/schliessen, Browser-Zurück
 │   ├── HomeScreen.tsx, Dock.tsx, AppSheet.tsx, icons.tsx, mobile.css
@@ -62,7 +64,8 @@ src/
 │   ├── terminal.ts          Terminal-Befehle als reine Funktion
 │   ├── wallpaper.ts         Hintergrund, localStorage-Key `silvanos-wall`
 │   ├── calendar.ts          Kalender-Logik (Europe/Zurich)
-│   └── useIsMobile.ts
+│   ├── clock.ts             Uhrzeit und Datum in Europe/Zurich
+│   └── useIsMobile.ts, useMediaQuery.ts
 ├── api/                     fetch-Funktionen für das Backend
 ├── data/                    statische Fallback-Daten (JSON), solange das Backend fehlt
 └── classic/                 "Klassische Ansicht": alles auf einer schlichten Seite
@@ -75,11 +78,11 @@ Notizen aus `ipa-assistant/lernunterlagen/` ein. Die Notizen kommen nie ins Repo
 Website, und der Assistent gibt sie nicht wörtlich heraus.
 
 Regeln:
-- Neue App = neuer Ordner in `apps/` + Eintrag in `apps.registry.ts` (Desktop) bzw. Datei in
+- Neue App = neuer Ordner in `desktop/apps/` + Eintrag in `desktop/apps.registry.ts` (Desktop) bzw. Datei in
   `mobile/apps/` + Eintrag in `mobile/mobileApps.ts` und `MobileOS.tsx` (Handy).
 - Texte nur in `data/*.json` pflegen. Beide Ansichten lesen über `shared/content.ts`.
 - Neuer Terminal-Befehl = ein Eintrag in `shared/terminal.ts` (gilt für Desktop und Handy).
-- Neuer Menüeintrag = Aktion in `os/actions.ts` + Eintrag in `os/menu.config.ts`.
+- Neuer Menüeintrag = Aktion in `desktop/actions.ts` + Eintrag in `desktop/menu.config.ts`.
   Menü, Tastenkürzel und Buttons rufen nur Aktionen auf, keine eigene Logik.
 - Kein UI-Framework für Fenster (kein react-rnd o. ä.). Drag selbst mit Pointer-Events.
 - Unter 860 px Breite: nur die Handy-Ansicht (`mobile/`), ab 860 px nur der Desktop. Umschalten
