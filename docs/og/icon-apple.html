@@ -1,0 +1,36 @@
+<!doctype html>
+<!--
+  Vorlage für apple-touch-icon.png (180 px). iOS füllt Transparenz schwarz,
+  darum mit dem Desktop-Hintergrund und etwas Rand.
+-->
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: #12131a;
+      }
+      /* Feste Pixel: headless Chrome hat eine Mindest-Fenstergrösse und schneidet oben links aus */
+      body {
+        width: 180px;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      svg {
+        display: block;
+        width: 126px;
+        height: 126px;
+      }
+    </style>
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 2l9 10-9 10-9-10z" fill="#5B3CC4" />
+    </svg>
+  </body>
+</html>

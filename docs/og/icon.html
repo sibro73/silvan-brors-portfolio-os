@@ -1,0 +1,29 @@
+<!doctype html>
+<!--
+  Vorlage für favicon-32.png (transparent). Gleiche Raute wie frontend/public/favicon.svg.
+  Mit Hintergrund (apple-touch-icon.png): icon-apple.html.
+-->
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: transparent;
+      }
+      /* Feste Pixel: headless Chrome hat eine Mindest-Fenstergrösse und schneidet oben links aus */
+      svg {
+        display: block;
+        width: 32px;
+        height: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 2l9 10-9 10-9-10z" fill="#5B3CC4" />
+    </svg>
+  </body>
+</html>
