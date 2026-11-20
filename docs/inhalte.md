@@ -8,7 +8,7 @@ Grosse Videos besser extern hosten (z. B. YouTube) und nur den Link eintragen.
 
 | Was | Wo es angezeigt wird | Ablage | Danach zu tun |
 |---|---|---|---|
-| Lebenslauf als PDF | Fenster «Lebenslauf», Menü «Lebenslauf herunterladen» | `media/lebenslauf.pdf` | Vorlage: `docs/cv/lebenslauf.html` (Platzhalter rot), PDF erzeugen siehe `docs/cv/README.md`. Danach `cv.downloadHref` auf `/media/lebenslauf.pdf` setzen und die Vorschau einbauen. |
+| Lebenslauf als PDF | Fenster «Lebenslauf», Menü «Lebenslauf herunterladen» | `media/lebenslauf.pdf` | Erledigt. Quelle `docs/cv/lebenslauf.html`, Vorschau `media/lebenslauf.webp` (siehe `docs/cv/README.md`). |
 | Trailer Rigged to Riches | Fenster «Rigged to Riches» | `media/rtr-trailer.mp4` (kurz, ohne Ton) oder YouTube-Link | Video-Einbindung baue ich, sobald die Datei da ist. |
 | Foto oder Dashboard der Wetterstation | Fenster «Wetterstation» | `media/wetterstation.jpg` (oder `.png`) | Bild mit Alternativtext einbinden. |
 | Screenshot der Seite fürs README | `README.md` | `docs/screenshot.png` | Erledigt: Screenshot der Live-Seite. |
@@ -17,11 +17,8 @@ Grosse Videos besser extern hosten (z. B. YouTube) und nur den Link eintragen.
 
 | Platzhalter | Datei | Was eintragen |
 |---|---|---|
-| `[deine@email.ch]` | `src/data/profile.json` | E-Mail-Adresse für Kontakt |
 | `[Trailer, läuft automatisch ohne Ton]` | `src/data/projects.json` | ersetzt durch das Video, siehe oben |
 | `[Foto / Dashboard-Screenshot]` | `src/data/projects.json` | ersetzt durch das Bild, siehe oben |
-| `[Lebenslauf als PDF einbetten]` | `src/data/profile.json` | ersetzt durch das PDF, siehe oben |
-| `Lehrjahr [x] von 4` (Akku in der Menüleiste) | `src/data/apprenticeship.ts` | aktuelles Lehrjahr (`year`, 1–4) |
 
 ## Bleiben bewusst Platzhalter (kommen live vom Backend)
 

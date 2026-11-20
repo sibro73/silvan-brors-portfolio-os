@@ -87,7 +87,7 @@ describe('createActions', () => {
     const { actions, deps } = setup();
     actions['copy-email']();
     await vi.waitFor(() => expect(deps.notify).toHaveBeenCalledWith('Kopiert'));
-    expect(deps.copyText).toHaveBeenCalledWith('[deine@email.ch]');
+    expect(deps.copyText).toHaveBeenCalledWith('silvan.brors@icloud.com');
   });
 
   it('copies the page link without hash', async () => {
@@ -103,10 +103,16 @@ describe('createActions', () => {
     await vi.waitFor(() => expect(deps.notify).toHaveBeenCalledWith('Kopieren nicht möglich'));
   });
 
-  it('does not pretend to download a CV that is not there yet', () => {
+  it('downloads the CV as PDF', () => {
+    const click = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
     const { actions, deps } = setup();
     actions['download-cv']();
-    expect(deps.notify).toHaveBeenCalledWith('Das PDF ist noch nicht hochgeladen.');
+    expect(click).toHaveBeenCalledTimes(1);
+    expect((click.mock.contexts[0] as HTMLAnchorElement).getAttribute('href')).toBe(
+      '/media/lebenslauf.pdf',
+    );
+    expect(deps.notify).not.toHaveBeenCalled();
+    click.mockRestore();
   });
 
   it('appearance actions update the preferences', () => {

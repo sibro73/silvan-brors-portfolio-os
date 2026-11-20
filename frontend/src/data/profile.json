@@ -58,7 +58,7 @@
   "tags": ["Java", "Spring", "Docker", "AI"],
   "motto": ["was ich zweimal von hand mache,", "automatisiere ich beim dritten mal."],
   "contact": {
-    "email": "[deine@email.ch]",
+    "email": "silvan.brors@icloud.com",
     "subject": "Hallo Silvan",
     "text": "Fragen zu einem Projekt oder eine offene Stelle? Melde dich.",
     "links": [
@@ -74,9 +74,10 @@
   },
   "cv": {
     "role": "Applikationsentwickler EFZ · Zürich",
-    "placeholder": "[Lebenslauf als PDF einbetten]",
+    "preview": "/media/lebenslauf.webp",
+    "previewAlt": "Vorschau des Lebenslaufs von Silvan Brors (eine Seite, A4)",
     "downloadLabel": "PDF herunterladen",
-    "downloadHref": "#lebenslauf"
+    "downloadHref": "/media/lebenslauf.pdf"
   },
   "welcome": {
     "title": "Portfolio von Silvan Brors",
