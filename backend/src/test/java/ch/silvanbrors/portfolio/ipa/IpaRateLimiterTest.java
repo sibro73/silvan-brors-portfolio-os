@@ -10,7 +10,7 @@ class IpaRateLimiterTest {
 
   private static IpaProperties props(int perMinute, int perDay, int global, boolean trustFly) {
     return new IpaProperties(
-        "http://ipa.test", Duration.ofSeconds(30), null, null, perMinute, perDay, global, trustFly);
+        "http://ipa.test", Duration.ofSeconds(30), perMinute, perDay, global, trustFly);
   }
 
   @Test

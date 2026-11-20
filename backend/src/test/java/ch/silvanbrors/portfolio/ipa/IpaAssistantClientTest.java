@@ -27,7 +27,6 @@ class IpaAssistantClientTest {
 
   private HttpServer server;
   private final AtomicReference<String> lastQuery = new AtomicReference<>();
-  private final AtomicReference<String> lastAccessId = new AtomicReference<>();
   private volatile int status = 200;
   private volatile String body = ANSWER;
   private volatile long delayMs = 0;
@@ -39,7 +38,6 @@ class IpaAssistantClientTest {
         "/chat",
         exchange -> {
           lastQuery.set(URLDecoder.decode(exchange.getRequestURI().getRawQuery(), StandardCharsets.UTF_8));
-          lastAccessId.set(exchange.getRequestHeaders().getFirst("CF-Access-Client-Id"));
           try {
             Thread.sleep(delayMs);
           } catch (InterruptedException e) {
@@ -63,14 +61,13 @@ class IpaAssistantClientTest {
     return "http://127.0.0.1:" + server.getAddress().getPort();
   }
 
-  private IpaAssistantClient client(String url, Duration timeout, String accessId) {
-    IpaProperties props =
-        new IpaProperties(url, timeout, accessId, accessId == null ? null : "secret", 5, 30, 200, false);
+  private IpaAssistantClient client(String url, Duration timeout) {
+    IpaProperties props = new IpaProperties(url, timeout, 5, 30, 200, false);
     return new IpaAssistantClient(props);
   }
 
   private IpaAssistantClient client() {
-    return client(url(), Duration.ofSeconds(2), null);
+    return client(url(), Duration.ofSeconds(2));
   }
 
   @Test
@@ -90,17 +87,8 @@ class IpaAssistantClientTest {
   }
 
   @Test
-  void sendsTheAccessTokenWhenConfigured() {
-    client(url(), Duration.ofSeconds(2), "portfolio.access").ask("Was ist IPERKA?");
-    assertThat(lastAccessId.get()).isEqualTo("portfolio.access");
-
-    client().ask("Was ist IPERKA?");
-    assertThat(lastAccessId.get()).isNull();
-  }
-
-  @Test
   void offlineWithoutUrl() {
-    IpaAssistantClient client = client("", Duration.ofSeconds(2), null);
+    IpaAssistantClient client = client("", Duration.ofSeconds(2));
     assertThat(client.configured()).isFalse();
     assertFailure(client, Failure.OFFLINE);
   }
@@ -122,13 +110,13 @@ class IpaAssistantClientTest {
   void unavailableWhenNobodyListens() {
     String deadUrl = url();
     server.stop(0);
-    assertFailure(client(deadUrl, Duration.ofSeconds(2), null), Failure.UNAVAILABLE);
+    assertFailure(client(deadUrl, Duration.ofSeconds(2)), Failure.UNAVAILABLE);
   }
 
   @Test
   void timeoutWhenTheAnswerTakesTooLong() {
     delayMs = 1500;
-    assertFailure(client(url(), Duration.ofMillis(300), null), Failure.TIMEOUT);
+    assertFailure(client(url(), Duration.ofMillis(300)), Failure.TIMEOUT);
   }
 
   private static void assertFailure(IpaAssistantClient client, Failure expected) {

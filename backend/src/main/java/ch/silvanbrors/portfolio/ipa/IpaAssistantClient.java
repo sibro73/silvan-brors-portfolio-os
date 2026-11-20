@@ -49,10 +49,6 @@ public class IpaAssistantClient {
     if (properties.configured()) {
       configured.baseUrl(properties.url());
     }
-    if (hasText(properties.accessClientId()) && hasText(properties.accessClientSecret())) {
-      configured.defaultHeader("CF-Access-Client-Id", properties.accessClientId());
-      configured.defaultHeader("CF-Access-Client-Secret", properties.accessClientSecret());
-    }
     this.rest = configured.build();
   }
 
