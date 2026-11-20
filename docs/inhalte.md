@@ -18,7 +18,6 @@ Grosse Videos besser extern hosten (z. B. YouTube) und nur den Link eintragen.
 | Platzhalter | Datei | Was eintragen |
 |---|---|---|
 | `[deine@email.ch]` | `src/data/profile.json` | E-Mail-Adresse für Kontakt |
-| GitHub- und LinkedIn-Link (zeigen auf die Startseite) | `src/data/profile.json` → `links` | eigene Profil-URLs |
 | `[Trailer, läuft automatisch ohne Ton]` | `src/data/projects.json` | ersetzt durch das Video, siehe oben |
 | `[Foto / Dashboard-Screenshot]` | `src/data/projects.json` | ersetzt durch das Bild, siehe oben |
 | `[Lebenslauf als PDF einbetten]` | `src/data/profile.json` | ersetzt durch das PDF, siehe oben |
