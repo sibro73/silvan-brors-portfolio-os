@@ -37,9 +37,10 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 - [x] Agents: Wochenbericht speichern und über `/api/agents/report` ausliefern
 
 ## Phase 5 – IPA-Demo live (`feat/ipa-ask`)
-- [ ] `POST /api/ipa/ask` an das RAG anbinden
-- [ ] Rate-Limit, Längenlimit, Timeout, Fehlermeldung im Chat
-- [ ] Quellen (welche Notiz) in der Antwort mitliefern
+- [x] `POST /api/ipa/ask` an das RAG anbinden
+  (an `ipa-assistant`, **nur lokal**: das Projekt darf nicht öffentlich sein, die Live-Seite zeigt Beispielantworten)
+- [x] Rate-Limit, Längenlimit, Timeout, Fehlermeldung im Chat
+- [x] Quellen (welche Notiz) in der Antwort mitliefern
 
 ## Phase 6 – Feinschliff (`chore/polish`)
 - [ ] Echte Screenshots, GIFs, Trailer, Lebenslauf-PDF
@@ -49,6 +50,6 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 
 ## Offene Punkte
 - Sprache des Clippers: [eintragen]
-- LLM und Vektor-DB des IPA-Assistenten: [eintragen]
+- LLM und Vektor-DB des IPA-Assistenten: Ollama `llama3.1:8b` + pgvector, im separaten Projekt `ipa-assistant`
 - Datenbank in Produktion: Neon (Free-Plan), siehe `docs/deploy.md`
 - Domain: silvanbrors.ch, API unter api.silvanbrors.ch (Hosting: Cloudflare Pages + Fly.io, siehe `docs/deploy.md`)

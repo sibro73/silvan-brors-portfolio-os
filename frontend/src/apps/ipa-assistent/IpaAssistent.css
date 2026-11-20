@@ -62,6 +62,51 @@
 .ipa__chip[aria-pressed='true'] {
   background: #e8f1fd;
 }
+.ipa__bubble--pending {
+  color: var(--muted);
+  font-style: italic;
+}
+.ipa__bubble--error {
+  background: #fdecec;
+  color: #8a1c1c;
+}
+.ipa__form {
+  display: flex;
+  gap: 8px;
+  padding: 0 18px 12px;
+}
+.ipa__input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid #d1d1d6;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: #ffffff;
+}
+.ipa__input:focus-visible {
+  outline: 2px solid #2f6fe4;
+  outline-offset: 1px;
+}
+.ipa__send {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #2f6fe4;
+  color: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ipa__send:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
 .ipa__footer {
   margin: 0;
   padding: 0 18px 14px;

@@ -104,6 +104,14 @@ gh variable set DEPLOY_ENABLED --body true
 Danach den ersten Deploy von Hand starten: *Actions* → `frontend` bzw. `backend` →
 *Run workflow* auf `main`. Ab dann geht es bei jedem Merge automatisch.
 
+### 6. IPA-Assistent: bleibt lokal
+
+`ipa-assistant` darf nicht öffentlich sein. Auf der Live-Seite bleibt `IPA_ASSISTANT_URL`
+deshalb **leer**, und `VITE_IPA_LIVE` wird beim Frontend-Build nicht gesetzt. Der Chat zeigt
+dort nur die Beispielantworten, mit dem Hinweis «Läuft nur lokal». Hier ist nichts zu tun.
+
+Wie man den Chat lokal gegen `ipa-assistant` laufen lässt, steht in `docs/api.md`.
+
 ## Prüfen
 
 ```bash

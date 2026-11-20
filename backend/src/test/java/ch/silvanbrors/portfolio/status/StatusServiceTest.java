@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import ch.silvanbrors.portfolio.agents.AgentsReportRepository;
 import ch.silvanbrors.portfolio.clipper.ClipRepository;
+import ch.silvanbrors.portfolio.ipa.IpaQuestionRepository;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -20,11 +21,12 @@ class StatusServiceTest {
 
   private final ClipRepository clips = mock(ClipRepository.class);
   private final AgentsReportRepository reports = mock(AgentsReportRepository.class);
+  private final IpaQuestionRepository ipaQuestions = mock(IpaQuestionRepository.class);
 
   /** 20.11.2026, 23:30 in Zurich (22:30 UTC). */
   private final Clock clock = Clock.fixed(Instant.parse("2026-11-20T22:30:00Z"), ZoneOffset.UTC);
 
-  private final StatusService service = new StatusService(clips, reports, clock);
+  private final StatusService service = new StatusService(clips, reports, ipaQuestions, clock);
 
   @Test
   void reportsNothingWhileNoSourceHasSentData() {
@@ -76,13 +78,23 @@ class StatusServiceTest {
   }
 
   @Test
-  void steamAndIpaAreNotConnectedYet() {
+  void countsAnsweredIpaQuestionsOnceThereAreAny() {
+    when(clips.any()).thenReturn(false);
+    when(reports.latestReceivedAt()).thenReturn(Optional.empty());
+
+    when(ipaQuestions.countAnswered()).thenReturn(0);
+    assertThat(service.currentStatus().ipaFragen()).isNull();
+
+    when(ipaQuestions.countAnswered()).thenReturn(37);
+    assertThat(service.currentStatus().ipaFragen()).isEqualTo(37);
+  }
+
+  @Test
+  void steamIsNotConnectedYet() {
     when(clips.any()).thenReturn(true);
     when(reports.latestReceivedAt()).thenReturn(Optional.of(Instant.now()));
+    when(ipaQuestions.countAnswered()).thenReturn(3);
 
-    StatusResponse status = service.currentStatus();
-
-    assertThat(status.wishlists()).isNull();
-    assertThat(status.ipaFragen()).isNull();
+    assertThat(service.currentStatus().wishlists()).isNull();
   }
 }

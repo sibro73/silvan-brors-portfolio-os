@@ -58,7 +58,7 @@ describe('apps', () => {
     expect(screen.queryByText(/Quelle:/)).toBeNull();
     await userEvent.click(screen.getByRole('button', { name: 'Image oder Container?' }));
     expect(screen.getByText(/unveränderliche Vorlage/)).toBeInTheDocument();
-    expect(screen.getByText('Quelle: notizen/docker.md')).toBeInTheDocument();
+    expect(screen.getByText('Beispielantwort · Quelle: notizen/docker.md')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Image oder Container?' })).toHaveAttribute(
       'aria-pressed',
       'true',

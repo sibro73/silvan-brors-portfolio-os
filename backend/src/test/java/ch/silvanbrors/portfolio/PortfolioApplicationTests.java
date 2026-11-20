@@ -18,10 +18,12 @@ class PortfolioApplicationTests {
             .query(Integer.class)
             .single();
     Integer tables =
-        jdbc.sql("select count(*) from information_schema.tables where table_name = 'clip_event'")
+        jdbc.sql(
+                "select count(*) from information_schema.tables"
+                    + " where table_name in ('clip_event', 'agents_report', 'ipa_question')")
             .query(Integer.class)
             .single();
     assertThat(failed).isZero();
-    assertThat(tables).isEqualTo(1);
+    assertThat(tables).isEqualTo(3);
   }
 }

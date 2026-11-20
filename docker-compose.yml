@@ -24,6 +24,7 @@ services:
       FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:5173}
       CLIPPER_API_KEY: ${CLIPPER_API_KEY:-}
       AGENTS_API_KEY: ${AGENTS_API_KEY:-}
+      IPA_ASSISTANT_URL: ${IPA_ASSISTANT_URL:-}
       POSTGRES_URL: jdbc:postgresql://postgres:5432/portfolio
       POSTGRES_USER: ${POSTGRES_USER:-portfolio}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD in .env setzen}
