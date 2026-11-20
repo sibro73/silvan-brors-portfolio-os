@@ -19,5 +19,7 @@ export default defineConfig({
     globals: false,
     setupFiles: ['./src/test/setup.ts'],
     css: false,
+    // Tests schicken nie echte Requests: ohne Backend-URL gilt überall der Fallback.
+    env: { VITE_API_URL: '' },
   },
 });

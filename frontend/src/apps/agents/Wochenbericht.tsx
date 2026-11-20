@@ -1,9 +1,10 @@
 import '../pdf-preview.css';
 import './Wochenbericht.css';
 
-import { agentsReport as r } from '../../data';
+import { useAgentsReport } from '../../api/agentsReport';
 
 export function Wochenbericht() {
+  const r = useAgentsReport();
   return (
     <div className="pdf">
       <article className="pdf__page report">
@@ -30,7 +31,7 @@ export function Wochenbericht() {
         <p className="report__rec">
           <b>Empfehlung:</b> {r.recommendation}
         </p>
-        <p className="report__note mono">{r.note}</p>
+        {r.note && <p className="report__note mono">{r.note}</p>}
       </article>
     </div>
   );
