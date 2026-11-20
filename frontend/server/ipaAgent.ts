@@ -13,6 +13,9 @@
  * antwortet Cloudflare mit einem Fehler, es entstehen keine Kosten (Workers Free).
  */
 
+import type { D1Like } from './db';
+import { recordIpaQuestion } from './liveData';
+
 export const MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 export const EMBED_MODEL = '@cf/baai/bge-m3';
 export const MIN_LENGTH = 3;
@@ -67,6 +70,8 @@ export interface Notes {
 export interface Env {
   AI?: Ai;
   NOTES?: Notes;
+  /** D1: zählt beantwortete Fragen für «IPA-Fragen» im Status. */
+  DB?: D1Like;
 }
 
 interface Excerpt {
@@ -143,7 +148,12 @@ function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
 
-async function answer(question: string, ai: Ai, notes: Notes): Promise<Response> {
+async function answer(
+  question: string,
+  ai: Ai,
+  notes: Notes,
+  db: D1Like | undefined,
+): Promise<Response> {
   const vector = embedding(await ai.run(EMBED_MODEL, { text: [question] }));
   if (!vector) return json(502, { fehler: FEHLER.unavailable });
 
@@ -164,6 +174,7 @@ async function answer(question: string, ai: Ai, notes: Notes): Promise<Response>
   });
   const text = answerText(result);
   if (!text) return json(502, { fehler: FEHLER.unavailable });
+  await recordIpaQuestion(db);
   return json(200, { antwort: toSwiss(text), quellen: sources(excerpts) });
 }
 
@@ -186,7 +197,7 @@ export async function handleAsk(
   }
 
   try {
-    return await withTimeout(answer(question, ai, notes), timeoutMs);
+    return await withTimeout(answer(question, ai, notes, env.DB), timeoutMs);
   } catch (e) {
     if (e instanceof Timeout) return json(504, { fehler: FEHLER.timeout });
     // Kontingent aufgebraucht oder zu viele Anfragen (Workers AI meldet das als Fehlertext)
