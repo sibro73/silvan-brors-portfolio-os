@@ -30,9 +30,11 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 
 ## Phase 4 – Echte Daten (`feat/live-data`)
 - [ ] `POST /api/clipper/events` mit API-Key, Clipper anbinden
-- [ ] Postgres + Flyway: Clips pro Tag speichern
+  (Endpunkt fertig, Doku: `docs/api.md`. Offen: der Clipper selbst muss ihn aufrufen)
+- [x] Postgres + Flyway: Clips pro Tag speichern
 - [ ] Steam: prüfen, was die Steamworks-API liefert (Wishlists/Follower), Scheduler + Cache
-- [ ] Agents: Wochenbericht speichern und über `/api/agents/report` ausliefern
+  (geprüft, siehe `docs/steam.md`: braucht Financial-API-Key, Endpunkt noch unbestätigt)
+- [x] Agents: Wochenbericht speichern und über `/api/agents/report` ausliefern
 
 ## Phase 5 – IPA-Demo live (`feat/ipa-ask`)
 - [ ] `POST /api/ipa/ask` an das RAG anbinden
@@ -48,4 +50,5 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 ## Offene Punkte
 - Sprache des Clippers: [eintragen]
 - LLM und Vektor-DB des IPA-Assistenten: [eintragen]
+- Datenbank in Produktion: Neon (Free-Plan), siehe `docs/deploy.md`
 - Domain: silvanbrors.ch, API unter api.silvanbrors.ch (Hosting: Cloudflare Pages + Fly.io, siehe `docs/deploy.md`)

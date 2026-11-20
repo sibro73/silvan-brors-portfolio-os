@@ -60,7 +60,7 @@ export interface AgentsReport {
   intro: string;
   channels: { name: string; barWidth: number; highlight?: boolean; views: string }[];
   recommendation: string;
-  note: string;
+  note?: string;
 }
 
 export interface IpaData {

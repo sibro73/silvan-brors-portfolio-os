@@ -1,13 +1,5 @@
 import { type Status, status as fallbackStatus } from '../data';
-
-/**
- * Basis-URL des Backends. In Produktion über `VITE_API_URL` gesetzt.
- * Fehlt sie, gibt es (ausser im Dev-Modus) gar keinen Request: die Seite zeigt die Daten aus `data/`.
- */
-export const API_URL: string =
-  import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? 'http://localhost:8080' : '');
-
-export const STATUS_TIMEOUT_MS = 3000;
+import { API_TIMEOUT_MS, API_URL, getJson } from './http';
 
 export interface StatusResult {
   status: Status;
@@ -57,29 +49,13 @@ const offline = (): StatusResult => ({ status: fallbackStatus, source: 'fallback
  */
 export async function fetchStatus(
   baseUrl: string = API_URL,
-  timeoutMs: number = STATUS_TIMEOUT_MS,
+  timeoutMs: number = API_TIMEOUT_MS,
 ): Promise<StatusResult> {
-  if (!baseUrl) return offline();
-
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  const started = performance.now();
-  try {
-    const res = await fetch(`${baseUrl.replace(/\/$/, '')}/api/status`, {
-      signal: controller.signal,
-      headers: { Accept: 'application/json' },
-    });
-    if (!res.ok) return offline();
-    const body: unknown = await res.json();
-    if (!isStatusDto(body)) return offline();
-    return {
-      status: mergeStatus(fallbackStatus, body),
-      source: 'live',
-      latencyMs: Math.round(performance.now() - started),
-    };
-  } catch {
-    return offline();
-  } finally {
-    clearTimeout(timer);
-  }
+  const res = await getJson(baseUrl, '/api/status', timeoutMs);
+  if (!res || !isStatusDto(res.body)) return offline();
+  return {
+    status: mergeStatus(fallbackStatus, res.body),
+    source: 'live',
+    latencyMs: res.latencyMs,
+  };
 }

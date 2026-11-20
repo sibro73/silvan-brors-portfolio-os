@@ -15,7 +15,7 @@ Referenz, kein Code zum Weiterverwenden.
 silvan-os/
 ├── frontend/        React + TypeScript + Vite
 ├── backend/         Spring Boot 4, Java 21, Maven
-├── docs/            Plan, Design-Referenz, Entscheide, deploy.md
+├── docs/            Plan, Design-Referenz, Entscheide, deploy.md, api.md
 ├── docker-compose.yml   lokal: backend + postgres
 └── .github/workflows/   CI für frontend und backend
 ```
@@ -79,6 +79,7 @@ Package `ch.silvanbrors.portfolio`:
 ├── clipper/     POST /api/clipper/events  Clipper meldet Clips (Header X-Api-Key)
 ├── steam/       Scheduler, holt Steam-Daten, Ergebnis im Cache
 ├── agents/      GET  /api/agents/report   letzter Wochenbericht
+│                POST /api/agents/report   Agents liefern ihn ab (Header X-Api-Key)
 ├── ipa/         POST /api/ipa/ask         Frage an den Lernassistenten (Rate-Limit!)
 └── config/      CORS, Cache (Caffeine), Security für API-Keys
 ```
