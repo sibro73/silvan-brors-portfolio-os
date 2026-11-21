@@ -11,7 +11,8 @@ export type MobileAppId =
   | 'settings'
   | 'kontakt'
   | 'notes'
-  | 'terminal';
+  | 'terminal'
+  | 'welcome';
 
 export interface MobileAppStyle {
   title: string;
@@ -43,10 +44,8 @@ export const MOBILE_APPS: Record<MobileAppId, MobileAppStyle> = {
   kontakt: { title: 'Neue E-Mail', bg: '#FFFFFF', fg: '#1D1D1F', tint: '#2F6FE4' },
   notes: { title: 'Notizen', bg: '#FFFDF5', fg: '#1D1D1F', tint: '#B8860B' },
   terminal: { title: 'Terminal', bg: '#1E1E1E', fg: '#FFFFFF', tint: '#7EE787' },
+  welcome: { title: 'Willkommen', bg: '#FFFFFF', fg: '#1D1D1F', tint: '#5B3CC4' },
 };
-
-export const isMobileAppId = (v: unknown): v is MobileAppId =>
-  typeof v === 'string' && Object.hasOwn(MOBILE_APPS, v);
 
 /** Namen für `open <name>` im Handy-Terminal. */
 export const MOBILE_OPEN_ALIASES: Record<string, MobileAppId> = {
@@ -62,11 +61,13 @@ export const MOBILE_OPEN_ALIASES: Record<string, MobileAppId> = {
   wetter: 'wetter',
   shop: 'shop',
   kalender: 'kalender',
+  willkommen: 'welcome',
+  start: 'welcome',
 };
 
 /** Was eine App von der Handy-Ansicht bekommt. */
 export interface MobileAppProps {
-  open: (id: MobileAppId) => void;
+  open: (id: MobileAppId, from?: HTMLElement) => void;
   goHome: () => void;
   toast: (text: string) => void;
 }

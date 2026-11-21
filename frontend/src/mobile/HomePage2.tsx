@@ -124,6 +124,19 @@ export function HomePage2({ onOpen }: { onOpen: OpenHandler }) {
         </span>
       </div>
 
+      {/* Startseite als App */}
+      <button type="button" className="m-app m-ic" onClick={open('welcome')}>
+        <span
+          className="m-app__tile"
+          style={{ background: 'linear-gradient(160deg, #8466F0, #4A2FB0)' }}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3.5l7.5 8.5-7.5 8.5-7.5-8.5z" fill="#FFFFFF" />
+          </svg>
+        </span>
+        <span className="m-lbl">Willkommen</span>
+      </button>
+
       {/* Links */}
       {linkedin && (
         <a

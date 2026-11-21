@@ -38,6 +38,7 @@ describe('Dock', () => {
   it('lists the dock apps in reference order with a name tooltip', () => {
     render(<Dock running={new Set()} onOpen={() => {}} />);
     expect(tooltips()).toEqual([
+      'Willkommen',
       'Finder',
       'Terminal',
       'Rigged to Riches',
@@ -91,6 +92,6 @@ describe('Dock', () => {
     expect(dock).not.toHaveClass('dock--magnify');
     fireEvent.pointerMove(dock, { clientX: 0, pointerType: 'mouse' });
     expect(screen.getByTestId('dock-finder').style.getPropertyValue('--scale')).toBe('');
-    expect(tooltips()).toHaveLength(7);
+    expect(tooltips()).toHaveLength(8);
   });
 });

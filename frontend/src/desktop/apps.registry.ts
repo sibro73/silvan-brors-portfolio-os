@@ -23,6 +23,7 @@ import { Glyph as RtrGlyph } from './apps/rigged-to-riches/Glyph';
 import { Glyph as ShopGlyph } from './apps/shop-outreach/Glyph';
 import { Glyph as TerminalGlyph } from './apps/terminal/Glyph';
 import { Glyph as WetterGlyph } from './apps/wetter/Glyph';
+import { Glyph as WelcomeGlyph } from './apps/welcome/Glyph';
 import type { GlyphProps } from './AppIcon';
 import type { AppProps } from './appTypes';
 
@@ -88,6 +89,8 @@ export const APPS: AppDefinition[] = [
     y: 24,
     width: 800,
     height: 'auto',
+    icon: { background: '#5B3CC4', Glyph: WelcomeGlyph },
+    dock: 'Willkommen',
   },
   {
     id: 'about',
@@ -266,6 +269,7 @@ export const DESKTOP_ORDER: AppId[] = ['finder', 'cv', 'about', 'kontakt'];
 
 /** Reihenfolge im Dock. */
 export const DOCK_ORDER: AppId[] = [
+  'welcome',
   'finder',
   'terminal',
   'rtr',
