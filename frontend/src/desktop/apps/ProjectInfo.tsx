@@ -18,6 +18,13 @@ export function ProjectInfo({ id, tone = 'plain' }: ProjectInfoProps) {
       <h3 id={headingId} className="pinfo__title">
         Über das Projekt
       </h3>
+      {d.tech.length > 0 && (
+        <ul className="pinfo__chips" aria-label="Technologien">
+          {d.tech.map((t) => (
+            <li key={t}>{t}</li>
+          ))}
+        </ul>
+      )}
       {d.summary.map((p) => (
         <p key={p}>{p}</p>
       ))}
@@ -31,7 +38,6 @@ export function ProjectInfo({ id, tone = 'plain' }: ProjectInfoProps) {
           </ul>
         </>
       )}
-      {d.tech.length > 0 && <p className="pinfo__tech mono">{d.tech.join(' · ')}</p>}
       {d.repo ? (
         <a className="pinfo__repo" href={d.repo.href} target="_blank" rel="noopener noreferrer">
           <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">

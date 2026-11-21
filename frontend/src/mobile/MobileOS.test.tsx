@@ -51,6 +51,7 @@ const LAUNCHERS: Record<keyof typeof MOBILE_APPS, () => HTMLElement> = {
   kontakt: () => screen.getByRole('button', { name: 'Mail: Kontakt' }),
   notes: () => screen.getByRole('button', { name: 'Notizen: Über mich' }),
   terminal: () => screen.getByRole('button', { name: 'Terminal' }),
+  welcome: () => screen.getByRole('button', { name: 'Willkommen' }),
 };
 
 describe('MobileOS', () => {
@@ -263,5 +264,31 @@ describe('MobileOS', () => {
       'href',
       'https://github.com/sibro73/shop-outreach',
     );
+  });
+
+  it('back never opens another app, also with old history entries after a reload', () => {
+    // Nach Neuladen in den Einstellungen steht im Verlauf noch «Einstellungen offen»
+    window.history.replaceState({ silvanosApp: 'settings' }, '');
+    render(<MobileOS />);
+    expect(window.history.state).toBeNull();
+
+    tap(screen.getByRole('button', { name: 'Rigged' }));
+    act(() => {
+      window.dispatchEvent(new PopStateEvent('popstate', { state: { silvanosApp: 'settings' } }));
+    });
+    advance(CLOSE_MS);
+    expect(sheet('Rigged to Riches')).toBeNull();
+    expect(sheet('Einstellungen')).toBeNull();
+  });
+
+  it('the start page opens as an app and leads to the projects', () => {
+    render(<MobileOS />);
+    tap(screen.getByRole('button', { name: 'Willkommen' }));
+    const start = sheet('Willkommen')!;
+    expect(within(start).getByText('Portfolio von Silvan Brors')).toBeInTheDocument();
+    expect(within(start).getByText(/Python · FFmpeg · streamlink/)).toBeInTheDocument();
+    tap(within(start).getByRole('button', { name: /Clipper/ }));
+    expect(sheet('Telegram')).toBeInTheDocument();
+    expect(sheet('Willkommen')).toBeNull();
   });
 });

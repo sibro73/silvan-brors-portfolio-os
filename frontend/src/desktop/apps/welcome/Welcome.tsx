@@ -2,7 +2,7 @@ import './Welcome.css';
 
 import { useStatus } from '../../../api/statusContext';
 import { APP_BY_ID, type AppId } from '../../apps.registry';
-import { profile, projects } from '../../../data';
+import { profile, type ProjectId, projects } from '../../../data';
 import { AppIcon } from '../../AppIcon';
 import type { AppProps } from '../../appTypes';
 
@@ -50,6 +50,11 @@ export function Welcome({ openApp }: AppProps) {
                   <div className="welcome__card-text">
                     <h3>{card.title}</h3>
                     <p>{card.text}</p>
+                    {card.app in projects.details && (
+                      <p className="welcome__tech mono">
+                        {projects.details[card.app as ProjectId].tech.slice(0, 3).join(' · ')}
+                      </p>
+                    )}
                   </div>
                   <button
                     type="button"

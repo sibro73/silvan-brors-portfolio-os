@@ -27,6 +27,34 @@ export function ProjectInfo({ id, link = '#2F6FE4' }: { id: ProjectId; link?: st
       <h3 id={`m-pinfo-${id}`} style={{ margin: 0, fontSize: 17, fontWeight: 700 }}>
         Über das Projekt
       </h3>
+      {d.tech.length > 0 && (
+        <ul
+          aria-label="Technologien"
+          style={{
+            listStyle: 'none',
+            margin: 0,
+            padding: 0,
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 6,
+          }}
+        >
+          {d.tech.map((t) => (
+            <li
+              key={t}
+              style={{
+                fontSize: 13,
+                fontWeight: 600,
+                padding: '4px 10px',
+                borderRadius: 999,
+                background: 'rgba(127,127,127,0.18)',
+              }}
+            >
+              {t}
+            </li>
+          ))}
+        </ul>
+      )}
       {d.summary.map((p) => (
         <p key={p} style={{ margin: 0 }}>
           {p}
@@ -54,11 +82,6 @@ export function ProjectInfo({ id, link = '#2F6FE4' }: { id: ProjectId; link?: st
             ))}
           </ul>
         </>
-      )}
-      {d.tech.length > 0 && (
-        <p style={{ margin: 0, fontSize: 13, fontFamily: "'JetBrains Mono', monospace", ...muted }}>
-          {d.tech.join(' · ')}
-        </p>
       )}
       {d.repo ? (
         <a
