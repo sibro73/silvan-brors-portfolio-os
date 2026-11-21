@@ -162,8 +162,10 @@ export interface ClassicData {
     kind: string;
     /** Filter-Kategorien (ids aus `filters`). */
     filters: string[];
-    /** Farbe der Bildfläche auf der Karte. */
+    /** Farbe der Bildfläche auf der Karte (Hintergrund, wenn kein Bild da ist). */
     color: string;
+    /** Echtes Bild des Projekts (16:9). Fehlt es, steht «[Screenshot]» da. */
+    image?: { src: string; alt: string };
     status?: string;
     text: string;
     tags: string[];

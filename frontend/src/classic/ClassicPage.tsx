@@ -202,8 +202,20 @@ export default function ClassicPage() {
               {projects.map((p) => (
                 <li key={`${filter}-${p.name}`} className="c-card">
                   <div className="c-card__media" style={{ background: p.color }}>
+                    {p.image ? (
+                      <img
+                        className="c-card__img"
+                        src={p.image.src}
+                        alt={p.image.alt}
+                        loading="lazy"
+                        decoding="async"
+                        width={1280}
+                        height={720}
+                      />
+                    ) : (
+                      <span className="c-card__shot">[Screenshot]</span>
+                    )}
                     {p.status && <span className="c-card__status">{p.status}</span>}
-                    <span className="c-card__shot">[Screenshot]</span>
                   </div>
                   <div className="c-card__body">
                     <p className="c-card__kind">{p.kind}</p>
