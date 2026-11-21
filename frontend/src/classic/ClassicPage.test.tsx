@@ -56,7 +56,12 @@ describe('ClassicPage', () => {
       'https://github.com/sibro73/stream-clipper-script',
     );
     expect(screen.getByText('Danach: [Übernahme / nächster Schritt]')).toBeInTheDocument();
-    expect(screen.getAllByText('[Screenshot]')).toHaveLength(7);
+    // Echte Bilder, wo es welche gibt; nur die Wetterstation hat noch keines
+    expect(screen.getAllByText('[Screenshot]')).toHaveLength(1);
+    expect(screen.getByRole('img', { name: /Casino der Stadt Las Agné/ })).toHaveAttribute(
+      'src',
+      '/media/projects/rtr.webp',
+    );
   });
 
   it('copies the e-mail and shows «Kopiert» for 1.8 s', async () => {
