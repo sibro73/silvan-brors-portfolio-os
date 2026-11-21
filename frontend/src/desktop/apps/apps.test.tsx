@@ -112,4 +112,24 @@ describe('apps', () => {
       unmount();
     }
   });
+
+  it('Lebenslauf opens a zoomable large view and closes with Escape', async () => {
+    render(<Lebenslauf />);
+    await userEvent.click(screen.getByRole('button', { name: 'Lebenslauf vergrössern' }));
+    const viewer = screen.getByRole('dialog', { name: 'Lebenslauf gross ansehen' });
+    expect(within(viewer).getByRole('img')).toHaveAttribute('src', '/media/lebenslauf-gross.webp');
+    expect(viewer).toHaveTextContent('100 %');
+    expect(within(viewer).getByRole('button', { name: 'Verkleinern' })).toBeDisabled();
+
+    await userEvent.click(within(viewer).getByRole('button', { name: 'Vergrössern' }));
+    expect(viewer).toHaveTextContent('150 %');
+    // Antippen des Bildes: gezoomt → ganze Seite, ganze Seite → 200 %
+    await userEvent.click(within(viewer).getByRole('img'));
+    expect(viewer).toHaveTextContent('100 %');
+    await userEvent.click(within(viewer).getByRole('img'));
+    expect(viewer).toHaveTextContent('200 %');
+
+    await userEvent.keyboard('{Escape}');
+    expect(screen.queryByRole('dialog')).toBeNull();
+  });
 });

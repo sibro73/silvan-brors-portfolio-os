@@ -37,6 +37,8 @@ export interface Profile {
     role: string;
     /** Bild der ersten Seite (aus docs/cv/lebenslauf.html), als Vorschau im Fenster. */
     preview: string;
+    /** Hochauflösend für die Grossansicht (Zoom bis 300 %). */
+    previewLarge: string;
     previewAlt: string;
     downloadLabel: string;
     downloadHref: string;

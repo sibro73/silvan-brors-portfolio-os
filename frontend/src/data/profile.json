@@ -83,6 +83,7 @@
   "cv": {
     "role": "Applikationsentwickler EFZ · Zürich",
     "preview": "/media/lebenslauf.webp",
+    "previewLarge": "/media/lebenslauf-gross.webp",
     "previewAlt": "Vorschau des Lebenslaufs von Silvan Brors (eine Seite, A4)",
     "downloadLabel": "PDF herunterladen",
     "downloadHref": "/media/lebenslauf.pdf"

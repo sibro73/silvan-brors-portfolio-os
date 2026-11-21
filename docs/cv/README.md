@@ -12,6 +12,10 @@ CH="/c/Program Files/Google/Chrome/Application/chrome.exe"; root=$(pwd -W)
 "$CH" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=2 --window-size=794,1123   --screenshot="$root/cv.png" "file:///$root/docs/cv/lebenslauf.html"
 python -c "from PIL import Image; Image.open('cv.png').convert('RGB').save('frontend/public/media/lebenslauf.webp', 'WEBP', quality=82)"
 rm cv.png
+# Grossansicht (Zoom bis 300 %): gleich, mit --force-device-scale-factor=3 nach lebenslauf-gross.webp
+"$CH" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=3 --window-size=794,1123   --screenshot="$root/cvhd.png" "file:///$root/docs/cv/lebenslauf.html"
+python -c "from PIL import Image; Image.open('cvhd.png').convert('RGB').save('frontend/public/media/lebenslauf-gross.webp', 'WEBP', quality=80)"
+rm cvhd.png
 ```
 
 Das ist die öffentliche Version: ohne Telefonnummer (nur E-Mail, Website, GitHub, LinkedIn).

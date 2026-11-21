@@ -1,0 +1,122 @@
+/* Grossansicht des Lebenslaufs (Desktop und Handy). */
+.cvv {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  background: rgba(20, 20, 24, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family:
+    Inter,
+    -apple-system,
+    system-ui,
+    sans-serif;
+  color: #ffffff;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  animation: cvv-in 0.18s ease-out both;
+}
+@keyframes cvv-in {
+  from {
+    opacity: 0;
+  }
+}
+.cvv__bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+}
+.cvv__btn {
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.cvv__btn:hover:not(:disabled),
+.cvv__btn:focus-visible {
+  background: rgba(255, 255, 255, 0.26);
+}
+.cvv__btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.cvv__zoom {
+  min-width: 52px;
+  text-align: center;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.cvv__link {
+  margin-left: auto;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.cvv__link:hover {
+  text-decoration: underline;
+}
+.cvv__close {
+  font-size: 18px;
+}
+.cvv__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 12px 24px;
+}
+.cvv__page {
+  /* «100 %» = ganze Seitenbreite: am Handy die Bildschirmbreite, am Desktop höchstens 820 px */
+  width: 100%;
+  margin: 0 auto;
+}
+@media (min-width: 860px) {
+  .cvv__page {
+    width: min(820px, 100%);
+  }
+}
+.cvv__toggle {
+  display: block;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: inherit;
+}
+.cvv__toggle:focus-visible {
+  outline: 3px solid #79aaff;
+  outline-offset: 4px;
+}
+.cvv__img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+  cursor: zoom-in;
+}
+.cvv__img--zoomed {
+  cursor: zoom-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cvv {
+    animation: none;
+  }
+}

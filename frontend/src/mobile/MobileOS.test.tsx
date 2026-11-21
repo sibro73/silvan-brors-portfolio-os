@@ -291,4 +291,16 @@ describe('MobileOS', () => {
     expect(sheet('Telegram')).toBeInTheDocument();
     expect(sheet('Willkommen')).toBeNull();
   });
+
+  it('CV preview opens the large view, closed with ✕', () => {
+    render(<MobileOS />);
+    tap(screen.getByRole('button', { name: 'Lebenslauf' }));
+    tap(screen.getByRole('button', { name: 'Lebenslauf vergrössern' }));
+    const viewer = screen.getByRole('dialog', { name: 'Lebenslauf gross ansehen' });
+    tap(within(viewer).getByRole('button', { name: 'Vergrössern' }));
+    expect(viewer).toHaveTextContent('150 %');
+    tap(within(viewer).getByRole('button', { name: 'Schliessen' }));
+    expect(screen.queryByRole('dialog')).toBeNull();
+    expect(sheet('Lebenslauf.pdf')).toBeInTheDocument();
+  });
 });
