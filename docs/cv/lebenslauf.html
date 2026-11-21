@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
-  Quelle für frontend/public/media/lebenslauf.pdf und lebenslauf.png (A4).
-  Nur echte Angaben, nichts erfinden.
+  Quelle für frontend/public/media/lebenslauf.pdf und lebenslauf.webp (A4, eine Seite).
+  Öffentliche Version: ohne Telefonnummer. Nur echte Angaben, nichts erfinden.
   PDF erzeugen: siehe docs/cv/README.md
 -->
 <html lang="de-CH">
@@ -11,7 +11,7 @@
     <style>
       @page {
         size: A4;
-        margin: 13mm 15mm 12mm;
+        margin: 11mm 15mm 10mm;
       }
       :root {
         --ink: #1d1d1f;
@@ -26,7 +26,7 @@
       html {
         font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
         font-size: 9.6pt;
-        line-height: 1.4;
+        line-height: 1.34;
         color: var(--ink);
         background: #fff;
       }
@@ -39,7 +39,7 @@
           box-sizing: border-box;
           width: 210mm;
           height: 297mm;
-          padding: 13mm 15mm 12mm;
+          padding: 11mm 15mm 10mm;
         }
       }
       header {
@@ -48,7 +48,7 @@
         align-items: flex-end;
         border-bottom: 2px solid var(--accent);
         padding-bottom: 8pt;
-        margin-bottom: 12pt;
+        margin-bottom: 10pt;
       }
       h1 {
         font-size: 24pt;
@@ -76,7 +76,7 @@
         text-transform: uppercase;
         letter-spacing: 0.08em;
         color: var(--accent);
-        margin: 11pt 0 5pt;
+        margin: 9pt 0 4pt;
       }
       p {
         margin: 0 0 6pt;
@@ -85,7 +85,7 @@
         display: grid;
         grid-template-columns: 30mm 1fr;
         gap: 0 10pt;
-        margin-bottom: 5pt;
+        margin-bottom: 4pt;
         break-inside: avoid;
       }
       .when {
@@ -119,13 +119,18 @@
       .skills dd {
         margin: 0;
       }
+      .skills dd.wide {
+        grid-column: span 3;
+      }
+      .what ul {
+        margin: 2pt 0 0;
+        padding-left: 12pt;
+      }
+      .what li {
+        margin: 0 0 1pt;
+      }
       .ph {
         color: var(--ph);
-      }
-      .motto {
-        margin-top: 10pt;
-        font-style: italic;
-        color: var(--muted);
       }
     </style>
   </head>
@@ -137,7 +142,6 @@
       </div>
       <div class="contact">
         <div><a href="mailto:silvan.brors@icloud.com">silvan.brors@icloud.com</a></div>
-        <div>079 108 24 36</div>
         <div><a href="https://silvanbrors.ch">silvanbrors.ch</a></div>
         <div><a href="https://github.com/sibro73">github.com/sibro73</a></div>
         <div>
@@ -150,30 +154,41 @@
 
     <h2>Profil</h2>
     <p>
-      Ich arbeite mit Java und Spring, am liebsten im Backend. Dazu Docker, SQL, Linux und AI. Was
-      ich zweimal von Hand mache, automatisiere ich beim dritten Mal. Neben der Lehre baue ich
-      eigene Projekte: ein Koop-Spiel für Steam, Bots und KI-Assistenten.
+      Applikationsentwickler im 4. Lehrjahr bei ti&amp;m. Am liebsten arbeite ich im Backend mit Java
+      und Spring Boot, dazu kommen Docker, SQL und Linux. Neben der Lehre beschäftige ich mich vor
+      allem mit KI: RAG mit Spring AI und Agents mit Claude Code. Was ich zweimal von Hand mache,
+      automatisiere ich beim dritten Mal.
     </p>
+
+    <h2>Berufserfahrung</h2>
+    <div class="entry">
+      <div class="when">08/2023 – heute</div>
+      <div class="what">
+        <strong>ti&amp;m, Zürich</strong> <span class="sub">· Applikationsentwickler in Ausbildung</span>
+        <ul>
+          <li>Kundenprojekt im Backend (Java, Spring Boot), u. a. ein dateibasierter Import mit transaktionaler Verarbeitung (Alles-oder-nichts). Das ist auch das Thema meiner IPA.</li>
+          <li>Mitarbeit in einem Frontend-Projekt mit React.</li>
+          <li>Rund 5 «hack an app»-Workshops (MIT App Inventor) und 2 Zukunftstage für Kinder geleitet.</li>
+        </ul>
+      </div>
+    </div>
 
     <h2>Ausbildung</h2>
     <div class="entry">
       <div class="when">08/2023 – 08/2027</div>
       <div class="what">
         <strong>Lehre Applikationsentwickler EFZ</strong> <span class="sub">· ti&amp;m, Zürich</span>
-        <p>4-jährige Lehre, aktuell im 4. Lehrjahr.</p>
+        <p>Vierjährige Lehre, aktuell im 4. Lehrjahr</p>
         <p>Berufsfachschule BBW · Berufsmaturität BMSW</p>
       </div>
     </div>
 
     <h2>Projekte</h2>
     <div class="entry">
-      <div class="when">Release 2027</div>
+      <div class="when">2026 – 2027</div>
       <div class="what">
         <strong>Rigged to Riches</strong> <span class="sub">· eigenes Spiel</span>
-        <p>
-          First-Person-Heist in der Casino-Stadt Las Agné, solo oder im Online-Koop mit bis zu 4
-          Leuten. Release auf Steam nach dem Steam Next Fest im Februar 2027.
-        </p>
+        <p>First-Person-Heist in der Casino-Stadt Las Agné, solo oder im Online-Koop mit bis zu 4 Leuten. Release auf Steam nach dem Steam Next Fest im Februar 2027.</p>
         <div class="tech">Unity · C#</div>
       </div>
     </div>
@@ -181,63 +196,47 @@
       <div class="when">2026</div>
       <div class="what">
         <strong>Silvan OS</strong> <span class="sub">· Portfolio, silvanbrors.ch</span>
-        <p>
-          Portfolio als Desktop im Browser und als Home-Bildschirm auf dem Handy: Fenster, Dock
-          und Terminal selbst gebaut, Spring-Boot-Backend, KI-Assistent auf Cloudflare.
-          Automatischer Deploy über GitHub Actions.
-        </p>
-        <div class="tech">
-          React · TypeScript · Spring Boot 4 · Java 21 · Postgres · Docker · GitHub Actions ·
-          Cloudflare
-        </div>
+        <p>Portfolio als Desktop im Browser und als Home-Bildschirm auf dem Handy: Fenster, Dock und Terminal selbst gebaut, Spring-Boot-Backend, KI-Assistent auf Cloudflare. Automatischer Deploy über GitHub Actions.</p>
+        <div class="tech">React · TypeScript · Spring Boot 4 · Java 21 · Postgres · Docker · GitHub Actions · Cloudflare</div>
       </div>
     </div>
     <div class="entry">
       <div class="when">2026</div>
       <div class="what">
         <strong>IPA-Lernassistent</strong> <span class="sub">· RAG über meine Lernnotizen</span>
-        <p>
-          Beantwortet Fragen aus meinen IPA-Lernunterlagen, mit Quellenangabe. Lokal mit Spring AI,
-          auf der Website als RAG auf Cloudflare.
-        </p>
-        <div class="tech">
-          Spring Boot · Spring AI · Ollama · pgvector · Cloudflare Workers AI · Vectorize
-        </div>
+        <p>Beantwortet Fragen aus meinen IPA-Lernunterlagen, mit Quellenangabe. Lokal mit Spring AI, auf der Website als RAG auf Cloudflare.</p>
+        <div class="tech">Spring Boot · Spring AI · Ollama · pgvector · Cloudflare Workers AI · Vectorize</div>
       </div>
     </div>
     <div class="entry">
       <div class="when">2026</div>
       <div class="what">
         <strong>Clipper</strong> <span class="sub">· Echtzeit-Bot für Livestreams</span>
-        <p>
-          Schaut Livestreams mit, erkennt Highlights und schickt einen fertigen Hochformat-Clip
-          mit Untertiteln aufs Handy.
-        </p>
+        <p>Schaut Livestreams mit, erkennt Highlights und schickt einen fertigen Clip im Hochformat mit Untertiteln aufs Handy.</p>
         <div class="tech">Python · FFmpeg · Whisper · Telegram Bot API</div>
       </div>
     </div>
     <div class="entry">
-      <div class="when">in Arbeit</div>
+      <div class="when">2026</div>
+      <div class="what">
+        <strong>Shop-Outreach</strong> <span class="sub">· Akquise-Tool</span>
+        <p>Ein Python-Tool, das mit Google Places und PageSpeed lokale Shops findet, deren Website ein Update braucht. Daraus kam die erste Kundenanfrage.</p>
+        <div class="tech">Python · Google Places API · PageSpeed Insights API</div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="when">2026 · in Arbeit</div>
       <div class="what">
         <strong>Marketing-Agents</strong> <span class="sub">· Multi-Agent-System</span>
-        <p>Agents, die den Release von Rigged to Riches begleiten und wöchentlich berichten.</p>
+        <p>Agents, die den Release von Rigged to Riches begleiten und jede Woche auswerten, was gut läuft.</p>
+        <div class="tech">Claude Code</div>
       </div>
     </div>
     <div class="entry">
-      <div class="when">BMA</div>
+      <div class="when">2026 – 2027</div>
       <div class="what">
-        <strong>Wetterstation</strong> <span class="sub">· Gruppenprojekt für die BMA</span>
-        <p>Von den Sensoren bis ins Dashboard.</p>
-      </div>
-    </div>
-    <div class="entry">
-      <div class="when">eigenes Projekt</div>
-      <div class="what">
-        <strong>Shop-Outreach</strong>
-        <p>
-          Python-Tool, das mit Google Places und PageSpeed lokale Shops findet, deren Website ein
-          Update braucht.
-        </p>
+        <strong>Wetterstation</strong> <span class="sub">· Gruppenprojekt, Berufsmaturitätsarbeit (BMA)</span>
+        <p>Von den Sensoren bis zum Dashboard.</p>
       </div>
     </div>
 
@@ -247,14 +246,12 @@
       <dd>Java, Spring Boot, REST, SQL</dd>
       <dt>DevOps</dt>
       <dd>Docker, Linux, Git, CI/CD</dd>
-      <dt>AI</dt>
-      <dd>RAG, Agents, Claude Code</dd>
+      <dt>KI</dt>
+      <dd>RAG, Spring AI, Claude Code</dd>
       <dt>Weitere</dt>
       <dd>Unity, C#, Python, React, TypeScript</dd>
       <dt>Sprachen</dt>
-      <dd>Deutsch, Englisch, Französisch (Grundkenntnisse)</dd>
+      <dd class="wide">Deutsch, Englisch (sehr gut), Französisch (Grundkenntnisse)</dd>
     </dl>
-
-    <p class="motto">«Was ich zweimal von Hand mache, automatisiere ich beim dritten Mal.»</p>
   </body>
 </html>
