@@ -2,6 +2,7 @@ import '../pdf-preview.css';
 import './Wochenbericht.css';
 
 import { useAgentsReport } from '../../../api/agentsReport';
+import { ProjectInfo } from '../ProjectInfo';
 
 export function Wochenbericht() {
   const r = useAgentsReport();
@@ -33,6 +34,7 @@ export function Wochenbericht() {
         </p>
         {r.note && <p className="report__note mono">{r.note}</p>}
       </article>
+      <ProjectInfo id="agents" tone="card" />
     </div>
   );
 }

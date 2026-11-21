@@ -34,6 +34,11 @@ export function Notes() {
       <p style={{ margin: 0, fontSize: 16, lineHeight: 1.5 }}>
         {profile.intro.map((part, i) => (part.mark ? <b key={i}>{part.text}</b> : part.text))}
       </p>
+      {profile.about.map((p) => (
+        <p key={p} style={{ margin: 0, fontSize: 16, lineHeight: 1.5 }}>
+          {p}
+        </p>
+      ))}
       <div
         style={{
           display: 'flex',

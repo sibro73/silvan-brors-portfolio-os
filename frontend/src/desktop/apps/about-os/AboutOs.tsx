@@ -1,6 +1,6 @@
 import './AboutOs.css';
 
-import { OS_STACK } from '../../../shared/content';
+import { OS_STACK, profile } from '../../../shared/content';
 
 /** Am Desktop ohne Datenbank-Zeile, wie im Design. */
 const STACK = OS_STACK.filter((s) => s.area !== 'Datenbank');
@@ -22,8 +22,11 @@ export function AboutOs() {
           </div>
         ))}
       </dl>
-      {/* Repo ist privat: Link folgt, sobald es öffentlich ist. */}
-      <p className="about-os__muted">Quellcode: [GitHub-Repo]</p>
+      <p className="about-os__muted">
+        <a href={profile.source.href} target="_blank" rel="noopener noreferrer">
+          {profile.source.label} ↗
+        </a>
+      </p>
     </div>
   );
 }

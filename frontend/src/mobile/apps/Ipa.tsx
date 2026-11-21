@@ -3,6 +3,7 @@ import { type CSSProperties, type FormEvent, useEffect, useId, useRef, useState 
 import { askIpa, IPA_AGENT, IPA_LIVE, type IpaResult } from '../../api/ipa';
 import { ipa } from '../../shared/content';
 import type { MobileAppProps } from '../mobileApps';
+import { ProjectInfo } from '../ProjectInfo';
 
 /** Wie im Design: Beispielantworten erscheinen nach kurzem «schreibt …». */
 export const EXAMPLE_TYPING_MS = 900;
@@ -223,6 +224,7 @@ export function Ipa({ ask = askIpa, live = IPA_LIVE, agent = IPA_AGENT }: IpaPro
       <p style={{ margin: '4px 0 0', fontSize: 12, color: '#6E6E73', textAlign: 'center' }}>
         {footer}
       </p>
+      <ProjectInfo id="ipa" link="#5B3CC4" />
     </div>
   );
 }

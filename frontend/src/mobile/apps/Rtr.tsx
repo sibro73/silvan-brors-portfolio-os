@@ -1,6 +1,7 @@
 import { useStatus } from '../../api/statusContext';
 import { projects } from '../../shared/content';
 import type { MobileAppProps } from '../mobileApps';
+import { ProjectInfo } from '../ProjectInfo';
 
 const gold = '#F2C14E';
 
@@ -62,6 +63,7 @@ export function Rtr({ toast }: MobileAppProps) {
       >
         {rtr.cta.label}
       </button>
+      <ProjectInfo id="rtr" link="#F2C14E" />
     </div>
   );
 }

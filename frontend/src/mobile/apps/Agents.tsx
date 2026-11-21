@@ -1,4 +1,5 @@
 import { useAgentsReport } from '../../api/agentsReport';
+import { ProjectInfo } from '../ProjectInfo';
 
 export function Agents() {
   const report = useAgentsReport();
@@ -37,6 +38,7 @@ export function Agents() {
         <b>Empfehlung:</b> {report.recommendation}
       </div>
       {report.note && <span className="m-note">{report.note}</span>}
+      <ProjectInfo id="agents" link="#C2570C" />
     </div>
   );
 }

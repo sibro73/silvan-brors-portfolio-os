@@ -87,7 +87,10 @@ describe('menu actions in the running desktop', () => {
     const win = screen.getByRole('region', { name: 'Über Silvan OS' });
     expect(win).toHaveTextContent(/Version \d+\.\d+\.\d+/);
     expect(win).toHaveTextContent('Spring Boot');
-    expect(win).toHaveTextContent('[GitHub-Repo]');
+    expect(within(win).getByRole('link', { name: /Quellcode dieser Seite/ })).toHaveAttribute(
+      'href',
+      'https://github.com/sibro73/silvan-brors-portfolio-os',
+    );
   });
 
   it('Hilfe → Terminal-Befehle opens the terminal and runs help once', async () => {

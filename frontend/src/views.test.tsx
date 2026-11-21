@@ -11,9 +11,10 @@ afterEach(() => {
   window.location.hash = '';
 });
 
-/** Beide Ansichten laden nach (React.lazy): auf die erste Ansicht warten. */
-const homeScreen = () => screen.findByRole('main', { name: 'Home-Bildschirm' });
-const menuBar = () => screen.findByTestId('active-app');
+/** Beide Ansichten laden nach (React.lazy). Im vollen Testlauf kann das länger als 1 s dauern. */
+const LAZY = { timeout: 10_000 };
+const homeScreen = () => screen.findByRole('main', { name: 'Home-Bildschirm' }, LAZY);
+const menuBar = () => screen.findByTestId('active-app', {}, LAZY);
 
 describe('views', () => {
   it('shows only the phone view below 860 px', async () => {
@@ -67,6 +68,6 @@ describe('views', () => {
       window.location.hash = '#desktop';
       window.dispatchEvent(new HashChangeEvent('hashchange'));
     });
-    expect(await screen.findByRole('navigation', { name: 'Dock' })).toBeInTheDocument();
+    expect(await screen.findByRole('navigation', { name: 'Dock' }, LAZY)).toBeInTheDocument();
   });
 });

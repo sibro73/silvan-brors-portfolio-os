@@ -21,6 +21,10 @@ export interface Profile {
   tagline: string;
   /** Einleitung, Teile mit `mark` werden hervorgehoben. */
   intro: { text: string; mark?: boolean }[];
+  /** Weitere Absätze über mich (Über mich.txt, Notizen am Handy). */
+  about: string[];
+  /** Repo dieser Seite. */
+  source: Link;
   tip: string;
   /** Tipp in der Handy-Ansicht (Notizen). */
   tipMobile: string;
@@ -72,6 +76,21 @@ export interface Projects {
   shop: { title: string; description: string; tags: string[] };
   /** Projektkarten im Willkommensfenster. `app` = AppId aus apps.registry.ts. */
   cards: { app: string; title: string; text: string }[];
+  /** «Über das Projekt» in jedem Projekt-Fenster, Desktop und Handy. */
+  details: Record<ProjectId, ProjectDetails>;
+}
+
+export type ProjectId = 'rtr' | 'clipper' | 'ipa' | 'agents' | 'wetter' | 'shop';
+
+export interface ProjectDetails {
+  /** Absätze: was das Projekt ist und warum. */
+  summary: string[];
+  /** «So funktioniert es». */
+  points: string[];
+  tech: string[];
+  /** Öffentliches Repo. Fehlt es, steht `codeNote` da. */
+  repo?: Link;
+  codeNote?: string;
 }
 
 export interface AgentsReport {

@@ -35,6 +35,14 @@
       "text": " ich beim dritten Mal, damit mein Alltag bequemer wird."
     }
   ],
+  "about": [
+    "Seit August 2023 mache ich die Lehre als Applikationsentwickler EFZ bei ti&m in Zürich, parallel dazu die Berufsmaturität. Im Sommer 2027 schliesse ich ab.",
+    "Neben der Lehre baue ich eigene Projekte: ein Koop-Spiel für Steam, einen Bot, der Highlights aus Livestreams schneidet, und KI-Assistenten. Am meisten Spass macht mir, wenn etwas automatisch läuft, das vorher Handarbeit war."
+  ],
+  "source": {
+    "label": "Quellcode dieser Seite",
+    "href": "https://github.com/sibro73/silvan-brors-portfolio-os"
+  },
   "tip": "Tipp: Öffne den Ordner «Projekte» oder klick unten im Dock auf eine App. Fenster lassen sich verschieben.",
   "tipMobile": "Tipp: Die Apps auf dem Home-Bildschirm sind meine Projekte.",
   "skills": [

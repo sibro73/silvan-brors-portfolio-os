@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import type { ComponentType } from 'react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -11,6 +12,8 @@ import { IpaAssistent } from './ipa-assistent/IpaAssistent';
 import { Lebenslauf } from './lebenslauf/Lebenslauf';
 import { Mail } from './mail/Mail';
 import { RiggedToRiches } from './rigged-to-riches/RiggedToRiches';
+import { ShopOutreach } from './shop-outreach/ShopOutreach';
+import { Wetter } from './wetter/Wetter';
 
 const noop = { openApp: () => {}, closeSelf: () => {} };
 
@@ -67,7 +70,9 @@ describe('apps', () => {
 
   it('Wochenbericht shows all channels', () => {
     render(<Wochenbericht />);
-    expect(screen.getAllByRole('listitem')).toHaveLength(4);
+    expect(
+      within(screen.getByRole('list', { name: 'Views pro Kanal' })).getAllByRole('listitem'),
+    ).toHaveLength(4);
     expect(screen.getByText('[KW]')).toBeInTheDocument();
   });
 
@@ -88,5 +93,23 @@ describe('apps', () => {
     const link = screen.getByRole('link', { name: 'PDF herunterladen' });
     expect(link).toHaveAttribute('href', '/media/lebenslauf.pdf');
     expect(link).toHaveAttribute('download');
+  });
+
+  it('every project window explains the project and links public code', () => {
+    const cases: [ComponentType, string, string | null][] = [
+      [RiggedToRiches, 'Der Code des Spiels ist privat.', null],
+      [Clipper, '', 'https://github.com/sibro73/stream-clipper-script'],
+      [ShopOutreach, '', 'https://github.com/sibro73/shop-outreach'],
+      [Wochenbericht, 'Der Code ist privat.', null],
+      [Wetter, 'Fotos folgen.', null],
+    ];
+    for (const [App, note, repo] of cases) {
+      const { unmount } = render(<App />);
+      const info = screen.getByRole('region', { name: 'Über das Projekt' });
+      if (repo)
+        expect(within(info).getByRole('link', { name: /GitHub/ })).toHaveAttribute('href', repo);
+      else expect(info).toHaveTextContent(note);
+      unmount();
+    }
   });
 });

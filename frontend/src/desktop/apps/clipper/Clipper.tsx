@@ -1,6 +1,7 @@
 import './Clipper.css';
 
 import { projects } from '../../../data';
+import { ProjectInfo } from '../ProjectInfo';
 
 export function Clipper() {
   const c = projects.clipper;
@@ -32,6 +33,7 @@ export function Clipper() {
         </li>
       </ol>
       <p className="tg__footer">{c.footer}</p>
+      <ProjectInfo id="clipper" tone="card" />
     </div>
   );
 }
