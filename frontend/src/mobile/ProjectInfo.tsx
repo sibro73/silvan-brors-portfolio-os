@@ -27,6 +27,24 @@ export function ProjectInfo({ id, link = '#2F6FE4' }: { id: ProjectId; link?: st
       <h3 id={`m-pinfo-${id}`} style={{ margin: 0, fontSize: 17, fontWeight: 700 }}>
         Über das Projekt
       </h3>
+      {d.image && (
+        <img
+          src={d.image.src}
+          alt={d.image.alt}
+          decoding="async"
+          width={1280}
+          height={720}
+          style={{
+            display: 'block',
+            width: '100%',
+            height: 'auto',
+            aspectRatio: '16 / 9',
+            objectFit: 'cover',
+            borderRadius: 12,
+            background: 'rgba(127,127,127,0.12)',
+          }}
+        />
+      )}
       {d.tech.length > 0 && (
         <ul
           aria-label="Technologien"

@@ -3,7 +3,7 @@ import './classic.css';
 
 import { type MouseEvent, useEffect, useRef, useState } from 'react';
 
-import { classic, profile } from '../shared/content';
+import { classic, profile, projects as projectData } from '../shared/content';
 import { HOME_PATH } from '../shared/route';
 import { RouteLink } from '../shared/RouteLink';
 
@@ -199,47 +199,51 @@ export default function ClassicPage() {
               </div>
             </div>
             <ul className="c-grid" aria-label="Projekte">
-              {projects.map((p) => (
-                <li key={`${filter}-${p.name}`} className="c-card">
-                  <div className="c-card__media" style={{ background: p.color }}>
-                    {p.image ? (
-                      <img
-                        className="c-card__img"
-                        src={p.image.src}
-                        alt={p.image.alt}
-                        loading="lazy"
-                        decoding="async"
-                        width={1280}
-                        height={720}
-                      />
-                    ) : (
-                      <span className="c-card__shot">[Screenshot]</span>
-                    )}
-                    {p.status && <span className="c-card__status">{p.status}</span>}
-                  </div>
-                  <div className="c-card__body">
-                    <p className="c-card__kind">{p.kind}</p>
-                    <h3 className="c-card__name">{p.name}</h3>
-                    <p className="c-card__text">{p.text}</p>
-                    <ul className="c-tags" aria-label="Technologien">
-                      {p.tags.map((t) => (
-                        <li key={t}>{t}</li>
-                      ))}
-                    </ul>
-                    {p.repo && (
-                      <a
-                        className="c-card__repo"
-                        href={p.repo.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${p.name} auf GitHub`}
-                      >
-                        {p.repo.label} ↗
-                      </a>
-                    )}
-                  </div>
-                </li>
-              ))}
+              {projects.map((p) => {
+                const image =
+                  p.image ?? (p.detailsId ? projectData.details[p.detailsId].image : undefined);
+                return (
+                  <li key={`${filter}-${p.name}`} className="c-card">
+                    <div className="c-card__media" style={{ background: p.color }}>
+                      {image ? (
+                        <img
+                          className="c-card__img"
+                          src={image.src}
+                          alt={image.alt}
+                          loading="lazy"
+                          decoding="async"
+                          width={1280}
+                          height={720}
+                        />
+                      ) : (
+                        <span className="c-card__shot">[Screenshot]</span>
+                      )}
+                      {p.status && <span className="c-card__status">{p.status}</span>}
+                    </div>
+                    <div className="c-card__body">
+                      <p className="c-card__kind">{p.kind}</p>
+                      <h3 className="c-card__name">{p.name}</h3>
+                      <p className="c-card__text">{p.text}</p>
+                      <ul className="c-tags" aria-label="Technologien">
+                        {p.tags.map((t) => (
+                          <li key={t}>{t}</li>
+                        ))}
+                      </ul>
+                      {p.repo && (
+                        <a
+                          className="c-card__repo"
+                          href={p.repo.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${p.name} auf GitHub`}
+                        >
+                          {p.repo.label} ↗
+                        </a>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>

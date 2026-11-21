@@ -303,4 +303,16 @@ describe('MobileOS', () => {
     expect(screen.queryByRole('dialog')).toBeNull();
     expect(sheet('Lebenslauf.pdf')).toBeInTheDocument();
   });
+
+  it('project apps show the real project image', () => {
+    render(<MobileOS />);
+    tap(screen.getByRole('button', { name: 'Rigged' }));
+    const info = within(sheet('Rigged to Riches')!).getByRole('region', {
+      name: 'Über das Projekt',
+    });
+    expect(within(info).getByRole('img', { name: /Casino der Stadt Las Agné/ })).toHaveAttribute(
+      'src',
+      '/media/projects/rtr.webp',
+    );
+  });
 });
