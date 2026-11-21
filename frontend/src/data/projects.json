@@ -2,8 +2,8 @@
   "rtr": {
     "title": "Rigged to Riches",
     "trailer": "[Trailer, läuft automatisch ohne Ton]",
-    "description": "First-Person-Heist in der Casino-Stadt Las Agné. Solo oder im Online-Koop mit bis zu 4 Leuten. Gebaut mit Unity und C#, Release nach dem Steam Next Fest im Februar 2027.",
-    "tags": ["Heist", "Koop", "First-Person"],
+    "description": "Koop-Spiel über Glücksspiel und Betrug in der Casino-Stadt Las Agné, mit einem Heist als Finale. Solo oder im Online-Koop mit bis zu 4 Leuten. Gebaut mit Unity und C#, Release nach dem Steam Next Fest im Februar 2027.",
+    "tags": ["Koop", "Casino", "First-Person"],
     "cta": {
       "label": "Auf die Wunschliste",
       "href": "#steam"
@@ -48,7 +48,7 @@
     {
       "app": "rtr",
       "title": "Rigged to Riches",
-      "text": "Koop-Heist-Spiel (Unity), bald auf Steam."
+      "text": "Koop-Spiel über Glücksspiel und Betrug (Unity), bald auf Steam."
     },
     {
       "app": "clipper",
@@ -65,5 +65,99 @@
       "title": "Marketing-Agents",
       "text": "Multi-Agent-System für den Spiel-Release (in Arbeit)."
     }
-  ]
+  ],
+  "details": {
+    "rtr": {
+      "summary": [
+        "Rigged to Riches ist mein eigenes Spiel. Frisch aus dem Gefängnis und pleite unter einer Brücke spielt man, betrügt und flieht vor der Polizei, bis einem das illegale Casino der Stadt gehört.",
+        "Es ist ein Koop-Spiel über Glücksspiel und Betrug, mit einem Heist als Finale. Gespielt wird in der düsteren Stadt Las Agné, solo oder online mit bis zu 4 Leuten. Der Release auf Steam ist nach dem Steam Next Fest im Februar 2027 geplant."
+      ],
+      "points": [
+        "Aufstieg vom Münzwurf auf der Strasse über Automaten und Blackjack bis zum Poker gegen El Joker im Hinterraum",
+        "Cheaten mit Gadgets als Minigames, zum Beispiel gezinkte Würfel, Magnet am Automaten oder Spiegelkarten. Jede Anwendung erhöht das Risiko",
+        "Polizei mit bis zu 5 Sternen, Flucht über Dächer, Uferweg und Kanalisation",
+        "Rollen im Koop: ablenken, Schmiere stehen, Karten zuspielen. Mitspieler darf man auch verpfeifen"
+      ],
+      "tech": ["Unity", "C#", "PC (Steam)"],
+      "codeNote": "Der Code des Spiels ist privat."
+    },
+    "clipper": {
+      "summary": [
+        "Der Clipper beobachtet grosse Twitch-Streamer, die GTA VI spielen. Passiert etwas Lustiges, schneidet er sofort einen fertigen Hochformat-Clip und schickt ihn per Telegram aufs Handy, meist innert ein bis zwei Minuten.",
+        "Ich muss den Clip nur noch anschauen und posten. Der Chat oben zeigt, wie das im Telegram aussieht."
+      ],
+      "points": [
+        "Nimmt die letzten 8 Minuten jedes Streams laufend auf (Ringpuffer mit streamlink und FFmpeg)",
+        "Erkennt Highlights an Chat-Spikes, vielen Lach-Emotes oder Twitch-Clips von mehreren Leuten zum gleichen Moment",
+        "Schneidet 20 Sekunden um den lautesten Punkt: Facecam oben, Gameplay unten, im Format 9:16",
+        "Englische Untertitel mit Whisper, dazu ein Caption-Vorschlag und der Link zum Moment im Stream",
+        "Meldet jeden gesendeten Clip an dieses Portfolio, daher kommt die Zahl «Clips heute»"
+      ],
+      "tech": ["Python", "FFmpeg", "streamlink", "Whisper", "Twitch API", "Telegram Bot API"],
+      "repo": {
+        "label": "sibro73/stream-clipper-script",
+        "href": "https://github.com/sibro73/stream-clipper-script"
+      }
+    },
+    "ipa": {
+      "summary": [
+        "Für meine IPA habe ich einen Lernassistenten gebaut, der Fragen aus meinen eigenen Lernnotizen beantwortet, mit Quellenangabe. Die Notizen schreibe ich in Obsidian: zehn Themen von IPERKA über Testing, Git und Docker bis SQL, IT-Security und Netzwerk.",
+        "Lokal läuft er mit Spring Boot, Spring AI, Ollama und pgvector. Hier auf der Website antwortet eine Version auf Cloudflare aus denselben Notizen. Die Notizen selbst werden nicht veröffentlicht."
+      ],
+      "points": [
+        "Die Notizen werden in Abschnitte zerlegt und als Vektoren gespeichert",
+        "Zu jeder Frage sucht er die passendsten Abschnitte und antwortet nur daraus, in eigenen Worten",
+        "Steht etwas nicht in den Notizen, sagt er das, statt etwas zu erfinden",
+        "Rate-Limit pro IP und eine Längenbegrenzung schützen das Gratis-Kontingent"
+      ],
+      "tech": [
+        "Spring Boot",
+        "Spring AI",
+        "Ollama",
+        "pgvector",
+        "Cloudflare Workers AI",
+        "Vectorize"
+      ],
+      "codeNote": "Der Code liegt im GitLab des Lehrbetriebs und ist nicht öffentlich."
+    },
+    "agents": {
+      "summary": [
+        "Für den Release von Rigged to Riches baue ich ein Marketing-System aus mehreren KI-Agents. Das Ziel: möglichst viele Wishlists auf Steam vor dem Release.",
+        "Die Agents schneiden Clips aus dem Spiel, schreiben Captions, posten auf YouTube Shorts und X, suchen Trends und werten jede Woche aus, was funktioniert hat. TikTok poste ich selbst, die Pipeline liefert Clip und Caption fertig aufs Handy."
+      ],
+      "points": [
+        "Jeder Agent hat eine Aufgabe: clip-cutter, caption-writer, publisher, trend-scout, loop-analyst und weitere",
+        "Bevor etwas veröffentlicht wird, gebe ich es per Telegram frei (ok oder skip)",
+        "Jeden Montag entsteht ein Wochenbericht mit Zahlen pro Plattform. Die Kurzfassung landet automatisch hier",
+        "Was funktioniert, fliesst als Learning in die nächste Woche"
+      ],
+      "tech": ["Claude Code (Agents)", "Python", "YouTube Data API", "Telegram Bot API"],
+      "codeNote": "Der Code ist privat."
+    },
+    "wetter": {
+      "summary": [
+        "Gruppenprojekt für die BMA: eine eigene Wetterstation, von den Sensoren bis ins Dashboard."
+      ],
+      "points": [],
+      "tech": [],
+      "codeNote": "Fotos folgen."
+    },
+    "shop": {
+      "summary": [
+        "Ein Python-Tool, das über die Google Places API Geschäfte in Zürich findet und ihre Websites prüft. So sehe ich, welche Shops eine langsame oder veraltete Website haben, und kann ihnen gezielt Hilfe anbieten."
+      ],
+      "points": [
+        "Mobile-Score und SEO-Score über PageSpeed Insights",
+        "Erkennt über 40 Shop-Systeme, Baukästen und CMS, dazu Agentur-Hinweise im Footer",
+        "Prüft Title, Meta-Description, H1, Alt-Texte, robots.txt, Sitemap und strukturierte Daten",
+        "Ketten-Filter und Opportunity-Score für die Reihenfolge, Ergebnisse als CSV",
+        "E-Mails verschickt es nur auf ausdrücklichen Befehl"
+      ],
+      "tech": ["Python", "Google Places API", "PageSpeed Insights API"],
+      "repo": {
+        "label": "sibro73/shop-outreach",
+        "href": "https://github.com/sibro73/shop-outreach"
+      }
+    }
+  }
 }

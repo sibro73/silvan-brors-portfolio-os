@@ -1,4 +1,4 @@
-import { OS_HOSTING, OS_STACK, WALLPAPERS } from '../../shared/content';
+import { OS_HOSTING, OS_STACK, profile, WALLPAPERS } from '../../shared/content';
 import { useWallpaper } from '../../shared/wallpaper';
 
 /** Wie im Design: Frontend, Backend, Datenbank. */
@@ -68,6 +68,17 @@ export function Settings() {
               </span>
             </div>
           ))}
+          <div className="m-list__row">
+            <span>Quellcode</span>
+            <a
+              href={profile.source.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textAlign: 'right', textDecoration: 'none' }}
+            >
+              GitHub ↗
+            </a>
+          </div>
           <div className="m-list__row">
             <span>Läuft auf</span>
             <span className="m-muted" style={{ textAlign: 'right' }}>

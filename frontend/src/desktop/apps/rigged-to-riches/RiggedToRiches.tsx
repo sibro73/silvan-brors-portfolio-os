@@ -2,6 +2,7 @@ import './RiggedToRiches.css';
 
 import { useStatus } from '../../../api/statusContext';
 import { projects } from '../../../data';
+import { ProjectInfo } from '../ProjectInfo';
 
 export function RiggedToRiches() {
   const rtr = projects.rtr;
@@ -31,6 +32,7 @@ export function RiggedToRiches() {
           </a>
         </div>
       </div>
+      <ProjectInfo id="rtr" tone="dark" />
     </div>
   );
 }

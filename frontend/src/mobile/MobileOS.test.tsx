@@ -254,4 +254,14 @@ describe('MobileOS', () => {
       '/media/lebenslauf.pdf',
     );
   });
+
+  it('project apps explain the project and link public code', () => {
+    render(<MobileOS />);
+    tap(screen.getByRole('button', { name: 'Shops' }));
+    const info = within(sheet('shop-outreach')!).getByRole('region', { name: 'Über das Projekt' });
+    expect(within(info).getByRole('link', { name: /GitHub/ })).toHaveAttribute(
+      'href',
+      'https://github.com/sibro73/shop-outreach',
+    );
+  });
 });

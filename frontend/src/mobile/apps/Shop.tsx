@@ -1,4 +1,5 @@
 import { projects } from '../../shared/content';
+import { ProjectInfo } from '../ProjectInfo';
 
 export function Shop() {
   const s = projects.shop;
@@ -17,6 +18,7 @@ export function Shop() {
           </span>
         ))}
       </div>
+      <ProjectInfo id="shop" link="#B02A6B" />
     </div>
   );
 }

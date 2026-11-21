@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 
 import { projects } from '../../shared/content';
+import { ProjectInfo } from '../ProjectInfo';
 
 const bubble: CSSProperties = {
   alignSelf: 'flex-start',
@@ -72,6 +73,7 @@ export function Clipper() {
       <p style={{ margin: '8px 0 0', fontSize: 13, color: '#3E6A8A', textAlign: 'center' }}>
         {c.footer}
       </p>
+      <ProjectInfo id="clipper" link="#1A73B5" />
     </div>
   );
 }

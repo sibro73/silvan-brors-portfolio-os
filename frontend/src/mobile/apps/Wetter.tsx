@@ -1,4 +1,5 @@
 import { projects } from '../../shared/content';
+import { ProjectInfo } from '../ProjectInfo';
 
 export function Wetter() {
   const w = projects.wetter;
@@ -20,16 +21,6 @@ export function Wetter() {
         <span style={{ fontSize: 15, color: 'rgba(255,255,255,0.85)' }}>{w.subtitle}</span>
       </div>
       <div
-        style={{
-          borderRadius: 18,
-          background: 'rgba(255,255,255,0.14)',
-          padding: 16,
-          fontSize: 15,
-        }}
-      >
-        {w.description}
-      </div>
-      <div
         className="m-placeholder"
         style={{
           aspectRatio: '4 / 3',
@@ -40,6 +31,7 @@ export function Wetter() {
       >
         {w.placeholder}
       </div>
+      <ProjectInfo id="wetter" link="#FFFFFF" />
     </div>
   );
 }

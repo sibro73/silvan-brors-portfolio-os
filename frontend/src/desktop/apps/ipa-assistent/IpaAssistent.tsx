@@ -5,6 +5,7 @@ import { type FormEvent, useId, useRef, useState } from 'react';
 import { askIpa, IPA_AGENT, IPA_LIVE, type IpaResult, type IpaSource } from '../../../api/ipa';
 import { ipa } from '../../../data';
 import type { AppProps } from '../../appTypes';
+import { ProjectInfo } from '../ProjectInfo';
 
 const MAX_LENGTH = 300;
 
@@ -146,6 +147,7 @@ export function IpaAssistent({
         {agent ? ipa.agentFooter : ipa.footer}
         {!live && ` · ${ipa.exampleNote}`}
       </p>
+      <ProjectInfo id="ipa" />
     </div>
   );
 }

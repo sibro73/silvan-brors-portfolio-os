@@ -3,16 +3,45 @@ import './Classic.css';
 import { useEffect, useRef } from 'react';
 
 import { useStatus } from '../api/statusContext';
-import { agentsReport, ipa, profile, projects } from '../data';
+import { agentsReport, ipa, profile, type ProjectId, projects } from '../data';
 
 /**
  * «Klassische Ansicht»: alle Inhalte auf einer schlichten, linearen Seite.
  * Gleiche Daten wie der Desktop, ohne Fenster, Drag oder Animationen.
  */
+/** Beschreibung, Technik und Repo-Link eines Projekts (gleiche Texte wie Desktop und Handy). */
+function Details({ id }: { id: ProjectId }) {
+  const d = projects.details[id];
+  return (
+    <>
+      {d.summary.map((p) => (
+        <p key={p}>{p}</p>
+      ))}
+      {d.points.length > 0 && (
+        <ul>
+          {d.points.map((p) => (
+            <li key={p}>{p}</li>
+          ))}
+        </ul>
+      )}
+      {d.tech.length > 0 && <p className="classic__muted">{d.tech.join(' · ')}</p>}
+      {d.repo ? (
+        <p>
+          <a href={d.repo.href} target="_blank" rel="noopener noreferrer">
+            GitHub: {d.repo.label} ↗
+          </a>
+        </p>
+      ) : (
+        d.codeNote && <p className="classic__muted">{d.codeNote}</p>
+      )}
+    </>
+  );
+}
+
 export function Classic() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const { status } = useStatus();
-  const { rtr, clipper, wetter, shop } = projects;
+  const { rtr, wetter, shop } = projects;
   const c = profile.contact;
 
   // Nach dem Wechsel den Fokus an den Seitenanfang setzen (Screenreader, Tastatur).
@@ -41,6 +70,9 @@ export function Classic() {
               part.mark ? <mark key={i}>{part.text}</mark> : <span key={i}>{part.text}</span>,
             )}
           </p>
+          {profile.about.map((p) => (
+            <p key={p}>{p}</p>
+          ))}
           <ul className="classic__skills">
             {profile.skills.map((s) => (
               <li key={s.area}>
@@ -55,7 +87,7 @@ export function Classic() {
 
           <article>
             <h3>{rtr.title}</h3>
-            <p>{rtr.description}</p>
+            <Details id="rtr" />
             <p className="classic__muted">
               {rtr.tags.join(' · ')} · Wishlists: {status.wishlists}
             </p>
@@ -66,11 +98,12 @@ export function Classic() {
 
           <article>
             <h3>Clipper</h3>
-            <p>{clipper.footer}</p>
+            <Details id="clipper" />
           </article>
 
           <article>
             <h3>IPA-Assistent</h3>
+            <Details id="ipa" />
             <p>{ipa.greeting}</p>
             <dl className="classic__qa">
               {ipa.examples.map((ex) => (
@@ -89,6 +122,7 @@ export function Classic() {
 
           <article>
             <h3>Marketing-Agents</h3>
+            <Details id="agents" />
             <p>{agentsReport.intro}</p>
             <p>
               <b>Empfehlung:</b> {agentsReport.recommendation}
@@ -97,12 +131,12 @@ export function Classic() {
 
           <article>
             <h3>{wetter.title} (BMA)</h3>
-            <p>{wetter.description}</p>
+            <Details id="wetter" />
           </article>
 
           <article>
             <h3>{shop.title}</h3>
-            <p>{shop.description}</p>
+            <Details id="shop" />
           </article>
         </section>
 
