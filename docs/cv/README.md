@@ -14,5 +14,5 @@ python -c "from PIL import Image; Image.open('cv.png').convert('RGB').save('fron
 rm cv.png
 ```
 
-Die Telefonnummer steht im öffentlichen PDF. Soll sie nicht online sein, die Zeile im Kopf
-entfernen und neu erzeugen.
+Das ist die öffentliche Version: ohne Telefonnummer (nur E-Mail, Website, GitHub, LinkedIn).
+Muss sie auf genau eine A4-Seite passen, nach dem Erzeugen die Seitenzahl prüfen.
