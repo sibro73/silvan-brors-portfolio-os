@@ -5,6 +5,8 @@
 export {
   agentsReport,
   type AgentsReport,
+  classic,
+  type ClassicData,
   type CalendarEvent,
   events,
   ipa,

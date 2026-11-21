@@ -2,6 +2,8 @@ import { useStatus } from '../../api/statusContext';
 import type { ProjectId } from '../../data';
 import { profile, projects } from '../../shared/content';
 import type { MobileAppId, MobileAppProps } from '../mobileApps';
+import { CLASSIC_PATH } from '../../shared/route';
+import { RouteLink } from '../../shared/RouteLink';
 
 /** Projektkarten: Karte → App am Handy. */
 const CARD_APPS: Record<string, MobileAppId> = {
@@ -131,9 +133,9 @@ export function Welcome({ open }: MobileAppProps) {
         >
           Kontakt
         </button>
-        <a
+        <RouteLink
           className="m-primary"
-          href="#klassisch"
+          to={CLASSIC_PATH}
           style={{
             background: '#F2F2F7',
             color: '#1D1D1F',
@@ -144,7 +146,7 @@ export function Welcome({ open }: MobileAppProps) {
           }}
         >
           Klassische Ansicht
-        </a>
+        </RouteLink>
       </div>
     </div>
   );
