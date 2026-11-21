@@ -67,27 +67,21 @@
   ],
   "projects": [
     {
+      "detailsId": "rtr",
       "name": "Rigged to Riches",
       "kind": "Spiel, eigenes Projekt",
       "filters": ["spiel"],
       "color": "#9E1530",
-      "image": {
-        "src": "/media/projects/rtr.webp",
-        "alt": "Rigged to Riches: das Casino der Stadt Las Agné bei Nacht, mit Suchscheinwerfern (Bild aus einer Trailer-Aufnahme)"
-      },
       "status": "Release 2027",
       "text": "Koop-Spiel über Glücksspiel und Betrug in der Casino-Stadt Las Agné, mit einem Heist als Finale. Solo oder im Online-Koop mit bis zu 4 Leuten. Release nach dem Steam Next Fest im Februar 2027.",
       "tags": ["Unity", "C#", "Steam"]
     },
     {
+      "detailsId": "clipper",
       "name": "Clipper",
       "kind": "Automatisierung",
       "filters": ["auto"],
       "color": "#1A73B5",
-      "image": {
-        "src": "/media/projects/clipper.webp",
-        "alt": "README des Clippers auf GitHub mit der Pipeline von Twitch bis Telegram"
-      },
       "text": "Echtzeit-Bot, der Livestreams mitschaut, Highlights erkennt, den Clip schneidet und sofort per Telegram schickt.",
       "tags": ["Python", "FFmpeg", "Whisper", "Telegram Bot API"],
       "repo": {
@@ -96,26 +90,20 @@
       }
     },
     {
+      "detailsId": "ipa",
       "name": "IPA-Lernassistent",
       "kind": "AI",
       "filters": ["ai"],
       "color": "#5B3CC4",
-      "image": {
-        "src": "/media/projects/ipa.webp",
-        "alt": "IPA-Assistent auf silvanbrors.ch: Antwort auf «Was ist der Unterschied zwischen Image und Container?» mit Quellen aus den Notizen"
-      },
       "text": "RAG über meine IPA-Lernnotizen. Man stellt eine Frage und bekommt eine Antwort mit Quelle aus den Notizen.",
       "tags": ["Spring Boot", "Spring AI", "Ollama", "pgvector"]
     },
     {
+      "detailsId": "agents",
       "name": "Marketing-Agents",
       "kind": "AI, Automatisierung",
       "filters": ["ai", "auto"],
       "color": "#B44A12",
-      "image": {
-        "src": "/media/projects/agents.webp",
-        "alt": "Hochformat-Clip aus Rigged to Riches, von den Agents geschnitten, mit dem Hook «Slight parking issue at the entrance»"
-      },
       "status": "In Arbeit",
       "text": "Mehrere Agents posten Clips von Rigged to Riches, ein Analyse-Agent schreibt jede Woche einen Bericht, was funktioniert hat.",
       "tags": ["Agents", "Claude Code", "Python"]
@@ -137,6 +125,7 @@
       }
     },
     {
+      "detailsId": "wetter",
       "name": "Wetterstation",
       "kind": "Schule, BMA-Gruppenprojekt",
       "filters": ["schule"],
@@ -145,14 +134,11 @@
       "tags": ["[Hardware]", "[Dashboard]"]
     },
     {
+      "detailsId": "shop",
       "name": "shop-outreach",
       "kind": "Automatisierung, Tool",
       "filters": ["auto"],
       "color": "#A3286A",
-      "image": {
-        "src": "/media/projects/shop-outreach.webp",
-        "alt": "README von shop-outreach auf GitHub mit den Prüfungen pro Shop-Website"
-      },
       "text": "Python-Tool, das mit Google Places und PageSpeed lokale Shops findet, deren Website ein Update braucht.",
       "tags": ["Python", "Google Places", "PageSpeed"],
       "repo": {

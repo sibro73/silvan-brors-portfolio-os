@@ -91,6 +91,8 @@ export interface ProjectDetails {
   /** «So funktioniert es». */
   points: string[];
   tech: string[];
+  /** Echtes Bild des Projekts (16:9), in allen Ansichten. */
+  image?: { src: string; alt: string };
   /** Öffentliches Repo. Fehlt es, steht `codeNote` da. */
   repo?: Link;
   codeNote?: string;
@@ -157,6 +159,8 @@ export interface ClassicData {
   };
   filters: { id: string; label: string }[];
   projects: {
+    /** Projekt aus `projects.json` → `details`: liefert das Bild. */
+    detailsId?: ProjectId;
     name: string;
     /** Art, z. B. «AI, Automatisierung». */
     kind: string;
@@ -164,7 +168,7 @@ export interface ClassicData {
     filters: string[];
     /** Farbe der Bildfläche auf der Karte (Hintergrund, wenn kein Bild da ist). */
     color: string;
-    /** Echtes Bild des Projekts (16:9). Fehlt es, steht «[Screenshot]» da. */
+    /** Eigenes Bild, nur wenn es kein `detailsId` gibt (z. B. Silvan OS). Sonst aus `details`. */
     image?: { src: string; alt: string };
     status?: string;
     text: string;

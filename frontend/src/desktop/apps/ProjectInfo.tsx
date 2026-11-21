@@ -18,6 +18,16 @@ export function ProjectInfo({ id, tone = 'plain' }: ProjectInfoProps) {
       <h3 id={headingId} className="pinfo__title">
         Über das Projekt
       </h3>
+      {d.image && (
+        <img
+          className="pinfo__img"
+          src={d.image.src}
+          alt={d.image.alt}
+          decoding="async"
+          width={1280}
+          height={720}
+        />
+      )}
       {d.tech.length > 0 && (
         <ul className="pinfo__chips" aria-label="Technologien">
           {d.tech.map((t) => (

@@ -79,7 +79,11 @@
         "Rollen im Koop: ablenken, Schmiere stehen, Karten zuspielen. Mitspieler darf man auch verpfeifen"
       ],
       "tech": ["Unity", "C#", "PC (Steam)"],
-      "codeNote": "Der Code des Spiels ist privat."
+      "codeNote": "Der Code des Spiels ist privat.",
+      "image": {
+        "src": "/media/projects/rtr.webp",
+        "alt": "Rigged to Riches: das Casino der Stadt Las Agné bei Nacht, mit Suchscheinwerfern (Bild aus einer Trailer-Aufnahme)"
+      }
     },
     "clipper": {
       "summary": [
@@ -97,6 +101,10 @@
       "repo": {
         "label": "sibro73/stream-clipper-script",
         "href": "https://github.com/sibro73/stream-clipper-script"
+      },
+      "image": {
+        "src": "/media/projects/clipper.webp",
+        "alt": "README des Clippers auf GitHub mit der Pipeline von Twitch bis Telegram"
       }
     },
     "ipa": {
@@ -118,7 +126,11 @@
         "Cloudflare Workers AI",
         "Vectorize"
       ],
-      "codeNote": "Der Code liegt im GitLab des Lehrbetriebs und ist nicht öffentlich."
+      "codeNote": "Der Code liegt im GitLab des Lehrbetriebs und ist nicht öffentlich.",
+      "image": {
+        "src": "/media/projects/ipa.webp",
+        "alt": "IPA-Assistent auf silvanbrors.ch: Antwort auf «Was ist der Unterschied zwischen Image und Container?» mit Quellen aus den Notizen"
+      }
     },
     "agents": {
       "summary": [
@@ -132,7 +144,11 @@
         "Was funktioniert, fliesst als Learning in die nächste Woche"
       ],
       "tech": ["Claude Code (Agents)", "Python", "YouTube Data API", "Telegram Bot API"],
-      "codeNote": "Der Code ist privat."
+      "codeNote": "Der Code ist privat.",
+      "image": {
+        "src": "/media/projects/agents.webp",
+        "alt": "Hochformat-Clip aus Rigged to Riches, von den Agents geschnitten, mit dem Hook «Slight parking issue at the entrance»"
+      }
     },
     "wetter": {
       "summary": [
@@ -157,6 +173,10 @@
       "repo": {
         "label": "sibro73/shop-outreach",
         "href": "https://github.com/sibro73/shop-outreach"
+      },
+      "image": {
+        "src": "/media/projects/shop-outreach.webp",
+        "alt": "README von shop-outreach auf GitHub mit den Prüfungen pro Shop-Website"
       }
     }
   }

@@ -132,4 +132,13 @@ describe('apps', () => {
     await userEvent.keyboard('{Escape}');
     expect(screen.queryByRole('dialog')).toBeNull();
   });
+
+  it('project windows show the real project image', () => {
+    render(<Clipper />);
+    const info = screen.getByRole('region', { name: 'Über das Projekt' });
+    expect(within(info).getByRole('img', { name: /README des Clippers/ })).toHaveAttribute(
+      'src',
+      '/media/projects/clipper.webp',
+    );
+  });
 });
