@@ -61,10 +61,25 @@ Jede Phase = ein Branch + ein PR. Erst weiter, wenn die Phase online läuft.
 - [x] Apps zoomen aus dem Icon, Browser-Zurück schliesst, Wackel-Modus, Animationen nur ohne
   `prefers-reduced-motion`
 
+## Phase 8 – Inhalte und Live-Daten (PR #18–#22)
+- [x] Lebenslauf als PDF mit echten Angaben, Vorschau in beiden Ansichten, E-Mail überall
+- [x] Zweite Seite am Handy (Live-Zahlen, Termin, Wochenbericht, Links)
+- [x] Live-Backend gratis auf Cloudflare: Pages Functions + D1, gleiche API wie Spring Boot
+- [x] «Über das Projekt» bei allen Projekten, Technologien als Chips, GitHub-Links
+  (Clipper, shop-outreach und diese Seite sind öffentlich)
+- [x] Startseite als App (Dock am Desktop, App am Handy)
+
+## Was noch fehlt (nur mit Silvan)
+- Trailer von Rigged to Riches (`media/rtr-trailer.mp4` oder YouTube-Link)
+- Foto oder Dashboard der Wetterstation, dazu mehr Text (Sensoren, Technik, eigene Rolle)
+- Steam-Wishlists: in Steamworks prüfen, ob ein Financial API Key die Zahlen liefert (`docs/steam.md`)
+- Clipper starten: Er meldet Clips, sobald er läuft (Key steht in seiner `.env`)
+
 ## Offene Punkte
 - ~~Sprache des Clippers~~: Python (FFmpeg, Whisper, Telegram Bot API)
 - LLM und Vektor-DB des IPA-Assistenten: lokal Ollama `llama3.1:8b` + pgvector (`ipa-assistant`),
   live Llama 3.3 70B + bge-m3 + Cloudflare Vectorize
 - Datenbank in Produktion: Cloudflare D1, siehe `docs/deploy.md`
 - Domain: silvanbrors.ch (live), API unter silvanbrors.ch/api (Pages Functions)
-- DNSSEC: bei Cloudflare eingeschaltet, wartet auf den DS-Eintrag bei der .ch-Registry
+- DNSSEC: bei Cloudflare eingeschaltet, CDS ist veröffentlicht. Die .ch-Registry übernimmt den
+  Schlüssel automatisch, wenn er ein paar Tage stabil war. Sonst DS bei Hostpoint eintragen.

@@ -10,7 +10,7 @@ Grosse Videos besser extern hosten (z. B. YouTube) und nur den Link eintragen.
 |---|---|---|---|
 | Lebenslauf als PDF | Fenster «Lebenslauf», Menü «Lebenslauf herunterladen» | `media/lebenslauf.pdf` | Erledigt. Quelle `docs/cv/lebenslauf.html`, Vorschau `media/lebenslauf.webp` (siehe `docs/cv/README.md`). |
 | Trailer Rigged to Riches | Fenster «Rigged to Riches» | `media/rtr-trailer.mp4` (kurz, ohne Ton) oder YouTube-Link | Video-Einbindung baue ich, sobald die Datei da ist. |
-| Foto oder Dashboard der Wetterstation | Fenster «Wetterstation» | `media/wetterstation.jpg` (oder `.png`) | Bild mit Alternativtext einbinden. |
+| Foto oder Dashboard der Wetterstation | Fenster «Wetterstation» | `media/wetterstation.jpg` (oder `.png`) | Bild mit Alternativtext einbinden. Dazu fehlt Text: welche Sensoren, welche Technik, eigene Rolle in der Gruppe (`data/projects.json` → `details.wetter`). |
 | Screenshot der Seite fürs README | `README.md` | `docs/screenshot.png` | Erledigt: Screenshot der Live-Seite. |
 
 ## Angaben (Text)
