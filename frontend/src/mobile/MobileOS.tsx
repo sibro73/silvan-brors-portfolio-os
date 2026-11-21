@@ -22,12 +22,13 @@ import { Rtr } from './apps/Rtr';
 import { Settings } from './apps/Settings';
 import { Shop } from './apps/Shop';
 import { Terminal } from './apps/Terminal';
+import { Welcome } from './apps/Welcome';
 import { Wetter } from './apps/Wetter';
 import { AppSheet } from './AppSheet';
 import { Dock } from './Dock';
 import { HomeScreen } from './HomeScreen';
 import { ClipperGlyph } from './icons';
-import { isMobileAppId, type MobileAppId, type MobileAppProps } from './mobileApps';
+import { type MobileAppId, type MobileAppProps } from './mobileApps';
 
 /** Zeiten aus design/mobile.dc.html. */
 export const CLOSE_MS = 250;
@@ -49,6 +50,7 @@ const APPS: Record<MobileAppId, ComponentType<MobileAppProps>> = {
   kontakt: Kontakt,
   notes: Notes,
   terminal: Terminal,
+  welcome: Welcome,
 };
 
 /** Merkt sich im Verlauf, dass eine App offen ist: Browser-Zurück schliesst sie. */
@@ -128,15 +130,14 @@ export default function MobileOS() {
   }, [close]);
 
   useEffect(() => {
-    const onPop = (e: PopStateEvent) => {
-      const target: unknown = (e.state as Record<string, unknown> | null)?.[HISTORY_KEY];
-      if (isMobileAppId(target) && target !== state.current.app) {
-        // Vorwärts zu einer App (selten): einfach öffnen
-        historyPushed.current = true;
-        setApp(target);
-        setClosing(false);
-        return;
-      }
+    // Ein alter Eintrag «App offen» (z. B. nach Neuladen) darf beim nächsten Zurück keine App öffnen.
+    const current: unknown = (window.history.state as Record<string, unknown> | null)?.[
+      HISTORY_KEY
+    ];
+    if (current !== undefined) window.history.replaceState(null, '');
+
+    // Zurück (Geste, Browser-Knopf oder unser Home-Button) schliesst immer nur die offene App.
+    const onPop = () => {
       historyPushed.current = false;
       close();
     };
