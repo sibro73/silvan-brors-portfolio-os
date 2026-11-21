@@ -230,7 +230,7 @@ describe('MobileOS', () => {
     expect(within(page2).getByText('Wochenbericht')).toBeInTheDocument();
     expect(within(page2).getByRole('link', { name: 'Klassische Ansicht' })).toHaveAttribute(
       'href',
-      '#klassisch',
+      '/klassisch',
     );
 
     // Seitenpunkte: Seite 1 aktiv, Seite 2 per Tipp

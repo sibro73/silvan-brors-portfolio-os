@@ -4,6 +4,7 @@
  * und bleiben stehen, bis echte Daten da sind.
  */
 import agentsReportJson from './agents-report.json';
+import classicJson from './classic.json';
 import eventsJson from './events.json';
 import ipaJson from './ipa.json';
 import profileJson from './profile.json';
@@ -145,3 +146,33 @@ export const agentsReport: AgentsReport = agentsReportJson;
 export const ipa: IpaData = ipaJson;
 export const status: Status = statusJson;
 export const events: CalendarEvent[] = eventsJson;
+
+/** Klassische Ansicht unter /klassisch: eine normale Portfolio-Seite. */
+export interface ClassicData {
+  hero: {
+    badge: string;
+    title: string;
+    text: string;
+    terminal: { cmd: string; out: { text: string; tone?: 'muted' | 'yellow' }[] }[];
+  };
+  filters: { id: string; label: string }[];
+  projects: {
+    name: string;
+    /** Art, z. B. «AI, Automatisierung». */
+    kind: string;
+    /** Filter-Kategorien (ids aus `filters`). */
+    filters: string[];
+    /** Farbe der Bildfläche auf der Karte. */
+    color: string;
+    status?: string;
+    text: string;
+    tags: string[];
+    repo?: Link;
+  }[];
+  timeline: { when: string; title: string; text: string }[];
+  skills: { label: string; items: string[]; bg: string; fg: string }[];
+  languages: string;
+  contactTitle: string;
+}
+
+export const classic: ClassicData = classicJson as ClassicData;

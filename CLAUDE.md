@@ -25,7 +25,7 @@ silvan-os/
 ```
 src/
 ├── main.tsx
-├── App.tsx                  Wechsel Handy / Desktop (matchMedia, React.lazy) / Klassische Ansicht
+├── App.tsx                  /klassisch → klassische Seite, sonst Handy oder Desktop (matchMedia, React.lazy)
 ├── desktop/                 Computer-Ansicht (ab 860 px) nach design/desktop.dc.html
 │   ├── DesktopView.tsx      Einstieg: Einstellungen, Neustart, Bootscreen
 │   ├── DesktopShell.tsx     der ganze «Mac»: Menüleiste, Schreibtisch, Fenster, Dock
@@ -68,7 +68,8 @@ src/
 │   └── useIsMobile.ts, useMediaQuery.ts
 ├── api/                     fetch-Funktionen für das Backend
 ├── data/                    statische Fallback-Daten (JSON), solange das Backend fehlt
-└── classic/                 "Klassische Ansicht": alles auf einer schlichten Seite
+└── classic/                 Klassische Ansicht unter /klassisch: normale Portfolio-Seite
+                             (Inhalte in data/classic.json, Routing in shared/route.ts)
 ```
 
 Neben `src/`: `functions/api/ipa/ask.ts` ist eine Cloudflare Pages Function (Logik in

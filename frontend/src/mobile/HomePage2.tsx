@@ -6,6 +6,8 @@ import { formatWhen, upcomingEvents, zurichToday } from '../shared/calendar';
 import { events, profile } from '../shared/content';
 import type { OpenHandler } from './HomeScreen';
 import type { MobileAppId } from './mobileApps';
+import { CLASSIC_PATH } from '../shared/route';
+import { RouteLink } from '../shared/RouteLink';
 
 const linkedin = profile.contact.links.find((l) => l.label === 'LinkedIn');
 
@@ -158,9 +160,9 @@ export function HomePage2({ onOpen }: { onOpen: OpenHandler }) {
           <span className="m-lbl">LinkedIn</span>
         </a>
       )}
-      <a
+      <RouteLink
         className="m-app m-ic"
-        href="#klassisch"
+        to={CLASSIC_PATH}
         aria-label="Klassische Ansicht"
         style={{ textDecoration: 'none' }}
       >
@@ -180,7 +182,7 @@ export function HomePage2({ onOpen }: { onOpen: OpenHandler }) {
           </svg>
         </span>
         <span className="m-lbl">Klassisch</span>
-      </a>
+      </RouteLink>
     </>
   );
 }

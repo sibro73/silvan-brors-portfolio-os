@@ -55,7 +55,7 @@ describe('Welcome', () => {
     expect(openApp).toHaveBeenLastCalledWith('kontakt');
     expect(screen.getByRole('link', { name: 'Klassische Ansicht' })).toHaveAttribute(
       'href',
-      '#klassisch',
+      '/klassisch',
     );
   });
 

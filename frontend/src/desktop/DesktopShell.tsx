@@ -18,14 +18,13 @@ import { useFullscreen } from './useFullscreen';
 import { useTimedNotification } from './useTimedNotification';
 import { Window } from './Window';
 import { activeWindow, type Area, createInitialState, useWindowStore } from './windowStore';
+import { CLASSIC_PATH, navigate } from '../shared/route';
 
 /** Benachrichtigung vom Clipper Bot: nach 4 s einblenden, nach 14 s wieder weg. */
 export const NOTIFICATION_SHOW_MS = 4000;
 export const NOTIFICATION_HIDE_MS = 14000;
 
-const showClassic = () => {
-  window.location.hash = '#klassisch';
-};
+const showClassic = () => navigate(CLASSIC_PATH);
 
 /** Desktop = Fenster minus Menüleiste (28 px). */
 const MENU_BAR_HEIGHT = 28;

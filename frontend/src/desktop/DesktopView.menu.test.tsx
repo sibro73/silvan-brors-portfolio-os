@@ -147,6 +147,13 @@ describe('menu actions in the running desktop', () => {
     advance(BOOT_MS);
     expect(os()).toHaveAttribute('data-wallpaper', 'gletscher');
   });
+
+  it('Klassische Ansicht leads to /klassisch', async () => {
+    render(<DesktopView />);
+    await choose('Silvan OS', 'Klassische Ansicht');
+    expect(window.location.pathname).toBe('/klassisch');
+    window.history.replaceState(null, '', '/');
+  });
 });
 
 describe('keyboard shortcuts', () => {

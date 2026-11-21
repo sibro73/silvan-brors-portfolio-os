@@ -1,4 +1,5 @@
 import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import App from './App';
@@ -8,7 +9,7 @@ const originalMatchMedia = window.matchMedia;
 
 afterEach(() => {
   window.matchMedia = originalMatchMedia;
-  window.location.hash = '';
+  window.history.replaceState(null, '', '/');
 });
 
 /** Beide Ansichten laden nach (React.lazy). Im vollen Testlauf kann das länger als 1 s dauern. */
@@ -50,24 +51,34 @@ describe('views', () => {
     expect(screen.queryByRole('main', { name: 'Home-Bildschirm' })).toBeNull();
   });
 
-  it('shows the classic view for #klassisch and returns to the desktop', async () => {
+  it('/klassisch shows the classic page, «Silvan OS öffnen» returns to the desktop', async () => {
     render(<App />);
     expect(await menuBar()).toBeInTheDocument();
-    act(() => {
-      window.location.hash = '#klassisch';
-      window.dispatchEvent(new HashChangeEvent('hashchange'));
-    });
-    expect(screen.getByRole('heading', { level: 1, name: 'Silvan Brors' })).toHaveFocus();
-    expect(screen.queryByRole('navigation', { name: 'Dock' })).toBeNull();
-    for (const name of ['Über mich', 'Projekte', 'Lebenslauf', 'Kontakt']) {
-      expect(screen.getByRole('heading', { level: 2, name })).toBeInTheDocument();
-    }
-    expect(screen.getByText(/Wishlists: \[live\]/)).toBeInTheDocument();
 
-    act(() => {
-      window.location.hash = '#desktop';
-      window.dispatchEvent(new HashChangeEvent('hashchange'));
-    });
+    // Desktop: Menü «Klassische Ansicht» bzw. Link im Willkommensfenster
+    await userEvent.click(screen.getByRole('link', { name: 'Klassische Ansicht' }));
+    expect(window.location.pathname).toBe('/klassisch');
+    expect(
+      await screen.findByRole('heading', { level: 1, name: /Ich baue Backends/ }, LAZY),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('navigation', { name: 'Dock' })).toBeNull();
+    expect(document.title).toBe('Silvan Brors – Portfolio');
+
+    await userEvent.click(screen.getByRole('link', { name: 'Silvan OS öffnen ↗' }));
+    expect(window.location.pathname).toBe('/');
     expect(await screen.findByRole('navigation', { name: 'Dock' }, LAZY)).toBeInTheDocument();
+  });
+
+  it('browser back leaves the classic page again', async () => {
+    window.history.pushState(null, '', '/klassisch');
+    render(<App />);
+    expect(await screen.findByRole('heading', { level: 1 }, LAZY)).toHaveTextContent(
+      'Ich baue Backends',
+    );
+    act(() => {
+      window.history.pushState(null, '', '/');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    });
+    expect(await menuBar()).toBeInTheDocument();
   });
 });

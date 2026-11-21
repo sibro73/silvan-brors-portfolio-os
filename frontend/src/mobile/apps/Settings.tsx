@@ -1,4 +1,6 @@
 import { OS_HOSTING, OS_STACK, profile, WALLPAPERS } from '../../shared/content';
+import { CLASSIC_PATH } from '../../shared/route';
+import { RouteLink } from '../../shared/RouteLink';
 import { useWallpaper } from '../../shared/wallpaper';
 
 /** Wie im Design: Frontend, Backend, Datenbank. */
@@ -86,6 +88,18 @@ export function Settings() {
             </span>
           </div>
         </div>
+      </div>
+      <div className="m-list">
+        <RouteLink
+          to={CLASSIC_PATH}
+          className="m-list__row"
+          style={{ minHeight: 50, alignItems: 'center', color: '#1D1D1F', textDecoration: 'none' }}
+        >
+          <span>Klassische Ansicht</span>
+          <span style={{ color: '#C7C7CC', fontSize: 20 }} aria-hidden="true">
+            ›
+          </span>
+        </RouteLink>
       </div>
       <p style={{ margin: 0, fontSize: 13, color: '#6E6E73', padding: '0 14px' }}>
         Am Computer öffnet sich Silvan OS als Desktop mit Fenstern, Menüleiste und Dock.

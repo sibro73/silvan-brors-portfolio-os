@@ -162,3 +162,6 @@ button {
   min-height: 100dvh;
   background: var(--wall);
 }
+.view-loading--light {
+  background: #f6f6f9;
+}

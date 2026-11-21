@@ -5,6 +5,8 @@ import { APP_BY_ID, type AppId } from '../../apps.registry';
 import { profile, type ProjectId, projects } from '../../../data';
 import { AppIcon } from '../../AppIcon';
 import type { AppProps } from '../../appTypes';
+import { CLASSIC_PATH } from '../../../shared/route';
+import { RouteLink } from '../../../shared/RouteLink';
 
 const isAppId = (id: string): id is AppId => id in APP_BY_ID;
 
@@ -99,9 +101,9 @@ export function Welcome({ openApp }: AppProps) {
         <button type="button" className="welcome__btn" onClick={() => openApp('kontakt')}>
           Kontakt
         </button>
-        <a className="welcome__btn" href="#klassisch">
+        <RouteLink className="welcome__btn" to={CLASSIC_PATH}>
           Klassische Ansicht
-        </a>
+        </RouteLink>
       </div>
 
       <p className="welcome__hint">{w.hint}</p>
