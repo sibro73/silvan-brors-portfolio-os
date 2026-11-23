@@ -86,10 +86,14 @@ export function clampPosition(x: number, y: number, width: number): { x: number;
 }
 
 /** Offene Fenster in der gegebenen Reihenfolge (erstes = ganz hinten). */
-export function createInitialState(open: { id: AppId; x: number; y: number }[]): DesktopState {
+export function createInitialState(
+  open: { id: AppId; x: number; y: number; width?: number; height?: number }[],
+): DesktopState {
   const windows: DesktopState['windows'] = {};
   open.forEach((w, i) => {
     windows[w.id] = { x: w.x, y: w.y, z: i + 1, minimized: false, maximized: false };
+    if (w.width !== undefined) windows[w.id]!.width = w.width;
+    if (w.height !== undefined) windows[w.id]!.height = w.height;
   });
   return { windows, nextZ: open.length + 1 };
 }

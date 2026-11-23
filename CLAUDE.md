@@ -40,6 +40,7 @@ src/
 │   ├── Dock.tsx             App-Icons, Hover-Vergrösserung, Punkt für offene Apps
 │   ├── Notification.tsx     Benachrichtigung oben rechts
 │   ├── windowStore.ts       Zustand: offen/minimiert/maximiert, x/y, z-Reihenfolge
+│   ├── initialWindows.ts    Startanordnung (Willkommen + Terminal), relativ zur Bildschirmgrösse
 │   ├── apps.registry.ts     Liste aller Desktop-Apps: id, Titel, Icon, Standardgrösse/-position
 │   └── apps/                Ein Ordner pro Desktop-App (Inhalt eines Fensters)
 │       ├── welcome/             Willkommensfenster (Startfenster)

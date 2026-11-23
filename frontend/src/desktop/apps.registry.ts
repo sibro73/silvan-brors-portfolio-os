@@ -282,9 +282,6 @@ export const DOCK_ORDER: AppId[] = [
 /** Reihenfolge im Ordner «Projekte». */
 export const FINDER_ORDER: AppId[] = ['rtr', 'clipper', 'ipa', 'agents', 'wetter', 'shop'];
 
-/** Beim ersten Laden offen, von hinten nach vorne. */
-export const INITIAL_OPEN: AppId[] = ['terminal', 'welcome'];
-
 /** Höhe der Spalte mit den Schreibtisch-Icons (4 Icons). Darunter ist der rechte Rand frei. */
 export const ICON_COLUMN_HEIGHT = 400;
 /** Abstand rechts, wenn das Fenster neben den Icons liegt (92 px Icons + 16 px Rand + Luft). */

@@ -10,18 +10,27 @@ interface AppSheetProps {
   /** transform-origin: Mitte des angetippten Icons, relativ zum Bildschirm. */
   origin: string;
   onHome: () => void;
+  /** Fokus beim Öffnen auf «Home». Nicht bei der Start-App, sonst steht dort gleich ein Rahmen. */
+  focusOnOpen?: boolean;
   children: ReactNode;
 }
 
 /** Geöffnete App, bildschirmfüllend. Zoomt aus dem Icon und beim Schliessen dorthin zurück. */
-export function AppSheet({ id, closing, origin, onHome, children }: AppSheetProps) {
+export function AppSheet({
+  id,
+  closing,
+  origin,
+  onHome,
+  focusOnOpen = true,
+  children,
+}: AppSheetProps) {
   const app = MOBILE_APPS[id];
   const back = useRef<HTMLButtonElement>(null);
 
   // Fokus in die App, damit Tastatur und Screenreader dort weitermachen
   useEffect(() => {
-    back.current?.focus({ preventScroll: true });
-  }, [id]);
+    if (focusOnOpen) back.current?.focus({ preventScroll: true });
+  }, [id, focusOnOpen]);
 
   const style = {
     transformOrigin: origin,

@@ -2,12 +2,13 @@ import './Desktop.css';
 
 import { useCallback, useMemo, useState } from 'react';
 
-import { APP_BY_ID, APPS, type AppId, defaultPosition, INITIAL_OPEN } from './apps.registry';
+import { APP_BY_ID, APPS, type AppId, defaultPosition } from './apps.registry';
 import { projects } from '../data';
 import { createActions } from './actions';
 import type { TerminalRequest } from './appTypes';
 import { Desktop } from './Desktop';
 import { Dock } from './Dock';
+import { layoutInitialWindows, MENU_BAR_HEIGHT } from './initialWindows';
 import type { MenuContext } from './menu.config';
 import { MenuBar } from './MenuBar';
 import { Notification } from './Notification';
@@ -26,13 +27,14 @@ export const NOTIFICATION_HIDE_MS = 14000;
 
 const showClassic = () => navigate(CLASSIC_PATH);
 
-/** Desktop = Fenster minus Menüleiste (28 px). */
-const MENU_BAR_HEIGHT = 28;
-
-const initState = () => {
-  const desktop = { width: window.innerWidth, height: window.innerHeight - MENU_BAR_HEIGHT };
-  return createInitialState(INITIAL_OPEN.map((id) => ({ id, ...defaultPosition(id, desktop) })));
-};
+/** Startanordnung aus `initialWindows`, immer frisch (nichts gespeichert). */
+const initState = () =>
+  createInitialState(
+    layoutInitialWindows({
+      width: window.innerWidth,
+      height: window.innerHeight - MENU_BAR_HEIGHT,
+    }),
+  );
 
 interface DesktopShellProps {
   preferences: Preferences;

@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { BOOT_MS } from './boot';
 import DesktopView from './DesktopView';
-import { INITIAL_OPEN } from './apps.registry';
+import { initialWindows } from './initialWindows';
 import { PREFERENCES_KEY } from './preferences';
 import { WALLPAPER_KEY } from '../shared/wallpaper';
 
@@ -77,7 +77,7 @@ describe('menu actions in the running desktop', () => {
     expect(screen.getByRole('status', { name: 'Silvan OS startet neu' })).toBeInTheDocument();
     advance(BOOT_MS);
     expect(screen.queryByRole('status', { name: 'Silvan OS startet neu' })).toBeNull();
-    expect(visibleWindows()).toHaveLength(INITIAL_OPEN.length);
+    expect(visibleWindows()).toHaveLength(initialWindows.length);
     expect(screen.queryByRole('region', { name: 'IPA-Assistent' })).toBeNull();
   });
 

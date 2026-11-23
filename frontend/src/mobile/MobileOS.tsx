@@ -56,6 +56,9 @@ const APPS: Record<MobileAppId, ComponentType<MobileAppProps>> = {
 /** Merkt sich im Verlauf, dass eine App offen ist: Browser-Zurück schliesst sie. */
 const HISTORY_KEY = 'silvanosApp';
 
+/** App, die beim Laden offen ist. Zurück oder Home führt auf den Home-Bildschirm. */
+export const START_APP: MobileAppId = 'welcome';
+
 /** Mitte eines Elements relativ zum Bildschirm, als transform-origin. */
 function originOf(el: HTMLElement | undefined, root: HTMLElement | null): string {
   if (!el || !root) return '50% 50%';
@@ -68,10 +71,18 @@ function originOf(el: HTMLElement | undefined, root: HTMLElement | null): string
 }
 
 /** Handy-Ansicht: Home-Bildschirm mit Widgets, App-Raster und Dock. Apps öffnen bildschirmfüllend. */
-export default function MobileOS() {
+interface MobileOSProps {
+  /** App, die beim Laden offen ist (`null` = Home-Bildschirm). */
+  startApp?: MobileAppId | null;
+}
+
+export default function MobileOS({ startApp = START_APP }: MobileOSProps = {}) {
   const [wall] = useWallpaper();
-  const [app, setApp] = useState<MobileAppId | null>(null);
+  // Beim Start ist nur das Willkommen-Fenster offen (wie am Desktop, ohne Terminal).
+  const [app, setApp] = useState<MobileAppId | null>(startApp);
   const [closing, setClosing] = useState(false);
+  // Erst Apps, die jemand selbst öffnet, bekommen den Fokus (nicht die Start-App).
+  const [openedByUser, setOpenedByUser] = useState(false);
   const [origin, setOrigin] = useState('50% 50%');
   const [jiggle, setJiggle] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -112,6 +123,7 @@ export default function MobileOS() {
       historyPushed.current = true;
     }
     setApp(id);
+    setOpenedByUser(true);
     setClosing(false);
     if (id === 'clipper') {
       setNotification(false);
@@ -135,6 +147,11 @@ export default function MobileOS() {
       HISTORY_KEY
     ];
     if (current !== undefined) window.history.replaceState(null, '');
+    // Start-App: ein Eintrag im Verlauf, damit Zurück sie schliesst (nur einmal, auch im StrictMode)
+    if (state.current.app && !historyPushed.current) {
+      window.history.pushState({ [HISTORY_KEY]: state.current.app }, '');
+      historyPushed.current = true;
+    }
 
     // Zurück (Geste, Browser-Knopf oder unser Home-Button) schliesst immer nur die offene App.
     const onPop = () => {
@@ -225,7 +242,13 @@ export default function MobileOS() {
       )}
 
       {app && Current && (
-        <AppSheet id={app} closing={closing} origin={origin} onHome={goHome}>
+        <AppSheet
+          id={app}
+          closing={closing}
+          origin={origin}
+          onHome={goHome}
+          focusOnOpen={openedByUser}
+        >
           <Current open={open} goHome={goHome} toast={toast} />
         </AppSheet>
       )}
