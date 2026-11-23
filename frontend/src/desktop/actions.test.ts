@@ -12,6 +12,7 @@ function setup(patch: Partial<ActionDeps> = {}) {
     minimize: vi.fn(),
     toggleMaximize: vi.fn(),
     move: vi.fn(),
+    resize: vi.fn(),
     minimizeAll: vi.fn(),
     tile: vi.fn(),
   };

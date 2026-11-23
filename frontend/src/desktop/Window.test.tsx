@@ -13,6 +13,7 @@ const mockActions = (): WindowActions => ({
   minimize: vi.fn(),
   toggleMaximize: vi.fn(),
   move: vi.fn(),
+  resize: vi.fn(),
   minimizeAll: vi.fn(),
   tile: vi.fn(),
 });
@@ -77,5 +78,47 @@ describe('Window', () => {
     setup({ minimized: true });
     expect(screen.queryByRole('region')).toBeNull();
     expect(screen.getByText('Inhalt', { selector: 'p' })).not.toBeVisible();
+  });
+
+  it('resizes at the bottom-right corner, auto height becomes fixed', () => {
+    const actions = setup({ width: 500 });
+    const corner = screen.getByTestId('resize-se');
+    fireEvent.pointerDown(corner, { pointerId: 2, button: 0, clientX: 600, clientY: 500 });
+    fireEvent.pointerMove(corner, { pointerId: 2, clientX: 680, clientY: 560 });
+    fireEvent.pointerUp(corner, { pointerId: 2 });
+    // «Über mich» hat Höhe auto; jsdom kennt keine Höhe → 400 als Ausgangswert
+    expect(actions.resize).toHaveBeenLastCalledWith('about', {
+      x: 90,
+      y: 40,
+      width: 580,
+      height: 460,
+    });
+    expect(actions.focus).toHaveBeenCalledWith('about');
+    expect(actions.move).not.toHaveBeenCalled();
+  });
+
+  it('resizes at the left edge, the right edge stays', () => {
+    const actions = setup({ width: 500, height: 300 });
+    const edge = screen.getByTestId('resize-w');
+    fireEvent.pointerDown(edge, { pointerId: 3, button: 0, clientX: 90, clientY: 200 });
+    fireEvent.pointerMove(edge, { pointerId: 3, clientX: 40, clientY: 260 });
+    expect(actions.resize).toHaveBeenLastCalledWith('about', {
+      x: 40,
+      y: 40,
+      width: 550,
+      height: 300,
+    });
+  });
+
+  it('has resize handles on all edges and corners, but not when maximized', () => {
+    setup();
+    for (const edge of ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw']) {
+      expect(screen.getByTestId(`resize-${edge}`)).toBeInTheDocument();
+    }
+  });
+
+  it('cannot be resized when maximized', () => {
+    setup({ maximized: true });
+    expect(screen.queryByTestId('resize-se')).toBeNull();
   });
 });
