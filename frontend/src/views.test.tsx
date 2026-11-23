@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import App from './App';
+import { layoutInitialWindows, MENU_BAR_HEIGHT } from './desktop/initialWindows';
 import { mockViewportWidth } from './test/matchMedia';
 
 const originalMatchMedia = window.matchMedia;
@@ -23,17 +24,27 @@ describe('views', () => {
     render(<App />);
     expect(await homeScreen()).toBeInTheDocument();
     expect(screen.queryByTestId('active-app')).toBeNull();
-    expect(screen.queryByRole('region', { name: 'Willkommen' })).toBeNull();
+    // Handy: beim Start nur das Willkommen-Fenster, kein Terminal
+    expect(screen.getByRole('region', { name: 'Willkommen' })).toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: 'silvan — zsh — 80×24' })).toBeNull();
   });
 
   it('shows only the desktop from 860 px', async () => {
     mockViewportWidth(860);
     render(<App />);
     expect(await menuBar()).toBeInTheDocument();
-    expect(screen.getByRole('region', { name: 'Willkommen' })).toHaveStyle({
-      left: '24px',
-      top: '24px',
+    const start = layoutInitialWindows({
+      width: window.innerWidth,
+      height: window.innerHeight - MENU_BAR_HEIGHT,
     });
+    for (const r of start) {
+      const name = r.id === 'welcome' ? 'Willkommen' : 'silvan — zsh — 80×24';
+      expect(screen.getByRole('region', { name })).toHaveStyle({
+        left: `${r.x}px`,
+        top: `${r.y}px`,
+        width: `${r.width}px`,
+      });
+    }
     expect(screen.queryByRole('main', { name: 'Home-Bildschirm' })).toBeNull();
   });
 

@@ -31,6 +31,11 @@ export function Terminal({ openApp, closeSelf, terminalRequest }: AppProps) {
     return () => pending.forEach(clearTimeout);
   }, []);
 
+  // Beim Öffnen (auch beim Start) gleich tippen können.
+  useEffect(() => {
+    inputRef.current?.focus({ preventScroll: true });
+  }, []);
+
   // Immer die letzte Zeile zeigen.
   useEffect(() => {
     const scroller = endRef.current?.closest('.win__body');

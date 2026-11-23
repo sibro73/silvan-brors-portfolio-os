@@ -10,6 +10,7 @@ import MobileOS, {
   LONG_PRESS_MS,
   NOTIFICATION_HIDE_MS,
   NOTIFICATION_SHOW_MS,
+  START_APP,
   TOAST_MS,
 } from './MobileOS';
 
@@ -55,8 +56,22 @@ const LAUNCHERS: Record<keyof typeof MOBILE_APPS, () => HTMLElement> = {
 };
 
 describe('MobileOS', () => {
-  it('shows the home screen with widgets, apps and dock, but no fake status bar', () => {
+  it('starts with only the welcome app open; back leads to the home screen', async () => {
+    const before = window.history.length;
     render(<MobileOS />);
+    expect(START_APP).toBe('welcome');
+    expect(sheet('Willkommen')).toHaveClass('m-sheet--in');
+    expect(screen.queryByRole('region', { name: 'Terminal' })).toBeNull();
+    // kein Fokusrahmen beim Laden
+    expect(screen.getByRole('button', { name: 'Home' })).not.toHaveFocus();
+    expect(window.history.length).toBe(before + 1);
+    await goHome();
+    expect(sheet('Willkommen')).toBeNull();
+    expect(home()).not.toHaveClass('m-home--behind');
+  });
+
+  it('shows the home screen with widgets, apps and dock, but no fake status bar', () => {
+    render(<MobileOS startApp={null} />);
     expect(home()).toBeInTheDocument();
     expect(screen.getByText('Silvan Brors')).toBeInTheDocument();
     expect(screen.getByText('[°C]')).toBeInTheDocument();
@@ -66,7 +81,7 @@ describe('MobileOS', () => {
   });
 
   it.each(Object.entries(LAUNCHERS))('opens and closes %s', async (id, launcher) => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     const title = MOBILE_APPS[id as keyof typeof MOBILE_APPS].title;
     tap(launcher());
     expect(sheet(title)).toHaveClass('m-sheet--in');
@@ -78,7 +93,7 @@ describe('MobileOS', () => {
   });
 
   it('zooms from the tapped icon and back, unmounting only after the animation', async () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'IPA' }));
     const app = sheet('IPA-Assistent')!;
     expect(app.style.transformOrigin).toMatch(/%/);
@@ -94,7 +109,7 @@ describe('MobileOS', () => {
 
   it('pushes a history entry, and browser back closes the app', () => {
     const push = vi.spyOn(window.history, 'pushState');
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'Shops' }));
     expect(push).toHaveBeenCalledWith({ silvanosApp: 'shop' }, '');
 
@@ -107,7 +122,7 @@ describe('MobileOS', () => {
   });
 
   it('long press starts the jiggle mode, taps do nothing until «Fertig»', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     act(() => fireEvent.pointerDown(home()));
     advance(LONG_PRESS_MS);
     expect(home()).toHaveClass('m-home--jiggle');
@@ -123,7 +138,7 @@ describe('MobileOS', () => {
   });
 
   it('a short press does not start the jiggle mode', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     act(() => fireEvent.pointerDown(home()));
     advance(LONG_PRESS_MS / 2);
     act(() => fireEvent.pointerUp(home()));
@@ -132,7 +147,7 @@ describe('MobileOS', () => {
   });
 
   it('shows the clipper notification after 6 s, hides it after 14 s', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     expect(screen.getByRole('button', { name: 'Clipper, 1 neue Mitteilung' })).toBeInTheDocument();
     advance(NOTIFICATION_SHOW_MS);
     expect(screen.getByText('Neuer Clip ist fertig. Tippe zum Ansehen.')).toBeInTheDocument();
@@ -141,7 +156,7 @@ describe('MobileOS', () => {
   });
 
   it('tapping the notification opens Telegram and clears the badge', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     advance(NOTIFICATION_SHOW_MS);
     tap(screen.getByRole('button', { name: /Clipper Bot/ }));
     expect(sheet('Telegram')).toBeInTheDocument();
@@ -151,7 +166,7 @@ describe('MobileOS', () => {
   });
 
   it('buttons without a target show a short toast', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'Rigged' }));
     tap(screen.getByRole('button', { name: 'Auf die Wunschliste' }));
     expect(screen.getByRole('status')).toHaveTextContent('Steam-Link folgt');
@@ -160,7 +175,7 @@ describe('MobileOS', () => {
   });
 
   it('settings change the wallpaper and save it under the shared key', () => {
-    const { container } = render(<MobileOS />);
+    const { container } = render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'Einstellungen' }));
     tap(screen.getByRole('radio', { name: /Casino/ }));
     expect(screen.getByRole('radio', { name: /Casino/ })).toHaveAttribute('aria-checked', 'true');
@@ -169,7 +184,7 @@ describe('MobileOS', () => {
   });
 
   it('terminal runs commands and opens apps', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'Terminal' }));
     const input = screen.getByRole('textbox', { name: /Befehl/ });
     expect(input).toHaveStyle({ fontSize: '16px' });
@@ -189,7 +204,7 @@ describe('MobileOS', () => {
   });
 
   it('IPA chat shows typing dots, then the example answer', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'IPA' }));
     const app = sheet('IPA-Assistent')!;
     tap(within(app).getByRole('button', { name: 'Was heisst IPERKA?' }));
@@ -200,7 +215,7 @@ describe('MobileOS', () => {
   });
 
   it('contact: message field is labelled and at least 16px, profile links are real', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'Mail: Kontakt' }));
     const message = screen.getByRole('textbox', { name: 'Nachricht' });
     expect(message).toHaveStyle({ fontSize: '16px' });
@@ -221,7 +236,7 @@ describe('MobileOS', () => {
   });
 
   it('has a second home page with live numbers, next event and report', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     const page2 = screen.getByRole('group', { name: 'Seite 2 von 2' });
     expect(
       within(page2).getByRole('button', { name: /Live-Zahlen: Wishlists \[live\]/ }),
@@ -247,7 +262,7 @@ describe('MobileOS', () => {
   });
 
   it('CV shows the preview and downloads the PDF', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'Lebenslauf' }));
     expect(screen.getByRole('img', { name: /Vorschau des Lebenslaufs/ })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'PDF herunterladen' })).toHaveAttribute(
@@ -257,7 +272,7 @@ describe('MobileOS', () => {
   });
 
   it('project apps explain the project and link public code', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'Shops' }));
     const info = within(sheet('shop-outreach')!).getByRole('region', { name: 'Über das Projekt' });
     expect(within(info).getByRole('link', { name: /GitHub/ })).toHaveAttribute(
@@ -269,7 +284,7 @@ describe('MobileOS', () => {
   it('back never opens another app, also with old history entries after a reload', () => {
     // Nach Neuladen in den Einstellungen steht im Verlauf noch «Einstellungen offen»
     window.history.replaceState({ silvanosApp: 'settings' }, '');
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     expect(window.history.state).toBeNull();
 
     tap(screen.getByRole('button', { name: 'Rigged' }));
@@ -282,7 +297,7 @@ describe('MobileOS', () => {
   });
 
   it('the start page opens as an app and leads to the projects', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'Willkommen' }));
     const start = sheet('Willkommen')!;
     expect(within(start).getByText('Portfolio von Silvan Brors')).toBeInTheDocument();
@@ -293,7 +308,7 @@ describe('MobileOS', () => {
   });
 
   it('CV preview opens the large view, closed with ✕', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'Lebenslauf' }));
     tap(screen.getByRole('button', { name: 'Lebenslauf vergrössern' }));
     const viewer = screen.getByRole('dialog', { name: 'Lebenslauf gross ansehen' });
@@ -305,7 +320,7 @@ describe('MobileOS', () => {
   });
 
   it('project apps show the real project image', () => {
-    render(<MobileOS />);
+    render(<MobileOS startApp={null} />);
     tap(screen.getByRole('button', { name: 'Rigged' }));
     const info = within(sheet('Rigged to Riches')!).getByRole('region', {
       name: 'Über das Projekt',
