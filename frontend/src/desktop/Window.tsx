@@ -4,7 +4,14 @@ import './windowTheme.css';
 import { type CSSProperties, type PointerEvent, type ReactNode, useRef } from 'react';
 
 import type { AppDefinition } from './apps.registry';
-import type { WindowActions, WindowState } from './windowStore';
+import {
+  type Rect,
+  RESIZE_EDGES,
+  type ResizeEdge,
+  resizeRect,
+  type WindowActions,
+  type WindowState,
+} from './windowStore';
 
 interface WindowProps {
   app: AppDefinition;
@@ -23,6 +30,14 @@ interface DragStart {
   startY: number;
   originX: number;
   originY: number;
+}
+
+interface ResizeStart {
+  pointerId: number;
+  edge: ResizeEdge;
+  startX: number;
+  startY: number;
+  rect: Rect;
 }
 
 const stop = (e: PointerEvent) => e.stopPropagation();
@@ -52,6 +67,8 @@ function windowStyle(app: AppDefinition, state: WindowState): CSSProperties {
 
 export function Window({ app, state, active, actions, entranceDelayMs, children }: WindowProps) {
   const drag = useRef<DragStart | null>(null);
+  const resize = useRef<ResizeStart | null>(null);
+  const section = useRef<HTMLElement>(null);
   const canDrag = !state.maximized;
 
   const onTitlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
@@ -83,6 +100,42 @@ export function Window({ app, state, active, actions, entranceDelayMs, children 
     e.currentTarget.releasePointerCapture?.(e.pointerId);
   };
 
+  // An Kanten und Ecken ziehen: Grösse ändern (nicht im maximierten Zustand)
+  const onResizeDown = (edge: ResizeEdge) => (e: PointerEvent<HTMLDivElement>) => {
+    if (!canDrag || e.button !== 0) return;
+    e.stopPropagation();
+    e.preventDefault();
+    actions.focus(app.id);
+    // Höhe «auto»: aktuelle Höhe übernehmen, ab jetzt fest
+    const el = section.current;
+    resize.current = {
+      pointerId: e.pointerId,
+      edge,
+      startX: e.clientX,
+      startY: e.clientY,
+      rect: {
+        x: state.x,
+        y: state.y,
+        width: state.width ?? (el?.offsetWidth || app.width),
+        height:
+          state.height ?? (typeof app.height === 'number' ? app.height : el?.offsetHeight || 400),
+      },
+    };
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+  };
+
+  const onResizeMove = (e: PointerEvent<HTMLDivElement>) => {
+    const r = resize.current;
+    if (!r || r.pointerId !== e.pointerId) return;
+    actions.resize(app.id, resizeRect(r.rect, r.edge, e.clientX - r.startX, e.clientY - r.startY));
+  };
+
+  const endResize = (e: PointerEvent<HTMLDivElement>) => {
+    if (resize.current?.pointerId !== e.pointerId) return;
+    resize.current = null;
+    e.currentTarget.releasePointerCapture?.(e.pointerId);
+  };
+
   const classes = ['win'];
   if (app.dark) classes.push('win--dark');
   if (active) classes.push('win--active');
@@ -91,6 +144,7 @@ export function Window({ app, state, active, actions, entranceDelayMs, children 
 
   return (
     <section
+      ref={section}
       className={classes.join(' ')}
       aria-label={app.title}
       hidden={state.minimized}
@@ -143,6 +197,19 @@ export function Window({ app, state, active, actions, entranceDelayMs, children 
         <span className="win__title">{app.title}</span>
       </div>
       <div className="win__body">{children}</div>
+      {canDrag &&
+        RESIZE_EDGES.map((edge) => (
+          <div
+            key={edge}
+            className={`win__resize win__resize--${edge}`}
+            data-testid={`resize-${edge}`}
+            aria-hidden="true"
+            onPointerDown={onResizeDown(edge)}
+            onPointerMove={onResizeMove}
+            onPointerUp={endResize}
+            onPointerCancel={endResize}
+          />
+        ))}
     </section>
   );
 }

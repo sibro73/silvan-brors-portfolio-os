@@ -28,6 +28,7 @@ export type WindowAction =
   | { type: 'minimize'; id: AppId }
   | { type: 'toggleMaximize'; id: AppId }
   | { type: 'move'; id: AppId; x: number; y: number; width: number }
+  | { type: 'resize'; id: AppId; rect: Rect }
   | { type: 'minimizeAll' }
   | { type: 'tile'; area: Area };
 
@@ -83,6 +84,35 @@ export function clampPosition(x: number, y: number, width: number): { x: number;
     x: Math.max(-(width - VISIBLE_EDGE), x),
     y: Math.max(0, y),
   };
+}
+
+/** Kante oder Ecke, an der ein Fenster gezogen wird. */
+export type ResizeEdge = 'n' | 's' | 'e' | 'w' | 'ne' | 'nw' | 'se' | 'sw';
+export const RESIZE_EDGES: ResizeEdge[] = ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'];
+
+/** Kleinste Fenstergrösse beim Ziehen an den Kanten. */
+export const MIN_WINDOW_WIDTH = 320;
+export const MIN_WINDOW_HEIGHT = 160;
+
+/**
+ * Neue Grösse beim Ziehen an einer Kante: Die gegenüberliegende Kante bleibt stehen.
+ * Nie kleiner als die Mindestgrösse und nie über die Menüleiste (y ≥ 0).
+ */
+export function resizeRect(start: Rect, edge: ResizeEdge, dx: number, dy: number): Rect {
+  let { x, y, width, height } = start;
+  if (edge.includes('e')) width = Math.max(MIN_WINDOW_WIDTH, start.width + dx);
+  if (edge.includes('s')) height = Math.max(MIN_WINDOW_HEIGHT, start.height + dy);
+  if (edge.includes('w')) {
+    const right = start.x + start.width;
+    width = Math.max(MIN_WINDOW_WIDTH, start.width - dx);
+    x = right - width;
+  }
+  if (edge.includes('n')) {
+    const bottom = start.y + start.height;
+    y = Math.max(0, Math.min(start.y + dy, bottom - MIN_WINDOW_HEIGHT));
+    height = bottom - y;
+  }
+  return { x, y, width, height };
 }
 
 /** Offene Fenster in der gegebenen Reihenfolge (erstes = ganz hinten). */
@@ -148,6 +178,11 @@ export function windowReducer(state: DesktopState, action: WindowAction): Deskto
       });
       return { ...state, windows };
     }
+    case 'resize': {
+      const current = state.windows[action.id];
+      if (!current || current.maximized) return state;
+      return patch(state, action.id, action.rect);
+    }
     case 'move': {
       const current = state.windows[action.id];
       if (!current || current.maximized) return state;
@@ -176,6 +211,7 @@ export interface WindowActions {
   minimize: (id: AppId) => void;
   toggleMaximize: (id: AppId) => void;
   move: (id: AppId, x: number, y: number, width: number) => void;
+  resize: (id: AppId, rect: Rect) => void;
   minimizeAll: () => void;
   tile: (area: Area) => void;
 }
@@ -190,6 +226,7 @@ export function useWindowStore(init: () => DesktopState): [DesktopState, WindowA
       minimize: (id) => dispatch({ type: 'minimize', id }),
       toggleMaximize: (id) => dispatch({ type: 'toggleMaximize', id }),
       move: (id, x, y, width) => dispatch({ type: 'move', id, x, y, width }),
+      resize: (id, rect) => dispatch({ type: 'resize', id, rect }),
       minimizeAll: () => dispatch({ type: 'minimizeAll' }),
       tile: (area) => dispatch({ type: 'tile', area }),
     }),

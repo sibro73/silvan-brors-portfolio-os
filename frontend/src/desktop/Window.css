@@ -117,3 +117,63 @@
   overflow: auto;
   min-height: 0;
 }
+
+/* Griffe zum Ziehen an Kanten und Ecken: unsichtbar, nur der Mauszeiger ändert sich */
+.win__resize {
+  position: absolute;
+  z-index: 5;
+  touch-action: none;
+}
+.win__resize--n,
+.win__resize--s {
+  left: 12px;
+  right: 12px;
+  height: 6px;
+  cursor: ns-resize;
+}
+.win__resize--n {
+  top: 0;
+}
+.win__resize--s {
+  bottom: 0;
+}
+.win__resize--e,
+.win__resize--w {
+  top: 12px;
+  bottom: 12px;
+  width: 6px;
+  cursor: ew-resize;
+}
+.win__resize--e {
+  right: 0;
+}
+.win__resize--w {
+  left: 0;
+}
+.win__resize--ne,
+.win__resize--nw,
+.win__resize--se,
+.win__resize--sw {
+  width: 10px;
+  height: 10px;
+}
+.win__resize--ne {
+  top: 0;
+  right: 0;
+  cursor: nesw-resize;
+}
+.win__resize--sw {
+  bottom: 0;
+  left: 0;
+  cursor: nesw-resize;
+}
+.win__resize--nw {
+  top: 0;
+  left: 0;
+  cursor: nwse-resize;
+}
+.win__resize--se {
+  bottom: 0;
+  right: 0;
+  cursor: nwse-resize;
+}

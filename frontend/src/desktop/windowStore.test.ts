@@ -3,6 +3,9 @@ import { describe, expect, it } from 'vitest';
 import {
   activeWindow,
   clampPosition,
+  MIN_WINDOW_HEIGHT,
+  MIN_WINDOW_WIDTH,
+  resizeRect,
   createInitialState,
   type DesktopState,
   TILE_DOCK_SPACE,
@@ -176,5 +179,49 @@ describe('tile / tileLayout', () => {
     expect(s.windows.finder).toMatchObject({ ...first, maximized: false });
     expect(s.windows.about).toMatchObject(second);
     expect(s.windows.terminal?.width).toBeUndefined();
+  });
+});
+
+describe('resize / resizeRect', () => {
+  const start = { x: 100, y: 100, width: 500, height: 300 };
+
+  it('grows and shrinks at the right and bottom edges', () => {
+    expect(resizeRect(start, 'e', 50, 999)).toEqual({ ...start, width: 550 });
+    expect(resizeRect(start, 's', 999, -40)).toEqual({ ...start, height: 260 });
+    expect(resizeRect(start, 'se', -100, 100)).toEqual({ ...start, width: 400, height: 400 });
+  });
+
+  it('keeps the opposite edge in place at the left and top edges', () => {
+    expect(resizeRect(start, 'w', -60, 0)).toEqual({ x: 40, y: 100, width: 560, height: 300 });
+    expect(resizeRect(start, 'n', 0, 30)).toEqual({ x: 100, y: 130, width: 500, height: 270 });
+    expect(resizeRect(start, 'nw', 20, 20)).toEqual({ x: 120, y: 120, width: 480, height: 280 });
+  });
+
+  it('never gets smaller than the minimum size', () => {
+    expect(resizeRect(start, 'se', -1000, -1000)).toEqual({
+      ...start,
+      width: MIN_WINDOW_WIDTH,
+      height: MIN_WINDOW_HEIGHT,
+    });
+    const r = resizeRect(start, 'nw', 1000, 1000);
+    expect(r).toEqual({
+      x: 600 - MIN_WINDOW_WIDTH,
+      y: 400 - MIN_WINDOW_HEIGHT,
+      width: MIN_WINDOW_WIDTH,
+      height: MIN_WINDOW_HEIGHT,
+    });
+  });
+
+  it('never goes over the menu bar', () => {
+    expect(resizeRect(start, 'n', 0, -500)).toEqual({ x: 100, y: 0, width: 500, height: 400 });
+  });
+
+  it('the reducer applies the new size, but not to maximized windows', () => {
+    const state = createInitialState([{ id: 'about', x: 100, y: 100 }]);
+    const rect = { x: 50, y: 60, width: 400, height: 250 };
+    const next = windowReducer(state, { type: 'resize', id: 'about', rect });
+    expect(next.windows.about).toMatchObject(rect);
+    const maxed = windowReducer(state, { type: 'toggleMaximize', id: 'about' });
+    expect(windowReducer(maxed, { type: 'resize', id: 'about', rect })).toBe(maxed);
   });
 });
